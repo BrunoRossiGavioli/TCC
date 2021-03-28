@@ -8,9 +8,9 @@ namespace TCCESTOQUE.Models
 {
     public class PessoaModel
     {
-        [Key]
+        [Key] 
         [ScaffoldColumn(false)]
-        public int Id { get; set; }
+        public int Id { get; set; } 
 
         [MaxLength(50, ErrorMessage = "Campo pode conter no maximo {0} caracteres")]
         [Required(ErrorMessage = "Informe o nome de usuario", AllowEmptyStrings = false)]
