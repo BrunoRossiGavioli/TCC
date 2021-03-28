@@ -10,6 +10,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TCCESTOQUE.Data;
+using TCCESTOQUE.Interfaces.Service;
+using TCCESTOQUE.Service;
+using TCCESTOQUE.Interfaces.Repository;
+using TCCESTOQUE.Repository;
 
 namespace TCCESTOQUE
 {
@@ -29,6 +33,9 @@ namespace TCCESTOQUE
 
             services.AddDbContext<TCCESTOQUEContext>(options =>
                     options.UseMySql(Configuration.GetConnectionString("TCCESTOQUEContext")));
+
+            services.AddScoped<IVendedorService, VendedorService>();
+            services.AddScoped<IVendedorRepository, VendedorRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
