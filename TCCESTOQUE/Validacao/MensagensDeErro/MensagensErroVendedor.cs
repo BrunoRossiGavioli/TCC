@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TCCESTOQUE.Validacao.MenssagensDeErro
+namespace TCCESTOQUE.Validacao.MensagensDeErro
 {
-    public static class MenssagensErroVendedor
+    public static class MensagensErroVendedor
     {
         #region Erros de Campos Nulos
         public static string NomeVazio ="O Nome não pode ser nulo";

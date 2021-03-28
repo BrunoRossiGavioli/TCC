@@ -30,7 +30,7 @@ namespace XUnitTestProject1
         [Fact]
         public void ObjetoDeveSerValido()
         {
-            var validador = new ValidadorVendedor();
+            var validador = new VendedorValidador();
             var result = validador.Validate(vendedor);
 
             Assert.True(result.IsValid);
@@ -43,7 +43,7 @@ namespace XUnitTestProject1
             [InlineData("jos")]
             public void NomeNaoDeveSerValido(string nome)
             {
-                var validador = new ValidadorVendedor();
+                var validador = new VendedorValidador();
                 vendedor.Nome = nome;
                 var result = validador.Validate(vendedor);
 
@@ -57,7 +57,7 @@ namespace XUnitTestProject1
             [InlineData("Carla")]
             public void NomeDeveSerValido(string nome)
             {
-                var validador = new ValidadorVendedor();
+                var validador = new VendedorValidador();
                 vendedor.Nome = nome;
                 var result = validador.Validate(vendedor);
 
@@ -73,7 +73,7 @@ namespace XUnitTestProject1
             [InlineData("aaaaa.com")]
             public void EmailNaoDeveSerValido(string email)
             {
-                var validador = new ValidadorVendedor();
+                var validador = new VendedorValidador();
                 vendedor.Email = email;
                 var result = validador.Validate(vendedor);
 
@@ -87,7 +87,7 @@ namespace XUnitTestProject1
             [InlineData("carla@gmail.com")]
             public void EmailDeveSerValido(string email)
             {
-                var validador = new ValidadorVendedor();
+                var validador = new VendedorValidador();
                 vendedor.Email = email;
                 var result = validador.Validate(vendedor);
 
@@ -102,7 +102,7 @@ namespace XUnitTestProject1
             [InlineData("01/01/1980")]
             public void DataDeveSerValida(string dataStr)
             {
-                var validador = new ValidadorVendedor();
+                var validador = new VendedorValidador();
                 vendedor.DataNascimento = DateTime.Parse(dataStr);
                 var result = validador.Validate(vendedor);
 
@@ -114,7 +114,7 @@ namespace XUnitTestProject1
             [InlineData("01/01/4400")]
             public void DataNaoDeveSerValida(string dataStr)
             {
-                var validador = new ValidadorVendedor();
+                var validador = new VendedorValidador();
                 vendedor.DataNascimento = DateTime.Parse(dataStr);
                 var result = validador.Validate(vendedor);
 
@@ -126,7 +126,7 @@ namespace XUnitTestProject1
             [InlineData("01/01/2021")]
             public void MinimoDeIdadeNaoValido(string dataStr)
             {
-                var validador = new ValidadorVendedor();
+                var validador = new VendedorValidador();
                 vendedor.DataNascimento = DateTime.Parse(dataStr);
                 var result = validador.Validate(vendedor);
 
@@ -142,7 +142,7 @@ namespace XUnitTestProject1
         [InlineData("oqwewqeqs")]
         public void EnderecoNaoDeveSerValido(string endereco)
         {
-            var validador = new ValidadorVendedor();
+            var validador = new VendedorValidador();
             vendedor.Endereco = endereco;
             var result = validador.Validate(vendedor);
 
@@ -156,7 +156,7 @@ namespace XUnitTestProject1
         [InlineData("JOSEMAR DOS CAMPOS GRANDES 765")]
         public void EnderecoDeveSerValido(string endereco)
         {
-            var validador = new ValidadorVendedor();
+            var validador = new VendedorValidador();
             vendedor.Endereco = endereco;
             var result = validador.Validate(vendedor);
 
@@ -172,7 +172,7 @@ namespace XUnitTestProject1
         [InlineData("12345678")]
         public void TelefoneNaoDeveSerValido(string telefone)
         {
-            var validador = new ValidadorVendedor();
+            var validador = new VendedorValidador();
             vendedor.Telefone = telefone;
             var result = validador.Validate(vendedor);
 
@@ -186,7 +186,7 @@ namespace XUnitTestProject1
         [InlineData("11234234234")]
         public void TelefoneDeveSerValido(string telefone)
         {
-            var validador = new ValidadorVendedor();
+            var validador = new VendedorValidador();
             vendedor.Telefone = telefone;
             var result = validador.Validate(vendedor);
 
@@ -203,7 +203,7 @@ namespace XUnitTestProject1
         [InlineData("kkkkiik4")]
         public void SenhaDeveSerValido(string senha)
         {
-            var validador = new ValidadorVendedor();
+            var validador = new VendedorValidador();
             vendedor.Senha = senha;
             var result = validador.Validate(vendedor);
 
@@ -217,7 +217,7 @@ namespace XUnitTestProject1
         [InlineData("sdv")]
         public void SenhaNaoDeveSerValido(string senha)
         {
-            var validador = new ValidadorVendedor();
+            var validador = new VendedorValidador();
             vendedor.Senha = senha;
             var result = validador.Validate(vendedor);
 
@@ -233,7 +233,7 @@ namespace XUnitTestProject1
         [InlineData("42342123123")]
         public void CpfDeveSerValido(string cpf)
         {
-            var validador = new ValidadorVendedor();
+            var validador = new VendedorValidador();
             vendedor.Cpf = cpf;
             var result = validador.Validate(vendedor);
 
@@ -247,7 +247,7 @@ namespace XUnitTestProject1
         [InlineData("efeef")]
         public void CpfNaoDeveSerValido(string cpf)
         {
-            var validador = new ValidadorVendedor();
+            var validador = new VendedorValidador();
             vendedor.Cpf = cpf;
             var result = validador.Validate(vendedor);
 
