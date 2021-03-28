@@ -1,5 +1,6 @@
 using System;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.ValidadorVendedor;
 using Xunit;
 
 namespace XUnitTestProject1

@@ -3,10 +3,10 @@ using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TCCESTOQUE.MenssagensDeErro;
 using System.Threading.Tasks;
+using TCCESTOQUE.Validacao.MenssagensDeErro;
 
-namespace XUnitTestProject1.ValidadorVendedor
+namespace TCCESTOQUE.ValidadorVendedor
 {
     public class ValidadorVendedor : AbstractValidator<VendedorModel>
     {

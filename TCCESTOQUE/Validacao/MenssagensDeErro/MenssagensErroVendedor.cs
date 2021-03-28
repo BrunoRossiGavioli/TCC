@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace XUnitTestProject1.MenssagensDeErroVendedor
+namespace TCCESTOQUE.Validacao.MenssagensDeErro
 {
     public static class MenssagensErroVendedor
     {
