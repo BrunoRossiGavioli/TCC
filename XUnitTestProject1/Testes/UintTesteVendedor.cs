@@ -17,7 +17,7 @@ namespace XUnitTestProject1
                 Email = "antônio@gmail.com",
                 DataNascimento = DateTime.Today.AddYears(-18),
                 Endereco = "Rua do carninha logo ali",
-                Telefone = "(11)1232-12321",
+                Telefone = "11123212321",
                 Senha = "sanknsajdn",
                 Cpf = "213123133",
                 Ativo = true,

@@ -8,9 +8,9 @@ using TCCESTOQUE.Validacao.MenssagensDeErro;
 
 namespace TCCESTOQUE.ValidadorVendedor
 {
-    public class ValidadorVendedor : AbstractValidator<VendedorModel>
+    public class VendedorValidador : AbstractValidator<VendedorModel>
     {
-        public ValidadorVendedor()
+        public VendedorValidador()
         {            
             RuleFor(v => v.Nome).NotEmpty().WithMessage(MenssagensErroVendedor.NomeVazio)
                 .NotNull().WithMessage(MenssagensErroVendedor.NomeVazio)
@@ -20,7 +20,7 @@ namespace TCCESTOQUE.ValidadorVendedor
             RuleFor(v => v.Email).NotEmpty().WithMessage(MenssagensErroVendedor.EmailVazio)
                 .NotNull().WithMessage(MenssagensErroVendedor.EmailVazio)
                 .MaximumLength(30).WithMessage(MenssagensErroVendedor.EmailTamanhoMaximo)
-                .MinimumLength(10).WithMessage(MenssagensErroVendedor.EmailTamanhoMinimo);
+                .MinimumLength(13).WithMessage(MenssagensErroVendedor.EmailTamanhoMinimo);
 
             RuleFor(v => v.Endereco).NotEmpty().WithMessage(MenssagensErroVendedor.EnderecoVazio)
                 .NotNull().WithMessage(MenssagensErroVendedor.EnderecoVazio)
