@@ -9,7 +9,7 @@ namespace TCCESTOQUE.Models
 {
     public class PessoaModel
     {
-        [Key]
+        [Key] 
         [ScaffoldColumn(false)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
