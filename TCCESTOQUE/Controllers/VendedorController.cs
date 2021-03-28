@@ -23,19 +23,19 @@ namespace TCCESTOQUE.Controllers
         // GET: Vendedor/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var vendedorModel = await _context.VendedorModel
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (vendedorModel == null)
-            {
-                return NotFound();
-            }
+                var vendedorModel = await _context.VendedorModel
+                    .FirstOrDefaultAsync(m => m.Id == id);
+                if (vendedorModel == null)
+                {
+                    return NotFound();
+                }
 
-            return View(vendedorModel);
+                return View(vendedorModel);
         }
 
         // GET: Vendedor/Create
