@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.Validacao.ValidacaoModels;
 
 namespace TCCESTOQUE.Repository
 {
@@ -44,53 +45,72 @@ namespace TCCESTOQUE.Repository
         public VendedorModel GetEdicao(int? id)
         {
             var vendedorModel = _context.VendedorModel.Find(id);
+            var validacao = new VendedorValidador().Validate(vendedorModel);
+            if (!validacao.IsValid) 
+            {
+                var erros = validacao.Errors.Select(e => e.ErrorMessage).ToList();
+                return null;
+            }
             return vendedorModel;
+
         }
 
         public VendedorModel GetExclusao(int? id)
         {
             var vendedorModel = _context.VendedorModel
                 .FirstOrDefault(m => m.Id == id);
-            //if (vendedorModel == null)
-            //    return null();
 
+            if (id != vendedorModel.Id || id == null)
+                return null;
+            var validacao = new VendedorValidador().Validate(vendedorModel);
+            if (!validacao.IsValid)
+                return null;
 
-            return vendedorModel;
+                return vendedorModel;
         }
 
         public object PostCriacao(VendedorModel vendedorModel)
         {
-                 //PRECISA DE VALIDAÇÃO COM FLUENT VALIDATION!!! @KAYKY
+            //PRECISA DE VALIDAÇÃO COM FLUENT VALIDATION!!! @KAYKY   
+            var validacao = new VendedorValidador().Validate(vendedorModel);
+            if (validacao.IsValid) 
+            { 
                 _context.Add(vendedorModel);
-                _context.SaveChangesAsync();
-                return ("Index", "Home");
+                _context.SaveChanges();
+            }
+            return vendedorModel;
         }
 
         public object PostEdicao(int id, VendedorModel vendedorModel)
         {
-            //PRECISA DE FLUENT VALIDATION!!! @KAYKY
-            //if (ModelState.IsValid){
+            //PERGUNTAR AO NIZZOLA SE TEM COMO MELHORAR ESSE CODIGO
+            vendedorModel.Id = id;
+            var validacao = new VendedorValidador().Validate(vendedorModel);
+            if (validacao.IsValid)
+            {
                 try
                 {
                     _context.Update(vendedorModel);
-                    _context.SaveChangesAsync();
+                    _context.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     return null;
                 }
-                return nameof(Index);
-            //}
+            }
 
-            //return vendedorModel;
+            return vendedorModel;
         }
 
         public object PostExclusao(int id)
         {
             var vendedorModel = _context.VendedorModel.Find(id);
+            if(id == vendedorModel.Id) { 
             _context.VendedorModel.Remove(vendedorModel);
             _context.SaveChanges();
-            return nameof(Index);
+            }
+            return null;
+            
         }
     }
 }
