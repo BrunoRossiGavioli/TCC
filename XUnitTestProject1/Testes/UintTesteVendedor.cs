@@ -40,7 +40,7 @@ namespace XUnitTestProject1
             [InlineData("a")]
             [InlineData("b")]
             [InlineData("aa")]
-            [InlineData("jos")]
+            [InlineData("js")]
             [InlineData("")]
             public void NomeNaoDeveSerValido(string nome)
             {
@@ -102,6 +102,7 @@ namespace XUnitTestProject1
             [Theory(DisplayName = "Teste de Datas de Nascimento Válidas")]
             [InlineData("01/01/2003")]
             [InlineData("01/01/1980")]
+            [InlineData("30/03/2003")]
             public void DataDeveSerValida(string dataStr)
             {
                 var validador = new VendedorValidador();
@@ -113,8 +114,7 @@ namespace XUnitTestProject1
 
             [Theory(DisplayName = "Teste de datas de nascimento Inválidas")]
             [InlineData("01/01/2022")]
-            [InlineData("01/01/4400")]
-            [InlineData("")]
+            [InlineData("01/01/4400")]            
             public void DataNaoDeveSerValida(string dataStr)
             {
                 var validador = new VendedorValidador();
@@ -127,6 +127,7 @@ namespace XUnitTestProject1
             [InlineData("01/01/2019")]
             [InlineData("01/01/2020")]
             [InlineData("01/01/2021")]
+            [InlineData("29/03/2003")]
             public void MinimoDeIdadeNaoValido(string dataStr)
             {
                 var validador = new VendedorValidador();
