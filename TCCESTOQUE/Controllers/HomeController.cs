@@ -9,7 +9,7 @@ using TCCESTOQUE.Models;
 
 namespace TCCESTOQUE.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : ControllerPai
     {
         private readonly ILogger<HomeController> _logger;
 
@@ -20,6 +20,7 @@ namespace TCCESTOQUE.Controllers
 
         public IActionResult Index()
         {
+            Autenticar();
             return View();
         }
 

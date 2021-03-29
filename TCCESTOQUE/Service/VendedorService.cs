@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using TCCESTOQUE.Controllers;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
@@ -37,6 +39,11 @@ namespace TCCESTOQUE.Service
             return _vendedorRepository.GetExclusao(id);
         }
 
+        public void GetLogin()
+        {
+            throw new NotImplementedException();
+        }
+
         public object PostCriacao(VendedorModel vendedorModel)
         {
             return _vendedorRepository.PostCriacao(vendedorModel);
@@ -50,6 +57,11 @@ namespace TCCESTOQUE.Service
         public object PostExclusao(int id)
         {
             return _vendedorRepository.PostExclusao(id);
+        }
+
+        public ClaimsPrincipal PostLogin(VendedorModel vendedorModel)
+        {
+            return _vendedorRepository.PostLogin(vendedorModel);
         }
     }
 }

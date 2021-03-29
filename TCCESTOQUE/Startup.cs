@@ -29,6 +29,14 @@ namespace TCCESTOQUE
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication("CookieAuthentication")
+                .AddCookie("CookieAuthentication", config =>
+                {
+                    config.Cookie.Name = "LoginUsuario";
+                    config.LoginPath = "/Vendedor/Login";
+                    config.AccessDeniedPath = "/Vendedor/LoginInvalido";
+                });
+
             services.AddControllersWithViews();
 
             services.AddDbContext<TCCESTOQUEContext>(options =>
@@ -52,9 +60,12 @@ namespace TCCESTOQUE
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
