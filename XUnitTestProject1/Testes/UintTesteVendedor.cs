@@ -17,7 +17,7 @@ namespace XUnitTestProject1
                 Email = "antonio@gmail.com",
                 DataNascimento = DateTime.Today.AddYears(-18),
                 Endereco = "Rua do carninha logo ali",
-                Telefone = "11123212321",
+                Telefone = "11123212321", 
                 Senha = "sanknsajdn",
                 Cpf = "12345678654",
                 Ativo = true,
@@ -56,6 +56,7 @@ namespace XUnitTestProject1
             [InlineData("Paula")]
             [InlineData("João")]
             [InlineData("Carla")]
+            [InlineData("Ana")]
             public void NomeDeveSerValido(string nome)
             {
                 var validador = new VendedorValidador();
@@ -101,8 +102,7 @@ namespace XUnitTestProject1
 
             [Theory(DisplayName = "Teste de Datas de Nascimento Válidas")]
             [InlineData("01/01/2003")]
-            [InlineData("01/01/1980")]
-            [InlineData("30/03/2003")]
+            [InlineData("01/01/1980")]            
             public void DataDeveSerValida(string dataStr)
             {
                 var validador = new VendedorValidador();
@@ -127,7 +127,6 @@ namespace XUnitTestProject1
             [InlineData("01/01/2019")]
             [InlineData("01/01/2020")]
             [InlineData("01/01/2021")]
-            [InlineData("29/03/2003")]
             public void MinimoDeIdadeNaoValido(string dataStr)
             {
                 var validador = new VendedorValidador();
@@ -170,7 +169,7 @@ namespace XUnitTestProject1
     #endregion
 
     #region Telefone
-    [Theory(DisplayName = "Teste de Telefone Inválidos")]
+        [Theory(DisplayName = "Teste de Telefone Inválidos")]
         [InlineData("11111111")]
         [InlineData("1231")]
         [InlineData("11111")]
@@ -202,7 +201,7 @@ namespace XUnitTestProject1
     #endregion
 
     #region Senha
-     [Theory(DisplayName = "Teste de Senha Válidos")]
+        [Theory(DisplayName = "Teste de Senha Válidos")]
         [InlineData("1234567890")]
         [InlineData("njnvkjndnvkvn")]
         [InlineData("KKJNKNKKNKJJN")]
@@ -233,7 +232,7 @@ namespace XUnitTestProject1
     #endregion
 
     #region Cpf
-     [Theory(DisplayName = "Teste de Cpf Válidos")]
+        [Theory(DisplayName = "Teste de Cpf Válidos")]
         [InlineData("11111111111")]
         [InlineData("22222222222")]
         [InlineData("19394297293")]
