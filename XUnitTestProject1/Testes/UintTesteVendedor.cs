@@ -14,12 +14,12 @@ namespace XUnitTestProject1
             vendedor = new VendedorModel()
             {
                 Nome = "Antônio",
-                Email = "antônio@gmail.com",
+                Email = "antonio@gmail.com",
                 DataNascimento = DateTime.Today.AddYears(-18),
                 Endereco = "Rua do carninha logo ali",
-                Telefone = "(11)1232-12321",
+                Telefone = "11123212321", 
                 Senha = "sanknsajdn",
-                Cpf = "213123133",
+                Cpf = "12345678654",
                 Ativo = true,
                 Logado = true
             };
@@ -39,8 +39,9 @@ namespace XUnitTestProject1
             [Theory(DisplayName = "Teste de Nome Inválidos")]
             [InlineData("a")]
             [InlineData("b")]
-            [InlineData("aaaa")]
-            [InlineData("jos")]
+            [InlineData("aa")]
+            [InlineData("js")]
+            [InlineData("")]
             public void NomeNaoDeveSerValido(string nome)
             {
                 var validador = new VendedorValidador();
@@ -55,6 +56,7 @@ namespace XUnitTestProject1
             [InlineData("Paula")]
             [InlineData("João")]
             [InlineData("Carla")]
+            [InlineData("Ana")]
             public void NomeDeveSerValido(string nome)
             {
                 var validador = new VendedorValidador();
@@ -71,6 +73,7 @@ namespace XUnitTestProject1
             [InlineData("aaaaa@")]
             [InlineData("@aaaaa")]
             [InlineData("aaaaa.com")]
+            [InlineData("")]
             public void EmailNaoDeveSerValido(string email)
             {
                 var validador = new VendedorValidador();
@@ -99,7 +102,7 @@ namespace XUnitTestProject1
 
             [Theory(DisplayName = "Teste de Datas de Nascimento Válidas")]
             [InlineData("01/01/2003")]
-            [InlineData("01/01/1980")]
+            [InlineData("01/01/1980")]            
             public void DataDeveSerValida(string dataStr)
             {
                 var validador = new VendedorValidador();
@@ -111,7 +114,7 @@ namespace XUnitTestProject1
 
             [Theory(DisplayName = "Teste de datas de nascimento Inválidas")]
             [InlineData("01/01/2022")]
-            [InlineData("01/01/4400")]
+            [InlineData("01/01/4400")]            
             public void DataNaoDeveSerValida(string dataStr)
             {
                 var validador = new VendedorValidador();
@@ -140,6 +143,7 @@ namespace XUnitTestProject1
         [InlineData("b123 ")]
         [InlineData("aaaa")]
         [InlineData("oqwewqeqs")]
+        [InlineData("")]
         public void EnderecoNaoDeveSerValido(string endereco)
         {
             var validador = new VendedorValidador();
@@ -165,11 +169,12 @@ namespace XUnitTestProject1
     #endregion
 
     #region Telefone
-    [Theory(DisplayName = "Teste de Telefone inválidos")]
-        [InlineData("11111-111)")]
-        [InlineData("1231")]
+        [Theory(DisplayName = "Teste de Telefone Inválidos")]
         [InlineData("11111111")]
-        [InlineData("12345678")]
+        [InlineData("1231")]
+        [InlineData("11111")]
+        [InlineData("123456786")]
+        [InlineData("")]
         public void TelefoneNaoDeveSerValido(string telefone)
         {
             var validador = new VendedorValidador();
@@ -180,10 +185,10 @@ namespace XUnitTestProject1
         }
 
         [Theory(DisplayName = "Teste de Telefone Válidos")]
-        [InlineData("11994483392")]
-        [InlineData("11221123112")]
-        [InlineData("11321543757")]
-        [InlineData("11234234234")]
+        [InlineData("11293745826")]
+        [InlineData("11847639472")]
+        [InlineData("11242674596")]
+        [InlineData("11039483905")]
         public void TelefoneDeveSerValido(string telefone)
         {
             var validador = new VendedorValidador();
@@ -196,7 +201,7 @@ namespace XUnitTestProject1
     #endregion
 
     #region Senha
-     [Theory(DisplayName = "Teste de Telefone Válidos")]
+        [Theory(DisplayName = "Teste de Senha Válidos")]
         [InlineData("1234567890")]
         [InlineData("njnvkjndnvkvn")]
         [InlineData("KKJNKNKKNKJJN")]
@@ -210,11 +215,12 @@ namespace XUnitTestProject1
             Assert.True(result.IsValid);
         }
 
-        [Theory(DisplayName = "Teste de Telefone Inválidos")]
+        [Theory(DisplayName = "Teste de Senha Inválidos")]
         [InlineData("1")]
         [InlineData("123123")]
         [InlineData("wqeq")]
         [InlineData("sdv")]
+        [InlineData("")]
         public void SenhaNaoDeveSerValido(string senha)
         {
             var validador = new VendedorValidador();
@@ -226,7 +232,7 @@ namespace XUnitTestProject1
     #endregion
 
     #region Cpf
-     [Theory(DisplayName = "Teste de Cpf Válidos")]
+        [Theory(DisplayName = "Teste de Cpf Válidos")]
         [InlineData("11111111111")]
         [InlineData("22222222222")]
         [InlineData("19394297293")]
@@ -245,6 +251,7 @@ namespace XUnitTestProject1
         [InlineData("12313134")]
         [InlineData("eferrf")]
         [InlineData("efeef")]
+        [InlineData("")]
         public void CpfNaoDeveSerValido(string cpf)
         {
             var validador = new VendedorValidador();
