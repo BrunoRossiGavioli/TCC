@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TCCESTOQUE.Data;
+using TCCESTOQUE.ValidadorVendedor;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.Validacao.Formatacao;
 
 namespace TCCESTOQUE.Controllers
 {
@@ -51,8 +53,15 @@ namespace TCCESTOQUE.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Senha,Cpf,Nome,Email,DataNascimento,Endereco,Telefone")] VendedorModel vendedorModel)
         {
-            if (ModelState.IsValid)
+            var validador = new VendedorValidador();                
+            var result = validador.Validate(vendedorModel);
+
+            if (result.IsValid)
             {
+               vendedorModel.Nome = FormataValores.FormataMaiusculo(vendedorModel.Nome);
+               vendedorModel.Endereco = FormataValores.FormataMaiusculo(vendedorModel.Endereco);
+               vendedorModel.Email = FormataValores.FormataMinusculo(vendedorModel.Email);
+
                 _context.Add(vendedorModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Home");
@@ -87,11 +96,17 @@ namespace TCCESTOQUE.Controllers
             {
                 return NotFound();
             }
+            var validador = new VendedorValidador();                
+            var result = validador.Validate(vendedorModel);
 
-            if (ModelState.IsValid)
+            if (result.IsValid)
             {
                 try
                 {
+                    vendedorModel.Nome = FormataValores.FormataMaiusculo(vendedorModel.Nome);
+                    vendedorModel.Endereco = FormataValores.FormataMaiusculo(vendedorModel.Endereco);
+                    vendedorModel.Email = FormataValores.FormataMinusculo(vendedorModel.Email);
+
                     _context.Update(vendedorModel);
                     await _context.SaveChangesAsync();
                 }
