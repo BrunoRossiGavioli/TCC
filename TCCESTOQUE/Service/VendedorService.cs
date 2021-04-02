@@ -19,9 +19,9 @@ namespace TCCESTOQUE.Service
         {
             _vendedorRepository = vendedorRepository;
         }
-        public IActionResult GetCriacao()
+        public object GetCriacao()
         {
-            throw new NotImplementedException();
+            return _vendedorRepository.GetCriacao();
         }
 
         public VendedorModel GetDetalhes(int? id)
@@ -44,19 +44,15 @@ namespace TCCESTOQUE.Service
             throw new NotImplementedException();
         }
 
-        public object PostCriacao(VendedorModel vendedorModel)
+        public bool PostCriacao(VendedorModel vendedorModel)
         {
-            vendedorModel.Nome = FormataValores.FormataMaiusculo(vendedorModel.Nome);
-            vendedorModel.Email = vendedorModel.Email.Trim();
-            vendedorModel.Senha = SecurityService.Criptografar(vendedorModel.Senha);
+            vendedorModel = FormataValores.FormataValoresVendedor(vendedorModel);
             return _vendedorRepository.PostCriacao(vendedorModel);
         }
 
-        public object PutEdicao(int id, VendedorModel vendedorModel)
+        public bool PutEdicao(int id, VendedorModel vendedorModel)
         {
-            vendedorModel.Nome = FormataValores.FormataMaiusculo(vendedorModel.Nome);
-            vendedorModel.Email = vendedorModel.Email.Trim();
-            vendedorModel.Senha = SecurityService.Criptografar(vendedorModel.Senha);
+            vendedorModel = FormataValores.FormataValoresVendedor(vendedorModel);
             return _vendedorRepository.PutEdicao(id, vendedorModel);
         }
 
