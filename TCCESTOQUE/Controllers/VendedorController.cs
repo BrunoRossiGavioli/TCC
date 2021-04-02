@@ -73,7 +73,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Edit(int id, [Bind("Senha,Cpf,Nome,Email,DataNascimento,Endereco,Telefone")] VendedorModel vendedorModel)
         {
             Autenticar();
-            _vendedorService.PostEdicao(id, vendedorModel);
+            _vendedorService.PutEdicao(id, vendedorModel);
             return RedirectToAction("Index", "Home");
         }
 

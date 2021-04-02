@@ -18,7 +18,7 @@ namespace TCCESTOQUE.Interfaces.Service
 
         public VendedorModel GetEdicao(int? id);
 
-        public object PostEdicao(int id, VendedorModel vendedorModel);
+        public object PutEdicao(int id, VendedorModel vendedorModel);
 
         public VendedorModel GetExclusao(int? id);
 
