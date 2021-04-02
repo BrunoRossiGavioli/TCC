@@ -9,6 +9,7 @@ using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.Service;
+using TCCESTOQUE.ValidadorVendedor;
 
 namespace TCCESTOQUE.Repository
 {
