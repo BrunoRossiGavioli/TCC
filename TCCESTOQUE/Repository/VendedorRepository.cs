@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.Service;
 using TCCESTOQUE.ValidadorVendedor;
 
 namespace TCCESTOQUE.Repository
@@ -124,7 +125,7 @@ namespace TCCESTOQUE.Repository
             var vendedor = _context.VendedorModel.Where(a => a.Email == vendedorModel.Email).FirstOrDefault();
             if (vendedor == null)
                 return null;
-            if (vendedor.Senha != vendedorModel.Senha)
+            if (vendedor.Senha != SecurityService.Criptografar(vendedorModel.Senha))
                 return null;
 
             var claim1 = new Claim(ClaimTypes.Name, vendedor.Nome);
