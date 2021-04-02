@@ -12,7 +12,6 @@ using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.ValidadorVendedor;
 using TCCESTOQUE.Models;
-using TCCESTOQUE.Validacao.Formatacao;
 
 namespace TCCESTOQUE.Controllers
 {
@@ -45,7 +44,7 @@ namespace TCCESTOQUE.Controllers
             Autenticar();
             return View();
         }
-
+ 
         // POST: Vendedor/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -53,23 +52,13 @@ namespace TCCESTOQUE.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("Senha,Cpf,Nome,Email,DataNascimento,Endereco,Telefone")] VendedorModel vendedorModel)
         {
-            Autenticar();
-            var res = _vendedorService.PostCriacao(vendedorModel);
-            if (res)
-            var validador = new VendedorValidador();                
-            var result = validador.Validate(vendedorModel);
-
-            if (result.IsValid)
-            {
-               vendedorModel.Nome = FormataValores.FormataMaiusculo(vendedorModel.Nome);
-               vendedorModel.Endereco = FormataValores.FormataMaiusculo(vendedorModel.Endereco);
-               vendedorModel.Email = FormataValores.FormataMinusculo(vendedorModel.Email);
-
-                _context.Add(vendedorModel);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index", "Home");
+            Autenticar();   
             
-            return View(vendedorModel);
+             var resultado = _vendedorService.PostCriacao(vendedorModel);
+                if(resultado)                
+                    return RedirectToAction("Index", "Home");
+
+            return View(vendedorModel);            
         }
 
         // GET: Vendedor/Edit/5
@@ -89,15 +78,9 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Edit(int id, [Bind("Senha,Cpf,Nome,Email,DataNascimento,Endereco,Telefone")] VendedorModel vendedorModel)
         {
             Autenticar();
-            var res = _vendedorService.PutEdicao(id, vendedorModel);
-            if(res)
-                return RedirectToAction("Index", "Home");
-            if (id != vendedorModel.Id)
-            {
-                return NotFound();
-            }
-            var validador = new VendedorValidador();                
-            var result = validador.Validate(vendedorModel);
+            var resultado = _vendedorService.PutEdicao(vendedorModel.Id, vendedorModel);
+                if(resultado)                
+                    return RedirectToAction("Index", "Home");
 
             return View(vendedorModel);
         }

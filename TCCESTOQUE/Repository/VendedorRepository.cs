@@ -59,12 +59,12 @@ namespace TCCESTOQUE.Repository
         public VendedorModel GetEdicao(int? id)
         {
             var vendedorModel = _context.VendedorModel.Find(id);
-            var validacao = new VendedorValidador().Validate(vendedorModel);
-            if (!validacao.IsValid)
-            {
+            
+                var validacao = new VendedorValidador().Validate(vendedorModel);
                 var erros = validacao.Errors.Select(e => e.ErrorMessage).ToList();
-                return null;
-            }
+                if(!validacao.IsValid)
+                return null;            
+            
             return vendedorModel;
 
         }

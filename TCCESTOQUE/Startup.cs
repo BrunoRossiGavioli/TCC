@@ -36,7 +36,7 @@ namespace TCCESTOQUE
                     config.LoginPath = "/Vendedor/Login";
                     config.AccessDeniedPath = "/Vendedor/LoginInvalido";
                 });
-
+                             
             services.AddControllersWithViews();
 
             services.AddDbContext<TCCESTOQUEContext>(options =>
@@ -71,7 +71,7 @@ namespace TCCESTOQUE
 
             app.UseAuthentication();
 
-            app.UseAuthorization();
+            app.UseAuthorization();           
 
             app.UseEndpoints(endpoints =>
             {
