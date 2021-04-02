@@ -26,7 +26,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Index()
         {
             Autenticar();
-            return View();
+            return View(_vendedorService.GetCriacao());
         }
 
         // GET: Vendedor/Details/5
@@ -52,8 +52,11 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Create([Bind("Senha,Cpf,Nome,Email,DataNascimento,Endereco,Telefone")] VendedorModel vendedorModel)
         {
             Autenticar();
-            _vendedorService.PostCriacao(vendedorModel);
-            return RedirectToAction("Index", "Home");
+            var res = _vendedorService.PostCriacao(vendedorModel);
+            if (res)
+                return RedirectToAction("Index", "Home");
+            
+            return View(vendedorModel);
         }
 
         // GET: Vendedor/Edit/5
@@ -73,8 +76,11 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Edit(int id, [Bind("Senha,Cpf,Nome,Email,DataNascimento,Endereco,Telefone")] VendedorModel vendedorModel)
         {
             Autenticar();
-            _vendedorService.PutEdicao(id, vendedorModel);
-            return RedirectToAction("Index", "Home");
+            var res = _vendedorService.PutEdicao(id, vendedorModel);
+            if(res)
+                return RedirectToAction("Index", "Home");
+
+            return View(vendedorModel);
         }
 
         // GET: Vendedor/Delete/5

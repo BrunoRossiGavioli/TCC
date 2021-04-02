@@ -12,13 +12,13 @@ namespace TCCESTOQUE.Interfaces.Service
     {
         public VendedorModel GetDetalhes(int? id);
 
-        public IActionResult GetCriacao();
+        public object GetCriacao();
 
-        public object PostCriacao(VendedorModel vendedorModel);
+        public bool PostCriacao(VendedorModel vendedorModel);
 
         public VendedorModel GetEdicao(int? id);
 
-        public object PutEdicao(int id, VendedorModel vendedorModel);
+        public bool PutEdicao(int id, VendedorModel vendedorModel);
 
         public VendedorModel GetExclusao(int? id);
 

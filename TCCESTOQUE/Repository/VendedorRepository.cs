@@ -22,20 +22,21 @@ namespace TCCESTOQUE.Repository
             _context = context;
         }
 
-        public IActionResult GetCriacao()
+        public object GetCriacao()
         {
-            throw new NotImplementedException();
+            return _context.VendedorModel.ToList();
         }
 
-        public object PostCriacao(VendedorModel vendedorModel)
+        public bool PostCriacao(VendedorModel vendedorModel)
         {
             var validacao = new VendedorValidador().Validate(vendedorModel);
             if (validacao.IsValid)
             {
                 _context.Add(vendedorModel);
                 _context.SaveChanges();
+                return true;
             }
-            return vendedorModel;
+            return false;
         }
 
         public VendedorModel GetDetalhes(int? id)
@@ -68,9 +69,8 @@ namespace TCCESTOQUE.Repository
 
         }
 
-        public object PutEdicao(int id, VendedorModel vendedorModel)
+        public bool PutEdicao(int id, VendedorModel vendedorModel)
         {
-            //PERGUNTAR AO NIZZOLA SE TEM COMO MELHORAR ESSE CODIGO
             vendedorModel.Id = id;
             var validacao = new VendedorValidador().Validate(vendedorModel);
             if (validacao.IsValid)
@@ -79,14 +79,15 @@ namespace TCCESTOQUE.Repository
                 {
                     _context.Update(vendedorModel);
                     _context.SaveChanges();
+                    return true;
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    return null;
+                    return false;
                 }
             }
 
-            return vendedorModel;
+            return false;
         }
 
         public VendedorModel GetExclusao(int? id)
