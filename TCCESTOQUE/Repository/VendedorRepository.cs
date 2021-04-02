@@ -35,7 +35,7 @@ namespace TCCESTOQUE.Repository
                 vendedorModel = FormataValores.FormataValoresVendedor(vendedorModel);
 
                 _context.Add(vendedorModel); 
-                _context.SaveChanges();   
+                _context.SaveChanges();    
                 return true;
                   
             }else

@@ -10,6 +10,7 @@ namespace TCCESTOQUE.Models
     [Table("Vendedor")] 
     public class VendedorModel : PessoaModel
     {        
+       
         [MaxLength(70)]
         [DataType(System.ComponentModel.DataAnnotations.DataType.Password)]
         public string Senha { get; set; } 

@@ -14,7 +14,6 @@ using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Service;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Repository;
-using TCCESTOQUE.ValidadorVendedor;
 
 namespace TCCESTOQUE
 {

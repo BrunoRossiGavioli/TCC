@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
-using TCCESTOQUE.Validacao.MensagensDeErro;
 
 namespace TCCESTOQUE.Models
 { 
@@ -15,8 +14,7 @@ namespace TCCESTOQUE.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [MaxLength(50)]
-        [Required(ErrorMessage = "Informe o nome do usuário.")]             
+        [MaxLength(50)]         
         public string Nome { get; set; }
 
         [MaxLength(80)]       
