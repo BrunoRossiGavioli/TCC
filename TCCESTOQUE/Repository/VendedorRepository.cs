@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,6 +9,7 @@ using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.ValidadorVendedor;
+using TCCESTOQUE.Formatacao;
 
 namespace TCCESTOQUE.Repository
 {
@@ -27,15 +27,22 @@ namespace TCCESTOQUE.Repository
             throw new NotImplementedException();
         }
 
-        public object PostCriacao(VendedorModel vendedorModel)
+        public bool PostCriacao(VendedorModel vendedorModel)
         {
             var validacao = new VendedorValidador().Validate(vendedorModel);
-            if (validacao.IsValid)
+            if(validacao.IsValid)
+            { 
+                vendedorModel = FormataValores.FormataValoresVendedor(vendedorModel);
+
+                _context.Add(vendedorModel); 
+                _context.SaveChanges();   
+                return true;
+                  
+            }else
             {
-                _context.Add(vendedorModel);
-                _context.SaveChanges();
+                return false;  
             }
-            return vendedorModel;
+         
         }
 
         public VendedorModel GetDetalhes(int? id)
@@ -58,17 +65,17 @@ namespace TCCESTOQUE.Repository
         public VendedorModel GetEdicao(int? id)
         {
             var vendedorModel = _context.VendedorModel.Find(id);
-            var validacao = new VendedorValidador().Validate(vendedorModel);
-            if (!validacao.IsValid)
-            {
+            
+                var validacao = new VendedorValidador().Validate(vendedorModel);
                 var erros = validacao.Errors.Select(e => e.ErrorMessage).ToList();
-                return null;
-            }
+                if(!validacao.IsValid)
+                return null;            
+            
             return vendedorModel;
 
         }
 
-        public object PostEdicao(int id, VendedorModel vendedorModel)
+        public bool PostEdicao(int id, VendedorModel vendedorModel)
         {
             //PERGUNTAR AO NIZZOLA SE TEM COMO MELHORAR ESSE CODIGO
             vendedorModel.Id = id;
@@ -76,17 +83,19 @@ namespace TCCESTOQUE.Repository
             if (validacao.IsValid)
             {
                 try
-                {
-                    _context.Update(vendedorModel);
-                    _context.SaveChanges();
+                {          
+                vendedorModel = FormataValores.FormataValoresVendedor(vendedorModel);
+                _context.Update(vendedorModel);
+                _context.SaveChanges();
+                return true;
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    return null;
+                    return false;
                 }
             }
 
-            return vendedorModel;
+            return false;
         }
 
         public VendedorModel GetExclusao(int? id)

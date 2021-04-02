@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.ValidadorVendedor;
 
 namespace TCCESTOQUE.Controllers
 {
@@ -43,7 +44,7 @@ namespace TCCESTOQUE.Controllers
             Autenticar();
             return View();
         }
-
+ 
         // POST: Vendedor/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -51,9 +52,13 @@ namespace TCCESTOQUE.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("Senha,Cpf,Nome,Email,DataNascimento,Endereco,Telefone")] VendedorModel vendedorModel)
         {
-            Autenticar();
-            _vendedorService.PostCriacao(vendedorModel);
-            return RedirectToAction("Index", "Home");
+            Autenticar();   
+            
+             var resultado = _vendedorService.PostCriacao(vendedorModel);
+                if(resultado)                
+                    return RedirectToAction("Index", "Home");
+
+            return View(vendedorModel);            
         }
 
         // GET: Vendedor/Edit/5
@@ -73,8 +78,11 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Edit(int id, [Bind("Senha,Cpf,Nome,Email,DataNascimento,Endereco,Telefone")] VendedorModel vendedorModel)
         {
             Autenticar();
-            _vendedorService.PostEdicao(id, vendedorModel);
-            return RedirectToAction("Index", "Home");
+            var resultado = _vendedorService.PostEdicao(vendedorModel.Id, vendedorModel);
+                if(resultado)                
+                    return RedirectToAction("Index", "Home");
+
+            return View(vendedorModel);
         }
 
         // GET: Vendedor/Delete/5

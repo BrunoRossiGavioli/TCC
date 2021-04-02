@@ -43,12 +43,12 @@ namespace TCCESTOQUE.Service
             throw new NotImplementedException();
         }
 
-        public object PostCriacao(VendedorModel vendedorModel)
+        public bool PostCriacao(VendedorModel vendedorModel)
         {
-            return _vendedorRepository.PostCriacao(vendedorModel);
+            return _vendedorRepository.PostCriacao(vendedorModel); 
         }
 
-        public object PostEdicao(int id, VendedorModel vendedorModel)
+        public bool PostEdicao(int id, VendedorModel vendedorModel)
         {
             return _vendedorRepository.PostEdicao(id, vendedorModel);
         }

@@ -4,9 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using TCCESTOQUE.Validacao.MensagensDeErro;
 
 namespace TCCESTOQUE.Models
-{
+{ 
     public class PessoaModel
     {
         [Key] 
@@ -14,20 +15,18 @@ namespace TCCESTOQUE.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [MaxLength(50, ErrorMessage = "Campo pode conter no maximo {0} caracteres")]
-        [Required(ErrorMessage = "Informe o nome de usuario", AllowEmptyStrings = false)]
+        [MaxLength(50)]
+        [Required(ErrorMessage = "Informe o nome do usuário.")]             
         public string Nome { get; set; }
 
-        [MaxLength(80, ErrorMessage = "Campo pode conter no maximo {0} caracteres")]
+        [MaxLength(80)]       
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Informe a data de nascimento", AllowEmptyStrings = false)]
         public DateTime DataNascimento { get; set; }
 
-        //criar uma tabela de endereço
+        //criar uma tabela de endereço       
         public string Endereco { get; set; }
-
-        [Required(ErrorMessage = "Informe um ou mais numeros de telefone!", AllowEmptyStrings = false)]
+       
         public string Telefone { get; set; }
     }
 }

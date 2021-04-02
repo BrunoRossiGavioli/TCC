@@ -14,11 +14,11 @@ namespace TCCESTOQUE.Interfaces.Repository
 
         public IActionResult GetCriacao();
 
-        public object PostCriacao(VendedorModel vendedorModel);
+        public bool PostCriacao(VendedorModel vendedorModel);
 
         public VendedorModel GetEdicao(int? id);
 
-        public object PostEdicao(int id, VendedorModel vendedorModel);
+        public bool PostEdicao(int id, VendedorModel vendedorModel);
 
         public VendedorModel GetExclusao(int? id);
 

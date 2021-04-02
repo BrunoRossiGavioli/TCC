@@ -14,6 +14,7 @@ using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Service;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Repository;
+using TCCESTOQUE.ValidadorVendedor;
 
 namespace TCCESTOQUE
 {
@@ -36,7 +37,7 @@ namespace TCCESTOQUE
                     config.LoginPath = "/Vendedor/Login";
                     config.AccessDeniedPath = "/Vendedor/LoginInvalido";
                 });
-
+                             
             services.AddControllersWithViews();
 
             services.AddDbContext<TCCESTOQUEContext>(options =>
@@ -67,7 +68,7 @@ namespace TCCESTOQUE
 
             app.UseAuthentication();
 
-            app.UseAuthorization();
+            app.UseAuthorization();           
 
             app.UseEndpoints(endpoints =>
             {
