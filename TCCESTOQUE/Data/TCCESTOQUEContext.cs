@@ -15,5 +15,9 @@ namespace TCCESTOQUE.Data
         }
 
         public DbSet<TCCESTOQUE.Models.VendedorModel> VendedorModel { get; set; }
+
+        public DbSet<TCCESTOQUE.Models.FornecedorModel> FornecedorModel { get; set; }
+
+        public DbSet<TCCESTOQUE.Models.ProdutoModel> ProdutoModel { get; set; }
     }
 }

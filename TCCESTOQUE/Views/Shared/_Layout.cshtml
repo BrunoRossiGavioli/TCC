@@ -21,12 +21,24 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Vendedor" asp-action="Create">Cadastro Vendedor</a>
-                        </li>
+                        @{
+                            if (!ViewBag.autenticado) 
+                            { 
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Vendedor" asp-action="Create">Cadastrar</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Vendedor" asp-action="Login">Login</a>
+                                </li>
+                            }
+
+                            if (ViewBag.autenticado != null && ViewBag.autenticado)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Vendedor" asp-action="Logout">Desconectar</a>
+                                </li>
+                            }
+                        }
                     </ul>
                 </div>
             </div>

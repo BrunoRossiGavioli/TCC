@@ -10,6 +10,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TCCESTOQUE.Data;
+using TCCESTOQUE.Interfaces.Service;
+using TCCESTOQUE.Service;
+using TCCESTOQUE.Interfaces.Repository;
+using TCCESTOQUE.Repository;
 
 namespace TCCESTOQUE
 {
@@ -25,10 +29,25 @@ namespace TCCESTOQUE
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication("CookieAuthentication")
+                .AddCookie("CookieAuthentication", config =>
+                {
+                    config.Cookie.Name = "LoginUsuario";
+                    config.LoginPath = "/Vendedor/Login";
+                    config.AccessDeniedPath = "/Vendedor/LoginInvalido";
+                });
+
             services.AddControllersWithViews();
 
             services.AddDbContext<TCCESTOQUEContext>(options =>
                     options.UseMySql(Configuration.GetConnectionString("TCCESTOQUEContext")));
+
+            services.AddScoped<IVendedorService, VendedorService>();
+            services.AddScoped<IVendedorRepository, VendedorRepository>();
+            services.AddScoped<IFornecedorService,FornecedorService>();
+            services.AddScoped<IFornecedorRepository, FornecedorRepository>();
+            services.AddScoped<IProdutoService, ProdutoService>();
+            services.AddScoped<IProdutoRepository, ProdutoRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,9 +64,12 @@ namespace TCCESTOQUE
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
