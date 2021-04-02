@@ -19,6 +19,7 @@ namespace TCCESTOQUE.Models
         public string Nome { get; set; }
 
         [MaxLength(80, ErrorMessage = "Campo pode conter no maximo {0} caracteres")]
+        [DataType(System.ComponentModel.DataAnnotations.DataType.EmailAddress)]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Informe a data de nascimento", AllowEmptyStrings = false)]

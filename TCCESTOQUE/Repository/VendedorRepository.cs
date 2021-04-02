@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +8,7 @@ using System.Threading.Tasks;
 using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Models;
-using TCCESTOQUE.ValidadorVendedor;
+using TCCESTOQUE.Service;
 
 namespace TCCESTOQUE.Repository
 {
@@ -68,7 +67,7 @@ namespace TCCESTOQUE.Repository
 
         }
 
-        public object PostEdicao(int id, VendedorModel vendedorModel)
+        public object PutEdicao(int id, VendedorModel vendedorModel)
         {
             //PERGUNTAR AO NIZZOLA SE TEM COMO MELHORAR ESSE CODIGO
             vendedorModel.Id = id;
@@ -125,7 +124,7 @@ namespace TCCESTOQUE.Repository
             var vendedor = _context.VendedorModel.Where(a => a.Email == vendedorModel.Email).FirstOrDefault();
             if (vendedor == null)
                 return null;
-            if (vendedor.Senha != vendedorModel.Senha)
+            if (vendedor.Senha != SecurityService.Criptografar(vendedorModel.Senha))
                 return null;
 
             var claim1 = new Claim(ClaimTypes.Name, vendedor.Nome);

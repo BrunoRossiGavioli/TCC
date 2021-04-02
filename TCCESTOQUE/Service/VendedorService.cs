@@ -8,6 +8,7 @@ using TCCESTOQUE.Controllers;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.Validacao.Formatacao;
 
 namespace TCCESTOQUE.Service
 {
@@ -45,12 +46,18 @@ namespace TCCESTOQUE.Service
 
         public object PostCriacao(VendedorModel vendedorModel)
         {
+            vendedorModel.Nome = FormataValores.FormataMaiusculo(vendedorModel.Nome);
+            vendedorModel.Email = vendedorModel.Email.Trim();
+            vendedorModel.Senha = SecurityService.Criptografar(vendedorModel.Senha);
             return _vendedorRepository.PostCriacao(vendedorModel);
         }
 
-        public object PostEdicao(int id, VendedorModel vendedorModel)
+        public object PutEdicao(int id, VendedorModel vendedorModel)
         {
-            return _vendedorRepository.PostEdicao(id, vendedorModel);
+            vendedorModel.Nome = FormataValores.FormataMaiusculo(vendedorModel.Nome);
+            vendedorModel.Email = vendedorModel.Email.Trim();
+            vendedorModel.Senha = SecurityService.Criptografar(vendedorModel.Senha);
+            return _vendedorRepository.PutEdicao(id, vendedorModel);
         }
 
         public object PostExclusao(int id)
