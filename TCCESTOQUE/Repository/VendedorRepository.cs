@@ -9,7 +9,8 @@ using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.Service;
-using TCCESTOQUE.ValidadorVendedor;
+using TCCESTOQUE.ValidaModels;
+using TCCESTOQUE.Validacao.Formatacao; 
 
 namespace TCCESTOQUE.Repository
 {
@@ -32,6 +33,7 @@ namespace TCCESTOQUE.Repository
             var validacao = new VendedorValidador().Validate(vendedorModel);
             if (validacao.IsValid)
             {
+                vendedorModel = FormataValores.FormataValoresVendedor(vendedorModel);
                 _context.Add(vendedorModel);
                 _context.SaveChanges();
                 return true;
@@ -59,12 +61,12 @@ namespace TCCESTOQUE.Repository
         public VendedorModel GetEdicao(int? id)
         {
             var vendedorModel = _context.VendedorModel.Find(id);
-            
-                var validacao = new VendedorValidador().Validate(vendedorModel);
+            var validacao = new VendedorValidador().Validate(vendedorModel);
+            if (!validacao.IsValid)
+            {
                 var erros = validacao.Errors.Select(e => e.ErrorMessage).ToList();
-                if(!validacao.IsValid)
-                return null;            
-            
+                return null;
+            }
             return vendedorModel;
 
         }
@@ -77,11 +79,12 @@ namespace TCCESTOQUE.Repository
             {
                 try
                 {
+                    vendedorModel = FormataValores.FormataValoresVendedor(vendedorModel);
                     _context.Update(vendedorModel);
                     _context.SaveChanges();
-                    return true;
+                    return true; 
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateConcurrencyException) 
                 {
                     return false;
                 }

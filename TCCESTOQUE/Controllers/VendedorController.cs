@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Service;
-using TCCESTOQUE.ValidadorVendedor;
 using TCCESTOQUE.Models;
 
 namespace TCCESTOQUE.Controllers
@@ -44,7 +43,7 @@ namespace TCCESTOQUE.Controllers
             Autenticar();
             return View();
         }
- 
+
         // POST: Vendedor/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -52,13 +51,12 @@ namespace TCCESTOQUE.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("Senha,Cpf,Nome,Email,DataNascimento,Endereco,Telefone")] VendedorModel vendedorModel)
         {
-            Autenticar();   
+            Autenticar();
+            var res = _vendedorService.PostCriacao(vendedorModel);
+            if (res)
+                return RedirectToAction("Index", "Home");
             
-             var resultado = _vendedorService.PostCriacao(vendedorModel);
-                if(resultado)                
-                    return RedirectToAction("Index", "Home");
-
-            return View(vendedorModel);            
+            return View(vendedorModel);
         }
 
         // GET: Vendedor/Edit/5
@@ -78,9 +76,9 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Edit(int id, [Bind("Senha,Cpf,Nome,Email,DataNascimento,Endereco,Telefone")] VendedorModel vendedorModel)
         {
             Autenticar();
-            var resultado = _vendedorService.PutEdicao(vendedorModel.Id, vendedorModel);
-                if(resultado)                
-                    return RedirectToAction("Index", "Home");
+            var res = _vendedorService.PutEdicao(id, vendedorModel);
+            if(res)
+                return RedirectToAction("Index", "Home");
 
             return View(vendedorModel);
         }
@@ -118,7 +116,7 @@ namespace TCCESTOQUE.Controllers
             Autenticar();
             var vend = _vendedorService.PostLogin(vendedor);
             HttpContext.SignInAsync(vend);
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index","Home"); 
         }
 
         //GET

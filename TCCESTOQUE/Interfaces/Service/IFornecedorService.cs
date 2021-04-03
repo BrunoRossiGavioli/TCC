@@ -15,11 +15,11 @@ namespace TCCESTOQUE.Interfaces.Service
 
         public object GetCriacao();
 
-        public object PostCriacao(FornecedorModel fornecedorModel);
+        public bool PostCriacao(FornecedorModel fornecedorModel);
 
         public FornecedorModel GetEdicao(int? id);
 
-        public object PutEdicao(int id, FornecedorModel fornecedorModel);
+        public bool PutEdicao(int id, FornecedorModel fornecedorModel);
 
         public FornecedorModel GetExclusao(int? id);
 

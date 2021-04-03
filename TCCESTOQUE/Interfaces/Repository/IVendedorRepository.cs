@@ -18,7 +18,7 @@ namespace TCCESTOQUE.Interfaces.Repository
 
         public VendedorModel GetEdicao(int? id);
 
-        public bool PutEdicao(int id, VendedorModel vendedorModel);
+        public bool PutEdicao(int id, VendedorModel vendedorModel); 
 
         public VendedorModel GetExclusao(int? id);
 

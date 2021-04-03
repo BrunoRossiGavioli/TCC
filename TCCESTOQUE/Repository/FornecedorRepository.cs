@@ -1,11 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.Service;
+using TCCESTOQUE.ValidaModels;
+using TCCESTOQUE.Validacao.Formatacao; 
 
 namespace TCCESTOQUE.Repository
 {
@@ -68,11 +73,18 @@ namespace TCCESTOQUE.Repository
             return fornecedorModel;
         }
 
-        public object PostCriacao(FornecedorModel fornecedorModel)
+        public bool PostCriacao(FornecedorModel fornecedorModel)
         {
+            var validacao = new FornecedorValidador().Validate(fornecedorModel);
+            if(validacao.IsValid)
+            {
+            fornecedorModel = FormataValores.FormataValoresFornecedor(fornecedorModel);                
             _context.Add(fornecedorModel);
             _context.SaveChanges();
-            return fornecedorModel;
+            return true;
+            }
+
+        return false;
         }
 
         public object PostExclusao(int id)
@@ -83,20 +95,25 @@ namespace TCCESTOQUE.Repository
             return nameof(Index);
         }
 
-        public object PutEdicao(int id, FornecedorModel fornecedorModel)
+        public bool PutEdicao(int id, FornecedorModel fornecedorModel)
         {
-            if (fornecedorModel.Id == 0)
-                fornecedorModel.Id = id;
-            try
+            fornecedorModel.Id = id;
+            var validacao = new FornecedorValidador().Validate(fornecedorModel);
+            if (validacao.IsValid)
             {
-                _context.Update(fornecedorModel);
-                _context.SaveChanges();
-                return nameof(Index);
+                try
+                {
+                    fornecedorModel = FormataValores.FormataValoresFornecedor(fornecedorModel); 
+                    _context.Update(fornecedorModel);
+                    _context.SaveChanges();
+                    return true;
+                }
+                catch (DbUpdateConcurrencyException) 
+                { 
+                    return false;
+                }               
             }
-            catch (Exception) 
-            { 
-                throw;
-            }
+            return false;
         }
     }
 }

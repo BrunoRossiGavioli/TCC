@@ -9,7 +9,7 @@ using TCCESTOQUE.Models;
 namespace TCCESTOQUE.Interfaces.Service
 {
     public interface IVendedorService
-    {
+    { 
         public VendedorModel GetDetalhes(int? id);
 
         public object GetCriacao();

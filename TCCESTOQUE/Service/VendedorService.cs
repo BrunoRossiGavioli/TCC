@@ -8,7 +8,6 @@ using TCCESTOQUE.Controllers;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
-using TCCESTOQUE.Validacao.Formatacao;
 
 namespace TCCESTOQUE.Service
 {
@@ -18,7 +17,7 @@ namespace TCCESTOQUE.Service
         public VendedorService(IVendedorRepository vendedorRepository)
         {
             _vendedorRepository = vendedorRepository;
-        }
+        } 
         public object GetCriacao()
         {
             return _vendedorRepository.GetCriacao();
@@ -46,13 +45,12 @@ namespace TCCESTOQUE.Service
 
         public bool PostCriacao(VendedorModel vendedorModel)
         {
-            vendedorModel = FormataValores.FormataValoresVendedor(vendedorModel);
+            
             return _vendedorRepository.PostCriacao(vendedorModel);
         }
 
         public bool PutEdicao(int id, VendedorModel vendedorModel)
         {
-            vendedorModel = FormataValores.FormataValoresVendedor(vendedorModel);
             return _vendedorRepository.PutEdicao(id, vendedorModel);
         }
 
