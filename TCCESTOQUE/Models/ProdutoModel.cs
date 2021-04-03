@@ -9,7 +9,7 @@ namespace TCCESTOQUE.Models
 {
     [Table("Produto")]
     public class ProdutoModel
-    {
+    { 
         [Key]
         public int Id { get; set; }
 

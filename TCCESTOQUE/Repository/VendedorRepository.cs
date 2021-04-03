@@ -9,8 +9,8 @@ using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.Service;
-using TCCESTOQUE.ValidaModels;
 using TCCESTOQUE.Validacao.Formatacao; 
+using TCCESTOQUE.Validacao.ValidacaoModels;
 
 namespace TCCESTOQUE.Repository
 {

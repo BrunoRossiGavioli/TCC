@@ -1,9 +1,9 @@
 using System;
 using TCCESTOQUE.Models;
-using TCCESTOQUE.ValidaModels;
+using TCCESTOQUE.Validacao.ValidacaoModels;
 using Xunit;
 
-namespace XUnitTestProject1
+namespace XUnitTestTCCESTOQUE.Testes
 {
     public class UintTesteFornecedor
     {

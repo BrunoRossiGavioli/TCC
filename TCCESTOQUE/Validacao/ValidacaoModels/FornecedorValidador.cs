@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TCCESTOQUE.Validacao.MensagensDeErro; 
 
-namespace TCCESTOQUE.ValidaModels
+namespace TCCESTOQUE.Validacao.ValidacaoModels
 {
     public class FornecedorValidador : AbstractValidator<FornecedorModel>
     {

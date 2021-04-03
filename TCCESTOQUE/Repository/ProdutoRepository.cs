@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.Validacao.ValidacaoModels;
 
 namespace TCCESTOQUE.Repository
 {
