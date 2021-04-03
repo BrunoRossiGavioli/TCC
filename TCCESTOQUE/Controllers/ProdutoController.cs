@@ -46,7 +46,7 @@ namespace TCCESTOQUE.Controllers
             Autenticar();
             ViewData["FornecedorId"] = _context.GetCriacao();
             return View();
-        }
+        } 
 
         // POST: Produto/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
@@ -57,9 +57,12 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Create([Bind("Id,Nome,Descricao,Custo,ValorUnitario,Quantidade,FornecedorId")] ProdutoModel produtoModel)
         {
             Autenticar();
-            _context.PostCriacao(produtoModel);
-            ViewData["FornecedorId"] = new SelectList(_context2.ProdutoModel, "Id", "Nome", produtoModel.FornecedorId);
+            var result = _context.PostCriacao(produtoModel);
+            if(result)
             return RedirectToAction("Index", "Produto");
+            
+
+        return View(produtoModel);
         }
 
         // GET: Produto/Edit/5
@@ -68,7 +71,7 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             var produtoModel = _context.GetEdicao(id);
-            ViewData["FornecedorId"] = new SelectList(_context2.ProdutoModel, "Id", "Nome", produtoModel.FornecedorId);
+            
             return View(produtoModel);
         }
 
@@ -81,9 +84,12 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Edit(int id, [Bind("Id,Nome,Descricao,Custo,ValorUnitario,Quantidade,FornecedorId")] ProdutoModel produtoModel)
         {
             Autenticar();
-            _context.PutEdicao(id, produtoModel);
-            ViewData["FornecedorId"] = new SelectList(_context2.ProdutoModel, "Id", "Nome", produtoModel.FornecedorId);
-            return RedirectToAction("Index", "Produto");
+            var result = _context.PutEdicao(id, produtoModel);
+            if(result)                                       
+            return RedirectToAction("Index", "Produto"); 
+            
+            
+        return View(produtoModel);    
         }
 
         // GET: Produto/Delete/5

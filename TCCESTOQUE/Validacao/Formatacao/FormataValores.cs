@@ -28,5 +28,14 @@ namespace TCCESTOQUE.Validacao.Formatacao
 
             return fornecedorModel;
         }
+        public static ProdutoModel FormataValoresProduto(ProdutoModel produtoModel)
+        {
+            produtoModel.Nome = produtoModel.Nome.ToUpper().Trim();
+            produtoModel.Descricao = produtoModel.Descricao.ToUpper().Trim();
+            produtoModel.ValorUnitario = produtoModel.ValorUnitario;  
+            produtoModel.Custo = produtoModel.Custo;
+
+            return produtoModel;
+        }
     }
 }

@@ -112,7 +112,7 @@ namespace TCCESTOQUE.Controllers
         //POST
         [HttpPost,ActionName("Login")]
         public IActionResult Login(VendedorModel vendedor)
-        {
+        { 
             Autenticar();
             var vend = _vendedorService.PostLogin(vendedor);
             HttpContext.SignInAsync(vend);

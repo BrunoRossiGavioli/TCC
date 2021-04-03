@@ -36,7 +36,7 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
         }
         private static bool DataMinima(DateTime data)
         {
-           return data <= DateTime.Now.AddMinutes(-1) ;
+           return data <= DateTime.Now.AddMinutes(1) ;
         }  
     }
 }

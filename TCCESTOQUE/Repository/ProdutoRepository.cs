@@ -1,14 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.Service;
 using TCCESTOQUE.Validacao.ValidacaoModels;
+using TCCESTOQUE.Validacao.Formatacao; 
 
 namespace TCCESTOQUE.Repository
 {
@@ -27,10 +29,9 @@ namespace TCCESTOQUE.Repository
             return tCCESTOQUEContext.ToList();
         }
 
-        public object GetCriacao()
+        public object GetCriacao() 
         {
-            var res  = new SelectList(_context.FornecedorModel, "Id", "Nome");
-            return res;
+            return _context.ProdutoModel.ToList();
         }
 
         public ProdutoModel GetDetalhes(int? id)
@@ -73,11 +74,17 @@ namespace TCCESTOQUE.Repository
             return produtoModel;
         }
 
-        public object PostCriacao(ProdutoModel produtoModel)
+        public bool PostCriacao(ProdutoModel produtoModel)
         {
-            _context.Add(produtoModel);
-            _context.SaveChanges();
-            return produtoModel;
+                var validacao = new ProdutoValidador().Validate(produtoModel);
+                if(validacao.IsValid)
+                {
+                produtoModel = FormataValores.FormataValoresProduto(produtoModel);
+                _context.Add(produtoModel);
+                _context.SaveChanges();
+                return true;
+                }
+            return false;
         }
 
         public object PostExclusao(int id)
@@ -88,20 +95,28 @@ namespace TCCESTOQUE.Repository
             return nameof(Index);
         }
 
-        public object PutEdicao(int id, ProdutoModel produtoModel)
+        public bool PutEdicao(int id, ProdutoModel produtoModel)
         {
             if (produtoModel.Id == 0)
                 produtoModel.Id = id;
-            try
+            var validacao = new ProdutoValidador().Validate(produtoModel);
+            if(validacao.IsValid)
             {
-                _context.Update(produtoModel);
-                _context.SaveChanges();
-                return nameof(Index);
+                try
+                {
+                    produtoModel = FormataValores.FormataValoresProduto(produtoModel);  
+                    _context.Update(produtoModel);
+                    _context.SaveChanges();
+                    return true;
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    return false;
+                }
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            
+            return false;
+           
         }
     }
 }

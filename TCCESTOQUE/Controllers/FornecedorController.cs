@@ -41,7 +41,7 @@ namespace TCCESTOQUE.Controllers
         [Authorize]
         public IActionResult Create()
         {
-            Autenticar();
+            Autenticar(); 
             return View();
         }
 

@@ -17,7 +17,7 @@ namespace XUnitTestTCCESTOQUE.Testes
                 Descricao = "Terra",
                 Custo = Convert.ToDecimal(100.00),
                 ValorUnitario = Convert.ToDecimal(10.00),
-                Quantidade =Convert.ToInt32(10), 
+                Quantidade = Convert.ToInt32(10), 
                 DataEntrada = DateTime.Now.AddMinutes(1)
             };
         }            

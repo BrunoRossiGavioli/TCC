@@ -28,7 +28,7 @@ namespace TCCESTOQUE.Repository
             return _context.FornecedorModel.ToList();
         }
 
-        public object GetCriacao()
+        public object GetCriacao() 
         {
             return null;
         }
@@ -97,6 +97,7 @@ namespace TCCESTOQUE.Repository
 
         public bool PutEdicao(int id, FornecedorModel fornecedorModel)
         {
+            if(fornecedorModel.Id == 0)
             fornecedorModel.Id = id;
             var validacao = new FornecedorValidador().Validate(fornecedorModel);
             if (validacao.IsValid)
