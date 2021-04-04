@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +32,8 @@ namespace TCCESTOQUE.Repository
 
         public object GetCriacao() 
         {
-            return _context.ProdutoModel.ToList();
+            var res  = new SelectList(_context.FornecedorModel, "Id", "Nome");
+            return res;
         }
 
         public ProdutoModel GetDetalhes(int? id)

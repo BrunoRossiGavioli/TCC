@@ -15,12 +15,10 @@ namespace TCCESTOQUE.Controllers
     public class ProdutoController : ControllerPai
     {
         private readonly IProdutoService _context;
-        private readonly TCCESTOQUEContext _context2;
 
-        public ProdutoController(IProdutoService context, TCCESTOQUEContext context2)
+        public ProdutoController(IProdutoService context)
         {
             _context = context;
-            _context2 = context2;
         }
 
         // GET: Produto
@@ -44,7 +42,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Create()
         {
             Autenticar();
-            ViewData["FornecedorId"] = _context.GetCriacao();
+            ViewData["FornecedorId"] = _context.GetCriacao(); 
             return View();
         } 
 

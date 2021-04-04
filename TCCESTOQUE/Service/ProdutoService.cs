@@ -24,7 +24,7 @@ namespace TCCESTOQUE.Service
         }
 
         public object GetCriacao()
-        {
+        { 
             return _produtoRepository.GetCriacao();
         }
 
