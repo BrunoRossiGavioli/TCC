@@ -14,7 +14,7 @@ using TCCESTOQUE.Validacao.ValidacaoModels;
 using TCCESTOQUE.Validacao.Formatacao; 
 
 namespace TCCESTOQUE.Repository
-{
+{ 
     public class ProdutoRepository : IProdutoRepository
     {
         private readonly TCCESTOQUEContext _context;
@@ -30,7 +30,7 @@ namespace TCCESTOQUE.Repository
             return tCCESTOQUEContext.ToList();
         }
 
-        public object GetCriacao() 
+        public object GetCriacao()  
         {
             var res  = new SelectList(_context.FornecedorModel, "Id", "Nome");
             return res;
@@ -115,10 +115,8 @@ namespace TCCESTOQUE.Repository
                 {
                     return false;
                 }
-            }
-            
-            return false;
-           
+            }            
+            return false;           
         }
     }
 }

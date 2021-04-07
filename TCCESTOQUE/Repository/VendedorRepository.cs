@@ -13,7 +13,7 @@ using TCCESTOQUE.Validacao.Formatacao;
 using TCCESTOQUE.Validacao.ValidacaoModels;
 
 namespace TCCESTOQUE.Repository
-{
+{ 
     public class VendedorRepository : IVendedorRepository
     {
         private readonly TCCESTOQUEContext _context;

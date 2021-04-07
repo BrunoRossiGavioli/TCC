@@ -25,7 +25,7 @@ namespace TCCESTOQUE.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            Autenticar();
+            Autenticar(); 
             return View(_fornecedorService.GetIndex());
         }
 
@@ -38,7 +38,7 @@ namespace TCCESTOQUE.Controllers
         }
 
         // GET: Fornecedor/Create
-        [Authorize]
+        [Authorize] 
         public IActionResult Create()
         {
             Autenticar(); 

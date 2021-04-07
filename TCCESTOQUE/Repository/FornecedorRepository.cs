@@ -13,7 +13,7 @@ using TCCESTOQUE.Validacao.ValidacaoModels;
 using TCCESTOQUE.Validacao.Formatacao; 
 
 namespace TCCESTOQUE.Repository
-{
+{ 
     public class FornecedorRepository : IFornecedorRepository
     {
         private readonly TCCESTOQUEContext _context;
@@ -100,7 +100,7 @@ namespace TCCESTOQUE.Repository
             if(fornecedorModel.Id == 0)
             fornecedorModel.Id = id;
             var validacao = new FornecedorValidador().Validate(fornecedorModel);
-            if (validacao.IsValid)
+            if (validacao.IsValid) 
             {
                 try
                 {

@@ -1,6 +1,8 @@
 using System;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.Service;
+using System.Globalization;
+using System.Threading;
 
 namespace TCCESTOQUE.Validacao.Formatacao
 {
@@ -32,8 +34,6 @@ namespace TCCESTOQUE.Validacao.Formatacao
         {
             produtoModel.Nome = produtoModel.Nome.ToUpper().Trim();
             produtoModel.Descricao = produtoModel.Descricao.ToUpper().Trim();
-            produtoModel.ValorUnitario = produtoModel.ValorUnitario;  
-            produtoModel.Custo = produtoModel.Custo;
 
             return produtoModel;
         }

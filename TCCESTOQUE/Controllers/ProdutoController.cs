@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Service;
-using TCCESTOQUE.Models;
+using TCCESTOQUE.Models; 
 
 namespace TCCESTOQUE.Controllers
 {

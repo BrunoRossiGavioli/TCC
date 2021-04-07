@@ -16,8 +16,8 @@ namespace TCCESTOQUE.Models
         [MaxLength(14, ErrorMessage = "O campo CNPJ deve possuir 14 caracteres!")]
         public string Cnpj { get; set; }
 
-        [ScaffoldColumn(false)]
-        public ICollection<ProdutoModel> produtos { get; set; }
+        [ScaffoldColumn(false)] 
+        public ICollection<ProdutoModel> Produtos { get; set; } 
 
     }
 }

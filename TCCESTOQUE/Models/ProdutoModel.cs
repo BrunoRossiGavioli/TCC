@@ -19,14 +19,14 @@ namespace TCCESTOQUE.Models
         [MaxLength(50, ErrorMessage = "Descrição deve possuir no maximo {0} caracteres!")]
         public string Descricao { get; set; }
 
-        [Column(TypeName = "decimal(12,2)")]
+        [Column(TypeName = "decimal(12,2)")] 
         public decimal Custo { get; set; }
 
         [Column(TypeName = "decimal(12,2)")]
         public decimal ValorUnitario { get; set; }
 
         public int Quantidade { get; set; }
-
+ 
         [ScaffoldColumn(false)]
         public DateTime DataEntrada { get; set; } = DateTime.Today;
 
@@ -34,9 +34,6 @@ namespace TCCESTOQUE.Models
         public int FornecedorId { get; set; }
         [ScaffoldColumn(false)]
         public FornecedorModel Fornecedor { get; set; }
-
-
-
 
     }
 

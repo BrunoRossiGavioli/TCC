@@ -16,7 +16,7 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
         RuleFor(p => p.Nome).NotEmpty().WithMessage(MensagensErroProduto.NomeVazio)
                 .MaximumLength(80).WithMessage(MensagensErroProduto.NomeTamanhoMaximo)
                 .MinimumLength(3).WithMessage(MensagensErroProduto.NomeTamanhoMinimo);
-
+ 
             RuleFor(p => p.Descricao).NotEmpty().WithMessage(MensagensErroProduto.DescricaoVazia)
                 .MaximumLength(30).WithMessage(MensagensErroProduto.DescricaoTamanhoMaximo)
                 .MinimumLength(3).WithMessage(MensagensErroProduto.DescricaoTamanhoMinimo);
@@ -31,12 +31,11 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
                 .GreaterThan(0).WithMessage(MensagensErroProduto.QuantidadeMinima);           
 
              RuleFor(p => p.DataEntrada).NotEmpty().WithMessage(MensagensErroProduto.DataEntradaVazia)
-                .Must(DataMinima).WithMessage(MensagensErroProduto.DataDeEntradaFutura);     
-        
+                .Must(DataMinima).WithMessage(MensagensErroProduto.DataDeEntradaFutura); 
         }
         private static bool DataMinima(DateTime data)
-        {
+        { 
            return data <= DateTime.Now.AddMinutes(1) ;
-        }  
+        }        
     }
 }

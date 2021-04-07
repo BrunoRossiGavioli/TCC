@@ -35,9 +35,9 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
                 
             RuleFor(f => f.Cnpj).NotEmpty().WithMessage(MenssagensErroFornecedor.CnpjVazio)
                 .Length(14).WithMessage(MenssagensErroFornecedor.CnpjTamanho);           
-
+ 
              RuleFor(f => f.DataNascimento).NotEmpty().WithMessage(MenssagensErroFornecedor.DataNascimentoVazia)
-                .Must(IdadeMinima).WithMessage(MenssagensErroFornecedor.DataTamanhoMinimo);     
+                .Must(IdadeMinima).WithMessage(MenssagensErroFornecedor.DataTamanhoMinimo);   
         
         }
         private static bool IdadeMinima(DateTime data)
