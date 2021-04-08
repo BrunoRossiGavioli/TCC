@@ -34,7 +34,7 @@ namespace TCCESTOQUE.Repository
                 return null;
 
             var fornecedorModel = _context.FornecedorModel
-                .FirstOrDefault(m => m.Id == id);
+                .FirstOrDefault(m => m.ForncedorId == id);
 
             if (fornecedorModel == null)
                 return null;
@@ -60,7 +60,7 @@ namespace TCCESTOQUE.Repository
                 return null;
 
             var fornecedorModel = _context.FornecedorModel
-                .FirstOrDefault(m => m.Id == id);
+                .FirstOrDefault(m => m.ForncedorId == id);
 
             if (fornecedorModel == null)
                 return null;
@@ -85,8 +85,8 @@ namespace TCCESTOQUE.Repository
 
         public object PutEdicao(int id, FornecedorModel fornecedorModel)
         {
-            if (fornecedorModel.Id == 0)
-                fornecedorModel.Id = id;
+            if (fornecedorModel.ForncedorId == 0)
+                fornecedorModel.ForncedorId = id;
             try
             {
                 _context.Update(fornecedorModel);

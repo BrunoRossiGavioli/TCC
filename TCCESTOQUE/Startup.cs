@@ -14,6 +14,7 @@ using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Service;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Repository;
+using TCCESTOQUE.AutoMapper;
 
 namespace TCCESTOQUE
 {
@@ -38,6 +39,8 @@ namespace TCCESTOQUE
                 });
 
             services.AddControllersWithViews();
+
+            services.AddAutoMapper(typeof(AutoMapperProfile));
 
             services.AddDbContext<TCCESTOQUEContext>(options =>
                     options.UseMySql(Configuration.GetConnectionString("TCCESTOQUEContext")));

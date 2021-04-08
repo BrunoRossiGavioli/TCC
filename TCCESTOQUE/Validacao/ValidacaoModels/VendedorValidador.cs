@@ -20,10 +20,6 @@ namespace TCCESTOQUE.ValidadorVendedor
                 .EmailAddress().WithMessage(MensagensErroVendedor.EmailFormatoInvalido)
                 .MaximumLength(30).WithMessage(MensagensErroVendedor.EmailTamanhoMaximo)
                 .MinimumLength(13).WithMessage(MensagensErroVendedor.EmailTamanhoMinimo);
-
-            RuleFor(v => v.Endereco).NotEmpty().WithMessage(MensagensErroVendedor.EnderecoVazio)
-                .MaximumLength(80).WithMessage(MensagensErroVendedor.EnderecoTamanhoMaximo)
-                .MinimumLength(10).WithMessage(MensagensErroVendedor.EnderecoTamanhoMinimo);
                 
             RuleFor(v => v.Telefone).NotEmpty().WithMessage(MensagensErroVendedor.TelefoneVazio)
                 .Length(11).WithMessage(MensagensErroVendedor.TelefoneTamanho);

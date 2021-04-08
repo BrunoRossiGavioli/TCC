@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TCCESTOQUE.Data;
 
 namespace TCCESTOQUE.Migrations
 {
     [DbContext(typeof(TCCESTOQUEContext))]
-    partial class TCCESTOQUEContextModelSnapshot : ModelSnapshot
+    [Migration("20210407145537_Novo")]
+    partial class Novo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,21 +75,22 @@ namespace TCCESTOQUE.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Cnpj")
-                        .IsRequired()
                         .HasColumnType("varchar(14) CHARACTER SET utf8mb4")
                         .HasMaxLength(14);
+
+                    b.Property<DateTime>("DataNascimento")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Email")
                         .HasColumnType("varchar(80) CHARACTER SET utf8mb4")
                         .HasMaxLength(80);
 
-                    b.Property<string>("NomeFantasia")
+                    b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
                         .HasMaxLength(50);
 
-                    b.Property<string>("RazaoSocial")
-                        .IsRequired()
+                    b.Property<string>("NomeFantasia")
                         .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
                         .HasMaxLength(50);
 
@@ -156,6 +159,9 @@ namespace TCCESTOQUE.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("varchar(80) CHARACTER SET utf8mb4")
                         .HasMaxLength(80);
+
+                    b.Property<string>("Endereco")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<bool>("Logado")
                         .HasColumnType("tinyint(1)");

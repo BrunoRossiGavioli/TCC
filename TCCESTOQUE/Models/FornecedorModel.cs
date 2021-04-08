@@ -10,14 +10,27 @@ namespace TCCESTOQUE.Models
     [Table("Fornecedor")]
     public class FornecedorModel : PessoaModel
     {
+        [Key]
+        [ScaffoldColumn(false)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ForncedorId { get; set; }
+
+        [MaxLength(50, ErrorMessage = "Campo pode conter no maximo {0} caracteres")]
+        [Required(ErrorMessage = "Informe a RazãoSocial de usuario", AllowEmptyStrings = false)]
+        public string RazaoSocial { get; set; }
+
         [MaxLength(50, ErrorMessage = "Nome fantasia deve possuir no maximo {0} caracteres!")]
+        [Required(ErrorMessage = "Informe a RazãoSocial de usuario", AllowEmptyStrings = false)]
         public string NomeFantasia { get; set; }
 
         [MaxLength(14, ErrorMessage = "O campo CNPJ deve possuir 14 caracteres!")]
+        [Required(ErrorMessage = "Informe a RazãoSocial de usuario", AllowEmptyStrings = false)]
         public string Cnpj { get; set; }
 
+        public ICollection<FornecedorEnderecoModel> Enderecos { get; set; }
+
         [ScaffoldColumn(false)]
-        public ICollection<ProdutoModel> produtos { get; set; }
+        public ICollection<ProdutoModel> Produtos { get; set; }
 
     }
 }
