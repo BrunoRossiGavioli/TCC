@@ -10,6 +10,8 @@ using Microsoft.EntityFrameworkCore;
 using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.Validacao.ValidacaoModels;
+using TCCESTOQUE.ValidadorVendedor;
 using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Controllers
@@ -37,10 +39,11 @@ namespace TCCESTOQUE.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> CadastroFull(ForncedorEnderecoViewModel feviewmodel)
+        public async Task<IActionResult> CadastroFull(FornecedorEnderecoViewModel feviewmodel)
         {
             Autenticar();
-            if (ModelState.IsValid)
+            var validator = new FornecedorEnderecoValidador().Validate(feviewmodel);
+            if (ModelState.IsValid && validator.IsValid)
             {
                 var fornecedor = _mapper.Map<FornecedorModel>(feviewmodel);
                 _context2.Add(fornecedor);
@@ -72,12 +75,14 @@ namespace TCCESTOQUE.Controllers
             return View(_context.GetDetalhes(id));
         }
 
-        // GET: Fornecedor/Edit/5
+        // GET: Fornecedor/EditFull/5
         [Authorize]
-        public IActionResult Edit(int? id)
+        public IActionResult EditFull(int? id)
         {
             Autenticar();
-            return View(_context.GetEdicao(id));
+            var info = _context.GetEditFull(id);
+
+            return View(info);
         }
 
         // POST: Fornecedor/Edit/5
@@ -86,11 +91,30 @@ namespace TCCESTOQUE.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult Edit(int id, [Bind("NomeFantasia,Cnpj,Nome,Email,DataNascimento,Endereco,Telefone")] FornecedorModel fornecedorModel)
+        public async Task<IActionResult> EditFull(int id,FornecedorEnderecoViewModel feviewmodel)
         {
             Autenticar();
-            _context.PutEdicao(id, fornecedorModel);
-            return RedirectToAction("Index", "Fornecedor");
+
+            var validator = new FornecedorEnderecoValidador().Validate(feviewmodel);
+            var fornecedor = _mapper.Map<FornecedorModel>(feviewmodel);
+
+            if (fornecedor.ForncedorId == 0)
+                fornecedor.ForncedorId = id;
+            
+            if (ModelState.IsValid && validator.IsValid)
+            {
+                //não funciona!!!
+                var endereco = _mapper.Map<FornecedorEnderecoModel>(feviewmodel);
+                _context2.Update(endereco);
+                await _context2.SaveChangesAsync();
+
+                _context2.Update(fornecedor);
+                await _context2.SaveChangesAsync();
+
+                return RedirectToAction("Index", "Fornecedor");
+            }
+
+            return View();
         }
 
         // GET: Fornecedor/Delete/5

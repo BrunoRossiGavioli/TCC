@@ -23,8 +23,8 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         @{
-                            if (!ViewBag.autenticado) 
-                            { 
+                            if (!ViewBag.autenticado)
+                            {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Vendedor" asp-action="Create">Cadastrar</a>
                                 </li>
@@ -35,6 +35,12 @@
 
                             if (ViewBag.autenticado != null && ViewBag.autenticado)
                             {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Fornecedor" asp-action="CadastroFull">Cadastrar Fornecedor</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Produto" asp-action="Create">Adicionar produto</a>
+                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Vendedor" asp-action="Logout">Desconectar</a>
                                 </li>

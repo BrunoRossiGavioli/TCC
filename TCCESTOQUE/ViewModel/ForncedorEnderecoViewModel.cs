@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace TCCESTOQUE.ViewModel
 {
-    public class ForncedorEnderecoViewModel
+    public class FornecedorEnderecoViewModel
     {
         #region Fornecedor
         public int FornecedorId { get; set; }
@@ -13,7 +13,6 @@ namespace TCCESTOQUE.ViewModel
         public string Cnpj { get; set; }
         public string RazaoSocial { get; set; }
         public string Email { get; set; }
-        public DateTime DataNascimento { get; set; }
         public string Telefone { get; set; }
         #endregion
 

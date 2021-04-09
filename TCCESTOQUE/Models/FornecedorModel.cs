@@ -27,7 +27,8 @@ namespace TCCESTOQUE.Models
         [Required(ErrorMessage = "Informe a RazãoSocial de usuario", AllowEmptyStrings = false)]
         public string Cnpj { get; set; }
 
-        public ICollection<FornecedorEnderecoModel> Enderecos { get; set; }
+        [ScaffoldColumn(false)]
+        public FornecedorEnderecoModel Endereco { get; set; }
 
         [ScaffoldColumn(false)]
         public ICollection<ProdutoModel> Produtos { get; set; }

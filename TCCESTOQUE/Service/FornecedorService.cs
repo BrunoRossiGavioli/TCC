@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Service
 {
@@ -22,20 +23,9 @@ namespace TCCESTOQUE.Service
         {
             return _fornecedorRepository.GetIndex();
         }
-
-        public object GetCriacao()
-        {
-            return _fornecedorRepository.GetCriacao();
-        }
-
         public FornecedorModel GetDetalhes(int? id)
         {
             return _fornecedorRepository.GetDetalhes(id);
-        }
-
-        public FornecedorModel GetEdicao(int? id)
-        {
-            return _fornecedorRepository.GetEdicao(id);
         }
 
         public FornecedorModel GetExclusao(int? id)
@@ -43,19 +33,19 @@ namespace TCCESTOQUE.Service
             return _fornecedorRepository.GetExclusao(id);
         }
 
-        public object PostCriacao(FornecedorModel fornecedorModel)
-        {
-            return _fornecedorRepository.PostCriacao(fornecedorModel);
-        }
-
         public object PostExclusao(int id)
         {
            return _fornecedorRepository.PostExclusao(id);
         }
 
-        public object PutEdicao(int id, FornecedorModel fornecedorModel)
+        public FornecedorEnderecoViewModel GetEditFull(int? id)
         {
-            return _fornecedorRepository.PutEdicao(id, fornecedorModel);
+            return _fornecedorRepository.GetEditFull(id);
+        }
+
+        public Task<bool> PutEditFull(int id, FornecedorEnderecoViewModel feviewmodel)
+        {
+            return _fornecedorRepository.PutEditFull(id, feviewmodel);
         }
     }
 }

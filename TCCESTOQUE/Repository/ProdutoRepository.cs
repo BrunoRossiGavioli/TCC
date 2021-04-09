@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.Validacao.ValidacaoModels;
 
 namespace TCCESTOQUE.Repository
 {
@@ -28,7 +29,7 @@ namespace TCCESTOQUE.Repository
 
         public object GetCriacao()
         {
-            var res  = new SelectList(_context.FornecedorModel, "Id", "Nome");
+            var res  = new SelectList(_context.FornecedorModel, "FornecedorId", "NomeFantasia");
             return res;
         }
 
@@ -72,11 +73,15 @@ namespace TCCESTOQUE.Repository
             return produtoModel;
         }
 
-        public object PostCriacao(ProdutoModel produtoModel)
+        public bool PostCriacao(ProdutoModel produtoModel)
         {
-            _context.Add(produtoModel);
-            _context.SaveChanges();
-            return produtoModel;
+            var validador = new ProdutoValidador().Validate(produtoModel);
+            if (validador.IsValid) { 
+                _context.Add(produtoModel);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
         }
 
         public object PostExclusao(int id)
@@ -87,20 +92,26 @@ namespace TCCESTOQUE.Repository
             return nameof(Index);
         }
 
-        public object PutEdicao(int id, ProdutoModel produtoModel)
+        public bool PutEdicao(int id, ProdutoModel produtoModel)
         {
             if (produtoModel.Id == 0)
                 produtoModel.Id = id;
-            try
+
+            var validador = new ProdutoValidador().Validate(produtoModel);
+            if (validador.IsValid)
             {
-                _context.Update(produtoModel);
-                _context.SaveChanges();
-                return nameof(Index);
+                try
+                {
+                    _context.Update(produtoModel);
+                    _context.SaveChanges();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            return false;
         }
     }
 }

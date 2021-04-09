@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,16 +7,20 @@ using System.Threading.Tasks;
 using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.Validacao.ValidacaoModels;
+using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Repository
 {
     public class FornecedorRepository : IFornecedorRepository
     {
         private readonly TCCESTOQUEContext _context;
+        private readonly IMapper _mapper;
 
-        public FornecedorRepository(TCCESTOQUEContext context)
+        public FornecedorRepository(TCCESTOQUEContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         public object GetIndex()
@@ -97,6 +102,51 @@ namespace TCCESTOQUE.Repository
             { 
                 throw;
             }
+        }
+
+        public FornecedorEnderecoViewModel GetEditFull(int? id)
+        {
+            var fornecedor = _context.FornecedorModel.Find(id);
+            var info = FeviewConvert(fornecedor);
+            return info;
+        }
+
+        public async Task<bool> PutEditFull(int id, FornecedorEnderecoViewModel feviewmodel)
+        {
+            var validator = new FornecedorEnderecoValidador().Validate(feviewmodel);
+            var fornecedor = _mapper.Map<FornecedorModel>(feviewmodel);
+            var endereco = _mapper.Map<FornecedorEnderecoModel>(feviewmodel);
+
+            if (fornecedor.ForncedorId == 0)
+                fornecedor.ForncedorId = id;
+
+            endereco.Id = _context.FornecedorEnderecoModel.Where(e => e.FornecedorId == fornecedor.ForncedorId).FirstOrDefault().Id;
+
+            if (validator.IsValid)
+            {
+                _context.Update(fornecedor);
+                await _context.SaveChangesAsync();
+
+                _context.Update(endereco);
+                _context.SaveChangesAsync();
+                return true;
+            }
+            return false;
+        }
+
+        public FornecedorEnderecoViewModel FeviewConvert(FornecedorModel fornecedor)
+        {
+            var endereco = _context.FornecedorEnderecoModel.Where(e => e.FornecedorId == fornecedor.ForncedorId).FirstOrDefault();
+            var info = _mapper.Map<FornecedorEnderecoViewModel>(fornecedor);
+            info.Bairro = endereco.Bairro;
+            info.Cep = endereco.Cep;
+            info.Complemento = endereco.Complemento;
+            info.Localidade = endereco.Localidade;
+            info.Logradouro = endereco.Logradouro;
+            info.Numero = endereco.Numero;
+            info.Uf = endereco.Uf;
+
+            return info;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace TCCESTOQUE.Validacao.MensagensDeErro
         public static string NomeVazio ="O Nome não pode ser nulo!";
         public static string SenhaVazia ="A Senha não pode ser nula!";
         public static string EmailVazio  ="O Email não pode ser nulo!";
-        public static string DataNascimentoVazia ="A Data de nascimento não pode ser nulo!";
+        public static string DataNascimentoVazia ="A Data de nascimento não pode ser nula!";
         public static string EnderecoVazio ="O Endereço não pode ser nulo!";
         public static string TelefoneVazio ="O Telefone não pode ser nulo!";
         public static string CpfVazio ="O Cpf não pode ser nulo!";

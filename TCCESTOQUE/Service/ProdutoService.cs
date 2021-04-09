@@ -43,7 +43,7 @@ namespace TCCESTOQUE.Service
             return _produtoRepository.GetExclusao(id);
         }
 
-        public object PostCriacao(ProdutoModel produtoModel)
+        public bool PostCriacao(ProdutoModel produtoModel)
         {
             return _produtoRepository.PostCriacao(produtoModel);
         }
@@ -53,7 +53,7 @@ namespace TCCESTOQUE.Service
             return _produtoRepository.PostExclusao(id);
         }
 
-        public object PutEdicao(int id, ProdutoModel produtoModel)
+        public bool PutEdicao(int id, ProdutoModel produtoModel)
         {
             return _produtoRepository.PutEdicao(id, produtoModel);
         }

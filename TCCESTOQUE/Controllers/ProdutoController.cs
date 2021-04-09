@@ -44,7 +44,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Create()
         {
             Autenticar();
-            ViewData["FornecedorId"] = _context.GetCriacao();
+            ViewData["FornecedorId"] = new SelectList(_context2.FornecedorModel, "ForncedorId", "NomeFantasia");
             return View();
         }
 
@@ -58,7 +58,7 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             _context.PostCriacao(produtoModel);
-            ViewData["FornecedorId"] = new SelectList(_context2.ProdutoModel, "Id", "Nome", produtoModel.FornecedorId);
+            ViewData["FornecedorId"] = new SelectList(_context2.FornecedorModel, "ForncedorId", "NomeFantasia", produtoModel.FornecedorId);
             return RedirectToAction("Index", "Produto");
         }
 
@@ -68,7 +68,7 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             var produtoModel = _context.GetEdicao(id);
-            ViewData["FornecedorId"] = new SelectList(_context2.ProdutoModel, "Id", "Nome", produtoModel.FornecedorId);
+            ViewData["FornecedorId"] = new SelectList(_context2.FornecedorModel, "ForncedorId", "NomeFantasia", produtoModel.FornecedorId);
             return View(produtoModel);
         }
 
@@ -82,7 +82,7 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             _context.PutEdicao(id, produtoModel);
-            ViewData["FornecedorId"] = new SelectList(_context2.ProdutoModel, "Id", "Nome", produtoModel.FornecedorId);
+            ViewData["FornecedorId"] = new SelectList(_context2.FornecedorModel, "ForncedorId", "NomeFantasia", produtoModel.FornecedorId);
             return RedirectToAction("Index", "Produto");
         }
 

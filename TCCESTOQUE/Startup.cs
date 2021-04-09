@@ -1,13 +1,8 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Service;
@@ -15,6 +10,7 @@ using TCCESTOQUE.Service;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Repository;
 using TCCESTOQUE.AutoMapper;
+using FluentValidation.AspNetCore;
 
 namespace TCCESTOQUE
 {
@@ -44,6 +40,10 @@ namespace TCCESTOQUE
 
             services.AddDbContext<TCCESTOQUEContext>(options =>
                     options.UseMySql(Configuration.GetConnectionString("TCCESTOQUEContext")));
+
+            services.AddMvc()
+                .AddFluentValidation(c =>
+                c.RegisterValidatorsFromAssemblyContaining<Startup>());
 
             services.AddScoped<IVendedorService, VendedorService>();
             services.AddScoped<IVendedorRepository, VendedorRepository>();

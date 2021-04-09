@@ -12,8 +12,10 @@ namespace TCCESTOQUE.AutoMapper
     {
         public AutoMapperProfile()
         {
-            CreateMap<ForncedorEnderecoViewModel, FornecedorModel>();
-            CreateMap<ForncedorEnderecoViewModel, FornecedorEnderecoModel>();
+            CreateMap<FornecedorEnderecoViewModel, FornecedorModel>();
+            CreateMap<FornecedorEnderecoViewModel, FornecedorEnderecoModel>();
+            CreateMap<FornecedorEnderecoModel, FornecedorEnderecoViewModel>();
+            CreateMap<FornecedorModel, FornecedorEnderecoViewModel>();
         }
     }
 }

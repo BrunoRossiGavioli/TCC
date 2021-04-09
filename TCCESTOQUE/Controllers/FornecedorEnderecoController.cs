@@ -24,15 +24,12 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             if (id == null)
-            {
                 return NotFound();
-            }
 
             var fornecedorEnderecoModel = await _context2.FornecedorEnderecoModel.FindAsync(id);
             if (fornecedorEnderecoModel == null)
-            {
                 return NotFound();
-            }
+
             ViewData["FornecedorId"] = new SelectList(_context2.FornecedorModel, "ForncedorId", "Nome", fornecedorEnderecoModel.FornecedorId);
             return View(fornecedorEnderecoModel);
         }
@@ -44,9 +41,7 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             if (id != fornecedorEnderecoModel.Id)
-            {
                 return NotFound();
-            }
 
             if (ModelState.IsValid)
             {
