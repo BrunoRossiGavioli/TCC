@@ -33,6 +33,7 @@ namespace TCCESTOQUE
                     config.LoginPath = "/Vendedor/Login";
                     config.AccessDeniedPath = "/Vendedor/LoginInvalido";
                 });
+            
 
             services.AddControllersWithViews();
 
@@ -43,7 +44,8 @@ namespace TCCESTOQUE
 
             services.AddMvc()
                 .AddFluentValidation(c =>
-                c.RegisterValidatorsFromAssemblyContaining<Startup>());
+                c.RegisterValidatorsFromAssemblyContaining<Startup>())
+                .AddMvcOptions( c => c.EnableEndpointRouting = false);
 
             services.AddScoped<IVendedorService, VendedorService>();
             services.AddScoped<IVendedorRepository, VendedorRepository>();
@@ -66,6 +68,14 @@ namespace TCCESTOQUE
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseMvc(route =>
+            {
+                route.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}");
+            });
+
             app.UseHttpsRedirection();
 
             app.UseStaticFiles();
