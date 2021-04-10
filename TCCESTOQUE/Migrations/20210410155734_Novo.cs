@@ -14,12 +14,11 @@ namespace TCCESTOQUE.Migrations
                 {
                     ForncedorId = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Nome = table.Column<string>(maxLength: 50, nullable: false),
                     Email = table.Column<string>(maxLength: 80, nullable: true),
-                    DataNascimento = table.Column<DateTime>(nullable: false),
                     Telefone = table.Column<string>(nullable: false),
-                    NomeFantasia = table.Column<string>(maxLength: 50, nullable: true),
-                    Cnpj = table.Column<string>(maxLength: 14, nullable: true)
+                    RazaoSocial = table.Column<string>(maxLength: 50, nullable: false),
+                    NomeFantasia = table.Column<string>(maxLength: 50, nullable: false),
+                    Cnpj = table.Column<string>(maxLength: 14, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -32,12 +31,11 @@ namespace TCCESTOQUE.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Nome = table.Column<string>(maxLength: 50, nullable: false),
                     Email = table.Column<string>(maxLength: 80, nullable: true),
-                    DataNascimento = table.Column<DateTime>(nullable: false),
                     Telefone = table.Column<string>(nullable: false),
+                    Nome = table.Column<string>(maxLength: 50, nullable: false),
                     Senha = table.Column<string>(maxLength: 70, nullable: false),
-                    Endereco = table.Column<string>(nullable: true),
+                    DataNascimento = table.Column<DateTime>(nullable: false),
                     Cpf = table.Column<string>(maxLength: 11, nullable: false),
                     Ativo = table.Column<bool>(nullable: false),
                     Logado = table.Column<bool>(nullable: false)
@@ -51,7 +49,7 @@ namespace TCCESTOQUE.Migrations
                 name: "FornecedorEndereco",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    EnderecoId = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Cep = table.Column<string>(maxLength: 8, nullable: false),
                     Logradouro = table.Column<string>(maxLength: 80, nullable: false),
@@ -64,7 +62,7 @@ namespace TCCESTOQUE.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FornecedorEndereco", x => x.Id);
+                    table.PrimaryKey("PK_FornecedorEndereco", x => x.EnderecoId);
                     table.ForeignKey(
                         name: "FK_FornecedorEndereco_Fornecedor_FornecedorId",
                         column: x => x.FornecedorId,
@@ -101,7 +99,8 @@ namespace TCCESTOQUE.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_FornecedorEndereco_FornecedorId",
                 table: "FornecedorEndereco",
-                column: "FornecedorId");
+                column: "FornecedorId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Produto_FornecedorId",

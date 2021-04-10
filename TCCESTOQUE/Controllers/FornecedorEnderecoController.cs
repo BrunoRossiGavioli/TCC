@@ -40,7 +40,7 @@ namespace TCCESTOQUE.Controllers
         public async Task<IActionResult> Edit(int id, [Bind("FornecedorId,Id,Cep,Logradouro,Complemento,Numero,Bairro,Localidade,Uf")] FornecedorEnderecoModel fornecedorEnderecoModel)
         {
             Autenticar();
-            if (id != fornecedorEnderecoModel.Id)
+            if (id != fornecedorEnderecoModel.EnderecoId)
                 return NotFound();
 
             if (ModelState.IsValid)
@@ -52,7 +52,7 @@ namespace TCCESTOQUE.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!FornecedorEnderecoModelExists(fornecedorEnderecoModel.Id))
+                    if (!FornecedorEnderecoModelExists(fornecedorEnderecoModel.EnderecoId))
                     {
                         return NotFound();
                     }
@@ -78,7 +78,7 @@ namespace TCCESTOQUE.Controllers
 
             var fornecedorEnderecoModel = await _context2.FornecedorEnderecoModel
                 .Include(f => f.Fornecedor)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.EnderecoId == id);
             if (fornecedorEnderecoModel == null)
             {
                 return NotFound();
@@ -101,7 +101,7 @@ namespace TCCESTOQUE.Controllers
 
         private bool FornecedorEnderecoModelExists(int id)
         {
-            return _context2.FornecedorEnderecoModel.Any(e => e.Id == id);
+            return _context2.FornecedorEnderecoModel.Any(e => e.EnderecoId == id);
         }
     }
 }

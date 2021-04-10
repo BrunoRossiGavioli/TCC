@@ -9,8 +9,8 @@ using TCCESTOQUE.Data;
 namespace TCCESTOQUE.Migrations
 {
     [DbContext(typeof(TCCESTOQUEContext))]
-    [Migration("20210408001255_Novo2")]
-    partial class Novo2
+    [Migration("20210410155734_Novo")]
+    partial class Novo
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace TCCESTOQUE.Migrations
 
             modelBuilder.Entity("TCCESTOQUE.Models.FornecedorEnderecoModel", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("EnderecoId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -61,9 +61,10 @@ namespace TCCESTOQUE.Migrations
                         .HasColumnType("varchar(2) CHARACTER SET utf8mb4")
                         .HasMaxLength(2);
 
-                    b.HasKey("Id");
+                    b.HasKey("EnderecoId");
 
-                    b.HasIndex("FornecedorId");
+                    b.HasIndex("FornecedorId")
+                        .IsUnique();
 
                     b.ToTable("FornecedorEndereco");
                 });
@@ -184,8 +185,8 @@ namespace TCCESTOQUE.Migrations
             modelBuilder.Entity("TCCESTOQUE.Models.FornecedorEnderecoModel", b =>
                 {
                     b.HasOne("TCCESTOQUE.Models.FornecedorModel", "Fornecedor")
-                        .WithMany("Enderecos")
-                        .HasForeignKey("FornecedorId")
+                        .WithOne("Endereco")
+                        .HasForeignKey("TCCESTOQUE.Models.FornecedorEnderecoModel", "FornecedorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

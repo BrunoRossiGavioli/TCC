@@ -43,7 +43,7 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             var validator = new FornecedorEnderecoValidador().Validate(feviewmodel);
-            if (ModelState.IsValid && validator.IsValid)
+            if (validator.IsValid)
             {
                 var fornecedor = _mapper.Map<FornecedorModel>(feviewmodel);
                 _context2.Add(fornecedor);
@@ -91,26 +91,13 @@ namespace TCCESTOQUE.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> EditFull(int id,FornecedorEnderecoViewModel feviewmodel)
+        public IActionResult EditFull(int id, FornecedorEnderecoViewModel feviewmodel)
         {
             Autenticar();
+            var info = _context.PutEditFull(id, feviewmodel);
 
-            var validator = new FornecedorEnderecoValidador().Validate(feviewmodel);
-            var fornecedor = _mapper.Map<FornecedorModel>(feviewmodel);
-
-            if (fornecedor.ForncedorId == 0)
-                fornecedor.ForncedorId = id;
-            
-            if (ModelState.IsValid && validator.IsValid)
+            if (info)
             {
-                //não funciona!!!
-                var endereco = _mapper.Map<FornecedorEnderecoModel>(feviewmodel);
-                _context2.Update(endereco);
-                await _context2.SaveChangesAsync();
-
-                _context2.Update(fornecedor);
-                await _context2.SaveChangesAsync();
-
                 return RedirectToAction("Index", "Fornecedor");
             }
 

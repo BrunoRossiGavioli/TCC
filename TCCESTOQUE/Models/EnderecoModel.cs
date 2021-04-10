@@ -10,7 +10,7 @@ namespace TCCESTOQUE.Models
     public class EnderecoModel
     {
         [Key]
-        public int Id{ get; set; }
+        public int EnderecoId{ get; set; }
 
         [StringLength(8, ErrorMessage = "Cep tem que ter 8 caracteres")]
         [Required(ErrorMessage = "Informe o Cep", AllowEmptyStrings = false)]

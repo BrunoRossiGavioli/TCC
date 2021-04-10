@@ -43,7 +43,7 @@ namespace TCCESTOQUE.Service
             return _fornecedorRepository.GetEditFull(id);
         }
 
-        public Task<bool> PutEditFull(int id, FornecedorEnderecoViewModel feviewmodel)
+        public bool PutEditFull(int id, FornecedorEnderecoViewModel feviewmodel)
         {
             return _fornecedorRepository.PutEditFull(id, feviewmodel);
         }

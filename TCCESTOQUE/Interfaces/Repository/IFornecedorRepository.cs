@@ -16,7 +16,7 @@ namespace TCCESTOQUE.Interfaces.Repository
 
         public FornecedorEnderecoViewModel GetEditFull(int? id);
 
-        public Task<bool> PutEditFull(int id, FornecedorEnderecoViewModel feviewmodel);
+        public bool PutEditFull(int id, FornecedorEnderecoViewModel feviewmodel);
 
         public FornecedorModel GetExclusao(int? id);
 

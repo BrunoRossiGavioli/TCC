@@ -12,7 +12,8 @@
     <div class="col-md-12">
         <form asp-action="CadastroFull">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+            <input asp-for="FornecedorId" hidden />
+            <input asp-for="EnderecoId" hidden />
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">

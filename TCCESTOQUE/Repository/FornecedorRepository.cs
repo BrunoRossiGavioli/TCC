@@ -111,24 +111,26 @@ namespace TCCESTOQUE.Repository
             return info;
         }
 
-        public async Task<bool> PutEditFull(int id, FornecedorEnderecoViewModel feviewmodel)
+        public bool PutEditFull(int id, FornecedorEnderecoViewModel feviewmodel)
         {
             var validator = new FornecedorEnderecoValidador().Validate(feviewmodel);
             var fornecedor = _mapper.Map<FornecedorModel>(feviewmodel);
             var endereco = _mapper.Map<FornecedorEnderecoModel>(feviewmodel);
 
-            if (fornecedor.ForncedorId == 0)
+            if (fornecedor.ForncedorId == 0) 
                 fornecedor.ForncedorId = id;
 
-            endereco.Id = _context.FornecedorEnderecoModel.Where(e => e.FornecedorId == fornecedor.ForncedorId).FirstOrDefault().Id;
+            endereco.FornecedorId = fornecedor.ForncedorId;
+
+            //endereco.EnderecoId = _context.FornecedorEnderecoModel.Where(e => e.FornecedorId == fornecedor.ForncedorId).FirstOrDefault().EnderecoId;
 
             if (validator.IsValid)
             {
                 _context.Update(fornecedor);
-                await _context.SaveChangesAsync();
+                //_context.SaveChangesAsync();
 
-                _context.Update(endereco);
-                _context.SaveChangesAsync();
+                _context.FornecedorEnderecoModel.Update(endereco);
+                _context.SaveChanges();
                 return true;
             }
             return false;
@@ -145,6 +147,7 @@ namespace TCCESTOQUE.Repository
             info.Logradouro = endereco.Logradouro;
             info.Numero = endereco.Numero;
             info.Uf = endereco.Uf;
+            info.EnderecoId = endereco.EnderecoId;
 
             return info;
         }
