@@ -29,96 +29,62 @@ namespace TCCESTOQUE.Repository
 
         public bool PostCriacao(VendedorModel vendedorModel)
         {
-            var validacao = new VendedorValidador().Validate(vendedorModel);
-            if (validacao.IsValid)
-            {
-                _context.Add(vendedorModel);
-                _context.SaveChanges();
-                return true;
-            }
-            return false;
+            _context.Add(vendedorModel);
+            _context.SaveChanges();
+            return true;
         }
 
         public VendedorModel GetDetalhes(int? id)
         {
-            if (id == null)
-            {
-                return null;
-            }
-
             var vendedorModel = _context.VendedorModel
-                .FirstOrDefault(m => m.Id == id);
+                .FirstOrDefault(m => m.VendedorId == id);
+
             if (vendedorModel == null)
-            {
                 return null;
-            }
 
             return vendedorModel;
         }
 
         public VendedorModel GetEdicao(int? id)
         {
-            var vendedorModel = _context.VendedorModel.Find(id);
-            var validacao = new VendedorValidador().Validate(vendedorModel);
-            if (!validacao.IsValid)
-            {
-                var erros = validacao.Errors.Select(e => e.ErrorMessage).ToList();
-                return null;
-            }
-            return vendedorModel;
-
+            return _context.VendedorModel.Find(id);
         }
 
         public bool PutEdicao(int id, VendedorModel vendedorModel)
         {
-            vendedorModel.Id = id;
-            var validacao = new VendedorValidador().Validate(vendedorModel);
-            if (validacao.IsValid)
+            try
             {
-                try
-                {
-                    _context.Update(vendedorModel);
-                    _context.SaveChanges();
-                    return true;
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    return false;
-                }
+                _context.Update(vendedorModel);
+                _context.SaveChanges();
+                return true;
             }
-
-            return false;
+            catch (DbUpdateConcurrencyException)
+            {
+                return false;
+            }
         }
 
         public VendedorModel GetExclusao(int? id)
         {
-            var vendedorModel = _context.VendedorModel
-                .FirstOrDefault(m => m.Id == id);
+            var vendedor = _context.VendedorModel
+                .FirstOrDefault(m => m.VendedorId == id);
 
-            if (id != vendedorModel.Id || id == null)
-                return null;
-            var validacao = new VendedorValidador().Validate(vendedorModel);
-            if (!validacao.IsValid)
+            if (vendedor == null)
                 return null;
 
-                return vendedorModel;
+            return vendedor;
         }
 
         public object PostExclusao(int id)
         {
             var vendedorModel = _context.VendedorModel.Find(id);
-            if (id == vendedorModel.Id)
+            if (vendedorModel.VendedorId == id)
             {
                 _context.VendedorModel.Remove(vendedorModel);
                 _context.SaveChanges();
             }
             return null;
 
-        }
-
-        public void GetLogin()
-        {
-            throw new NotImplementedException();
         }
 
         public ClaimsPrincipal PostLogin(VendedorModel vendedorModel)

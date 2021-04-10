@@ -13,7 +13,7 @@ namespace TCCESTOQUE.Models
         [Key]
         [ScaffoldColumn(false)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int VendedorId { get; set; }
 
         [MaxLength(50, ErrorMessage = "Campo pode conter no maximo {0} caracteres")]
         [Required(ErrorMessage = "Informe o nome de usuario", AllowEmptyStrings = false)]

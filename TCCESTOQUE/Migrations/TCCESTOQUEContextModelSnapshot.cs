@@ -103,7 +103,7 @@ namespace TCCESTOQUE.Migrations
 
             modelBuilder.Entity("TCCESTOQUE.Models.ProdutoModel", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ProdutoId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -130,7 +130,7 @@ namespace TCCESTOQUE.Migrations
                     b.Property<decimal>("ValorUnitario")
                         .HasColumnType("decimal(12,2)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ProdutoId");
 
                     b.HasIndex("FornecedorId");
 
@@ -139,7 +139,7 @@ namespace TCCESTOQUE.Migrations
 
             modelBuilder.Entity("TCCESTOQUE.Models.VendedorModel", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("VendedorId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -175,7 +175,7 @@ namespace TCCESTOQUE.Migrations
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.HasKey("Id");
+                    b.HasKey("VendedorId");
 
                     b.ToTable("Vendedor");
                 });

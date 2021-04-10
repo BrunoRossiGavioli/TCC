@@ -24,8 +24,6 @@ namespace TCCESTOQUE.Interfaces.Repository
 
         public object PostExclusao(int id);
 
-        public void GetLogin();
-
         public ClaimsPrincipal PostLogin(VendedorModel vendedorModel);
     }
 }

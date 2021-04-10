@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TCCESTOQUE.Migrations
 {
-    public partial class Novo : Migration
+    public partial class Nova : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,7 +29,7 @@ namespace TCCESTOQUE.Migrations
                 name: "Vendedor",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    VendedorId = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Email = table.Column<string>(maxLength: 80, nullable: true),
                     Telefone = table.Column<string>(nullable: false),
@@ -42,7 +42,7 @@ namespace TCCESTOQUE.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Vendedor", x => x.Id);
+                    table.PrimaryKey("PK_Vendedor", x => x.VendedorId);
                 });
 
             migrationBuilder.CreateTable(
@@ -75,7 +75,7 @@ namespace TCCESTOQUE.Migrations
                 name: "Produto",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    ProdutoId = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Nome = table.Column<string>(maxLength: 50, nullable: true),
                     Descricao = table.Column<string>(maxLength: 50, nullable: true),
@@ -87,7 +87,7 @@ namespace TCCESTOQUE.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Produto", x => x.Id);
+                    table.PrimaryKey("PK_Produto", x => x.ProdutoId);
                     table.ForeignKey(
                         name: "FK_Produto_Fornecedor_FornecedorId",
                         column: x => x.FornecedorId,

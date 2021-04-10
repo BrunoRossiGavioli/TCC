@@ -1,11 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TCCESTOQUE.Interfaces.Repository;
+﻿using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.Validacao.ValidacaoModels;
 
 namespace TCCESTOQUE.Service
 {
@@ -30,22 +26,35 @@ namespace TCCESTOQUE.Service
 
         public ProdutoModel GetDetalhes(int? id)
         {
+            if (id == null)
+                return null;
+
             return _produtoRepository.GetDetalhes(id);
         }
 
         public ProdutoModel GetEdicao(int? id)
         {
+            if (id == null)
+                return null;
+
             return _produtoRepository.GetEdicao(id);
         }
 
         public ProdutoModel GetExclusao(int? id)
         {
+            if (id == null)
+                return null;
+
             return _produtoRepository.GetExclusao(id);
         }
 
         public bool PostCriacao(ProdutoModel produtoModel)
         {
-            return _produtoRepository.PostCriacao(produtoModel);
+            var validador = new ProdutoValidador().Validate(produtoModel);
+            if (validador.IsValid)
+                return _produtoRepository.PostCriacao(produtoModel);
+
+            return false;
         }
 
         public object PostExclusao(int id)
@@ -55,7 +64,14 @@ namespace TCCESTOQUE.Service
 
         public bool PutEdicao(int id, ProdutoModel produtoModel)
         {
-            return _produtoRepository.PutEdicao(id, produtoModel);
+            if (produtoModel.ProdutoId == 0)
+                produtoModel.ProdutoId = id;
+
+            var validador = new ProdutoValidador().Validate(produtoModel);
+            if (validador.IsValid)
+                return _produtoRepository.PutEdicao(id, produtoModel);
+
+            return false;
         }
     }
 }

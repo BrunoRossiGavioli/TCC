@@ -1,14 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Models;
-using TCCESTOQUE.Validacao.ValidacaoModels;
 
 namespace TCCESTOQUE.Repository
 {
@@ -35,11 +31,8 @@ namespace TCCESTOQUE.Repository
 
         public ProdutoModel GetDetalhes(int? id)
         {
-            if (id == null)
-                return null;
-
             var produtoModel = _context.ProdutoModel
-                .FirstOrDefault(m => m.Id == id);
+                .FirstOrDefault(m => m.ProdutoId == id);
 
             if (produtoModel == null)
                 return null;
@@ -49,9 +42,6 @@ namespace TCCESTOQUE.Repository
 
         public ProdutoModel GetEdicao(int? id)
         {
-            if (id == null)
-                return null;
-
             var produtoModel = _context.ProdutoModel.Find(id);
             if (produtoModel == null)
                 return null;
@@ -61,11 +51,8 @@ namespace TCCESTOQUE.Repository
 
         public ProdutoModel GetExclusao(int? id)
         {
-            if (id == null)
-                return null;
-
             var produtoModel = _context.ProdutoModel
-                .FirstOrDefault(m => m.Id == id);
+                .FirstOrDefault(m => m.ProdutoId == id);
 
             if (produtoModel == null)
                 return null;
@@ -75,13 +62,16 @@ namespace TCCESTOQUE.Repository
 
         public bool PostCriacao(ProdutoModel produtoModel)
         {
-            var validador = new ProdutoValidador().Validate(produtoModel);
-            if (validador.IsValid) { 
+            try
+            {
                 _context.Add(produtoModel);
                 _context.SaveChanges();
                 return true;
             }
-            return false;
+            catch (Exception)
+            {
+                return false;
+            }       
         }
 
         public object PostExclusao(int id)
@@ -94,24 +84,16 @@ namespace TCCESTOQUE.Repository
 
         public bool PutEdicao(int id, ProdutoModel produtoModel)
         {
-            if (produtoModel.Id == 0)
-                produtoModel.Id = id;
-
-            var validador = new ProdutoValidador().Validate(produtoModel);
-            if (validador.IsValid)
+            try
             {
-                try
-                {
-                    _context.Update(produtoModel);
-                    _context.SaveChanges();
-                    return true;
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
+                _context.Update(produtoModel);
+                _context.SaveChanges();
+                return true;
             }
-            return false;
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

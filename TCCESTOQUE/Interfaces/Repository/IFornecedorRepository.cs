@@ -14,6 +14,8 @@ namespace TCCESTOQUE.Interfaces.Repository
 
         public FornecedorModel GetDetalhes(int? id);
 
+        public bool PostCadastroFull(FornecedorEnderecoViewModel feviewmodel);
+
         public FornecedorEnderecoViewModel GetEditFull(int? id);
 
         public bool PutEditFull(int id, FornecedorEnderecoViewModel feviewmodel);

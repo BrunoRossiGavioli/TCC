@@ -39,23 +39,12 @@ namespace TCCESTOQUE.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> CadastroFull(FornecedorEnderecoViewModel feviewmodel)
+        public IActionResult CadastroFull(FornecedorEnderecoViewModel feviewmodel)
         {
             Autenticar();
-            var validator = new FornecedorEnderecoValidador().Validate(feviewmodel);
-            if (validator.IsValid)
-            {
-                var fornecedor = _mapper.Map<FornecedorModel>(feviewmodel);
-                _context2.Add(fornecedor);
-                await _context2.SaveChangesAsync();
-
-                var endereco = _mapper.Map<FornecedorEnderecoModel>(feviewmodel);
-                endereco.FornecedorId = fornecedor.ForncedorId;
-                _context2.Add(endereco);
-                await _context2.SaveChangesAsync();
-
+            var validator = _context.PostCadastroFull(feviewmodel);
+            if (validator)
                 return RedirectToAction("Index", "Fornecedor");
-            }
 
             return View();
         }

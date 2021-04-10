@@ -11,7 +11,7 @@ namespace TCCESTOQUE.Models
     public class ProdutoModel
     {
         [Key]
-        public int Id { get; set; }
+        public int ProdutoId { get; set; }
 
         [MaxLength(50, ErrorMessage = "Nome deve possuir no maximo {0} caracteres!")]
         public string Nome { get; set; }

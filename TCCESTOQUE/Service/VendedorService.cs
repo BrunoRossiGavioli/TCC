@@ -9,6 +9,7 @@ using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.Validacao.Formatacao;
+using TCCESTOQUE.ValidadorVendedor;
 
 namespace TCCESTOQUE.Service
 {
@@ -26,6 +27,9 @@ namespace TCCESTOQUE.Service
 
         public VendedorModel GetDetalhes(int? id)
         {
+            if (id == null)
+                return null;
+
             return _vendedorRepository.GetDetalhes(id);
         }
 
@@ -39,21 +43,27 @@ namespace TCCESTOQUE.Service
             return _vendedorRepository.GetExclusao(id);
         }
 
-        public void GetLogin()
-        {
-            throw new NotImplementedException();
-        }
-
         public bool PostCriacao(VendedorModel vendedorModel)
         {
-            vendedorModel = FormataValores.FormataValoresVendedor(vendedorModel);
-            return _vendedorRepository.PostCriacao(vendedorModel);
+            var validacao = new VendedorValidador().Validate(vendedorModel);
+            if (validacao.IsValid)
+            {
+                vendedorModel = FormataValores.FormataValoresVendedor(vendedorModel);
+                return _vendedorRepository.PostCriacao(vendedorModel);
+            }
+            return false;
         }
 
         public bool PutEdicao(int id, VendedorModel vendedorModel)
         {
-            vendedorModel = FormataValores.FormataValoresVendedor(vendedorModel);
-            return _vendedorRepository.PutEdicao(id, vendedorModel);
+            vendedorModel.VendedorId = id;
+            var validacao = new VendedorValidador().Validate(vendedorModel);
+            if (validacao.IsValid)
+            {
+                vendedorModel = FormataValores.FormataValoresVendedor(vendedorModel);
+                return _vendedorRepository.PutEdicao(id, vendedorModel);
+            }
+            return false;   
         }
 
         public object PostExclusao(int id)
