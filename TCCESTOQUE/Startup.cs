@@ -1,16 +1,16 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.EntityFrameworkCore;
-using TCCESTOQUE.Data;
-using TCCESTOQUE.Interfaces.Service;
-using TCCESTOQUE.Service;
-using TCCESTOQUE.Interfaces.Repository;
-using TCCESTOQUE.Repository;
 using TCCESTOQUE.AutoMapper;
-using FluentValidation.AspNetCore;
+using TCCESTOQUE.Data;
+using TCCESTOQUE.Interfaces.Repository;
+using TCCESTOQUE.Interfaces.Service;
+using TCCESTOQUE.Repository;
+using TCCESTOQUE.Service;
 
 namespace TCCESTOQUE
 {

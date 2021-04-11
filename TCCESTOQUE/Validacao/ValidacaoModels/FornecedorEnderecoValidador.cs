@@ -1,8 +1,4 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TCCESTOQUE.Validacao.MensagensDeErro;
 using TCCESTOQUE.ViewModel;
 
@@ -16,9 +12,9 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
                 .MaximumLength(80).WithMessage(MensagensErroFornecedor.NomeFantasiaTamanhoMaximo)
                 .MinimumLength(3).WithMessage(MensagensErroFornecedor.NomeFantasiaTamanhoMinimo);
 
-            RuleFor(f => f.NomeFantasia).NotEmpty().WithMessage(MensagensErroFornecedor.NomeVazio)
-            .MaximumLength(80).WithMessage(MensagensErroFornecedor.NomeTamanhoMaximo)
-            .MinimumLength(3).WithMessage(MensagensErroFornecedor.NomeTamanhoMinimo);
+            RuleFor(f => f.RazaoSocial).NotEmpty().WithMessage(MensagensErroFornecedor.RazaoSocialVazia)
+               .MaximumLength(80).WithMessage(MensagensErroFornecedor.RazaoSocialTamanhoMaximo)
+               .MinimumLength(3).WithMessage(MensagensErroFornecedor.RazaoSocialTamanhoMinimo);
 
             RuleFor(f => f.Email).NotEmpty().WithMessage(MensagensErroFornecedor.EmailVazio)
                 .EmailAddress().WithMessage(MensagensErroFornecedor.EmailFormatoInvalido)
@@ -31,6 +27,30 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
 
             RuleFor(f => f.Cnpj).NotEmpty().WithMessage(MensagensErroFornecedor.CnpjVazio)
                 .Length(14).WithMessage(MensagensErroFornecedor.CnpjTamanho);
+
+
+            RuleFor(f => f.Cep).NotEmpty().WithMessage(MensagensDeErroEndereco.CepVazio)
+                .Length(8).WithMessage(MensagensDeErroEndereco.CepTamanho);
+
+            RuleFor(f => f.Logradouro).NotEmpty().WithMessage(MensagensDeErroEndereco.LogradouroVazio)
+                .MaximumLength(80).WithMessage(MensagensDeErroEndereco.LogradouroTamanhoMaximo)
+                .MinimumLength(10).WithMessage(MensagensDeErroEndereco.LogradouroTamanhoMinimo);
+
+            RuleFor(f => f.Complemento).NotEmpty().WithMessage(MensagensDeErroEndereco.ComplementoVazio)
+                .MaximumLength(80).WithMessage(MensagensDeErroEndereco.ComplementoTamanhoMaximo)
+                .MinimumLength(10).WithMessage(MensagensDeErroEndereco.ComplementoVazio);
+
+            RuleFor(f => f.Numero).NotEmpty().WithMessage(MensagensDeErroEndereco.NumeroVazio)
+                .GreaterThanOrEqualTo(1).WithMessage(MensagensDeErroEndereco.NumeroTamanhoMinimo);
+
+            RuleFor(f => f.Bairro).NotEmpty().WithMessage(MensagensDeErroEndereco.BairroVazio)
+                .MaximumLength(80).WithMessage(MensagensDeErroEndereco.BairroTamanhoMaximo)
+                .MinimumLength(10).WithMessage(MensagensDeErroEndereco.BairroTamanhoMinimo);
+
+            RuleFor(f => f.Localidade).NotEmpty().WithMessage(MensagensDeErroEndereco.LocalidadeVazio)
+                .MaximumLength(80).WithMessage(MensagensDeErroEndereco.LocalidadeTamanhoMaximo)
+                .MinimumLength(10).WithMessage(MensagensDeErroEndereco.LocalidadeTamanhoMinimo);
+
         }
     }
 }

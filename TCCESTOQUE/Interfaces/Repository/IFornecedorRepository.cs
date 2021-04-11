@@ -1,9 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TCCESTOQUE.Models;
+﻿using TCCESTOQUE.Models;
 using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Interfaces.Repository
@@ -23,5 +18,13 @@ namespace TCCESTOQUE.Interfaces.Repository
         public FornecedorModel GetExclusao(int? id);
 
         public object PostExclusao(int id);
+
+        public FornecedorModel GetByCnpj(string cnpj);
+
+        public FornecedorModel GetByRazaoSocial(string razao);
+        public FornecedorModel GetByNomeFantsia(string nome);
+
+
+
     }
 }

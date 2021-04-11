@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace TCCESTOQUE.Models
 {
@@ -12,25 +7,25 @@ namespace TCCESTOQUE.Models
         [Key]
         public int EnderecoId{ get; set; }
 
-        [StringLength(8, ErrorMessage = "Cep tem que ter 8 caracteres")]
+        [StringLength(8)]
         [Required(ErrorMessage = "Informe o Cep", AllowEmptyStrings = false)]
         public string Cep { get; set; }
 
-        [MaxLength(80, ErrorMessage = "O Campo excedeu o numero maximo de caracteres")]
+        [MaxLength(80)]
         [Required(ErrorMessage = "Informe o Logradouro", AllowEmptyStrings = false)]
         public string Logradouro { get; set; }
 
-        [MaxLength(80, ErrorMessage = "O Campo excedeu o numero maximo de caracteres")]
+        [MaxLength(80)]
         public string Complemento { get; set; }
 
-        [MaxLength(10, ErrorMessage = "O campo excedeu o numero maximo de caracteres")]
+        [MaxLength(10)]
         public int Numero { get; set; }
 
-        [MaxLength(80, ErrorMessage = "O Campo excedeu o numero maximo de caracteres")]
+        [MaxLength(80)]
         [Required(ErrorMessage = "Informe o Bairro", AllowEmptyStrings = false)]
         public string Bairro { get; set; }
 
-        [MaxLength(80, ErrorMessage = "O Campo excedeu o numero maximo de caracteres")]
+        [MaxLength(80)]
         [Required(ErrorMessage = "Informe a Localidade", AllowEmptyStrings = false)]
         public string Localidade { get; set; }
 

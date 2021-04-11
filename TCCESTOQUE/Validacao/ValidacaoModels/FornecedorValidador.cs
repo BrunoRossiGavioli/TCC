@@ -1,10 +1,6 @@
-using TCCESTOQUE.Models;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TCCESTOQUE.Validacao.MensagensDeErro; 
+using TCCESTOQUE.Models;
+using TCCESTOQUE.Validacao.MensagensDeErro;
 
 namespace TCCESTOQUE.Validacao.ValidacaoModels
 {

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace TCCESTOQUE.Models
 {
@@ -15,15 +12,15 @@ namespace TCCESTOQUE.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ForncedorId { get; set; }
 
-        [MaxLength(50, ErrorMessage = "Campo pode conter no maximo {0} caracteres")]
+        [MaxLength(50)]
         [Required(ErrorMessage = "Informe a RazãoSocial de usuario", AllowEmptyStrings = false)]
         public string RazaoSocial { get; set; }
 
-        [MaxLength(50, ErrorMessage = "Nome fantasia deve possuir no maximo {0} caracteres!")]
+        [MaxLength(50)]
         [Required(ErrorMessage = "Informe a RazãoSocial de usuario", AllowEmptyStrings = false)]
         public string NomeFantasia { get; set; }
 
-        [MaxLength(14, ErrorMessage = "O campo CNPJ deve possuir 14 caracteres!")]
+        [MaxLength(14)]
         [Required(ErrorMessage = "Informe a RazãoSocial de usuario", AllowEmptyStrings = false)]
         public string Cnpj { get; set; }
 

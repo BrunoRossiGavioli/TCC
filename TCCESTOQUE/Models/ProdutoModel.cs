@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace TCCESTOQUE.Models
 {
@@ -13,10 +10,10 @@ namespace TCCESTOQUE.Models
         [Key]
         public int ProdutoId { get; set; }
 
-        [MaxLength(50, ErrorMessage = "Nome deve possuir no maximo {0} caracteres!")]
+        [MaxLength(50)]
         public string Nome { get; set; }
 
-        [MaxLength(50, ErrorMessage = "Descrição deve possuir no maximo {0} caracteres!")]
+        [MaxLength(50)]
         public string Descricao { get; set; }
 
         [Column(TypeName = "decimal(12,2)")]

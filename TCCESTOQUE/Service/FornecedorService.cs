@@ -1,12 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.Validacao.Formatacao;
 using TCCESTOQUE.Validacao.ValidacaoModels;
+using TCCESTOQUE.Validacao.ValidacaoModels.ValidacaoNegocios;
 using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Service
@@ -60,12 +58,25 @@ namespace TCCESTOQUE.Service
         }
 
         public bool PostCadastroFull(FornecedorEnderecoViewModel feviewmodel)
-        {
-            var validator = new FornecedorEnderecoValidador().Validate(feviewmodel);
-            if (validator.IsValid)
-                return _fornecedorRepository.PostCadastroFull(feviewmodel);
+        {           
+            var validacao = new FornecedorEnderecoValidador().Validate(feviewmodel);
 
-            return false;
+            if (!validacao.IsValid)
+            {
+                var erros = validacao.Errors.Select(a => a.ErrorMessage).ToList();
+                return false;
+            }
+
+            var validacaoNegocios = new FornecedorEnderecoViewModeValidator(_fornecedorRepository).Validate(feviewmodel);
+
+            if (!validacaoNegocios.IsValid)
+            {
+                var erros = validacaoNegocios.Errors.Select(a => a.ErrorMessage).ToList();
+                return false;
+            }
+            feviewmodel = FormataValores.FormataValoresFornecedorView(feviewmodel);
+            _fornecedorRepository.PostCadastroFull(feviewmodel);
+            return true;
         }
     }
 }

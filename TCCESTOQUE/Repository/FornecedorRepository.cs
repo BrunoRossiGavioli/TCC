@@ -109,5 +109,20 @@ namespace TCCESTOQUE.Repository
 
             return info;
         }
+
+        public FornecedorModel GetByCnpj(string cnpj)
+        {
+            return _context.FornecedorModel.Where(f => f.Cnpj == cnpj).FirstOrDefault();
+        }
+
+        public FornecedorModel GetByRazaoSocial(string razao)
+        {
+            return _context.FornecedorModel.Where(f => f.RazaoSocial == razao).FirstOrDefault();
+        }
+
+        public FornecedorModel GetByNomeFantsia(string nome)
+        {
+            return _context.FornecedorModel.Where(f => f.NomeFantasia == nome).FirstOrDefault();
+        }
     }
 }

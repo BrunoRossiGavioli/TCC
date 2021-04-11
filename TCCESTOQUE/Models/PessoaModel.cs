@@ -4,7 +4,7 @@ namespace TCCESTOQUE.Models
 {
     public class PessoaModel
     {
-        [MaxLength(80, ErrorMessage = "Campo pode conter no maximo {0} caracteres")]
+        [MaxLength(80)]
         [DataType(System.ComponentModel.DataAnnotations.DataType.EmailAddress)]
         public string Email { get; set; }
 

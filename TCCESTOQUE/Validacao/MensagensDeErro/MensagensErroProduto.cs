@@ -1,5 +1,3 @@
-using System;
-
 namespace TCCESTOQUE.Validacao.MensagensDeErro
 {
     public static class MensagensErroProduto

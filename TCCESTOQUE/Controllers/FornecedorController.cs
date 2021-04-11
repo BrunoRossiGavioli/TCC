@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Service;
-using TCCESTOQUE.Models;
-using TCCESTOQUE.Validacao.ValidacaoModels;
-using TCCESTOQUE.ValidadorVendedor;
 using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Controllers
@@ -41,12 +32,11 @@ namespace TCCESTOQUE.Controllers
         [Authorize]
         public IActionResult CadastroFull(FornecedorEnderecoViewModel feviewmodel)
         {
-            Autenticar();
-            var validator = _context.PostCadastroFull(feviewmodel);
-            if (validator)
+            var res = _context.PostCadastroFull(feviewmodel);
+            if (res)
                 return RedirectToAction("Index", "Fornecedor");
 
-            return View();
+            return View(feviewmodel);
         }
         // GET: Fornecedor
         [Authorize]

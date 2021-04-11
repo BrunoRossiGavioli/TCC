@@ -1,15 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.Service;
-using TCCESTOQUE.ValidadorVendedor;
 
 namespace TCCESTOQUE.Repository
 {
@@ -108,6 +104,21 @@ namespace TCCESTOQUE.Repository
             var vendPrincipal = new ClaimsPrincipal(new[] { minhaIdentity });
 
             return vendPrincipal;
+        }
+
+        public VendedorModel GetByCpf(string cpf)
+        {
+            return _context.VendedorModel.Where(a => a.Cpf == cpf).FirstOrDefault();
+        }
+
+        public VendedorModel GetByPhone(string telefone)
+        {
+            return _context.VendedorModel.Where(a => a.Telefone == telefone).FirstOrDefault();
+        }
+
+        public VendedorModel GetByEmail(string email)
+        {
+            return _context.VendedorModel.Where(a => a.Email == email).FirstOrDefault();
         }
     }
 }
