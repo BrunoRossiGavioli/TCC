@@ -44,8 +44,7 @@ namespace TCCESTOQUE
 
             services.AddMvc()
                 .AddFluentValidation(c =>
-                c.RegisterValidatorsFromAssemblyContaining<Startup>())
-                .AddMvcOptions( c => c.EnableEndpointRouting = false);
+                c.RegisterValidatorsFromAssemblyContaining<Startup>());
 
             services.AddScoped<IVendedorService, VendedorService>();
             services.AddScoped<IVendedorRepository, VendedorRepository>();
@@ -69,13 +68,6 @@ namespace TCCESTOQUE
                 app.UseHsts();
             }
 
-            app.UseMvc(route =>
-            {
-                route.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}");
-            });
-
             app.UseHttpsRedirection();
 
             app.UseStaticFiles();
@@ -90,7 +82,7 @@ namespace TCCESTOQUE
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Vendedor}/{action=Login}/{id?}");
             });
         }
     }
