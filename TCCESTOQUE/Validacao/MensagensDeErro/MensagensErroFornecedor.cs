@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace TCCESTOQUE.Validacao.MensagensDeErro
 {
-    public static class MenssagensErroFornecedor
+    public static class MensagensErroFornecedor
     {
       #region Erros de Campos Nulos
         public static string NomeVazio ="O campo Nome não pode ser nulo!";
