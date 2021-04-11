@@ -4,7 +4,6 @@ using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.Validacao.Formatacao;
-using TCCESTOQUE.Validacao.ValidacaoModels.ValidacaoNegocios;
 using TCCESTOQUE.ValidadorVendedor;
 
 namespace TCCESTOQUE.Service
@@ -41,48 +40,30 @@ namespace TCCESTOQUE.Service
 
         public bool PostCriacao(VendedorModel vendedorModel)
         {
-            var validacao = new VendedorValidador().Validate(vendedorModel);
+            var validacao = new VendedorValidador(_vendedorRepository).Validate(vendedorModel);
 
-            if (!validacao.IsValid)
+            if (validacao.IsValid)
             {
-                var erros = validacao.Errors.Select(a => a.ErrorMessage).ToList();
-                return false;
+                vendedorModel = FormataValores.FormataValoresVendedor(vendedorModel);
+                return _vendedorRepository.PostCriacao(vendedorModel);
             }
-
-            var validacaoNegocios = new VendedorNegocios(_vendedorRepository).Validate(vendedorModel);
-
-            if (!validacaoNegocios.IsValid)
-            {
-                var erros = validacaoNegocios.Errors.Select(a => a.ErrorMessage).ToList();
-                return false;
-            }
-            vendedorModel = FormataValores.FormataValoresVendedor(vendedorModel);
-            _vendedorRepository.PostCriacao(vendedorModel);
-            return true;
+            
+            return false;
         }
 
         public bool PutEdicao(int id, VendedorModel vendedorModel)
         {
             vendedorModel.VendedorId = id;
 
-            var validacao = new VendedorValidador().Validate(vendedorModel);
+            var validacao = new VendedorValidador(_vendedorRepository).Validate(vendedorModel);
 
             if (validacao.IsValid)
             {
-                var erros = validacao.Errors.Select(a => a.ErrorMessage).ToList();
-                return false;
+                vendedorModel = FormataValores.FormataValoresVendedor(vendedorModel);
+                return _vendedorRepository.PutEdicao(id, vendedorModel);
             }
-
-            var validacaoNegocios = new VendedorNegocios(_vendedorRepository).Validate(vendedorModel);
-
-            if (!validacaoNegocios.IsValid)
-            {
-                var erros = validacaoNegocios.Errors.Select(a => a.ErrorMessage).ToList();
-                return false;
-            }
-            vendedorModel = FormataValores.FormataValoresVendedor(vendedorModel);
-            _vendedorRepository.PutEdicao(id, vendedorModel);
-            return true;
+            
+            return false;
         }
 
         public object PostExclusao(int id)

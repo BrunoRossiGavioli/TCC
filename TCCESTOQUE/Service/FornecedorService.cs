@@ -4,7 +4,6 @@ using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.Validacao.Formatacao;
 using TCCESTOQUE.Validacao.ValidacaoModels;
-using TCCESTOQUE.Validacao.ValidacaoModels.ValidacaoNegocios;
 using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Service
@@ -50,7 +49,7 @@ namespace TCCESTOQUE.Service
 
         public bool PutEditFull(int id, FornecedorEnderecoViewModel feviewmodel)
         {
-            var validator = new FornecedorEnderecoValidador().Validate(feviewmodel);
+            var validator = new FornecedorEnderecoValidador(_fornecedorRepository).Validate(feviewmodel);
             if(validator.IsValid)
                 return _fornecedorRepository.PutEditFull(id, feviewmodel);
 
@@ -59,24 +58,15 @@ namespace TCCESTOQUE.Service
 
         public bool PostCadastroFull(FornecedorEnderecoViewModel feviewmodel)
         {           
-            var validacao = new FornecedorEnderecoValidador().Validate(feviewmodel);
+            var validacao = new FornecedorEnderecoValidador(_fornecedorRepository).Validate(feviewmodel);
 
-            if (!validacao.IsValid)
+            if (validacao.IsValid)
             {
-                var erros = validacao.Errors.Select(a => a.ErrorMessage).ToList();
-                return false;
+                feviewmodel = FormataValores.FormataValoresFornecedorView(feviewmodel);
+                return _fornecedorRepository.PostCadastroFull(feviewmodel);
             }
-
-            var validacaoNegocios = new FornecedorEnderecoViewModeValidator(_fornecedorRepository).Validate(feviewmodel);
-
-            if (!validacaoNegocios.IsValid)
-            {
-                var erros = validacaoNegocios.Errors.Select(a => a.ErrorMessage).ToList();
-                return false;
-            }
-            feviewmodel = FormataValores.FormataValoresFornecedorView(feviewmodel);
-            _fornecedorRepository.PostCadastroFull(feviewmodel);
-            return true;
+            
+            return false;
         }
     }
 }

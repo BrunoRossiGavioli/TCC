@@ -10,14 +10,10 @@ namespace TCCESTOQUE.Controllers
     public class FornecedorController : ControllerPai
     {
         private readonly IFornecedorService _context;
-        private readonly IMapper _mapper;
-        private readonly TCCESTOQUEContext _context2;
 
         public FornecedorController(IFornecedorService context, IMapper mapper, TCCESTOQUEContext context2)
         {
             _context = context;
-            _mapper = mapper;
-            _context2 = context2;
         }
 
         [Authorize]
@@ -32,6 +28,7 @@ namespace TCCESTOQUE.Controllers
         [Authorize]
         public IActionResult CadastroFull(FornecedorEnderecoViewModel feviewmodel)
         {
+            Autenticar();
             var res = _context.PostCadastroFull(feviewmodel);
             if (res)
                 return RedirectToAction("Index", "Fornecedor");
