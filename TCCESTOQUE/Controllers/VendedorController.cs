@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.ValidadorVendedor;
 
 namespace TCCESTOQUE.Controllers
 {
@@ -106,9 +108,14 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Login(VendedorModel vendedor)
         {
             Autenticar();
-            var vend = _vendedorService.PostLogin(vendedor);
-            HttpContext.SignInAsync(vend);
-            return RedirectToAction("Index","Home");
+            var res = _vendedorService.PostLogin(vendedor);
+            if (res != null)
+            {
+                HttpContext.SignInAsync(res);
+                return RedirectToAction("Index", "Home");
+            }
+            return View(vendedor);
+           
         }
 
         //GET

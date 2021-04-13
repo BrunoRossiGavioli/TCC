@@ -39,7 +39,7 @@ namespace TCCESTOQUE.Service
 
         public object PostExclusao(int id)
         {
-           return _fornecedorRepository.PostExclusao(id);
+            return _fornecedorRepository.PostExclusao(id);
         }
 
         public FornecedorEnderecoViewModel GetEditFull(int? id)
@@ -50,22 +50,23 @@ namespace TCCESTOQUE.Service
         public bool PutEditFull(int id, FornecedorEnderecoViewModel feviewmodel)
         {
             var validator = new FornecedorEnderecoValidador(_fornecedorRepository).Validate(feviewmodel);
-            if(validator.IsValid)
+            if (validator.IsValid)
                 return _fornecedorRepository.PutEditFull(id, feviewmodel);
 
             return false;
         }
 
         public bool PostCadastroFull(FornecedorEnderecoViewModel feviewmodel)
-        {           
+        {
             var validacao = new FornecedorEnderecoValidador(_fornecedorRepository).Validate(feviewmodel);
 
             if (validacao.IsValid)
             {
                 feviewmodel = FormataValores.FormataValoresFornecedorView(feviewmodel);
-                return _fornecedorRepository.PostCadastroFull(feviewmodel);
+                _fornecedorRepository.PostCadastroFull(feviewmodel);
+                return true;
             }
-            
+
             return false;
         }
     }

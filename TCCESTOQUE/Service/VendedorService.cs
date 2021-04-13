@@ -4,6 +4,7 @@ using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.Validacao.Formatacao;
+using TCCESTOQUE.Validacao.ValidacaoModels;
 using TCCESTOQUE.ValidadorVendedor;
 
 namespace TCCESTOQUE.Service
@@ -73,7 +74,13 @@ namespace TCCESTOQUE.Service
 
         public ClaimsPrincipal PostLogin(VendedorModel vendedorModel)
         {
-            return _vendedorRepository.PostLogin(vendedorModel);
+            var validacao = new LoginValidador(_vendedorRepository).Validate(vendedorModel);
+            if(validacao.IsValid)
+            {
+                return _vendedorRepository.PostLogin(vendedorModel);
+            }
+            return null;
+
         }
     }
 }
