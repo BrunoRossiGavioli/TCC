@@ -26,6 +26,8 @@ namespace TCCESTOQUE.Validacao.MensagensDeErro
         public static string CpfjaCadastrado = "O CPF ja encontra-se cadastrado";
         public static string EmailNaoEncontrado = "Email não encontrado!";
 
+        public static string SenhaIncorreta = "Senha incorreta!";
+
 
         public static string TelefoneJaCadastrado = "O Telefone ja encontra-se cadastrado";
         public static string EmailJaCadastrado = "O Email ja encontra-se cadastrado";

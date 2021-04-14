@@ -74,7 +74,7 @@ namespace TCCESTOQUE.Service
 
         public ClaimsPrincipal PostLogin(VendedorModel vendedorModel)
         {
-            var validacao = new LoginValidador(_vendedorRepository).Validate(vendedorModel);
+            var validacao = new LoginVaidador(_vendedorRepository).Validate(vendedorModel);
             if(validacao.IsValid)
             {
                 return _vendedorRepository.PostLogin(vendedorModel);

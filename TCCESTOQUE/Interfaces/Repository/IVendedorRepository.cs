@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.Service;
 
 namespace TCCESTOQUE.Interfaces.Repository
 {
@@ -24,6 +25,8 @@ namespace TCCESTOQUE.Interfaces.Repository
         public VendedorModel GetByCpf(string cpf);
         public VendedorModel GetByPhone(string telefone);
         public VendedorModel GetByEmail(string email);
+
+        public VendedorModel GetSenha(string senha);
 
     }
 }
