@@ -124,5 +124,10 @@ namespace TCCESTOQUE.Repository
         {
             return _context.FornecedorModel.Where(f => f.NomeFantasia == nome).FirstOrDefault();
         }
+
+        public FornecedorModel GetByEmail(string email)
+        {
+            return _context.FornecedorModel.Where(f => f.Email == email).FirstOrDefault();
+        }
     }
 }

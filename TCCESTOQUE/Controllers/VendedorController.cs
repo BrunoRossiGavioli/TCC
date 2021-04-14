@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
@@ -114,8 +115,7 @@ namespace TCCESTOQUE.Controllers
                 HttpContext.SignInAsync(res);
                 return RedirectToAction("Index", "Home");
             }
-            return View(vendedor);
-           
+            return View(vendedor);           
         }
 
         //GET
@@ -129,10 +129,10 @@ namespace TCCESTOQUE.Controllers
         //POST
         [Authorize]
         [HttpPost, ActionName("Logout")]
-        public IActionResult Logout(VendedorModel vendedor)
+        public async Task<IActionResult> Logout(VendedorModel vendedor)
         {
             Autenticar();
-            HttpContext.SignOutAsync();
+            await HttpContext.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
     }

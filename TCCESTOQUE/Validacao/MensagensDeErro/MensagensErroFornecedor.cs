@@ -30,6 +30,7 @@ namespace TCCESTOQUE.Validacao.MensagensDeErro
 
         public static string RazaoSocialJaCadastrada = "A Razão Social já encontra-se cadastrado!";
         public static string NomeFantaziajaCadastrado = "O Nome Fantasia já encontra-se cadastrado!";
+        public static string EmailJaCadastrado = "O Email já encontra-se cadastrado";
 
         #region Erros ao não alcançar o mínimo de caracteres        
         public static string NomeTamanhoMinimo = "O campo Nome tem que ter no mínimo {0} caracteres!";

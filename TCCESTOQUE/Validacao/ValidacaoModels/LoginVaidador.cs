@@ -20,7 +20,7 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
                 .MaximumLength(30).WithMessage(MensagensErroVendedor.EmailTamanhoMaximo)
                 .MinimumLength(13).WithMessage(MensagensErroVendedor.EmailTamanhoMinimo);
 
-            RuleFor(v => v.Senha).Must(senha => vend.GetSenha(SecurityService.Criptografar(senha))!= null).WithMessage(MensagensErroVendedor.SenhaIncorreta)
+            RuleFor(v => v.Senha).Must(senha => vend.GetSenha(senha)!= null).WithMessage(MensagensErroVendedor.SenhaIncorreta)
                 .NotEmpty().WithMessage(MensagensErroVendedor.SenhaVazia)
                 .MaximumLength(50).WithMessage(MensagensErroVendedor.SenhaTamanhoMaximo)
                 .MinimumLength(8).WithMessage(MensagensErroVendedor.SenhaTamanhoMinimo);

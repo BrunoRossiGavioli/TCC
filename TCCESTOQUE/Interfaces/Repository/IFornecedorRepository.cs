@@ -23,6 +23,7 @@ namespace TCCESTOQUE.Interfaces.Repository
 
         public FornecedorModel GetByRazaoSocial(string razao);
         public FornecedorModel GetByNomeFantsia(string nome);
+        public FornecedorModel GetByEmail(string email);
 
 
 

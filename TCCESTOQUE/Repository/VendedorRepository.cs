@@ -122,7 +122,7 @@ namespace TCCESTOQUE.Repository
         }
         public VendedorModel GetSenha(string senha)
         {
-            return _context.VendedorModel.Where(a => a.Senha == senha).FirstOrDefault();
+            return _context.VendedorModel.Where(a => a.Senha == SecurityService.Criptografar(senha)).FirstOrDefault();
         }
     }
 }
