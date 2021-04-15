@@ -120,9 +120,10 @@ namespace TCCESTOQUE.Repository
         {
             return _context.VendedorModel.Where(a => a.Email == email).FirstOrDefault();
         }
+
         public VendedorModel GetSenha(string senha)
         {
-            return _context.VendedorModel.Where(a => a.Senha == SecurityService.Criptografar(senha)).FirstOrDefault();
+            return _context.VendedorModel.Where(a => a.Senha == senha).FirstOrDefault();
         }
     }
 }
