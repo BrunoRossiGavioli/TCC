@@ -8,7 +8,7 @@ namespace TCCESTOQUE.Models
         [DataType(System.ComponentModel.DataAnnotations.DataType.EmailAddress)]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Informe um ou mais numeros de telefone!", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Informe um numero de telefone!", AllowEmptyStrings = false)]
         public string Telefone { get; set; }
     }
 }

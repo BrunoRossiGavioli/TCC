@@ -9,7 +9,7 @@ using TCCESTOQUE.Data;
 namespace TCCESTOQUE.Migrations
 {
     [DbContext(typeof(TCCESTOQUEContext))]
-    [Migration("20210410193523_Nova")]
+    [Migration("20210416180712_Nova")]
     partial class Nova
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -19,7 +19,39 @@ namespace TCCESTOQUE.Migrations
                 .HasAnnotation("ProductVersion", "3.1.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("TCCESTOQUE.Models.FornecedorEnderecoModel", b =>
+            modelBuilder.Entity("TCCESTOQUE.Models.ClienteModel", b =>
+                {
+                    b.Property<int>("ClienteId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Cpf")
+                        .HasColumnType("varchar(11) CHARACTER SET utf8mb4")
+                        .HasMaxLength(11);
+
+                    b.Property<string>("Email")
+                        .HasColumnType("varchar(80) CHARACTER SET utf8mb4")
+                        .HasMaxLength(80);
+
+                    b.Property<int?>("EnderecoId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Telefone")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("ClienteId");
+
+                    b.HasIndex("EnderecoId");
+
+                    b.ToTable("Cliente");
+                });
+
+            modelBuilder.Entity("TCCESTOQUE.Models.EnderecoModel", b =>
                 {
                     b.Property<int>("EnderecoId")
                         .ValueGeneratedOnAdd()
@@ -39,8 +71,9 @@ namespace TCCESTOQUE.Migrations
                         .HasColumnType("varchar(80) CHARACTER SET utf8mb4")
                         .HasMaxLength(80);
 
-                    b.Property<int>("FornecedorId")
-                        .HasColumnType("int");
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Localidade")
                         .IsRequired()
@@ -63,10 +96,9 @@ namespace TCCESTOQUE.Migrations
 
                     b.HasKey("EnderecoId");
 
-                    b.HasIndex("FornecedorId")
-                        .IsUnique();
+                    b.ToTable("EnderecoModel");
 
-                    b.ToTable("FornecedorEndereco");
+                    b.HasDiscriminator<string>("Discriminator").HasValue("EnderecoModel");
                 });
 
             modelBuilder.Entity("TCCESTOQUE.Models.FornecedorModel", b =>
@@ -139,6 +171,57 @@ namespace TCCESTOQUE.Migrations
                     b.ToTable("Produto");
                 });
 
+            modelBuilder.Entity("TCCESTOQUE.Models.VendaItensModel", b =>
+                {
+                    b.Property<int>("VendaItensId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProdutoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantidade")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VendaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("VendaItensId");
+
+                    b.HasIndex("ProdutoId");
+
+                    b.HasIndex("VendaId");
+
+                    b.ToTable("VendaItensModel");
+                });
+
+            modelBuilder.Entity("TCCESTOQUE.Models.VendaModel", b =>
+                {
+                    b.Property<int>("VendaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("ClienteId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DataVenda")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<decimal>("Valor")
+                        .HasColumnType("decimal(12,2)");
+
+                    b.Property<int>("VendedorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("VendaId");
+
+                    b.HasIndex("ClienteId");
+
+                    b.HasIndex("VendedorId");
+
+                    b.ToTable("VendaModel");
+                });
+
             modelBuilder.Entity("TCCESTOQUE.Models.VendedorModel", b =>
                 {
                     b.Property<int>("VendedorId")
@@ -184,11 +267,24 @@ namespace TCCESTOQUE.Migrations
 
             modelBuilder.Entity("TCCESTOQUE.Models.FornecedorEnderecoModel", b =>
                 {
-                    b.HasOne("TCCESTOQUE.Models.FornecedorModel", "Fornecedor")
-                        .WithOne("Endereco")
-                        .HasForeignKey("TCCESTOQUE.Models.FornecedorEnderecoModel", "FornecedorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasBaseType("TCCESTOQUE.Models.EnderecoModel");
+
+                    b.Property<int>("FornecedorId")
+                        .HasColumnType("int");
+
+                    b.HasIndex("FornecedorId")
+                        .IsUnique();
+
+                    b.ToTable("FornecedorEndereco");
+
+                    b.HasDiscriminator().HasValue("FornecedorEnderecoModel");
+                });
+
+            modelBuilder.Entity("TCCESTOQUE.Models.ClienteModel", b =>
+                {
+                    b.HasOne("TCCESTOQUE.Models.EnderecoModel", "Endereco")
+                        .WithMany()
+                        .HasForeignKey("EnderecoId");
                 });
 
             modelBuilder.Entity("TCCESTOQUE.Models.ProdutoModel", b =>
@@ -196,6 +292,45 @@ namespace TCCESTOQUE.Migrations
                     b.HasOne("TCCESTOQUE.Models.FornecedorModel", "Fornecedor")
                         .WithMany("Produtos")
                         .HasForeignKey("FornecedorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("TCCESTOQUE.Models.VendaItensModel", b =>
+                {
+                    b.HasOne("TCCESTOQUE.Models.ProdutoModel", "Produto")
+                        .WithMany()
+                        .HasForeignKey("ProdutoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TCCESTOQUE.Models.VendaModel", "Venda")
+                        .WithMany("Itens")
+                        .HasForeignKey("VendaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("TCCESTOQUE.Models.VendaModel", b =>
+                {
+                    b.HasOne("TCCESTOQUE.Models.ClienteModel", "Cliente")
+                        .WithMany()
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TCCESTOQUE.Models.VendedorModel", "Vendedor")
+                        .WithMany()
+                        .HasForeignKey("VendedorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("TCCESTOQUE.Models.FornecedorEnderecoModel", b =>
+                {
+                    b.HasOne("TCCESTOQUE.Models.FornecedorModel", "Fornecedor")
+                        .WithOne("Endereco")
+                        .HasForeignKey("TCCESTOQUE.Models.FornecedorEnderecoModel", "FornecedorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
