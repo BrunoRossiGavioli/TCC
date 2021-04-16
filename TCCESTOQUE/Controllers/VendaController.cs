@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TCCESTOQUE.Data;
+using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.ViewModel;
 
@@ -14,40 +15,28 @@ namespace TCCESTOQUE.Controllers
 {
     public class VendaController : ControllerPai
     {
-        private readonly TCCESTOQUEContext _context;
-        private readonly IMapper _mapper;
+        private readonly IVendaService _context;
 
-        public VendaController(TCCESTOQUEContext context, IMapper mapper)
+        public VendaController(IVendaService context)
         {
             _context = context;
-            _mapper = mapper;
         }
 
         // GET: Venda
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             Autenticar();
-            var tCCESTOQUEContext = _context.VendaModel.Include(v => v.Cliente).Include(v => v.Vendedor);
-            return View(await tCCESTOQUEContext.ToListAsync());
+            return View(_context.GetIndex());
         }
 
         // GET: Venda/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             Autenticar();
             if (id == null)
                 return NotFound();
-            var itens = _context.VendaItensModel
-                .Include(v => v.Produto)
-                .Include(v => v.Produto.Fornecedor)
-                .ToList();
-            
-            var vendaModel = await _context.VendaModel
-                .Include(v => v.Itens)
-                .Include(v => v.Cliente)
-                .Include(v => v.Vendedor)
-                .FirstOrDefaultAsync(m => m.VendaId == id);
-            vendaModel.Itens = itens;
+
+            var vendaModel = _context.GetDetalhes(id);
 
             if (vendaModel == null)
                 return NotFound();
@@ -59,9 +48,9 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Create()
         {
             Autenticar();
-            ViewData["ProdutoId"] = new SelectList(_context.ProdutoModel, "ProdutoId", "Nome");
-            ViewData["ClienteId"] = new SelectList(_context.ClienteModel, "ClienteId", "Nome");
-            ViewData["VendedorId"] = new SelectList(_context.VendedorModel, "VendedorId", "Nome");
+            ViewData["ProdutoId"] = _context.SelectListProduto("ProdutoId", "Nome");
+            ViewData["ClienteId"] = _context.SelectListCliente("ClienteId", "Nome");
+            ViewData["VendedorId"] = _context.SelectListVendedor("VendedorId", "Nome");
             return View();
         }
 
@@ -70,40 +59,33 @@ namespace TCCESTOQUE.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(VendaViewModel vendaViewModel)
+        public IActionResult Create(VendaViewModel vendaViewModel)
         {
             Autenticar();
             if (ModelState.IsValid)
             {
-                var venda = _mapper.Map<VendaModel>(vendaViewModel);
-                var itens = _mapper.Map<VendaItensModel>(vendaViewModel);
-
-                _context.Add(venda);
-                await _context.SaveChangesAsync();
-                itens.VendaId = venda.VendaId;
-                _context.Add(itens);
-                await _context.SaveChangesAsync();
+                _context.PostCricao(vendaViewModel);
                 return RedirectToAction("Index", "Venda");
             }
-            ViewData["ClienteId"] = new SelectList(_context.ClienteModel, "ClienteId", "Nome", vendaViewModel.ClienteId);
-            ViewData["VendedorId"] = new SelectList(_context.VendedorModel, "VendedorId", "Nome", vendaViewModel.VendedorId);
-            ViewData["ProdutoId"] = new SelectList(_context.ProdutoModel, "ProdutoId", "Nome", vendaViewModel.ProdutoId);
+            ViewData["ClienteId"] = _context.SelectListCliente("ClienteId", "Nome", vendaViewModel.ClienteId);
+            ViewData["VendedorId"] = _context.SelectListVendedor("VendedorId", "Nome", vendaViewModel.VendedorId);
+            ViewData["ProdutoId"] = _context.SelectListProduto("ProdutoId", "Nome", vendaViewModel.ProdutoId);
             return View(vendaViewModel);
         }
 
         // GET: Venda/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             Autenticar();
             if (id == null)
                 return NotFound();
 
-            var vendaModel = await _context.VendaModel.FindAsync(id);
+            var vendaModel = _context.GetEdicao(id);
             if (vendaModel == null)
                 return NotFound();
 
-            ViewData["ClienteId"] = new SelectList(_context.ClienteModel, "ClienteId", "Nome", vendaModel.ClienteId);
-            ViewData["VendedorId"] = new SelectList(_context.VendedorModel, "VendedorId", "Nome", vendaModel.VendedorId);
+            ViewData["ClienteId"] = _context.SelectListCliente("ClienteId", "Nome", vendaModel.ClienteId);
+            ViewData["VendedorId"] = _context.SelectListVendedor("VendedorId", "Nome", vendaModel.VendedorId);
             return View(vendaModel);
         }
 
@@ -112,7 +94,7 @@ namespace TCCESTOQUE.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("VendaId,Valor,DataVenda,VendedorId,ClienteId")] VendaModel vendaModel)
+        public IActionResult Edit(int id, [Bind("VendaId,Valor,DataVenda,VendedorId,ClienteId")] VendaModel vendaModel)
         {
             Autenticar();
             if (id != vendaModel.VendaId)
@@ -122,38 +104,27 @@ namespace TCCESTOQUE.Controllers
             {
                 try
                 {
-                    _context.Update(vendaModel);
-                    await _context.SaveChangesAsync();
+                    _context.PutEdicao(id, vendaModel);
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception)
                 {
-                    if (!VendaModelExists(vendaModel.VendaId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    return View(vendaModel);
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClienteId"] = new SelectList(_context.ClienteModel, "ClienteId", "Nome", vendaModel.ClienteId);
-            ViewData["VendedorId"] = new SelectList(_context.VendedorModel, "VendedorId", "Nome", vendaModel.VendedorId);
+            ViewData["ClienteId"] = _context.SelectListCliente("ClienteId", "Nome", vendaModel.ClienteId);
+            ViewData["VendedorId"] = _context.SelectListVendedor("VendedorId", "Nome", vendaModel.VendedorId);
             return View(vendaModel);
         }
 
         // GET: Venda/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             Autenticar();
             if (id == null)
                 return NotFound();
 
-            var vendaModel = await _context.VendaModel
-                .Include(v => v.Cliente)
-                .Include(v => v.Vendedor)
-                .FirstOrDefaultAsync(m => m.VendaId == id);
+            var vendaModel = _context.GetExclusao(id);
             if (vendaModel == null)
                 return NotFound();
 
@@ -163,18 +134,11 @@ namespace TCCESTOQUE.Controllers
         // POST: Venda/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
             Autenticar();
-            var vendaModel = await _context.VendaModel.FindAsync(id);
-            _context.VendaModel.Remove(vendaModel);
-            await _context.SaveChangesAsync();
+            var vendaModel = _context.PostExclusao(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool VendaModelExists(int id)
-        {
-            return _context.VendaModel.Any(e => e.VendaId == id);
         }
     }
 }

@@ -41,11 +41,11 @@ namespace TCCESTOQUE.Controllers
         }
 
         // GET: VendaItens/Create
-        public IActionResult Create()
+        public IActionResult Create(int id)
         {
             Autenticar();
             ViewData["ProdutoId"] = new SelectList(_context.ProdutoModel, "ProdutoId", "Nome");
-            ViewData["VendaId"] = new SelectList(_context.VendaModel, "VendaId", "VendaId", ViewBag.SelectVendaId);
+            ViewData["VendaId"] = new SelectList(_context.VendaModel, "VendaId", "VendaId", id);
             return View();
         }
 
@@ -54,17 +54,18 @@ namespace TCCESTOQUE.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("VendaItensId,VendaId,ProdutoId,Quantidade")] VendaItensModel vendaItensModel)
+        public async Task<IActionResult> Create([Bind("VendaItensId,VendaId,ProdutoId,Quantidade")] VendaItensModel vendaItensModel, int id)
         {
             Autenticar();
-            if (ModelState.IsValid)
+
+            if (ModelState.IsValid && vendaItensModel.VendaId == id)
             {
                 _context.Add(vendaItensModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index","Venda");
             }
             ViewData["ProdutoId"] = new SelectList(_context.ProdutoModel, "ProdutoId", "Nome", vendaItensModel.ProdutoId);
-            ViewData["VendaId"] = new SelectList(_context.VendaModel, "VendaId", "VendaId", vendaItensModel.VendaId);
+            ViewData["VendaId"] = new SelectList(_context.VendaModel, "VendaId", "VendaId", id);
             return View(vendaItensModel);
         }
 

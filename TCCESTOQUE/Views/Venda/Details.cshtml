@@ -36,7 +36,8 @@
     </dl>
 </div>
 <div class="row py-3 px-3">
-    <a asp-controller="VendaItens" asp-action="Create"><input type="button" class="btn btn-success" value="Adicionar produto"></a>
+    <!--<a asp-controller="VendaItens" asp-action="Create"><input type="button" class="btn btn-success" value="Adicionar produto"></a>-->
+    <a href="/VendaItens/Create/@Model.VendaId"><input type="button" class="btn btn-success" value="Adicionar produto"></a>
 </div>
 <table class="table">
     <thead>
