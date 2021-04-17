@@ -61,6 +61,9 @@ namespace TCCESTOQUE
             services.AddScoped<IVendaItensRepository, VendaItensRepository>();
             services.AddScoped<IVendaItensService, VendaItensService>();
 
+            services.AddScoped<IClienteRepository, ClienteRepository>();
+            services.AddScoped<IClienteService, ClienteService>();
+
             services.AddScoped<ISelectListRepository, SelectListRepository>();
 
         }

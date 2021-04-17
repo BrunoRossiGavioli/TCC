@@ -6,36 +6,36 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TCCESTOQUE.Data;
+using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
 
 namespace TCCESTOQUE.Controllers
 {
     public class ClienteController : ControllerPai
     {
-        private readonly TCCESTOQUEContext _context;
+        private readonly IClienteService _context;
 
-        public ClienteController(TCCESTOQUEContext context)
+        public ClienteController(IClienteService context)
         {
             _context = context;
         }
 
         // GET: Cliente
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             Autenticar();
-            return View(await _context.ClienteModel.ToListAsync());
+            return View(_context.GetIndex());
         }
 
         // GET: Cliente/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             Autenticar();
             if (id == null)
                 return NotFound();
 
-            var clienteModel = await _context.ClienteModel
-                .FirstOrDefaultAsync(m => m.ClienteId == id);
-            
+            var clienteModel = _context.GetDetalhes(id);
+
             if (clienteModel == null)
                 return NotFound();
 
@@ -54,26 +54,25 @@ namespace TCCESTOQUE.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ClienteId,Nome,Cpf,Email,Telefone")] ClienteModel clienteModel)
+        public IActionResult Create([Bind("ClienteId,Nome,Cpf,Email,Telefone")] ClienteModel clienteModel)
         {
             Autenticar();
             if (ModelState.IsValid)
             {
-                _context.Add(clienteModel);
-                await _context.SaveChangesAsync();
+                _context.PostCriacao(clienteModel);
                 return RedirectToAction(nameof(Index));
             }
             return View(clienteModel);
         }
 
         // GET: Cliente/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             Autenticar();
             if (id == null)
                 return NotFound();
 
-            var clienteModel = await _context.ClienteModel.FindAsync(id);
+            var clienteModel = _context.GetEdicao(id);
             if (clienteModel == null)
                 return NotFound();
 
@@ -85,7 +84,7 @@ namespace TCCESTOQUE.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ClienteId,Nome,Cpf,Email,Telefone")] ClienteModel clienteModel)
+        public IActionResult Edit(int id, [Bind("ClienteId,Nome,Cpf,Email,Telefone")] ClienteModel clienteModel)
         {
             Autenticar();
             if (id != clienteModel.ClienteId)
@@ -93,37 +92,21 @@ namespace TCCESTOQUE.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(clienteModel);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ClienteModelExists(clienteModel.ClienteId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                _context.PutEdicao(id, clienteModel);
                 return RedirectToAction(nameof(Index));
             }
             return View(clienteModel);
         }
 
         // GET: Cliente/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             Autenticar();
             if (id == null)
                 return NotFound();
 
-            var clienteModel = await _context.ClienteModel
-                .FirstOrDefaultAsync(m => m.ClienteId == id);
-            
+            var clienteModel = _context.GetExclusao(id);
+
             if (clienteModel == null)
                 return NotFound();
 
@@ -133,18 +116,11 @@ namespace TCCESTOQUE.Controllers
         // POST: Cliente/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
             Autenticar();
-            var clienteModel = await _context.ClienteModel.FindAsync(id);
-            _context.ClienteModel.Remove(clienteModel);
-            await _context.SaveChangesAsync();
+            _context.PostExclusao(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool ClienteModelExists(int id)
-        {
-            return _context.ClienteModel.Any(e => e.ClienteId == id);
         }
     }
 }
