@@ -1,10 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Models;
@@ -28,17 +25,14 @@ namespace TCCESTOQUE.Repository
 
         public object GetCriacao()
         {
-            var res  = new SelectList(_context.FornecedorModel, "Id", "Nome");
+            var res  = new SelectList(_context.FornecedorModel, "FornecedorId", "NomeFantasia");
             return res;
         }
 
         public ProdutoModel GetDetalhes(int? id)
         {
-            if (id == null)
-                return null;
-
             var produtoModel = _context.ProdutoModel
-                .FirstOrDefault(m => m.Id == id);
+                .FirstOrDefault(m => m.ProdutoId == id);
 
             if (produtoModel == null)
                 return null;
@@ -48,9 +42,6 @@ namespace TCCESTOQUE.Repository
 
         public ProdutoModel GetEdicao(int? id)
         {
-            if (id == null)
-                return null;
-
             var produtoModel = _context.ProdutoModel.Find(id);
             if (produtoModel == null)
                 return null;
@@ -60,11 +51,8 @@ namespace TCCESTOQUE.Repository
 
         public ProdutoModel GetExclusao(int? id)
         {
-            if (id == null)
-                return null;
-
             var produtoModel = _context.ProdutoModel
-                .FirstOrDefault(m => m.Id == id);
+                .FirstOrDefault(m => m.ProdutoId == id);
 
             if (produtoModel == null)
                 return null;
@@ -72,11 +60,18 @@ namespace TCCESTOQUE.Repository
             return produtoModel;
         }
 
-        public object PostCriacao(ProdutoModel produtoModel)
+        public bool PostCriacao(ProdutoModel produtoModel)
         {
-            _context.Add(produtoModel);
-            _context.SaveChanges();
-            return produtoModel;
+            try
+            {
+                _context.Add(produtoModel);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }       
         }
 
         public object PostExclusao(int id)
@@ -87,19 +82,17 @@ namespace TCCESTOQUE.Repository
             return nameof(Index);
         }
 
-        public object PutEdicao(int id, ProdutoModel produtoModel)
+        public bool PutEdicao(int id, ProdutoModel produtoModel)
         {
-            if (produtoModel.Id == 0)
-                produtoModel.Id = id;
             try
             {
                 _context.Update(produtoModel);
                 _context.SaveChanges();
-                return nameof(Index);
+                return true;
             }
             catch (Exception)
             {
-                throw;
+                return false;
             }
         }
     }

@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace TCCESTOQUE.Validacao.MensagensDeErro
 {
     public static class MensagensErroVendedor
@@ -11,7 +6,7 @@ namespace TCCESTOQUE.Validacao.MensagensDeErro
         public static string NomeVazio ="O Nome não pode ser nulo!";
         public static string SenhaVazia ="A Senha não pode ser nula!";
         public static string EmailVazio  ="O Email não pode ser nulo!";
-        public static string DataNascimentoVazia ="A Data de nascimento não pode ser nulo!";
+        public static string DataNascimentoVazia ="A Data de nascimento não pode ser nula!";
         public static string EnderecoVazio ="O Endereço não pode ser nulo!";
         public static string TelefoneVazio ="O Telefone não pode ser nulo!";
         public static string CpfVazio ="O Cpf não pode ser nulo!";
@@ -28,7 +23,14 @@ namespace TCCESTOQUE.Validacao.MensagensDeErro
         public static string EmailFormatoInvalido = "Email inválido, tente novamente!";
         public static string TelefoneTamanho = "O Telefone deve ter 11 caracteres!";
         public static string CpfTamanho = "O CPF deve ter 11 caracteres!";
-        
+        public static string CpfjaCadastrado = "O CPF ja encontra-se cadastrado";
+        public static string EmailNaoEncontrado = "Email não encontrado!";
+
+        public static string SenhaIncorreta = "Senha incorreta!";
+
+
+        public static string TelefoneJaCadastrado = "O Telefone ja encontra-se cadastrado";
+        public static string EmailJaCadastrado = "O Email ja encontra-se cadastrado";
         #region Erros ao não alcançar o mínimo de caracteres        
         public static string NomeTamanhoMinimo = "O Nome tem que ter no mínimo {0} caracteres!";
         public static string SenhaTamanhoMinimo = "A Seha tem que ter no mínimo {0} caracteres!";

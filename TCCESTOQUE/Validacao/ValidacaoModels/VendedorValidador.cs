@@ -1,17 +1,19 @@
-using TCCESTOQUE.Models;
 using FluentValidation;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using TCCESTOQUE.Interfaces.Repository;
+using TCCESTOQUE.Models;
 using TCCESTOQUE.Validacao.MensagensDeErro;
 
 namespace TCCESTOQUE.ValidadorVendedor
 {
     public class VendedorValidador : AbstractValidator<VendedorModel>
     {
-        public VendedorValidador()
-        {                        
+        public VendedorValidador(IVendedorRepository vend)
+        {
+            RuleFor(a => a.Cpf).Must(cpf => vend.GetByCpf(cpf) == null).WithMessage(MensagensErroVendedor.CpfjaCadastrado);
+            RuleFor(a => a.Email).Must(email => vend.GetByEmail(email) == null).WithMessage(MensagensErroVendedor.EmailJaCadastrado);
+            RuleFor(a => a.Telefone).Must(telefone => vend.GetByPhone(telefone) == null).WithMessage(MensagensErroVendedor.TelefoneJaCadastrado);
+
             RuleFor(v => v.Nome).NotEmpty().WithMessage(MensagensErroVendedor.NomeVazio)
                 .MaximumLength(80).WithMessage(MensagensErroVendedor.NomeTamanhoMaximo)
                 .MinimumLength(3).WithMessage(MensagensErroVendedor.NomeTamanhoMinimo);
@@ -20,10 +22,6 @@ namespace TCCESTOQUE.ValidadorVendedor
                 .EmailAddress().WithMessage(MensagensErroVendedor.EmailFormatoInvalido)
                 .MaximumLength(30).WithMessage(MensagensErroVendedor.EmailTamanhoMaximo)
                 .MinimumLength(13).WithMessage(MensagensErroVendedor.EmailTamanhoMinimo);
-
-            RuleFor(v => v.Endereco).NotEmpty().WithMessage(MensagensErroVendedor.EnderecoVazio)
-                .MaximumLength(80).WithMessage(MensagensErroVendedor.EnderecoTamanhoMaximo)
-                .MinimumLength(10).WithMessage(MensagensErroVendedor.EnderecoTamanhoMinimo);
                 
             RuleFor(v => v.Telefone).NotEmpty().WithMessage(MensagensErroVendedor.TelefoneVazio)
                 .Length(11).WithMessage(MensagensErroVendedor.TelefoneTamanho);

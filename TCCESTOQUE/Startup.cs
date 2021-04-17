@@ -1,19 +1,16 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+using TCCESTOQUE.AutoMapper;
 using TCCESTOQUE.Data;
-using TCCESTOQUE.Interfaces.Service;
-using TCCESTOQUE.Service;
 using TCCESTOQUE.Interfaces.Repository;
+using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Repository;
+using TCCESTOQUE.Service;
 
 namespace TCCESTOQUE
 {
@@ -36,18 +33,36 @@ namespace TCCESTOQUE
                     config.LoginPath = "/Vendedor/Login";
                     config.AccessDeniedPath = "/Vendedor/LoginInvalido";
                 });
+            
 
             services.AddControllersWithViews();
+
+            services.AddAutoMapper(typeof(AutoMapperProfile));
 
             services.AddDbContext<TCCESTOQUEContext>(options =>
                     options.UseMySql(Configuration.GetConnectionString("TCCESTOQUEContext")));
 
+            services.AddMvc()
+                .AddFluentValidation(c =>
+                c.RegisterValidatorsFromAssemblyContaining<Startup>());
+
             services.AddScoped<IVendedorService, VendedorService>();
             services.AddScoped<IVendedorRepository, VendedorRepository>();
+            
             services.AddScoped<IFornecedorService,FornecedorService>();
             services.AddScoped<IFornecedorRepository, FornecedorRepository>();
+            
             services.AddScoped<IProdutoService, ProdutoService>();
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
+            
+            services.AddScoped<IVendaRepository, VendaRepository>();
+            services.AddScoped<IVendaService, VendaService>();
+
+            services.AddScoped<IVendaItensRepository, VendaItensRepository>();
+            services.AddScoped<IVendaItensService, VendaItensService>();
+
+            services.AddScoped<ISelectListRepository, SelectListRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,6 +78,7 @@ namespace TCCESTOQUE
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
 
             app.UseStaticFiles();
@@ -77,7 +93,7 @@ namespace TCCESTOQUE
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Vendedor}/{action=Login}/{id?}");
             });
         }
     }

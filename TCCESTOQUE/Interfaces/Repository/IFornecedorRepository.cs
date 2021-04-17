@@ -1,9 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TCCESTOQUE.Models;
+﻿using TCCESTOQUE.Models;
+using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Interfaces.Repository
 {
@@ -13,16 +9,23 @@ namespace TCCESTOQUE.Interfaces.Repository
 
         public FornecedorModel GetDetalhes(int? id);
 
-        public object GetCriacao();
+        public bool PostCadastroFull(FornecedorEnderecoViewModel feviewmodel);
 
-        public object PostCriacao(FornecedorModel fornecedorModel);
+        public FornecedorEnderecoViewModel GetEditFull(int? id);
 
-        public FornecedorModel GetEdicao(int? id);
-
-        public object PutEdicao(int id, FornecedorModel fornecedorModel);
+        public bool PutEditFull(int id, FornecedorEnderecoViewModel feviewmodel);
 
         public FornecedorModel GetExclusao(int? id);
 
         public object PostExclusao(int id);
+
+        public FornecedorModel GetByCnpj(string cnpj);
+
+        public FornecedorModel GetByRazaoSocial(string razao);
+        public FornecedorModel GetByNomeFantsia(string nome);
+        public FornecedorModel GetByEmail(string email);
+
+
+
     }
 }

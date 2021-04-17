@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using System.Security.Claims;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.Service;
 
 namespace TCCESTOQUE.Interfaces.Repository
 {
@@ -24,8 +20,13 @@ namespace TCCESTOQUE.Interfaces.Repository
 
         public object PostExclusao(int id);
 
-        public void GetLogin();
-
         public ClaimsPrincipal PostLogin(VendedorModel vendedorModel);
+
+        public VendedorModel GetByCpf(string cpf);
+        public VendedorModel GetByPhone(string telefone);
+        public VendedorModel GetByEmail(string email);
+
+        public VendedorModel GetSenha(string senha);
+
     }
 }

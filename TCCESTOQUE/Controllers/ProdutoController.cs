@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using TCCESTOQUE.Data;
+using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
 
@@ -15,12 +11,12 @@ namespace TCCESTOQUE.Controllers
     public class ProdutoController : ControllerPai
     {
         private readonly IProdutoService _context;
-        private readonly TCCESTOQUEContext _context2;
+        private readonly ISelectListRepository _selectListRepository;
 
-        public ProdutoController(IProdutoService context, TCCESTOQUEContext context2)
+        public ProdutoController(IProdutoService context, ISelectListRepository selectListRepository)
         {
             _context = context;
-            _context2 = context2;
+            _selectListRepository = selectListRepository;
         }
 
         // GET: Produto
@@ -44,7 +40,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Create()
         {
             Autenticar();
-            ViewData["FornecedorId"] = _context.GetCriacao();
+            ViewData["FornecedorId"] = _selectListRepository.SelectListFornecedor("ForncedorId", "NomeFantasia");
             return View();
         }
 
@@ -58,7 +54,7 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             _context.PostCriacao(produtoModel);
-            ViewData["FornecedorId"] = new SelectList(_context2.ProdutoModel, "Id", "Nome", produtoModel.FornecedorId);
+            ViewData["FornecedorId"] = _selectListRepository.SelectListFornecedor("ForncedorId", "NomeFantasia", produtoModel.FornecedorId);
             return RedirectToAction("Index", "Produto");
         }
 
@@ -68,7 +64,7 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             var produtoModel = _context.GetEdicao(id);
-            ViewData["FornecedorId"] = new SelectList(_context2.ProdutoModel, "Id", "Nome", produtoModel.FornecedorId);
+            ViewData["FornecedorId"] = _selectListRepository.SelectListFornecedor("ForncedorId", "NomeFantasia", produtoModel.FornecedorId);
             return View(produtoModel);
         }
 
@@ -82,7 +78,7 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             _context.PutEdicao(id, produtoModel);
-            ViewData["FornecedorId"] = new SelectList(_context2.ProdutoModel, "Id", "Nome", produtoModel.FornecedorId);
+            ViewData["FornecedorId"] = _selectListRepository.SelectListFornecedor("ForncedorId", "NomeFantasia", produtoModel.FornecedorId);
             return RedirectToAction("Index", "Produto");
         }
 

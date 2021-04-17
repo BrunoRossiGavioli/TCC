@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Service;
-using TCCESTOQUE.Models;
+using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Controllers
 {
@@ -16,11 +11,30 @@ namespace TCCESTOQUE.Controllers
     {
         private readonly IFornecedorService _context;
 
-        public FornecedorController(IFornecedorService context)
+        public FornecedorController(IFornecedorService context, IMapper mapper, TCCESTOQUEContext context2)
         {
             _context = context;
         }
 
+        [Authorize]
+        public IActionResult CadastroFull()
+        {
+            Autenticar();
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public IActionResult CadastroFull(FornecedorEnderecoViewModel feviewmodel)
+        {
+            Autenticar();
+            var res = _context.PostCadastroFull(feviewmodel);
+            if (res)
+                return RedirectToAction("Index", "Fornecedor");
+
+            return View(feviewmodel);
+        }
         // GET: Fornecedor
         [Authorize]
         public IActionResult Index()
@@ -37,33 +51,14 @@ namespace TCCESTOQUE.Controllers
             return View(_context.GetDetalhes(id));
         }
 
-        // GET: Fornecedor/Create
+        // GET: Fornecedor/EditFull/5
         [Authorize]
-        public IActionResult Create()
+        public IActionResult EditFull(int? id)
         {
             Autenticar();
-            return View();
-        }
+            var info = _context.GetEditFull(id);
 
-        // POST: Fornecedor/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize]
-        public IActionResult Create([Bind("NomeFantasia,Cnpj,Nome,Email,DataNascimento,Endereco,Telefone")] FornecedorModel fornecedorModel)
-        {
-            Autenticar();
-            _context.PostCriacao(fornecedorModel);
-            return RedirectToAction("Index", "Fornecedor");
-        }
-
-        // GET: Fornecedor/Edit/5
-        [Authorize]
-        public IActionResult Edit(int? id)
-        {
-            Autenticar();
-            return View(_context.GetEdicao(id));
+            return View(info);
         }
 
         // POST: Fornecedor/Edit/5
@@ -72,11 +67,17 @@ namespace TCCESTOQUE.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult Edit(int id, [Bind("NomeFantasia,Cnpj,Nome,Email,DataNascimento,Endereco,Telefone")] FornecedorModel fornecedorModel)
+        public IActionResult EditFull(int id, FornecedorEnderecoViewModel feviewmodel)
         {
             Autenticar();
-            _context.PutEdicao(id, fornecedorModel);
-            return RedirectToAction("Index", "Fornecedor");
+            var info = _context.PutEditFull(id, feviewmodel);
+
+            if (info)
+            {
+                return RedirectToAction("Index", "Fornecedor");
+            }
+
+            return View();
         }
 
         // GET: Fornecedor/Delete/5

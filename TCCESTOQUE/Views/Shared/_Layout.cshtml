@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - TCCESTOQUE</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 <body>
     <header>
@@ -22,8 +23,8 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         @{
-                            if (!ViewBag.autenticado) 
-                            { 
+                            if (!ViewBag.autenticado)
+                            {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Vendedor" asp-action="Create">Cadastrar</a>
                                 </li>
@@ -34,6 +35,18 @@
 
                             if (ViewBag.autenticado != null && ViewBag.autenticado)
                             {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Fornecedor" asp-action="CadastroFull">Cadastrar Fornecedor</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Produto" asp-action="Create">Adicionar produto</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Venda" asp-action="Create">Adicionar Venda</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Create">Adicionar Cliente</a>
+                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Vendedor" asp-action="Logout">Desconectar</a>
                                 </li>

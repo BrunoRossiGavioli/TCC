@@ -5,14 +5,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20210327191923_PrimeiraMigration.cs" />
-    <Compile Remove="Migrations\20210327191923_PrimeiraMigration.Designer.cs" />
-    <Compile Remove="Migrations\20210402183201_FornecedorEProduto.cs" />
-    <Compile Remove="Migrations\20210402183201_FornecedorEProduto.Designer.cs" />
+    <Compile Remove="Migrations\**" />
+    <Content Remove="Migrations\**" />
+    <EmbeddedResource Remove="Migrations\**" />
+    <None Remove="Migrations\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="9.5.3" />
+    <Compile Include="Migrations\20210416180712_Nova.cs" />
+    <Compile Include="Migrations\20210416180712_Nova.Designer.cs" />
+    <Compile Include="Migrations\TCCESTOQUEContextModelSnapshot.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="10.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.13">

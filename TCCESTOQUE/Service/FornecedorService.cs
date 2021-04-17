@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.Validacao.Formatacao;
+using TCCESTOQUE.Validacao.ValidacaoModels;
+using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Service
 {
@@ -22,40 +21,53 @@ namespace TCCESTOQUE.Service
         {
             return _fornecedorRepository.GetIndex();
         }
-
-        public object GetCriacao()
-        {
-            return _fornecedorRepository.GetCriacao();
-        }
-
         public FornecedorModel GetDetalhes(int? id)
         {
-            return _fornecedorRepository.GetDetalhes(id);
-        }
+            if (id == null)
+                return null;
 
-        public FornecedorModel GetEdicao(int? id)
-        {
-            return _fornecedorRepository.GetEdicao(id);
+            return _fornecedorRepository.GetDetalhes(id);
         }
 
         public FornecedorModel GetExclusao(int? id)
         {
-            return _fornecedorRepository.GetExclusao(id);
-        }
+            if (id == null)
+                return null;
 
-        public object PostCriacao(FornecedorModel fornecedorModel)
-        {
-            return _fornecedorRepository.PostCriacao(fornecedorModel);
+            return _fornecedorRepository.GetExclusao(id);
         }
 
         public object PostExclusao(int id)
         {
-           return _fornecedorRepository.PostExclusao(id);
+            return _fornecedorRepository.PostExclusao(id);
         }
 
-        public object PutEdicao(int id, FornecedorModel fornecedorModel)
+        public FornecedorEnderecoViewModel GetEditFull(int? id)
         {
-            return _fornecedorRepository.PutEdicao(id, fornecedorModel);
+            return _fornecedorRepository.GetEditFull(id);
+        }
+
+        public bool PutEditFull(int id, FornecedorEnderecoViewModel feviewmodel)
+        {
+            var validator = new FornecedorEnderecoValidador(_fornecedorRepository).Validate(feviewmodel);
+            if (validator.IsValid)
+                return _fornecedorRepository.PutEditFull(id, feviewmodel);
+
+            return false;
+        }
+
+        public bool PostCadastroFull(FornecedorEnderecoViewModel feviewmodel)
+        {
+            var validacao = new FornecedorEnderecoValidador(_fornecedorRepository).Validate(feviewmodel);
+
+            if (validacao.IsValid)
+            {
+                feviewmodel = FormataValores.FormataValoresFornecedorView(feviewmodel);
+                _fornecedorRepository.PostCadastroFull(feviewmodel);
+                return true;
+            }
+
+            return false;
         }
     }
 }
