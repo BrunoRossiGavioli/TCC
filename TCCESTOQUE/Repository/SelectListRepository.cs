@@ -53,5 +53,28 @@ namespace TCCESTOQUE.Repository
         }
         #endregion
 
+        #region ListFornecedor
+        public SelectList SelectListFornecedor(string dataValue, string textValue)
+        {
+            return new SelectList(_context.FornecedorModel, dataValue, textValue);
+        }
+
+        public SelectList SelectListFornecedor(string dataValue, string textValue, object selectedValueId)
+        {
+            return new SelectList(_context.FornecedorModel, dataValue, textValue, selectedValueId); 
+        }
+        #endregion
+
+        #region ListVenda
+        public SelectList SelectListVenda(string dataValue, string textValue)
+        {
+            return new SelectList(_context.VendaModel, dataValue, textValue);
+        }
+
+        public SelectList SelectListVenda(string dataValue, string textValue, object selectedValueId)
+        {
+            return new SelectList(_context.VendaModel, dataValue, textValue, selectedValueId);
+        }
+        #endregion
     }
 }
