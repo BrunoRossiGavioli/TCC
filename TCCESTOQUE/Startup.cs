@@ -54,6 +54,7 @@ namespace TCCESTOQUE
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
             services.AddScoped<IVendaRepository, VendaRepository>();
             services.AddScoped<IVendaService, VendaService>();
+            services.AddScoped<ISelectListRepository, SelectListRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

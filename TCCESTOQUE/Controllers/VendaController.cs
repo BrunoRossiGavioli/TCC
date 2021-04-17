@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TCCESTOQUE.Data;
+using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.ViewModel;
@@ -16,10 +17,12 @@ namespace TCCESTOQUE.Controllers
     public class VendaController : ControllerPai
     {
         private readonly IVendaService _context;
+        private readonly ISelectListRepository _selectListRepository;
 
-        public VendaController(IVendaService context)
+        public VendaController(IVendaService context, ISelectListRepository selectListRepository)
         {
             _context = context;
+            _selectListRepository = selectListRepository;
         }
 
         // GET: Venda
@@ -48,9 +51,9 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Create()
         {
             Autenticar();
-            ViewData["ProdutoId"] = _context.SelectListProduto("ProdutoId", "Nome");
-            ViewData["ClienteId"] = _context.SelectListCliente("ClienteId", "Nome");
-            ViewData["VendedorId"] = _context.SelectListVendedor("VendedorId", "Nome");
+            ViewData["ProdutoId"] = _selectListRepository.SelectListProduto("ProdutoId", "Nome");
+            ViewData["ClienteId"] = _selectListRepository.SelectListCliente("ClienteId", "Nome");
+            ViewData["VendedorId"] = _selectListRepository.SelectListVendedor("VendedorId", "Nome");
             return View();
         }
 
@@ -67,9 +70,9 @@ namespace TCCESTOQUE.Controllers
                 _context.PostCricao(vendaViewModel);
                 return RedirectToAction("Index", "Venda");
             }
-            ViewData["ClienteId"] = _context.SelectListCliente("ClienteId", "Nome", vendaViewModel.ClienteId);
-            ViewData["VendedorId"] = _context.SelectListVendedor("VendedorId", "Nome", vendaViewModel.VendedorId);
-            ViewData["ProdutoId"] = _context.SelectListProduto("ProdutoId", "Nome", vendaViewModel.ProdutoId);
+            ViewData["ClienteId"] = _selectListRepository.SelectListCliente("ClienteId", "Nome", vendaViewModel.ClienteId);
+            ViewData["VendedorId"] = _selectListRepository.SelectListVendedor("VendedorId", "Nome", vendaViewModel.VendedorId);
+            ViewData["ProdutoId"] = _selectListRepository.SelectListProduto("ProdutoId", "Nome", vendaViewModel.ProdutoId);
             return View(vendaViewModel);
         }
 
@@ -84,8 +87,8 @@ namespace TCCESTOQUE.Controllers
             if (vendaModel == null)
                 return NotFound();
 
-            ViewData["ClienteId"] = _context.SelectListCliente("ClienteId", "Nome", vendaModel.ClienteId);
-            ViewData["VendedorId"] = _context.SelectListVendedor("VendedorId", "Nome", vendaModel.VendedorId);
+            ViewData["ClienteId"] = _selectListRepository.SelectListCliente("ClienteId", "Nome", vendaModel.ClienteId);
+            ViewData["VendedorId"] = _selectListRepository.SelectListVendedor("VendedorId", "Nome", vendaModel.VendedorId);
             return View(vendaModel);
         }
 
@@ -112,8 +115,8 @@ namespace TCCESTOQUE.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClienteId"] = _context.SelectListCliente("ClienteId", "Nome", vendaModel.ClienteId);
-            ViewData["VendedorId"] = _context.SelectListVendedor("VendedorId", "Nome", vendaModel.VendedorId);
+            ViewData["ClienteId"] = _selectListRepository.SelectListCliente("ClienteId", "Nome", vendaModel.ClienteId);
+            ViewData["VendedorId"] = _selectListRepository.SelectListVendedor("VendedorId", "Nome", vendaModel.VendedorId);
             return View(vendaModel);
         }
 

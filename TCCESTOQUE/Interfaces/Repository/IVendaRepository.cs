@@ -24,15 +24,5 @@ namespace TCCESTOQUE.Interfaces.Repository
         public VendaModel GetExclusao(int? id);
 
         public VendaModel PostExclusao(int id);
-
-        public SelectList SelectListCliente(string dataValue, string textValue);
-        public SelectList SelectListCliente(string dataValue, string textValue, object selectedValue);
-        
-        public SelectList SelectListVendedor(string dataValue, string textValue);
-        public SelectList SelectListVendedor(string dataValue, string textValue, object selectedValue);
-
-        public SelectList SelectListProduto(string dataValue, string textValue);
-        public SelectList SelectListProduto(string dataValue, string textValue, object selectedValue);
-
     }
 }

@@ -58,35 +58,5 @@ namespace TCCESTOQUE.Service
         {
             return _vendaRepository.PostExclusao(id);
         }
-
-        public SelectList SelectListCliente(string dataValue, string textValue)
-        {
-            return _vendaRepository.SelectListCliente(dataValue, textValue);
-        }
-
-        public SelectList SelectListCliente(string dataValue, string textValue, object selectedValue)
-        {
-            return _vendaRepository.SelectListCliente(dataValue, textValue, selectedValue);
-        }
-
-        public SelectList SelectListVendedor(string dataValue, string textValue)
-        {
-            return _vendaRepository.SelectListVendedor(dataValue, textValue);
-        }
-
-        public SelectList SelectListVendedor(string dataValue, string textValue, object selectedValue)
-        {
-            return _vendaRepository.SelectListVendedor(dataValue, textValue, selectedValue);
-        }
-
-        public SelectList SelectListProduto(string dataValue, string textValue)
-        {
-            return _vendaRepository.SelectListProduto(dataValue, textValue);
-        }
-
-        public SelectList SelectListProduto(string dataValue, string textValue, object selectedValue)
-        {
-            return _vendaRepository.SelectListProduto(dataValue, textValue, selectedValue);
-        }
     }
 }

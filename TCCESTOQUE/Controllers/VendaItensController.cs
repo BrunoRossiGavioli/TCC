@@ -24,18 +24,15 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             if (id == null)
-            {
                 return NotFound();
-            }
 
             var vendaItensModel = await _context.VendaItensModel
                 .Include(v => v.Produto)
                 .Include(v => v.Venda)
                 .FirstOrDefaultAsync(m => m.VendaItensId == id);
+            
             if (vendaItensModel == null)
-            {
                 return NotFound();
-            }
 
             return View(vendaItensModel);
         }
@@ -74,15 +71,12 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             if (id == null)
-            {
                 return NotFound();
-            }
 
             var vendaItensModel = await _context.VendaItensModel.FindAsync(id);
             if (vendaItensModel == null)
-            {
                 return NotFound();
-            }
+
             ViewData["ProdutoId"] = new SelectList(_context.ProdutoModel, "ProdutoId", "Nome", vendaItensModel.ProdutoId);
             ViewData["VendaId"] = new SelectList(_context.VendaModel, "VendaId", "VendaId", vendaItensModel.VendaId);
             return View(vendaItensModel);
@@ -97,9 +91,7 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             if (id != vendaItensModel.VendaItensId)
-            {
                 return NotFound();
-            }
 
             if (ModelState.IsValid)
             {
@@ -131,18 +123,15 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             if (id == null)
-            {
                 return NotFound();
-            }
 
             var vendaItensModel = await _context.VendaItensModel
                 .Include(v => v.Produto)
                 .Include(v => v.Venda)
                 .FirstOrDefaultAsync(m => m.VendaItensId == id);
+            
             if (vendaItensModel == null)
-            {
                 return NotFound();
-            }
 
             return View(vendaItensModel);
         }

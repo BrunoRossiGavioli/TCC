@@ -102,35 +102,5 @@ namespace TCCESTOQUE.Repository
             _context.SaveChanges();
             return vendaModel;
         }
-
-        public SelectList SelectListCliente(string dataValue, string textValue)
-        {
-            return new SelectList(_context.ClienteModel, dataValue, textValue);
-        }
-
-        public SelectList SelectListCliente(string dataValue, string textValue, object selectedValueId)
-        {
-            return new SelectList(_context.ClienteModel, dataValue, textValue,selectedValueId);
-        }
-
-        public SelectList SelectListVendedor(string dataValue, string textValue)
-        {
-            return new SelectList(_context.VendedorModel, dataValue, textValue);
-        }
-
-        public SelectList SelectListVendedor(string dataValue, string textValue, object selectedValueId)
-        {
-            return new SelectList(_context.VendedorModel, dataValue, textValue, selectedValueId);
-        }
-
-        public SelectList SelectListProduto(string dataValue, string textValue)
-        {
-            return new SelectList(_context.ProdutoModel, dataValue, textValue);
-        }
-
-        public SelectList SelectListProduto(string dataValue, string textValue, object selectedValueId)
-        {
-            return new SelectList(_context.ProdutoModel, dataValue, textValue, selectedValueId);
-        }
     }
 }
