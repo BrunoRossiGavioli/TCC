@@ -29,10 +29,11 @@ namespace TCCESTOQUE.Models
 
         [ForeignKey("Fornecedor")]
         public int FornecedorId { get; set; }
-        [ScaffoldColumn(false)]
         public FornecedorModel Fornecedor { get; set; }
 
-
+        [ForeignKey("Vendedor")]
+        public int VendedorId { get; set; }
+        public VendedorModel Vendedor { get; set; }
 
 
     }

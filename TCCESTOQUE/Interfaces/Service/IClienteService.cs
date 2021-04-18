@@ -12,11 +12,11 @@ namespace TCCESTOQUE.Interfaces.Service
 
         public ClienteModel GetDetalhes(int? id);
 
-        public object PostCriacao(ClienteModel cliente);
+        public object PostCriacao(ClienteModel cliente,int vendedorId);
 
         public ClienteModel GetEdicao(int? id);
 
-        public object PutEdicao(int id, ClienteModel cliente);
+        public object PutEdicao(int id, ClienteModel cliente, int vendedorId);
 
         public ClienteModel GetExclusao(int? id);
 

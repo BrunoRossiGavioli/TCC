@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -91,18 +92,19 @@ namespace TCCESTOQUE.Repository
             if (vendedor.Senha != SecurityService.Criptografar(vendedorModel.Senha))
                 return null;
 
+
             var claim1 = new Claim(ClaimTypes.Name, vendedor.Nome);
             var claim2 = new Claim(ClaimTypes.Email, vendedor.Email);
-
+            var claim3 = new Claim(ClaimTypes.SerialNumber, Convert.ToString(vendedor.VendedorId));
             IList<Claim> Claims = new List<Claim>()
             {
                 claim1,
-                claim2
+                claim2,
+                claim3
             };
 
             var minhaIdentity = new ClaimsIdentity(Claims, "Vendedor");
             var vendPrincipal = new ClaimsPrincipal(new[] { minhaIdentity });
-
             return vendPrincipal;
         }
 

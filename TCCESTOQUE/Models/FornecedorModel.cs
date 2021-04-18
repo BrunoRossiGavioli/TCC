@@ -30,5 +30,9 @@ namespace TCCESTOQUE.Models
         [ScaffoldColumn(false)]
         public ICollection<ProdutoModel> Produtos { get; set; }
 
+        [ForeignKey("Vendedor")]
+        public int VendedorId { get; set; }
+        public VendedorModel Vendedor { get; set; }
+
     }
 }

@@ -36,8 +36,11 @@ namespace TCCESTOQUE.Service
             return _clienteRepository.GetIndex();
         }
 
-        public object PostCriacao(ClienteModel cliente)
+        public object PostCriacao(ClienteModel cliente, int vendedorId)
         {
+            if (cliente.VendedorId != vendedorId)
+                return null;
+
             return _clienteRepository.PostCriacao(cliente);
         }
 
@@ -46,8 +49,10 @@ namespace TCCESTOQUE.Service
             return _clienteRepository.PostExclusao(id);
         }
 
-        public object PutEdicao(int id, ClienteModel cliente)
+        public object PutEdicao(int id, ClienteModel cliente, int vendedorId)
         {
+            if (cliente.VendedorId != vendedorId)
+                return null;
             return _clienteRepository.PutEdicao(id, cliente);
         }
     }

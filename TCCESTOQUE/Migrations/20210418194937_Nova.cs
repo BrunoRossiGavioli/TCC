@@ -9,23 +9,6 @@ namespace TCCESTOQUE.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Fornecedor",
-                columns: table => new
-                {
-                    ForncedorId = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Email = table.Column<string>(maxLength: 80, nullable: true),
-                    Telefone = table.Column<string>(nullable: false),
-                    RazaoSocial = table.Column<string>(maxLength: 50, nullable: false),
-                    NomeFantasia = table.Column<string>(maxLength: 50, nullable: false),
-                    Cnpj = table.Column<string>(maxLength: 14, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Fornecedor", x => x.ForncedorId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Vendedor",
                 columns: table => new
                 {
@@ -43,6 +26,30 @@ namespace TCCESTOQUE.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Vendedor", x => x.VendedorId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Fornecedor",
+                columns: table => new
+                {
+                    ForncedorId = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Email = table.Column<string>(maxLength: 80, nullable: true),
+                    Telefone = table.Column<string>(nullable: false),
+                    RazaoSocial = table.Column<string>(maxLength: 50, nullable: false),
+                    NomeFantasia = table.Column<string>(maxLength: 50, nullable: false),
+                    Cnpj = table.Column<string>(maxLength: 14, nullable: false),
+                    VendedorId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Fornecedor", x => x.ForncedorId);
+                    table.ForeignKey(
+                        name: "FK_Fornecedor_Vendedor_VendedorId",
+                        column: x => x.VendedorId,
+                        principalTable: "Vendedor",
+                        principalColumn: "VendedorId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -84,7 +91,8 @@ namespace TCCESTOQUE.Migrations
                     ValorUnitario = table.Column<decimal>(type: "decimal(12,2)", nullable: false),
                     Quantidade = table.Column<int>(nullable: false),
                     DataEntrada = table.Column<DateTime>(nullable: false),
-                    FornecedorId = table.Column<int>(nullable: false)
+                    FornecedorId = table.Column<int>(nullable: false),
+                    VendedorId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -94,6 +102,12 @@ namespace TCCESTOQUE.Migrations
                         column: x => x.FornecedorId,
                         principalTable: "Fornecedor",
                         principalColumn: "ForncedorId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Produto_Vendedor_VendedorId",
+                        column: x => x.VendedorId,
+                        principalTable: "Vendedor",
+                        principalColumn: "VendedorId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -107,7 +121,8 @@ namespace TCCESTOQUE.Migrations
                     Telefone = table.Column<string>(nullable: false),
                     Nome = table.Column<string>(maxLength: 50, nullable: true),
                     Cpf = table.Column<string>(maxLength: 11, nullable: true),
-                    EnderecoId = table.Column<int>(nullable: true)
+                    EnderecoId = table.Column<int>(nullable: true),
+                    VendedorId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -118,6 +133,12 @@ namespace TCCESTOQUE.Migrations
                         principalTable: "EnderecoModel",
                         principalColumn: "EnderecoId",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Cliente_Vendedor_VendedorId",
+                        column: x => x.VendedorId,
+                        principalTable: "Vendedor",
+                        principalColumn: "VendedorId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -181,15 +202,30 @@ namespace TCCESTOQUE.Migrations
                 column: "EnderecoId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Cliente_VendedorId",
+                table: "Cliente",
+                column: "VendedorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_EnderecoModel_FornecedorId",
                 table: "EnderecoModel",
                 column: "FornecedorId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Fornecedor_VendedorId",
+                table: "Fornecedor",
+                column: "VendedorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Produto_FornecedorId",
                 table: "Produto",
                 column: "FornecedorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Produto_VendedorId",
+                table: "Produto",
+                column: "VendedorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_VendaItensModel_ProdutoId",
@@ -227,13 +263,13 @@ namespace TCCESTOQUE.Migrations
                 name: "Cliente");
 
             migrationBuilder.DropTable(
-                name: "Vendedor");
-
-            migrationBuilder.DropTable(
                 name: "EnderecoModel");
 
             migrationBuilder.DropTable(
                 name: "Fornecedor");
+
+            migrationBuilder.DropTable(
+                name: "Vendedor");
         }
     }
 }

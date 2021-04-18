@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using TCCESTOQUE.Service;
 
 namespace TCCESTOQUE.Controllers
@@ -8,8 +9,10 @@ namespace TCCESTOQUE.Controllers
         internal void Autenticar()
         {
             var autenticacao = SecurityService.Autenticado(HttpContext);
-            ViewBag.usuario = autenticacao == "" ? "Não Logado" : autenticacao;
-            ViewBag.autenticado = autenticacao == "" ? false : true;
+            ViewBag.usuario = autenticacao == null ? "Não Logado" : autenticacao.Usuario;
+            ViewBag.email = autenticacao == null ? "Não Logado" : autenticacao.Email;
+            ViewBag.usuarioId = autenticacao == null ? 000 : autenticacao.VendedorId;
+            ViewBag.autenticado = autenticacao == null ? false : true;
         }
     }
 }

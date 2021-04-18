@@ -9,7 +9,7 @@ using TCCESTOQUE.Data;
 namespace TCCESTOQUE.Migrations
 {
     [DbContext(typeof(TCCESTOQUEContext))]
-    [Migration("20210416180712_Nova")]
+    [Migration("20210418194937_Nova")]
     partial class Nova
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,9 +44,14 @@ namespace TCCESTOQUE.Migrations
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<int>("VendedorId")
+                        .HasColumnType("int");
+
                     b.HasKey("ClienteId");
 
                     b.HasIndex("EnderecoId");
+
+                    b.HasIndex("VendedorId");
 
                     b.ToTable("Cliente");
                 });
@@ -130,7 +135,12 @@ namespace TCCESTOQUE.Migrations
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<int>("VendedorId")
+                        .HasColumnType("int");
+
                     b.HasKey("ForncedorId");
+
+                    b.HasIndex("VendedorId");
 
                     b.ToTable("Fornecedor");
                 });
@@ -164,9 +174,14 @@ namespace TCCESTOQUE.Migrations
                     b.Property<decimal>("ValorUnitario")
                         .HasColumnType("decimal(12,2)");
 
+                    b.Property<int>("VendedorId")
+                        .HasColumnType("int");
+
                     b.HasKey("ProdutoId");
 
                     b.HasIndex("FornecedorId");
+
+                    b.HasIndex("VendedorId");
 
                     b.ToTable("Produto");
                 });
@@ -285,6 +300,21 @@ namespace TCCESTOQUE.Migrations
                     b.HasOne("TCCESTOQUE.Models.EnderecoModel", "Endereco")
                         .WithMany()
                         .HasForeignKey("EnderecoId");
+
+                    b.HasOne("TCCESTOQUE.Models.VendedorModel", "Vendedor")
+                        .WithMany()
+                        .HasForeignKey("VendedorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("TCCESTOQUE.Models.FornecedorModel", b =>
+                {
+                    b.HasOne("TCCESTOQUE.Models.VendedorModel", "Vendedor")
+                        .WithMany()
+                        .HasForeignKey("VendedorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("TCCESTOQUE.Models.ProdutoModel", b =>
@@ -292,6 +322,12 @@ namespace TCCESTOQUE.Migrations
                     b.HasOne("TCCESTOQUE.Models.FornecedorModel", "Fornecedor")
                         .WithMany("Produtos")
                         .HasForeignKey("FornecedorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TCCESTOQUE.Models.VendedorModel", "Vendedor")
+                        .WithMany()
+                        .HasForeignKey("VendedorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

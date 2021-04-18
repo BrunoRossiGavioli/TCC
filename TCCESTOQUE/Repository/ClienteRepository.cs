@@ -37,7 +37,7 @@ namespace TCCESTOQUE.Repository
             }
             catch (Exception)
             { 
-                return false;
+                return null;
             }
 
         }
@@ -57,7 +57,7 @@ namespace TCCESTOQUE.Repository
             }
             catch (Exception)
             {
-                return true;
+                return null;
             }
         }
 
