@@ -47,8 +47,7 @@ namespace TCCESTOQUE.Service
             {
                 vendedorModel = FormataValores.FormataValoresVendedor(vendedorModel);
                 return _vendedorRepository.PostCriacao(vendedorModel);
-            }
-
+            }            
             return false;
         }
 
@@ -73,9 +72,8 @@ namespace TCCESTOQUE.Service
         }
 
         public ClaimsPrincipal PostLogin(VendedorModel vendedorModel)
-        {
+        {            
             return _vendedorRepository.PostLogin(vendedorModel);
-
         }
     }
 }

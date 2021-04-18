@@ -1,10 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TCCESTOQUE.ValidadorVendedor;
 
 namespace TCCESTOQUE.Models
 {
-    [Table("Vendedor")] 
+    [Table("Vendedor")]
     public class VendedorModel : PessoaModel
     {
         [Key]

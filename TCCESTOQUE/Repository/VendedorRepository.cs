@@ -6,6 +6,7 @@ using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.Service;
+using TCCESTOQUE.Validacao.ValidacaoModels;
 
 namespace TCCESTOQUE.Repository
 {
@@ -84,7 +85,7 @@ namespace TCCESTOQUE.Repository
         }
 
         public ClaimsPrincipal PostLogin(VendedorModel vendedorModel)
-        {
+        {           
             var vendedor = _context.VendedorModel.Where(a => a.Email == vendedorModel.Email).FirstOrDefault();
             if (vendedor == null)
                 return null;

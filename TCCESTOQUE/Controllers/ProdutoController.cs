@@ -52,9 +52,11 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Create([Bind("Id,Nome,Descricao,Custo,ValorUnitario,Quantidade,FornecedorId")] ProdutoModel produtoModel)
         {
             Autenticar();
-            _context.PostCriacao(produtoModel);
+            var res = _context.PostCriacao(produtoModel);           
             ViewData["FornecedorId"] = new SelectList(_context2.FornecedorModel, "ForncedorId", "NomeFantasia", produtoModel.FornecedorId);
-            return RedirectToAction("Index", "Produto");
+            if (res)
+               return RedirectToAction("Index", "Produto");
+            return View(produtoModel);
         }
 
         // GET: Produto/Edit/5

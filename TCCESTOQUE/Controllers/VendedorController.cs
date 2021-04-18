@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.Validacao.ValidacaoModels;
 using TCCESTOQUE.ValidadorVendedor;
 
 namespace TCCESTOQUE.Controllers
@@ -72,9 +73,11 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             var res = _vendedorService.PutEdicao(id, vendedorModel);
-            if(res)
+            if (res)
+            {
                 return RedirectToAction("Index", "Home");
-
+            }
+                
             return View(vendedorModel);
         }
 
@@ -115,6 +118,8 @@ namespace TCCESTOQUE.Controllers
                 HttpContext.SignInAsync(res);
                 return RedirectToAction("Index", "Home");
             }
+            
+            ViewBag.NaoEncotrado = res == null ? "Email ou senha incorreta!": "";
             return View(vendedor);           
         }
 
