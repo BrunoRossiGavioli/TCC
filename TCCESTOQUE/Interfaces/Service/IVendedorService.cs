@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Interfaces.Service
 {
@@ -19,6 +20,10 @@ namespace TCCESTOQUE.Interfaces.Service
 
         public object PostExclusao(int id);
 
-        public ClaimsPrincipal PostLogin(VendedorModel vendedorModel);
+        public object GetEmail(string email);
+
+        public object GetSenha(string senha);
+
+        public ClaimsPrincipal PostLogin(LoginVendedorViewModel vendedorModel);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.Service;
+using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Interfaces.Repository
 {
@@ -20,7 +21,7 @@ namespace TCCESTOQUE.Interfaces.Repository
 
         public object PostExclusao(int id);
 
-        public ClaimsPrincipal PostLogin(VendedorModel vendedorModel);
+        public ClaimsPrincipal PostLogin(LoginVendedorViewModel vendedorModel);
 
         public VendedorModel GetByCpf(string cpf);
         public VendedorModel GetByPhone(string telefone);
