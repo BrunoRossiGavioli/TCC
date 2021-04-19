@@ -6,7 +6,11 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     <p>Usuário @ViewBag.usuario </p>
-    <p>Email @ViewBag.email</p>
-    <p>UsuárioId @ViewBag.usuarioId</p>
     <p>Autenticado: @ViewBag.autenticado </p>
+    @{ if (ViewBag.autenticado)
+        {
+            <p>Email @ViewBag.email</p>
+            <p>UsuárioId @ViewBag.usuarioId</p>
+        }
+    }
 </div>

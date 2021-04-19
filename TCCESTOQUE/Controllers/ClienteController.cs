@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Controllers
 {
@@ -54,7 +55,7 @@ namespace TCCESTOQUE.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(ClienteModel clienteModel, int Vendedorid)
+        public IActionResult Create(ClienteViewModel clienteModel, int Vendedorid)
         {
             Autenticar();
             if (ModelState.IsValid)
@@ -88,7 +89,7 @@ namespace TCCESTOQUE.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, ClienteModel clienteModel, int VendedorId)
+        public IActionResult Edit(int id, ClienteViewModel clienteModel, int VendedorId)
         {
             Autenticar();
             if (id != clienteModel.ClienteId)

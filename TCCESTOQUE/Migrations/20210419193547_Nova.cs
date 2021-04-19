@@ -29,6 +29,29 @@ namespace TCCESTOQUE.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Cliente",
+                columns: table => new
+                {
+                    ClienteId = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Email = table.Column<string>(maxLength: 80, nullable: true),
+                    Telefone = table.Column<string>(nullable: false),
+                    Nome = table.Column<string>(maxLength: 50, nullable: true),
+                    Cpf = table.Column<string>(maxLength: 11, nullable: true),
+                    VendedorId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cliente", x => x.ClienteId);
+                    table.ForeignKey(
+                        name: "FK_Cliente_Vendedor_VendedorId",
+                        column: x => x.VendedorId,
+                        principalTable: "Vendedor",
+                        principalColumn: "VendedorId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Fornecedor",
                 columns: table => new
                 {
@@ -53,7 +76,7 @@ namespace TCCESTOQUE.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EnderecoModel",
+                name: "ClienteEndereco",
                 columns: table => new
                 {
                     EnderecoId = table.Column<int>(nullable: false)
@@ -65,14 +88,67 @@ namespace TCCESTOQUE.Migrations
                     Bairro = table.Column<string>(maxLength: 80, nullable: false),
                     Localidade = table.Column<string>(maxLength: 80, nullable: false),
                     Uf = table.Column<string>(maxLength: 2, nullable: false),
-                    Discriminator = table.Column<string>(nullable: false),
-                    FornecedorId = table.Column<int>(nullable: true)
+                    ClienteId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EnderecoModel", x => x.EnderecoId);
+                    table.PrimaryKey("PK_ClienteEndereco", x => x.EnderecoId);
                     table.ForeignKey(
-                        name: "FK_EnderecoModel_Fornecedor_FornecedorId",
+                        name: "FK_ClienteEndereco_Cliente_ClienteId",
+                        column: x => x.ClienteId,
+                        principalTable: "Cliente",
+                        principalColumn: "ClienteId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "VendaModel",
+                columns: table => new
+                {
+                    VendaId = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Valor = table.Column<decimal>(type: "decimal(12,2)", nullable: false),
+                    DataVenda = table.Column<DateTime>(nullable: false),
+                    VendedorId = table.Column<int>(nullable: false),
+                    ClienteId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VendaModel", x => x.VendaId);
+                    table.ForeignKey(
+                        name: "FK_VendaModel_Cliente_ClienteId",
+                        column: x => x.ClienteId,
+                        principalTable: "Cliente",
+                        principalColumn: "ClienteId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_VendaModel_Vendedor_VendedorId",
+                        column: x => x.VendedorId,
+                        principalTable: "Vendedor",
+                        principalColumn: "VendedorId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FornecedorEndereco",
+                columns: table => new
+                {
+                    EnderecoId = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Cep = table.Column<string>(maxLength: 8, nullable: false),
+                    Logradouro = table.Column<string>(maxLength: 80, nullable: false),
+                    Complemento = table.Column<string>(maxLength: 80, nullable: true),
+                    Numero = table.Column<int>(maxLength: 10, nullable: false),
+                    Bairro = table.Column<string>(maxLength: 80, nullable: false),
+                    Localidade = table.Column<string>(maxLength: 80, nullable: false),
+                    Uf = table.Column<string>(maxLength: 2, nullable: false),
+                    FornecedorId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FornecedorEndereco", x => x.EnderecoId);
+                    table.ForeignKey(
+                        name: "FK_FornecedorEndereco_Fornecedor_FornecedorId",
                         column: x => x.FornecedorId,
                         principalTable: "Fornecedor",
                         principalColumn: "ForncedorId",
@@ -112,64 +188,6 @@ namespace TCCESTOQUE.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Cliente",
-                columns: table => new
-                {
-                    ClienteId = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Email = table.Column<string>(maxLength: 80, nullable: true),
-                    Telefone = table.Column<string>(nullable: false),
-                    Nome = table.Column<string>(maxLength: 50, nullable: true),
-                    Cpf = table.Column<string>(maxLength: 11, nullable: true),
-                    EnderecoId = table.Column<int>(nullable: true),
-                    VendedorId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Cliente", x => x.ClienteId);
-                    table.ForeignKey(
-                        name: "FK_Cliente_EnderecoModel_EnderecoId",
-                        column: x => x.EnderecoId,
-                        principalTable: "EnderecoModel",
-                        principalColumn: "EnderecoId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Cliente_Vendedor_VendedorId",
-                        column: x => x.VendedorId,
-                        principalTable: "Vendedor",
-                        principalColumn: "VendedorId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "VendaModel",
-                columns: table => new
-                {
-                    VendaId = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Valor = table.Column<decimal>(type: "decimal(12,2)", nullable: false),
-                    DataVenda = table.Column<DateTime>(nullable: false),
-                    VendedorId = table.Column<int>(nullable: false),
-                    ClienteId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_VendaModel", x => x.VendaId);
-                    table.ForeignKey(
-                        name: "FK_VendaModel_Cliente_ClienteId",
-                        column: x => x.ClienteId,
-                        principalTable: "Cliente",
-                        principalColumn: "ClienteId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_VendaModel_Vendedor_VendedorId",
-                        column: x => x.VendedorId,
-                        principalTable: "Vendedor",
-                        principalColumn: "VendedorId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "VendaItensModel",
                 columns: table => new
                 {
@@ -197,25 +215,26 @@ namespace TCCESTOQUE.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cliente_EnderecoId",
-                table: "Cliente",
-                column: "EnderecoId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Cliente_VendedorId",
                 table: "Cliente",
                 column: "VendedorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EnderecoModel_FornecedorId",
-                table: "EnderecoModel",
-                column: "FornecedorId",
+                name: "IX_ClienteEndereco_ClienteId",
+                table: "ClienteEndereco",
+                column: "ClienteId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Fornecedor_VendedorId",
                 table: "Fornecedor",
                 column: "VendedorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FornecedorEndereco_FornecedorId",
+                table: "FornecedorEndereco",
+                column: "FornecedorId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Produto_FornecedorId",
@@ -251,6 +270,12 @@ namespace TCCESTOQUE.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "ClienteEndereco");
+
+            migrationBuilder.DropTable(
+                name: "FornecedorEndereco");
+
+            migrationBuilder.DropTable(
                 name: "VendaItensModel");
 
             migrationBuilder.DropTable(
@@ -260,13 +285,10 @@ namespace TCCESTOQUE.Migrations
                 name: "VendaModel");
 
             migrationBuilder.DropTable(
-                name: "Cliente");
-
-            migrationBuilder.DropTable(
-                name: "EnderecoModel");
-
-            migrationBuilder.DropTable(
                 name: "Fornecedor");
+
+            migrationBuilder.DropTable(
+                name: "Cliente");
 
             migrationBuilder.DropTable(
                 name: "Vendedor");

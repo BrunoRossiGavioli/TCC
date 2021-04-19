@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Service
 {
@@ -21,7 +22,7 @@ namespace TCCESTOQUE.Service
             return _clienteRepository.GetDetalhes(id);
         }
 
-        public ClienteModel GetEdicao(int? id)
+        public ClienteViewModel GetEdicao(int? id)
         {
             return _clienteRepository.GetEdicao(id);
         }
@@ -36,7 +37,7 @@ namespace TCCESTOQUE.Service
             return _clienteRepository.GetIndex();
         }
 
-        public object PostCriacao(ClienteModel cliente, int vendedorId)
+        public object PostCriacao(ClienteViewModel cliente, int vendedorId)
         {
             if (cliente.VendedorId != vendedorId)
                 return null;
@@ -49,7 +50,7 @@ namespace TCCESTOQUE.Service
             return _clienteRepository.PostExclusao(id);
         }
 
-        public object PutEdicao(int id, ClienteModel cliente, int vendedorId)
+        public object PutEdicao(int id, ClienteViewModel cliente, int vendedorId)
         {
             if (cliente.VendedorId != vendedorId)
                 return null;

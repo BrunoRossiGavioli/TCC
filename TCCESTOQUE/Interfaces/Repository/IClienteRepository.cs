@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Interfaces.Repository
 {
@@ -12,11 +13,11 @@ namespace TCCESTOQUE.Interfaces.Repository
 
         public ClienteModel GetDetalhes(int? id);
 
-        public object PostCriacao(ClienteModel cliente);
+        public object PostCriacao(ClienteViewModel cliente);
 
-        public ClienteModel GetEdicao(int? id);
+        public ClienteViewModel GetEdicao(int? id);
 
-        public object PutEdicao(int id, ClienteModel cliente);
+        public object PutEdicao(int id, ClienteViewModel cliente);
 
         public ClienteModel GetExclusao(int? id);
 

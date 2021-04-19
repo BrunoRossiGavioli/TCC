@@ -17,44 +17,7 @@ namespace TCCESTOQUE.Migrations
                 .HasAnnotation("ProductVersion", "3.1.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("TCCESTOQUE.Models.ClienteModel", b =>
-                {
-                    b.Property<int>("ClienteId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Cpf")
-                        .HasColumnType("varchar(11) CHARACTER SET utf8mb4")
-                        .HasMaxLength(11);
-
-                    b.Property<string>("Email")
-                        .HasColumnType("varchar(80) CHARACTER SET utf8mb4")
-                        .HasMaxLength(80);
-
-                    b.Property<int?>("EnderecoId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Nome")
-                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("Telefone")
-                        .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<int>("VendedorId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ClienteId");
-
-                    b.HasIndex("EnderecoId");
-
-                    b.HasIndex("VendedorId");
-
-                    b.ToTable("Cliente");
-                });
-
-            modelBuilder.Entity("TCCESTOQUE.Models.EnderecoModel", b =>
+            modelBuilder.Entity("TCCESTOQUE.Models.ClienteEnderecoModel", b =>
                 {
                     b.Property<int>("EnderecoId")
                         .ValueGeneratedOnAdd()
@@ -70,13 +33,12 @@ namespace TCCESTOQUE.Migrations
                         .HasColumnType("varchar(8) CHARACTER SET utf8mb4")
                         .HasMaxLength(8);
 
+                    b.Property<int>("ClienteId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Complemento")
                         .HasColumnType("varchar(80) CHARACTER SET utf8mb4")
                         .HasMaxLength(80);
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Localidade")
                         .IsRequired()
@@ -99,9 +61,92 @@ namespace TCCESTOQUE.Migrations
 
                     b.HasKey("EnderecoId");
 
-                    b.ToTable("EnderecoModel");
+                    b.HasIndex("ClienteId")
+                        .IsUnique();
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("EnderecoModel");
+                    b.ToTable("ClienteEndereco");
+                });
+
+            modelBuilder.Entity("TCCESTOQUE.Models.ClienteModel", b =>
+                {
+                    b.Property<int>("ClienteId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Cpf")
+                        .HasColumnType("varchar(11) CHARACTER SET utf8mb4")
+                        .HasMaxLength(11);
+
+                    b.Property<string>("Email")
+                        .HasColumnType("varchar(80) CHARACTER SET utf8mb4")
+                        .HasMaxLength(80);
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Telefone")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("VendedorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ClienteId");
+
+                    b.HasIndex("VendedorId");
+
+                    b.ToTable("Cliente");
+                });
+
+            modelBuilder.Entity("TCCESTOQUE.Models.FornecedorEnderecoModel", b =>
+                {
+                    b.Property<int>("EnderecoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Bairro")
+                        .IsRequired()
+                        .HasColumnType("varchar(80) CHARACTER SET utf8mb4")
+                        .HasMaxLength(80);
+
+                    b.Property<string>("Cep")
+                        .IsRequired()
+                        .HasColumnType("varchar(8) CHARACTER SET utf8mb4")
+                        .HasMaxLength(8);
+
+                    b.Property<string>("Complemento")
+                        .HasColumnType("varchar(80) CHARACTER SET utf8mb4")
+                        .HasMaxLength(80);
+
+                    b.Property<int>("FornecedorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Localidade")
+                        .IsRequired()
+                        .HasColumnType("varchar(80) CHARACTER SET utf8mb4")
+                        .HasMaxLength(80);
+
+                    b.Property<string>("Logradouro")
+                        .IsRequired()
+                        .HasColumnType("varchar(80) CHARACTER SET utf8mb4")
+                        .HasMaxLength(80);
+
+                    b.Property<int>("Numero")
+                        .HasColumnType("int")
+                        .HasMaxLength(10);
+
+                    b.Property<string>("Uf")
+                        .IsRequired()
+                        .HasColumnType("varchar(2) CHARACTER SET utf8mb4")
+                        .HasMaxLength(2);
+
+                    b.HasKey("EnderecoId");
+
+                    b.HasIndex("FornecedorId")
+                        .IsUnique();
+
+                    b.ToTable("FornecedorEndereco");
                 });
 
             modelBuilder.Entity("TCCESTOQUE.Models.FornecedorModel", b =>
@@ -278,30 +323,29 @@ namespace TCCESTOQUE.Migrations
                     b.ToTable("Vendedor");
                 });
 
-            modelBuilder.Entity("TCCESTOQUE.Models.FornecedorEnderecoModel", b =>
+            modelBuilder.Entity("TCCESTOQUE.Models.ClienteEnderecoModel", b =>
                 {
-                    b.HasBaseType("TCCESTOQUE.Models.EnderecoModel");
-
-                    b.Property<int>("FornecedorId")
-                        .HasColumnType("int");
-
-                    b.HasIndex("FornecedorId")
-                        .IsUnique();
-
-                    b.ToTable("FornecedorEndereco");
-
-                    b.HasDiscriminator().HasValue("FornecedorEnderecoModel");
+                    b.HasOne("TCCESTOQUE.Models.ClienteModel", "Cliente")
+                        .WithOne("Endereco")
+                        .HasForeignKey("TCCESTOQUE.Models.ClienteEnderecoModel", "ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("TCCESTOQUE.Models.ClienteModel", b =>
                 {
-                    b.HasOne("TCCESTOQUE.Models.EnderecoModel", "Endereco")
-                        .WithMany()
-                        .HasForeignKey("EnderecoId");
-
                     b.HasOne("TCCESTOQUE.Models.VendedorModel", "Vendedor")
                         .WithMany()
                         .HasForeignKey("VendedorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("TCCESTOQUE.Models.FornecedorEnderecoModel", b =>
+                {
+                    b.HasOne("TCCESTOQUE.Models.FornecedorModel", "Fornecedor")
+                        .WithOne("Endereco")
+                        .HasForeignKey("TCCESTOQUE.Models.FornecedorEnderecoModel", "FornecedorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -356,15 +400,6 @@ namespace TCCESTOQUE.Migrations
                     b.HasOne("TCCESTOQUE.Models.VendedorModel", "Vendedor")
                         .WithMany()
                         .HasForeignKey("VendedorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("TCCESTOQUE.Models.FornecedorEnderecoModel", b =>
-                {
-                    b.HasOne("TCCESTOQUE.Models.FornecedorModel", "Fornecedor")
-                        .WithOne("Endereco")
-                        .HasForeignKey("TCCESTOQUE.Models.FornecedorEnderecoModel", "FornecedorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
