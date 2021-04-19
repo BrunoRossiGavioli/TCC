@@ -1,18 +1,42 @@
 ﻿using Microsoft.AspNetCore.Http;
+using System;
+using System.Collections.Generic;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using TCCESTOQUE.POCO;
 
 namespace TCCESTOQUE.Service
 {
     public static class SecurityService
     {
-        public static string Autenticado(HttpContext context)
+        public static VendedorLogin Autenticado(HttpContext context)
         {
-            var usuario = "";
+            string email = "";
+            string vendedorId = "";
+            VendedorLogin res;
             if (context.User.Identity.IsAuthenticated)
-                usuario = context.User.Identity.Name;
+            {
+                string usuario = context.User.Identity.Name;
 
-            return usuario;
+                foreach (var item in context.User.Claims)
+                {
+                    if (item.Type == ClaimTypes.Email)
+                        email = item.Value;
+
+                    if (item.Type == ClaimTypes.SerialNumber)
+                        vendedorId = item.Value;
+                }
+
+                res = new VendedorLogin()
+                {
+                    Usuario = usuario,
+                    Email = email,
+                    VendedorId = Convert.ToInt32(vendedorId)
+                };
+                return res;
+            }
+            return null;
         }
 
         public static string Criptografar(string senha)

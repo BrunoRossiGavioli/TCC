@@ -51,10 +51,11 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Create()
         {
             Autenticar();
-            ViewData["ProdutoId"] = _selectListRepository.SelectListProduto("ProdutoId", "Nome");
             ViewData["ClienteId"] = _selectListRepository.SelectListCliente("ClienteId", "Nome");
             ViewData["VendedorId"] = _selectListRepository.SelectListVendedor("VendedorId", "Nome");
-            return View();
+            ViewData["ProdutoId"] = _selectListRepository.SelectListProduto("ProdutoId", "Nome");
+            var res = View();
+            return res;
         }
 
         // POST: Venda/Create

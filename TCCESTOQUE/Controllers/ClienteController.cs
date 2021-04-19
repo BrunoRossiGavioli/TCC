@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Controllers
 {
@@ -49,23 +50,27 @@ namespace TCCESTOQUE.Controllers
             return View();
         }
 
-        // POST: Cliente/Create
+        // POST: Cliente/Create/VendedorId
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("ClienteId,Nome,Cpf,Email,Telefone")] ClienteModel clienteModel)
+        public IActionResult Create(ClienteViewModel clienteModel, int Vendedorid)
         {
             Autenticar();
             if (ModelState.IsValid)
             {
-                _context.PostCriacao(clienteModel);
-                return RedirectToAction(nameof(Index));
+                var res =_context.PostCriacao(clienteModel, Vendedorid);
+                if(res != null)
+                    return RedirectToAction(nameof(Index));
+
+                return View(clienteModel);
+                
             }
             return View(clienteModel);
         }
 
-        // GET: Cliente/Edit/5
+        // GET: Cliente/Edit/5/VendedorId
         public IActionResult Edit(int? id)
         {
             Autenticar();
@@ -84,7 +89,7 @@ namespace TCCESTOQUE.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("ClienteId,Nome,Cpf,Email,Telefone")] ClienteModel clienteModel)
+        public IActionResult Edit(int id, ClienteViewModel clienteModel, int VendedorId)
         {
             Autenticar();
             if (id != clienteModel.ClienteId)
@@ -92,8 +97,9 @@ namespace TCCESTOQUE.Controllers
 
             if (ModelState.IsValid)
             {
-                _context.PutEdicao(id, clienteModel);
-                return RedirectToAction(nameof(Index));
+                var res = _context.PutEdicao(id, clienteModel, VendedorId);
+                if(res != null)
+                    return RedirectToAction(nameof(Index));
             }
             return View(clienteModel);
         }

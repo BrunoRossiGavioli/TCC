@@ -23,5 +23,7 @@ namespace TCCESTOQUE.Data
         public DbSet<TCCESTOQUE.Models.VendaModel> VendaModel { get; set; }
 
         public DbSet<TCCESTOQUE.Models.VendaItensModel> VendaItensModel { get; set; }
+
+        public DbSet<TCCESTOQUE.Models.ClienteEnderecoModel> ClienteEnderecoModel { get; set; }
     }
 }
