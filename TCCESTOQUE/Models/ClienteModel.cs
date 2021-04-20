@@ -14,12 +14,14 @@ namespace TCCESTOQUE.Models
         public int ClienteId { get; set; }
 
         [MaxLength(50)]
+        [Required(ErrorMessage = "Informe o Nome", AllowEmptyStrings = false)]
         public string Nome { get; set; }
 
         [StringLength(11)]
         public string Cpf { get; set; }
 
         [ScaffoldColumn(false)]
+        [Required(ErrorMessage = "Informe Endereço", AllowEmptyStrings = false)]
         public ClienteEnderecoModel Endereco { get; set; }
 
         [ForeignKey("Vendedor")]

@@ -12,7 +12,6 @@ namespace TCCESTOQUE.Models
         public string Cep { get; set; }
 
         [MaxLength(80)]
-        [Required(ErrorMessage = "Informe o Logradouro", AllowEmptyStrings = false)]
         public string Logradouro { get; set; }
 
         [MaxLength(80)]
@@ -22,7 +21,6 @@ namespace TCCESTOQUE.Models
         public int Numero { get; set; }
 
         [MaxLength(80)]
-        [Required(ErrorMessage = "Informe o Bairro", AllowEmptyStrings = false)]
         public string Bairro { get; set; }
 
         [MaxLength(80)]
