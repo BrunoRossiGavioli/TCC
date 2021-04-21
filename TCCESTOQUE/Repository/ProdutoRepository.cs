@@ -95,5 +95,10 @@ namespace TCCESTOQUE.Repository
                 return false;
             }
         }
+
+        public VendedorModel GetByIdVendedor(int id)
+        {
+            return _context.VendedorModel.Where( a=> a.VendedorId == id).FirstOrDefault();
+        }
     }
 }

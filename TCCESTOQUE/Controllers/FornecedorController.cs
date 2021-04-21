@@ -11,7 +11,7 @@ namespace TCCESTOQUE.Controllers
     {
         private readonly IFornecedorService _context;
 
-        public FornecedorController(IFornecedorService context, IMapper mapper, TCCESTOQUEContext context2)
+        public FornecedorController(IFornecedorService context)
         {
             _context = context;
         }

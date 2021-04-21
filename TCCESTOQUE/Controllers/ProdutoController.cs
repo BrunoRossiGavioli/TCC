@@ -40,7 +40,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Create()
         {
             Autenticar();
-            ViewData["FornecedorId"] = _selectListRepository.SelectListFornecedor("ForncedorId", "NomeFantasia");
+            ViewData["FornecedorId"] = _selectListRepository.SelectListFornecedor("ForncedorId", "NomeFantasia");          
             return View();
         }
 
@@ -50,12 +50,15 @@ namespace TCCESTOQUE.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult Create([Bind("Id,Nome,Descricao,Custo,ValorUnitario,Quantidade,FornecedorId")] ProdutoModel produtoModel)
+        public IActionResult Create([Bind("ProdutoId,Nome,Descricao,Custo,ValorUnitario,Quantidade,FornecedorId, VendedorId")] ProdutoModel produtoModel)
         {
             Autenticar();
-            _context.PostCriacao(produtoModel);
+            var res = _context.PostCriacao(produtoModel);
             ViewData["FornecedorId"] = _selectListRepository.SelectListFornecedor("ForncedorId", "NomeFantasia", produtoModel.FornecedorId);
-            return RedirectToAction("Index", "Produto");
+            if (res)
+                return RedirectToAction("Index", "Produto");
+
+            return View(produtoModel);
         }
 
         // GET: Produto/Edit/5
@@ -65,6 +68,7 @@ namespace TCCESTOQUE.Controllers
             Autenticar();
             var produtoModel = _context.GetEdicao(id);
             ViewData["FornecedorId"] = _selectListRepository.SelectListFornecedor("ForncedorId", "NomeFantasia", produtoModel.FornecedorId);
+            ViewData["VendedorId"] = _selectListRepository.SelectListVendedor("VendedorId", "Nome", produtoModel.VendedorId);
             return View(produtoModel);
         }
 

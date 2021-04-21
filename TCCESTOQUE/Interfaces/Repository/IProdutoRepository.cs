@@ -19,5 +19,7 @@ namespace TCCESTOQUE.Interfaces.Repository
         public ProdutoModel GetExclusao(int? id);
 
         public object PostExclusao(int id);
+
+        public VendedorModel GetByIdVendedor(int id);
     }
 }

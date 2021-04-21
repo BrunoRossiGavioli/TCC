@@ -10,9 +10,9 @@ namespace TCCESTOQUE.ValidadorVendedor
     {
         public VendedorValidador(IVendedorRepository vend)
         {
-            RuleFor(a => a.Cpf).Must(cpf => vend.GetByCpf(cpf) == null).WithMessage(MensagensErroVendedor.CpfjaCadastrado);
+          //  RuleFor(a => a.Cpf).Must(cpf => vend.GetByCpf(cpf) == null).WithMessage(MensagensErroVendedor.CpfjaCadastrado);
             RuleFor(a => a.Email).Must(email => vend.GetByEmail(email) == null).WithMessage(MensagensErroVendedor.EmailJaCadastrado);
-            RuleFor(a => a.Telefone).Must(telefone => vend.GetByPhone(telefone) == null).WithMessage(MensagensErroVendedor.TelefoneJaCadastrado);
+           // RuleFor(a => a.Telefone).Must(telefone => vend.GetByPhone(telefone) == null).WithMessage(MensagensErroVendedor.TelefoneJaCadastrado);
 
             RuleFor(v => v.Nome).NotEmpty().WithMessage(MensagensErroVendedor.NomeVazio)
                 .MaximumLength(80).WithMessage(MensagensErroVendedor.NomeTamanhoMaximo)

@@ -59,6 +59,16 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="VendedorId" class="control-label"></label>
+                        <input asp-for="VendedorId" type="hidden" value="@ViewBag.usuarioId" class="form-control" />
+                        <span asp-validation-for="VendedorId" class="text-danger"></span>
+                       
+                    </div>
+                </div>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

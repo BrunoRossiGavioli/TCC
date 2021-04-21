@@ -73,5 +73,10 @@ namespace TCCESTOQUE.Service
 
             return false;
         }
+
+        public VendedorModel GetByIdVendedor(int id)
+        {
+            return _produtoRepository.GetByIdVendedor(id);
+        }
     }
 }

@@ -18,6 +18,8 @@ namespace TCCESTOQUE.Interfaces.Service
 
         public ProdutoModel GetExclusao(int? id);
 
+        public VendedorModel GetByIdVendedor(int id);
+
         public object PostExclusao(int id);
     }
 }
