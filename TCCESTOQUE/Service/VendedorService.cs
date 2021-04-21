@@ -6,6 +6,7 @@ using TCCESTOQUE.Models;
 using TCCESTOQUE.Validacao.Formatacao;
 using TCCESTOQUE.Validacao.ValidacaoModels;
 using TCCESTOQUE.ValidadorVendedor;
+using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Service
 {
@@ -71,11 +72,19 @@ namespace TCCESTOQUE.Service
         {
             return _vendedorRepository.PostExclusao(id);
         }
-
-        public ClaimsPrincipal PostLogin(VendedorModel vendedorModel)
+        public ClaimsPrincipal PostLogin(LoginVendedorViewModel vendedorModel)
         {
             return _vendedorRepository.PostLogin(vendedorModel);
+        }
 
+        public object GetEmail(string email)
+        {
+            return _vendedorRepository.GetByEmail(email);
+        }
+
+        public object GetSenha(string senha)
+        {
+            return _vendedorRepository.GetSenha(senha);
         }
     }
 }

@@ -6,6 +6,7 @@ using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.ValidadorVendedor;
+using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Controllers
 {
@@ -106,15 +107,19 @@ namespace TCCESTOQUE.Controllers
 
         //POST
         [HttpPost,ActionName("Login")]
-        public IActionResult Login(VendedorModel vendedor)
+        public IActionResult Login(LoginVendedorViewModel vendedor)
         {
             Autenticar();
             var res = _vendedorService.PostLogin(vendedor);
+            var resEmail = _vendedorService.GetEmail(vendedor.Email);
+            var resSenha = _vendedorService.GetSenha(vendedor.Senha);
             if (res != null)
             {
                 HttpContext.SignInAsync(res);
                 return RedirectToAction("Index", "Home");
             }
+            ViewBag.Email = resEmail == null ? "Email não encontrado!" : "";
+            ViewBag.Senha = resSenha == null ? "Senha incorreta" : "";
             return View(vendedor);           
         }
 

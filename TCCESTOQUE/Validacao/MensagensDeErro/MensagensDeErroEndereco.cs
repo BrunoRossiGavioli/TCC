@@ -12,6 +12,8 @@
         public static string UfVazio = "O campo Uf não pode ser nulo !";
         #endregion
 
+        //
+
         #region tamanho máximo
         public static string CepTamanho = "O campo Cep tem que ter 8 caracteres !";
         public static string LogradouroTamanhoMaximo = "O campo Logradouro excedeu o numero maximo de caracteres !";
@@ -21,6 +23,7 @@
         public static string LocalidadeTamanhoMaximo = "O Localidade excedeu o numero maximo de caracteres  !";
         public static string UfTamanho = "O campo Uf deve ter {0} caracteres !";
         #endregion
+        //
 
         #region tamanho mínimo
         public static string LogradouroTamanhoMinimo = "O campo Logradouro tem que ter no mínimo {0} caracteres!";

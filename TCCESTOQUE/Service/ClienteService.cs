@@ -1,10 +1,12 @@
-﻿using System;
+﻿using FluentValidation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.Validacao.ValidacaoModels;
 using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Service
@@ -39,9 +41,14 @@ namespace TCCESTOQUE.Service
 
         public object PostCriacao(ClienteViewModel cliente, int vendedorId)
         {
-            if (cliente.VendedorId != vendedorId)
-                return null;
+            var validacao = new ClienteValidador().Validate(cliente);
 
+            if (!validacao.IsValid)
+            {
+                if (cliente.VendedorId != vendedorId)
+                    return null;
+            }
+            
             return _clienteRepository.PostCriacao(cliente);
         }
 

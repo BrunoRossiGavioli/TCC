@@ -16,6 +16,7 @@ namespace TCCESTOQUE.Validacao.MensagensDeErro
         public static string NomeTamanhoMaximo = "O campo Nome excedeu o máximo de caracteres !";
         public static string DescricaoTamanhoMaximo = "O campo Descrição excedeu o máximo de caracteres !";      
         #endregion
+        //
 
         #region Tamanho minimo
         public static string NomeTamanhoMinimo = "O campo Nome tem que ter no mínimo {0} caracteres !";

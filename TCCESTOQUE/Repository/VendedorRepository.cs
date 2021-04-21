@@ -7,6 +7,7 @@ using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.Service;
+using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Repository
 {
@@ -84,7 +85,7 @@ namespace TCCESTOQUE.Repository
 
         }
 
-        public ClaimsPrincipal PostLogin(VendedorModel vendedorModel)
+        public ClaimsPrincipal PostLogin(LoginVendedorViewModel vendedorModel)
         {
             var vendedor = _context.VendedorModel.Where(a => a.Email == vendedorModel.Email).FirstOrDefault();
             if (vendedor == null)
@@ -125,7 +126,7 @@ namespace TCCESTOQUE.Repository
 
         public VendedorModel GetSenha(string senha)
         {
-            return _context.VendedorModel.Where(a => a.Senha == senha).FirstOrDefault();
-        }
+            return _context.VendedorModel.Where(a => a.Senha == SecurityService.Criptografar(senha)).FirstOrDefault();
+        }        
     }
 }

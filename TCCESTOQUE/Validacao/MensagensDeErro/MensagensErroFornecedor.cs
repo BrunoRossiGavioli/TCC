@@ -22,6 +22,7 @@ namespace TCCESTOQUE.Validacao.MensagensDeErro
         public static string NomeFantasiaTamanhoMaximo = "O campo Nome Fantasia excedeu o máximo de caracteres!";
         public static string RazaoSocialTamanhoMaximo = "O campo Razão Social tem que ter no mínimo {0} caracteres!";
         public static string ProdutoTamanhoMaximo = "O campo Produto excedeu o máximo de caracteres!";
+        //
         #endregion
 
         public static string EmailFormatoInvalido = "Email inválido, tente novamente!";

@@ -22,6 +22,7 @@ namespace TCCESTOQUE.Models
         public VendedorModel Vendedor { get; set; }
         
         [ForeignKey("Cliente")]
+        [Required(ErrorMessage = "Informe o Nome do cliente", AllowEmptyStrings = false)]
         public int ClienteId { get; set; }
         [ScaffoldColumn(false)]
         public ClienteModel Cliente { get; set; }
