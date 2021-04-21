@@ -10,7 +10,7 @@ namespace TCCESTOQUE.Controllers
         {
             var autenticacao = SecurityService.Autenticado(HttpContext);
             ViewBag.usuario = autenticacao == null ? "Não Logado" : autenticacao.Usuario;
-            ViewBag.email = autenticacao == null ? "Não Logado" : autenticacao.Email;
+            ViewBag.emailHome = autenticacao == null ? "Não Logado" : autenticacao.Email;
             ViewBag.usuarioId = autenticacao == null ? 000 : autenticacao.VendedorId;
             ViewBag.autenticado = autenticacao == null ? false : true;
         }

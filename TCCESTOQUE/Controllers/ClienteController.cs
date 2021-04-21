@@ -58,14 +58,10 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Create(ClienteViewModel clienteModel, int Vendedorid)
         {
             Autenticar();
-            if (ModelState.IsValid)
-            {
-                var res =_context.PostCriacao(clienteModel, Vendedorid);
-                if(res != null)
-                    return RedirectToAction(nameof(Index));
-
-                return View(clienteModel);
-                
+            var res = _context.PostCriacao(clienteModel, Vendedorid);
+            if (res != null)
+            {                             
+                return RedirectToAction(nameof(Index));                                
             }
             return View(clienteModel);
         }

@@ -15,12 +15,12 @@ namespace TCCESTOQUE.Validacao.Formatacao
         }
         public static FornecedorEnderecoViewModel FormataValoresFornecedorView(FornecedorEnderecoViewModel fornecedor)
         {
-            fornecedor.NomeFantasia = fornecedor.NomeFantasia.ToUpper().Trim();
+            fornecedor.NomeFantasia = fornecedor.NomeFantasia != null? fornecedor.NomeFantasia.ToUpper().Trim() : fornecedor.NomeFantasia;
             fornecedor.RazaoSocial = fornecedor.RazaoSocial.ToUpper().Trim();
-            fornecedor.Logradouro = fornecedor.Logradouro.ToUpper().Trim();
+            fornecedor.Logradouro = fornecedor.Logradouro != null? fornecedor.Logradouro.ToUpper().Trim(): fornecedor.Logradouro;
             fornecedor.Localidade = fornecedor.Localidade.ToUpper().Trim();
-            fornecedor.Complemento = fornecedor.Complemento.ToUpper().Trim();
-            fornecedor.Bairro = fornecedor.Bairro.ToUpper().Trim();
+            fornecedor.Complemento = fornecedor.Complemento != null? fornecedor.Complemento.ToUpper().Trim(): fornecedor.Complemento;
+            fornecedor.Bairro = fornecedor.Bairro != null? fornecedor.Bairro.ToUpper().Trim(): fornecedor.Bairro;
             return fornecedor;
         }
     }

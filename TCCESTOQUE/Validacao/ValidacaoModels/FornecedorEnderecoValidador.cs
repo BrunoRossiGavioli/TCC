@@ -11,19 +11,17 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
         {
             RuleFor(f => f.Cnpj).Must(cnpj => fornecedor.GetByCnpj(cnpj) == null).WithMessage(MensagensErroFornecedor.CnpjJaCadastrado);
             RuleFor(f => f.RazaoSocial).Must(razaoSocial => fornecedor.GetByRazaoSocial(razaoSocial) == null).WithMessage(MensagensErroFornecedor.RazaoSocialJaCadastrada);
-            RuleFor(f => f.NomeFantasia).Must(nomeFantasia => fornecedor.GetByNomeFantsia(nomeFantasia) == null).WithMessage(MensagensErroFornecedor.NomeFantaziajaCadastrado);
-            RuleFor(f => f.Email).Must(email => fornecedor.GetByEmail(email) == null).WithMessage(MensagensErroFornecedor.EmailJaCadastrado);
+           // RuleFor(f => f.NomeFantasia).Must(nomeFantasia => fornecedor.GetByNomeFantsia(nomeFantasia) == null).WithMessage(MensagensErroFornecedor.NomeFantaziajaCadastrado);
+          //  RuleFor(f => f.Email).Must(email => fornecedor.GetByEmail(email) == null).WithMessage(MensagensErroFornecedor.EmailJaCadastrado);
 
-            RuleFor(f => f.NomeFantasia).NotEmpty().WithMessage(MensagensErroFornecedor.NomeFantasiaVazio)
-                .MaximumLength(80).WithMessage(MensagensErroFornecedor.NomeFantasiaTamanhoMaximo)
+            RuleFor(f => f.NomeFantasia).MaximumLength(80).WithMessage(MensagensErroFornecedor.NomeFantasiaTamanhoMaximo)
                 .MinimumLength(3).WithMessage(MensagensErroFornecedor.NomeFantasiaTamanhoMinimo);
 
             RuleFor(f => f.RazaoSocial).NotEmpty().WithMessage(MensagensErroFornecedor.RazaoSocialVazia)
                .MaximumLength(80).WithMessage(MensagensErroFornecedor.RazaoSocialTamanhoMaximo)
                .MinimumLength(3).WithMessage(MensagensErroFornecedor.RazaoSocialTamanhoMinimo);
 
-            RuleFor(f => f.Email).NotEmpty().WithMessage(MensagensErroFornecedor.EmailVazio)
-                .EmailAddress().WithMessage(MensagensErroFornecedor.EmailFormatoInvalido)
+            RuleFor(f => f.Email).EmailAddress().WithMessage(MensagensErroFornecedor.EmailFormatoInvalido)
                 .MaximumLength(30).WithMessage(MensagensErroFornecedor.EmailTamanhoMaximo)
                 .MinimumLength(13).WithMessage(MensagensErroFornecedor.EmailTamanhoMinimo);
 
@@ -35,22 +33,17 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
                 .Length(14).WithMessage(MensagensErroFornecedor.CnpjTamanho);
 
 
-            RuleFor(e => e.Cep).NotEmpty().WithMessage(MensagensDeErroEndereco.CepVazio)
-                .Length(8).WithMessage(MensagensDeErroEndereco.CepTamanho);
+            RuleFor(e => e.Cep).Length(8).WithMessage(MensagensDeErroEndereco.CepTamanho);
 
-            RuleFor(e => e.Logradouro).NotEmpty().WithMessage(MensagensDeErroEndereco.LogradouroVazio)
-                .MaximumLength(80).WithMessage(MensagensDeErroEndereco.LogradouroTamanhoMaximo)
+            RuleFor(e => e.Logradouro).MaximumLength(80).WithMessage(MensagensDeErroEndereco.LogradouroTamanhoMaximo)
                 .MinimumLength(3).WithMessage(MensagensDeErroEndereco.LogradouroTamanhoMinimo);
 
-            RuleFor(e => e.Complemento).NotEmpty().WithMessage(MensagensDeErroEndereco.ComplementoVazio)
-                .MaximumLength(80).WithMessage(MensagensDeErroEndereco.ComplementoTamanhoMaximo)
+            RuleFor(e => e.Complemento).MaximumLength(80).WithMessage(MensagensDeErroEndereco.ComplementoTamanhoMaximo)
                 .MinimumLength(3).WithMessage(MensagensDeErroEndereco.ComplementoVazio);
 
-            RuleFor(e => e.Numero).NotEmpty().WithMessage(MensagensDeErroEndereco.NumeroVazio)                
-                .GreaterThanOrEqualTo(0).WithMessage(MensagensDeErroEndereco.NumeroTamanhoMinimo);
+            RuleFor(e => e.Numero).GreaterThanOrEqualTo(0).WithMessage(MensagensDeErroEndereco.NumeroTamanhoMinimo);
 
-            RuleFor(e => e.Bairro).NotEmpty().WithMessage(MensagensDeErroEndereco.BairroVazio)
-                .MaximumLength(80).WithMessage(MensagensDeErroEndereco.BairroTamanhoMaximo)
+            RuleFor(e => e.Bairro).MaximumLength(80).WithMessage(MensagensDeErroEndereco.BairroTamanhoMaximo)
                 .MinimumLength(2).WithMessage(MensagensDeErroEndereco.BairroTamanhoMinimo);
 
             RuleFor(e => e.Localidade).NotEmpty().WithMessage(MensagensDeErroEndereco.LocalidadeVazio)
