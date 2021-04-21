@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.Validacao.Formatacao;
+using TCCESTOQUE.Validacao.ValidacaoModels;
 using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Service
@@ -36,7 +38,11 @@ namespace TCCESTOQUE.Service
 
         public object PostCricao(VendaViewModel venda)
         {
-            return _vendaRepository.PostCricao(venda);
+            var res = new VendaValidador().Validate(venda);
+            if (res.IsValid)
+                return _vendaRepository.PostCricao(venda);
+
+            return null;
         }
 
         public VendaModel GetEdicao(int? id)

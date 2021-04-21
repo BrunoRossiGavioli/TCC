@@ -20,8 +20,7 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
                 .MinimumLength(3).WithMessage(MensagensDeErroEndereco.ComplementoVazio);
 
             RuleFor(e => e.Numero).NotEmpty().WithMessage(MensagensDeErroEndereco.NumeroVazio)
-                .LessThanOrEqualTo(999999999).WithMessage(MensagensDeErroEndereco.NumeroTamanhoMaximo)
-                .GreaterThan(0).WithMessage(MensagensDeErroEndereco.NumeroTamanhoMinimo);
+                .GreaterThanOrEqualTo(1).WithMessage(MensagensDeErroEndereco.NumeroTamanhoMinimo);
 
             RuleFor(e => e.Bairro).NotEmpty().WithMessage(MensagensDeErroEndereco.BairroVazio)
                 .MaximumLength(80).WithMessage(MensagensDeErroEndereco.BairroTamanhoMaximo)

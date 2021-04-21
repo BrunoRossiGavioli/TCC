@@ -66,11 +66,12 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Create(VendaViewModel vendaViewModel)
         {
             Autenticar();
-            if (ModelState.IsValid)
+            var res = _context.PostCricao(vendaViewModel);
+            if (res != null)
             {
-                _context.PostCricao(vendaViewModel);
                 return RedirectToAction("Index", "Venda");
             }
+            
             ViewData["ClienteId"] = _selectListRepository.SelectListCliente("ClienteId", "Nome", vendaViewModel.ClienteId);
             ViewData["VendedorId"] = _selectListRepository.SelectListVendedor("VendedorId", "Nome", vendaViewModel.VendedorId);
             ViewData["ProdutoId"] = _selectListRepository.SelectListProduto("ProdutoId", "Nome", vendaViewModel.ProdutoId);

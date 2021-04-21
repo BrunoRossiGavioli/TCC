@@ -48,7 +48,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Create([Bind("VendaItensId,VendaId,ProdutoId,Quantidade")] VendaItensModel vendaItensModel, int id)
         {
             Autenticar();
-
+            
             if (ModelState.IsValid)
             {
                 _context.PostCriacao(vendaItensModel, id);

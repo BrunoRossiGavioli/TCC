@@ -1,6 +1,7 @@
 ﻿using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.Validacao.Formatacao;
 using TCCESTOQUE.Validacao.ValidacaoModels;
 
 namespace TCCESTOQUE.Service
@@ -52,7 +53,11 @@ namespace TCCESTOQUE.Service
         {
             var validador = new ProdutoValidador().Validate(produtoModel);
             if (validador.IsValid)
+            {
+                produtoModel = FormataValores.FormataValoresProdutoModel(produtoModel);
                 return _produtoRepository.PostCriacao(produtoModel);
+            }
+                
 
             return false;
         }

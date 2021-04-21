@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.Validacao.Formatacao;
 using TCCESTOQUE.Validacao.ValidacaoModels;
 using TCCESTOQUE.ViewModel;
 
@@ -43,13 +44,15 @@ namespace TCCESTOQUE.Service
         {
             var validacao = new ClienteValidador().Validate(cliente);
 
-            if (!validacao.IsValid)
+            if (validacao.IsValid)
             {
-                if (cliente.VendedorId != vendedorId)
-                    return null;
+                cliente = FormataValores.FormataValoresClienteView(cliente);
+                return _clienteRepository.PostCriacao(cliente);
             }
-            
-            return _clienteRepository.PostCriacao(cliente);
+            if (cliente.VendedorId != vendedorId)
+                return null;
+            return null;
+
         }
 
         public object PostExclusao(int id)
