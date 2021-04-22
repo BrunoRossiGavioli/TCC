@@ -8,6 +8,7 @@ using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.Service;
 using TCCESTOQUE.ViewModel;
+using TCCESTOQUE.ViewModel.EditViewModels;
 
 namespace TCCESTOQUE.Repository
 {
@@ -48,7 +49,7 @@ namespace TCCESTOQUE.Repository
             return _context.VendedorModel.Find(id);
         }
 
-        public bool PutEdicao(int id, VendedorModel vendedorModel)
+        public bool PutEdicao(int id, VendedorEditViewModel vendedorModel)
         {
             try
             {
@@ -109,9 +110,9 @@ namespace TCCESTOQUE.Repository
             return vendPrincipal;
         }
 
-        public VendedorModel GetByCpf(string cpf)
+        public string GetByCpf(string cpf)
         {
-            return _context.VendedorModel.Where(a => a.Cpf == cpf).FirstOrDefault();
+            return _context.VendedorModel.Where(a => a.Cpf == cpf).FirstOrDefault().Cpf;
         }
 
         public string GetByPhone(string telefone)
@@ -127,6 +128,7 @@ namespace TCCESTOQUE.Repository
         public VendedorModel GetSenha(string senha)
         {
             return _context.VendedorModel.Where(a => a.Senha == SecurityService.Criptografar(senha)).FirstOrDefault();
-        }        
+        }
+
     }
 }

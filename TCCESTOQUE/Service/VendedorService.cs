@@ -1,12 +1,15 @@
-﻿using System.Linq;
+﻿using AutoMapper;
+using System.Linq;
 using System.Security.Claims;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.Validacao.Formatacao;
 using TCCESTOQUE.Validacao.ValidacaoModels;
+using TCCESTOQUE.Validacao.ValidacaoModels.ValidaEdit;
 using TCCESTOQUE.ValidadorVendedor;
 using TCCESTOQUE.ViewModel;
+using TCCESTOQUE.ViewModel.EditViewModels;
 
 namespace TCCESTOQUE.Service
 {
@@ -53,15 +56,14 @@ namespace TCCESTOQUE.Service
             return false;
         }
 
-        public bool PutEdicao(int id, VendedorModel vendedorModel)
+        public bool PutEdicao(int id, VendedorEditViewModel vendedorModel)
         {
             vendedorModel.VendedorId = id;
-
-            var validacao = new VendedorValidador(_vendedorRepository).Validate(vendedorModel);
+            var validacao = new VendedorEditValidador(_vendedorRepository).Validate(vendedorModel);
 
             if (validacao.IsValid)
             {
-                vendedorModel = FormataValores.FormataValoresVendedor(vendedorModel);
+                //vendedorModel = FormataValores.FormataValoresVendedor(vendedorModel);
                 return _vendedorRepository.PutEdicao(id, vendedorModel);
             }
 
@@ -77,7 +79,7 @@ namespace TCCESTOQUE.Service
             return _vendedorRepository.PostLogin(vendedorModel);
         }
 
-        public object GetEmail(string email)
+        public VendedorModel GetEmail(string email)
         {
             return _vendedorRepository.GetByEmail(email);
         }

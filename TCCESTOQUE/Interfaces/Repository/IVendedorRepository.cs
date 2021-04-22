@@ -2,6 +2,7 @@
 using TCCESTOQUE.Models;
 using TCCESTOQUE.Service;
 using TCCESTOQUE.ViewModel;
+using TCCESTOQUE.ViewModel.EditViewModels;
 
 namespace TCCESTOQUE.Interfaces.Repository
 {
@@ -11,11 +12,11 @@ namespace TCCESTOQUE.Interfaces.Repository
         public object GetCriacao();
         public bool PostCriacao(VendedorModel vendedorModel);
         public VendedorModel GetEdicao(int? id);
-        public bool PutEdicao(int id, VendedorModel vendedorModel);
+        public bool PutEdicao(int id, VendedorEditViewModel vendedorModel);
         public VendedorModel GetExclusao(int? id);
         public object PostExclusao(int id);
         public ClaimsPrincipal PostLogin(LoginVendedorViewModel vendedorModel);
-        public VendedorModel GetByCpf(string cpf);
+        public string GetByCpf(string cpf);
         public string GetByPhone(string telefone);
         public VendedorModel GetByEmail(string email);
         public VendedorModel GetSenha(string senha);
