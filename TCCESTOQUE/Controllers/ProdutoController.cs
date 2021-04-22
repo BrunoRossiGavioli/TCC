@@ -50,7 +50,7 @@ namespace TCCESTOQUE.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult Create([Bind("Id,Nome,Descricao,Custo,ValorUnitario,Quantidade,FornecedorId")] ProdutoModel produtoModel)
+        public IActionResult Create(ProdutoModel produtoModel)
         {
             Autenticar();
             _context.PostCriacao(produtoModel);
@@ -74,7 +74,7 @@ namespace TCCESTOQUE.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult Edit(int id, [Bind("Id,Nome,Descricao,Custo,ValorUnitario,Quantidade,FornecedorId")] ProdutoModel produtoModel)
+        public IActionResult Edit(int id, ProdutoModel produtoModel)
         {
             Autenticar();
             _context.PutEdicao(id, produtoModel);

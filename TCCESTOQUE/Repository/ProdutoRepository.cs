@@ -68,7 +68,7 @@ namespace TCCESTOQUE.Repository
                 _context.SaveChanges();
                 return true;
             }
-            catch (Exception)
+            catch (Exception erro)
             {
                 return false;
             }       
