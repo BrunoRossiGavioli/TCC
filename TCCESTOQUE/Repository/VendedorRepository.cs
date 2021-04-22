@@ -114,9 +114,9 @@ namespace TCCESTOQUE.Repository
             return _context.VendedorModel.Where(a => a.Cpf == cpf).FirstOrDefault();
         }
 
-        public VendedorModel GetByPhone(string telefone)
+        public string GetByPhone(string telefone)
         {
-            return _context.VendedorModel.Where(a => a.Telefone == telefone).FirstOrDefault();
+            return _context.VendedorModel.Where(a => a.Telefone == telefone).FirstOrDefault().Telefone;
         }
 
         public VendedorModel GetByEmail(string email)

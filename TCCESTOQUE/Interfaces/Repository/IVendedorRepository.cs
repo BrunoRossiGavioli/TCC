@@ -16,7 +16,7 @@ namespace TCCESTOQUE.Interfaces.Repository
         public object PostExclusao(int id);
         public ClaimsPrincipal PostLogin(LoginVendedorViewModel vendedorModel);
         public VendedorModel GetByCpf(string cpf);
-        public VendedorModel GetByPhone(string telefone);
+        public string GetByPhone(string telefone);
         public VendedorModel GetByEmail(string email);
         public VendedorModel GetSenha(string senha);
 
