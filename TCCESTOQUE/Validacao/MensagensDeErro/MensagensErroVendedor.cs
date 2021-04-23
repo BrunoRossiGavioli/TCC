@@ -24,8 +24,8 @@ namespace TCCESTOQUE.Validacao.MensagensDeErro
         public static string TelefoneTamanho = "O Telefone deve ter 11 caracteres!";
         public static string CpfTamanho = "O CPF deve ter 11 caracteres!";
         public static string CpfjaCadastrado = "O CPF ja encontra-se cadastrado";
-
         public static string EmailNaoEncontrado = "Email não encontrado!";
+
         public static string SenhaIncorreta = "Senha incorreta!";
 
 

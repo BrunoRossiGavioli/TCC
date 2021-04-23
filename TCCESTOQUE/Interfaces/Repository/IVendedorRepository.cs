@@ -10,16 +10,15 @@ namespace TCCESTOQUE.Interfaces.Repository
     {
         public VendedorModel GetDetalhes(int? id);
         public object GetCriacao();
-        public VendedorModel GetOne(int id);
         public bool PostCriacao(VendedorModel vendedorModel);
         public VendedorModel GetEdicao(int? id);
-        public VendedorModel PutEdicao(VendedorModel vendedorModel);
+        public bool PutEdicao(int id, VendedorEditViewModel vendedorModel);
         public VendedorModel GetExclusao(int? id);
         public object PostExclusao(int id);
         public ClaimsPrincipal PostLogin(LoginVendedorViewModel vendedorModel);
-        public VendedorModel GetByCpf(string cpf);
-        public VendedorModel GetByPhone(string telefone);
-        public VendedorModel GetByEmail(string email);
+        public string GetByCpf(string cpf);
+        public string GetByPhone(string telefone);
+        public string GetByEmail(string email);
         public VendedorModel GetSenha(string senha);
 
     }

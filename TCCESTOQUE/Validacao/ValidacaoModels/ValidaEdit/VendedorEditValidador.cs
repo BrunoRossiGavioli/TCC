@@ -14,6 +14,11 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels.ValidaEdit
     {
         public VendedorEditValidador(IVendedorRepository vend)
         {
+
+            
+            RuleFor(a => a.Email).Must(email => vend.GetByEmail(email) == null || vend.GetByEmail(email) == vend.GetByEmail(email)).WithMessage(MensagensErroVendedor.EmailJaCadastrado);
+            RuleFor(a => a.Telefone).Must(telefone => vend.GetByPhone(telefone) == null || vend.GetByPhone(telefone) == vend.GetByPhone(telefone)).WithMessage(MensagensErroVendedor.TelefoneJaCadastrado);         
+
             RuleFor(v => v.Nome).NotEmpty().WithMessage(MensagensErroVendedor.NomeVazio)
                     .MaximumLength(80).WithMessage(MensagensErroVendedor.NomeTamanhoMaximo)
                     .MinimumLength(3).WithMessage(MensagensErroVendedor.NomeTamanhoMinimo);
@@ -21,16 +26,13 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels.ValidaEdit
             RuleFor(v => v.Email).NotEmpty().WithMessage(MensagensErroVendedor.EmailVazio)
                     .EmailAddress().WithMessage(MensagensErroVendedor.EmailFormatoInvalido)
                     .MaximumLength(30).WithMessage(MensagensErroVendedor.EmailTamanhoMaximo)
-                    .MinimumLength(13).WithMessage(MensagensErroVendedor.EmailTamanhoMinimo)
-                    .Must(email => vend.GetByEmail(email) == null).WithMessage(MensagensErroVendedor.EmailJaCadastrado);
-
-            RuleFor(v => v.Telefone).Length(11).WithMessage(MensagensErroVendedor.TelefoneTamanho)
-                .Must(telefone => vend.GetByPhone(telefone) == null ).WithMessage(MensagensErroVendedor.TelefoneJaCadastrado);
+                    .MinimumLength(13).WithMessage(MensagensErroVendedor.EmailTamanhoMinimo);
 
             RuleFor(v => v.Senha).NotEmpty().WithMessage(MensagensErroVendedor.SenhaVazia)
-                    .MaximumLength(50).WithMessage(MensagensErroVendedor.SenhaTamanhoMaximo)
-                    .MinimumLength(8).WithMessage(MensagensErroVendedor.SenhaTamanhoMinimo);
+                .MaximumLength(50).WithMessage(MensagensErroVendedor.SenhaTamanhoMaximo)
+                .MinimumLength(8).WithMessage(MensagensErroVendedor.SenhaTamanhoMinimo);
 
+            RuleFor(v => v.Telefone).Length(11).WithMessage(MensagensErroVendedor.TelefoneTamanho);
         }
     }
 }

@@ -16,6 +16,5 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
             RuleFor(a => a.Email).Must(email => vend.GetByEmail(email) != null).WithMessage(MensagensErroVendedor.EmailNaoEncontrado);
             RuleFor(a => a.Senha).Must(senha => vend.GetSenha(senha) != null).WithMessage(MensagensErroVendedor.SenhaIncorreta);
         }
-
     }
 }

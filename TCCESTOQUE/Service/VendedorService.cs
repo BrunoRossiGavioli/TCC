@@ -16,12 +16,9 @@ namespace TCCESTOQUE.Service
     public class VendedorService : IVendedorService
     {
         private readonly IVendedorRepository _vendedorRepository;
-        private readonly IMapper _mapper;
-        public VendedorService(IVendedorRepository vendedorRepository, IMapper mapper)
+        public VendedorService(IVendedorRepository vendedorRepository)
         {
             _vendedorRepository = vendedorRepository;
-            _mapper = mapper;
-
         }
         public object GetCriacao()
         {
@@ -59,18 +56,17 @@ namespace TCCESTOQUE.Service
             return false;
         }
 
-        public VendedorModel PutEdicao(VendedorModel vendedorModel)
+        public bool PutEdicao(int id, VendedorEditViewModel vendedorModel)
         {
-            var result = _mapper.Map<VendedorEditViewModel>(vendedorModel);
-            var validacao = new VendedorEditValidador(_vendedorRepository).Validate(result);
+            vendedorModel.VendedorId = id;
+            var validacao = new VendedorEditValidador(_vendedorRepository).Validate(vendedorModel);
 
             if (validacao.IsValid)
-            {
-                //vendedorModel = FormataValores.FormataValoresVendedor(vendedorModel);
-                return _vendedorRepository.PutEdicao(vendedorModel);
+            {               
+                return _vendedorRepository.PutEdicao(id, vendedorModel);
             }
 
-            return null;
+            return false;
         }
 
         public object PostExclusao(int id)
@@ -79,14 +75,14 @@ namespace TCCESTOQUE.Service
         }
         public ClaimsPrincipal PostLogin(LoginVendedorViewModel vendedorModel)
         {
-            var validador = new ValidaLogin(_vendedorRepository).Validate(vendedorModel);
-            if (validador.IsValid)
+            var validacao = new ValidaLogin(_vendedorRepository).Validate(vendedorModel);
+            if (validacao.IsValid)
                 return _vendedorRepository.PostLogin(vendedorModel);
 
             return null;
         }
 
-        public VendedorModel GetEmail(string email)
+        public string GetEmail(string email)
         {
             return _vendedorRepository.GetByEmail(email);
         }

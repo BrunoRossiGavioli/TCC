@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -15,12 +14,10 @@ namespace TCCESTOQUE.Controllers
     public class VendedorController : ControllerPai
     {
         private readonly IVendedorService _vendedorService;
-        private readonly IMapper _mapper;
 
-        public VendedorController(IVendedorService vendedorService, IMapper mapper)
+        public VendedorController(IVendedorService vendedorService)
         {
             _vendedorService = vendedorService;
-            _mapper = mapper;
         }
 
         public IActionResult Index()
@@ -70,19 +67,17 @@ namespace TCCESTOQUE.Controllers
         // POST: Vendedor/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPut("{id}")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult Edit(int id, [Bind("Senha,Cpf,Nome,Email,DataNascimento,Endereco,Telefone")] VendedorModel vendedorModel)
+        public IActionResult Edit(int id, [Bind("Nome,Email,Senha,Telefone")] VendedorEditViewModel vendedorModel)
         {
             Autenticar();
-            if (id != vendedorModel.VendedorId)
-                return View(vendedorModel);
-            var res = _vendedorService.PutEdicao(vendedorModel);
-            if (res == null)
-                return View(vendedorModel);
+            var res = _vendedorService.PutEdicao(id, vendedorModel);
+            if (res)
+                return RedirectToAction("Index", "Home");
 
-            return RedirectToAction("Index", "Home");
+            return View(vendedorModel);
         }
 
         // GET: Vendedor/Delete/5

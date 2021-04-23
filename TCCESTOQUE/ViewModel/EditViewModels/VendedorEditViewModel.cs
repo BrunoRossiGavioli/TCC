@@ -21,5 +21,6 @@ namespace TCCESTOQUE.ViewModel.EditViewModels
         [MaxLength(70)]
         [DataType(System.ComponentModel.DataAnnotations.DataType.Password)]
         public string Senha { get; set; }
+
     }
 }
