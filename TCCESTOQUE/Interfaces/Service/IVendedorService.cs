@@ -11,7 +11,7 @@ namespace TCCESTOQUE.Interfaces.Service
         public object GetCriacao();
         public bool PostCriacao(VendedorModel vendedorModel);
         public VendedorModel GetEdicao(int? id);
-        public bool PutEdicao(int id, VendedorEditViewModel vendedorModel);
+        public VendedorModel PutEdicao(VendedorModel vendedorModel);
         public VendedorModel GetExclusao(int? id);
         public object PostExclusao(int id);
         public ClaimsPrincipal PostLogin(LoginVendedorViewModel vendedorModel);

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +16,12 @@ namespace TCCESTOQUE.Repository
     public class VendedorRepository : IVendedorRepository
     {
         private readonly TCCESTOQUEContext _context;
+        private readonly IMapper _mapper;
 
-        public VendedorRepository(TCCESTOQUEContext context)
+        public VendedorRepository(TCCESTOQUEContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         public object GetCriacao()
@@ -49,17 +52,21 @@ namespace TCCESTOQUE.Repository
             return _context.VendedorModel.Find(id);
         }
 
-        public bool PutEdicao(int id, VendedorEditViewModel vendedorModel)
+        public VendedorModel PutEdicao(VendedorModel vendedorModel)
         {
+            DetachLocal(a => a.VendedorId == vendedorModel.VendedorId);
+           // var result = _mapper.Map<VendedorModel>(vendedorModel);           
+            _context.Entry(vendedorModel).State = EntityState.Modified;
+           
             try
             {
-                _context.Update(vendedorModel);
-                _context.SaveChanges();
-                return true;
+               _context.Update(vendedorModel);
+               _context.SaveChangesAsync();
+                return vendedorModel;
             }
             catch (DbUpdateConcurrencyException)
             {
-                return false;
+                return null;
             }
         }
 
@@ -108,16 +115,11 @@ namespace TCCESTOQUE.Repository
             var minhaIdentity = new ClaimsIdentity(Claims, "Vendedor");
             var vendPrincipal = new ClaimsPrincipal(new[] { minhaIdentity });
             return vendPrincipal;
-        }
+        }       
 
-        public string GetByCpf(string cpf)
+        public VendedorModel GetByPhone(string telefone)
         {
-            return _context.VendedorModel.Where(a => a.Cpf == cpf).FirstOrDefault().Cpf;
-        }
-
-        public string GetByPhone(string telefone)
-        {
-            return _context.VendedorModel.Where(a => a.Telefone == telefone).FirstOrDefault().Telefone;
+            return _context.VendedorModel.Where(a => a.Telefone == telefone).FirstOrDefault();
         }
 
         public VendedorModel GetByEmail(string email)
@@ -130,5 +132,22 @@ namespace TCCESTOQUE.Repository
             return _context.VendedorModel.Where(a => a.Senha == SecurityService.Criptografar(senha)).FirstOrDefault();
         }
 
+        public VendedorModel GetByCpf(string cpf)
+        {
+            return _context.VendedorModel.Where(a => a.Cpf == cpf).FirstOrDefault();
+        }
+
+        public VendedorModel GetOne(int id)
+        {
+            return _context.VendedorModel.Find(id);
+        }
+        public void DetachLocal(Func<VendedorModel, bool> predicate)
+        {
+            var local = _context.Set<VendedorModel>().Local.Where(predicate).FirstOrDefault();
+            if (local != null)
+            {
+                _context.Entry(local).State = EntityState.Detached;
+            }
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -14,10 +15,12 @@ namespace TCCESTOQUE.Controllers
     public class VendedorController : ControllerPai
     {
         private readonly IVendedorService _vendedorService;
+        private readonly IMapper _mapper;
 
-        public VendedorController(IVendedorService vendedorService)
+        public VendedorController(IVendedorService vendedorService, IMapper mapper)
         {
             _vendedorService = vendedorService;
+            _mapper = mapper;
         }
 
         public IActionResult Index()
@@ -52,7 +55,7 @@ namespace TCCESTOQUE.Controllers
             var res = _vendedorService.PostCriacao(vendedorModel);
             if (res)
                 return RedirectToAction("Index", "Home");
-            
+
             return View(vendedorModel);
         }
 
@@ -67,17 +70,19 @@ namespace TCCESTOQUE.Controllers
         // POST: Vendedor/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPut("{id}")]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult Edit(int id, [Bind("Senha,Cpf,Nome,Email,DataNascimento,Endereco,Telefone")] VendedorEditViewModel vendedorModel)
+        public IActionResult Edit(int id, [Bind("Senha,Cpf,Nome,Email,DataNascimento,Endereco,Telefone")] VendedorModel vendedorModel)
         {
             Autenticar();
-            var res = _vendedorService.PutEdicao(id, vendedorModel);
-            if(res)
-                return RedirectToAction("Index", "Home");
+            if (id != vendedorModel.VendedorId)
+                return View(vendedorModel);
+            var res = _vendedorService.PutEdicao(vendedorModel);
+            if (res == null)
+                return View(vendedorModel);
 
-            return View(vendedorModel);
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: Vendedor/Delete/5
@@ -96,7 +101,7 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             _vendedorService.PostExclusao(id);
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
 
         // GET
@@ -107,21 +112,17 @@ namespace TCCESTOQUE.Controllers
         }
 
         //POST
-        [HttpPost,ActionName("Login")]
+        [HttpPost, ActionName("Login")]
         public IActionResult Login(LoginVendedorViewModel vendedor)
         {
             Autenticar();
             var res = _vendedorService.PostLogin(vendedor);
-            var resEmail = _vendedorService.GetEmail(vendedor.Email);
-            var resSenha = _vendedorService.GetSenha(vendedor.Senha);
             if (res != null)
             {
                 HttpContext.SignInAsync(res);
                 return RedirectToAction("Index", "Home");
             }
-            ViewBag.Email = resEmail == null ? "Email não encontrado!" : "";
-            ViewBag.Senha = resSenha == null ? "Senha incorreta" : "";
-            return View(vendedor);           
+            return View(vendedor);
         }
 
         //GET

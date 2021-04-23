@@ -12,7 +12,6 @@ namespace TCCESTOQUE.ViewModel.EditViewModels
 
         [DataType(System.ComponentModel.DataAnnotations.DataType.EmailAddress)]
         public string Email { get; set; }
-        public string Cpf { get; set; }
         public string Telefone { get; set; }
 
         [Required(ErrorMessage = "Informe o nome de usuario", AllowEmptyStrings = false)]
@@ -22,8 +21,5 @@ namespace TCCESTOQUE.ViewModel.EditViewModels
         [MaxLength(70)]
         [DataType(System.ComponentModel.DataAnnotations.DataType.Password)]
         public string Senha { get; set; }
-
-        [Required(ErrorMessage = "Informe a data de nascimento", AllowEmptyStrings = false)]
-        public DateTime DataNascimento { get; set; }
     }
 }
