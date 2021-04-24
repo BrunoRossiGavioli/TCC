@@ -47,14 +47,21 @@ namespace TCCESTOQUE.Repository
             return vendedorModel;
         }
 
-        public VendedorModel GetEdicao(int? id)
+        public VendedorEditViewModel GetEdicao(int? id)
         {
-            return _context.VendedorModel.Find(id);
+            var vendedor = _mapper.Map<VendedorEditViewModel>(_context.VendedorModel.Find(id));
+            return vendedor;
         }
 
         public bool PutEdicao(int id, VendedorEditViewModel vendedorModel)
         {
             var mapeamento = _mapper.Map<VendedorModel>(vendedorModel);
+            //var complemento = _context.VendedorModel.Find(id);
+            //complemento.Senha = mapeamento.Senha;
+            //complemento.Nome = mapeamento.Nome;
+            //complemento.Email = mapeamento.Email;
+            //complemento.Telefone = mapeamento.Telefone;
+
             try
             {
                 _context.Update(mapeamento);
@@ -114,24 +121,24 @@ namespace TCCESTOQUE.Repository
             return vendPrincipal;
         }
 
-        public VendedorModel GetByCpf(string cpf)
+        public string GetByCpf(string cpf)
         {
-            return _context.VendedorModel.Where(a => a.Cpf == cpf).FirstOrDefault();
+            return _context.VendedorModel.Where(a => a.Cpf == cpf).FirstOrDefault().Cpf;
         }
 
-        public VendedorModel GetByPhone(string telefone)
+        public string GetByPhone(string telefone)
         {
-            return _context.VendedorModel.Where(a => a.Telefone == telefone).FirstOrDefault();
+            return _context.VendedorModel.Where(a => a.Telefone == telefone).FirstOrDefault().Telefone;
         }
 
-        public VendedorModel GetByEmail(string email)
+        public string GetByEmail(string email)
         {
-            return _context.VendedorModel.Where(a => a.Email == email).FirstOrDefault();
+            return _context.VendedorModel.Where(a => a.Email == email).FirstOrDefault().Email;
         }
 
-        public VendedorModel GetSenha(string senha)
+        public string GetSenha(string senha)
         {
-            return _context.VendedorModel.Where(a => a.Senha == SecurityService.Criptografar(senha)).FirstOrDefault();
+            return _context.VendedorModel.Where(a => a.Senha == SecurityService.Criptografar(senha)).FirstOrDefault().Senha;
         }
 
     }

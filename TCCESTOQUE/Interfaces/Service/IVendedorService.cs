@@ -10,7 +10,7 @@ namespace TCCESTOQUE.Interfaces.Service
         public VendedorModel GetDetalhes(int? id);
         public object GetCriacao();
         public bool PostCriacao(VendedorModel vendedorModel);
-        public VendedorModel GetEdicao(int? id);
+        public VendedorEditViewModel GetEdicao(int? id);
         public bool PutEdicao(int id, VendedorEditViewModel vendedorModel);
         public VendedorModel GetExclusao(int? id);
         public object PostExclusao(int id);

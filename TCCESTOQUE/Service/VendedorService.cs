@@ -35,7 +35,7 @@ namespace TCCESTOQUE.Service
             return _vendedorRepository.GetDetalhes(id);
         }
 
-        public VendedorModel GetEdicao(int? id)
+        public VendedorEditViewModel GetEdicao(int? id)
         {
             return _vendedorRepository.GetEdicao(id);
         }
