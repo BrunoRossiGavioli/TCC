@@ -3,16 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using TCCESTOQUE.Models;
 
 namespace TCCESTOQUE.ViewModel.EditViewModels
 {
-    public class VendedorEditViewModel
+    public class VendedorEditViewModel : PessoaModel
     {
-        public int VendedorId { get; set; }
-
-        [DataType(System.ComponentModel.DataAnnotations.DataType.EmailAddress)]
-        public string Email { get; set; }
-        public string Telefone { get; set; }
+        public int VendedorId { get; set; }        
 
         [Required(ErrorMessage = "Informe o nome de usuario", AllowEmptyStrings = false)]
         public string Nome { get; set; }

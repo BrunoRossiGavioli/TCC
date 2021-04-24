@@ -40,7 +40,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Create()
         {
             Autenticar();
-            ViewData["FornecedorId"] = _selectListRepository.SelectListFornecedor("ForncedorId", "NomeFantasia");          
+            ViewData["FornecedorId"] = _selectListRepository.SelectListFornecedor("ForncedorId", "NomeFantasia");
             return View();
         }
 
@@ -81,9 +81,12 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Edit(int id, [Bind("Id,Nome,Descricao,Custo,ValorUnitario,Quantidade,FornecedorId")] ProdutoModel produtoModel)
         {
             Autenticar();
-            _context.PutEdicao(id, produtoModel);
+            var res = _context.PutEdicao(id, produtoModel);
             ViewData["FornecedorId"] = _selectListRepository.SelectListFornecedor("ForncedorId", "NomeFantasia", produtoModel.FornecedorId);
-            return RedirectToAction("Index", "Produto");
+            if (res)
+                return RedirectToAction("Index", "Produto");
+
+            return View(produtoModel);
         }
 
         // GET: Produto/Delete/5

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.ViewModel;
+using TCCESTOQUE.ViewModel.EditViewModels;
 
 namespace TCCESTOQUE.AutoMapper
 {
@@ -22,6 +23,9 @@ namespace TCCESTOQUE.AutoMapper
 
             CreateMap<ClienteModel, ClienteViewModel>();
             CreateMap<ClienteEnderecoModel, ClienteViewModel>();
+
+            CreateMap<VendedorModel, VendedorEditViewModel>();
+            CreateMap<VendedorEditViewModel, VendedorModel>();
         }
     }
 }

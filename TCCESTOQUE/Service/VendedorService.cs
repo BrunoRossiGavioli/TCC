@@ -16,9 +16,11 @@ namespace TCCESTOQUE.Service
     public class VendedorService : IVendedorService
     {
         private readonly IVendedorRepository _vendedorRepository;
-        public VendedorService(IVendedorRepository vendedorRepository)
+        private readonly IMapper _mapper;
+        public VendedorService(IVendedorRepository vendedorRepository, IMapper mapper)
         {
             _vendedorRepository = vendedorRepository;
+            _mapper = mapper;
         }
         public object GetCriacao()
         {
@@ -59,10 +61,11 @@ namespace TCCESTOQUE.Service
         public bool PutEdicao(int id, VendedorEditViewModel vendedorModel)
         {
             vendedorModel.VendedorId = id;
-            var validacao = new VendedorEditValidador(_vendedorRepository).Validate(vendedorModel);
 
+            var validacao = new VendedorEditValidador(_vendedorRepository).Validate(vendedorModel);
             if (validacao.IsValid)
-            {               
+            {
+                vendedorModel = FormataValores.FormataValoresVendedorEdit(vendedorModel);
                 return _vendedorRepository.PutEdicao(id, vendedorModel);
             }
 
@@ -82,7 +85,7 @@ namespace TCCESTOQUE.Service
             return null;
         }
 
-        public string GetEmail(string email)
+        public object GetEmail(string email)
         {
             return _vendedorRepository.GetByEmail(email);
         }

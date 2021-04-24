@@ -54,10 +54,10 @@ namespace TCCESTOQUE.Repository
 
         public bool PutEdicao(int id, VendedorEditViewModel vendedorModel)
         {
+            var mapeamento = _mapper.Map<VendedorModel>(vendedorModel);
             try
             {
-                var result = _mapper.Map<VendedorModel>(vendedorModel);
-                _context.VendedorModel.Update(result);
+                _context.Update(mapeamento);
                 _context.SaveChanges();
                 return true;
             }
@@ -114,19 +114,19 @@ namespace TCCESTOQUE.Repository
             return vendPrincipal;
         }
 
-        public string GetByCpf(string cpf)
+        public VendedorModel GetByCpf(string cpf)
         {
-            return _context.VendedorModel.Where(a => a.Cpf == cpf).FirstOrDefault().Cpf;
+            return _context.VendedorModel.Where(a => a.Cpf == cpf).FirstOrDefault();
         }
 
-        public string GetByPhone(string telefone)
+        public VendedorModel GetByPhone(string telefone)
         {
-            return _context.VendedorModel.Where(a => a.Telefone == telefone).FirstOrDefault().Telefone;
+            return _context.VendedorModel.Where(a => a.Telefone == telefone).FirstOrDefault();
         }
 
-        public string GetByEmail(string email)
+        public VendedorModel GetByEmail(string email)
         {
-            return _context.VendedorModel.Where(a => a.Email == email).FirstOrDefault().Email;
+            return _context.VendedorModel.Where(a => a.Email == email).FirstOrDefault();
         }
 
         public VendedorModel GetSenha(string senha)

@@ -15,9 +15,9 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels.ValidaEdit
         public VendedorEditValidador(IVendedorRepository vend)
         {
 
-            
+
             RuleFor(a => a.Email).Must(email => vend.GetByEmail(email) == null || vend.GetByEmail(email) == vend.GetByEmail(email)).WithMessage(MensagensErroVendedor.EmailJaCadastrado);
-            RuleFor(a => a.Telefone).Must(telefone => vend.GetByPhone(telefone) == null || vend.GetByPhone(telefone) == vend.GetByPhone(telefone)).WithMessage(MensagensErroVendedor.TelefoneJaCadastrado);         
+            RuleFor(a => a.Telefone).Must(telefone => vend.GetByPhone(telefone) == null || vend.GetByPhone(telefone) == vend.GetByPhone(telefone)).WithMessage(MensagensErroVendedor.TelefoneJaCadastrado);
 
             RuleFor(v => v.Nome).NotEmpty().WithMessage(MensagensErroVendedor.NomeVazio)
                     .MaximumLength(80).WithMessage(MensagensErroVendedor.NomeTamanhoMaximo)
