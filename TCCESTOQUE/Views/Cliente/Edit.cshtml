@@ -1,4 +1,4 @@
-﻿@model TCCESTOQUE.ViewModel.ClienteViewModel
+﻿@model TCCESTOQUE.ViewModel.EditViewModels.ClienteEditViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -114,6 +114,7 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+<script src="~/js/CepScript.js" type="text/javascript"></script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

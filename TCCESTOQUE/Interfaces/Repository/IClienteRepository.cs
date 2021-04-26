@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.ViewModel;
+using TCCESTOQUE.ViewModel.EditViewModels;
 
 namespace TCCESTOQUE.Interfaces.Repository
 {
@@ -15,12 +16,16 @@ namespace TCCESTOQUE.Interfaces.Repository
 
         public object PostCriacao(ClienteViewModel cliente);
 
-        public ClienteViewModel GetEdicao(int? id);
+        public ClienteEditViewModel GetEdicao(int? id);
 
-        public object PutEdicao(int id, ClienteViewModel cliente);
+        public object PutEdicao(int id, ClienteEditViewModel cliente);
 
         public ClienteModel GetExclusao(int? id);
 
         public object PostExclusao(int id);
+
+        public ClienteModel GetbyEmail(string email);
+        public ClienteModel GetByPhone(string telefone);
+        public ClienteModel GetByCpf(string cpf);
     }
 }

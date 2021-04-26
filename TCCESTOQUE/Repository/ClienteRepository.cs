@@ -7,6 +7,7 @@ using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.ViewModel;
+using TCCESTOQUE.ViewModel.EditViewModels;
 
 namespace TCCESTOQUE.Repository
 {
@@ -45,18 +46,19 @@ namespace TCCESTOQUE.Repository
                 return true;
         }
 
-        public ClienteViewModel GetEdicao(int? id)
+        public ClienteEditViewModel GetEdicao(int? id)
         {
-            return ConvertCliViewModel(_context.ClienteEnderecoModel.Find(id));
+            var cliente = _mapper.Map<ClienteEditViewModel>(_context.ClienteModel.Find(id));
+            return cliente;
         }
 
-        public object PutEdicao(int id, ClienteViewModel cliente)
+        public object PutEdicao(int id, ClienteEditViewModel cliente)
         {
             var cli = _mapper.Map<ClienteModel>(cliente);
             var endereco = _mapper.Map<ClienteEnderecoModel>(cliente);
 
             cli.ClienteId = id;
-            endereco.ClienteId = cli.ClienteId;
+            endereco.EnderecoId = cli.ClienteId;
 
             try
             {
@@ -101,6 +103,21 @@ namespace TCCESTOQUE.Repository
             info.Telefone = cliente.Telefone;
             info.Email = cliente.Email;
             return info;
+        }
+
+        public ClienteModel GetbyEmail(string email)
+        {
+            return _context.ClienteModel.Where(a => a.Email == email).FirstOrDefault();
+        }
+
+        public ClienteModel GetByPhone(string telefone)
+        {
+            return _context.ClienteModel.Where(a => a.Telefone == telefone).FirstOrDefault();
+        }
+
+        public ClienteModel GetByCpf(string cpf)
+        {
+            return _context.ClienteModel.Where(a => a.Cpf == cpf).FirstOrDefault();
         }
     }
 }

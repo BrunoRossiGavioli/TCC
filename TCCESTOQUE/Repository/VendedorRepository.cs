@@ -57,10 +57,10 @@ namespace TCCESTOQUE.Repository
         {
             var mapeamento = _mapper.Map<VendedorModel>(vendedorModel);
             //var complemento = _context.VendedorModel.Find(id);
-            //complemento.Senha = mapeamento.Senha;
-            //complemento.Nome = mapeamento.Nome;
-            //complemento.Email = mapeamento.Email;
-            //complemento.Telefone = mapeamento.Telefone;
+            //mapeamento.Senha = complemento.Senha;
+            //mapeamento.Nome = complemento.Nome;
+            //mapeamento.Email = complemento.Email;
+            //mapeamento.Telefone = complemento.Telefone;
 
             try
             {
@@ -121,24 +121,24 @@ namespace TCCESTOQUE.Repository
             return vendPrincipal;
         }
 
-        public string GetByCpf(string cpf)
+        public VendedorModel GetByCpf(string cpf)
         {
-            return _context.VendedorModel.Where(a => a.Cpf == cpf).FirstOrDefault().Cpf;
+            return _context.VendedorModel.Where(a => a.Cpf == cpf).FirstOrDefault();
         }
 
-        public string GetByPhone(string telefone)
+        public VendedorModel GetByPhone(string telefone)
         {
-            return _context.VendedorModel.Where(a => a.Telefone == telefone).FirstOrDefault().Telefone;
+            return _context.VendedorModel.Where(a => a.Telefone == telefone).FirstOrDefault();
         }
 
-        public string GetByEmail(string email)
+        public VendedorModel GetByEmail(string email)
         {
-            return _context.VendedorModel.Where(a => a.Email == email).FirstOrDefault().Email;
+            return _context.VendedorModel.Where(a => a.Email == email).FirstOrDefault();
         }
 
-        public string GetSenha(string senha)
+        public VendedorModel GetSenha(string senha)
         {
-            return _context.VendedorModel.Where(a => a.Senha == SecurityService.Criptografar(senha)).FirstOrDefault().Senha;
+            return _context.VendedorModel.Where(a => a.Senha == SecurityService.Criptografar(senha)).FirstOrDefault();
         }
 
     }

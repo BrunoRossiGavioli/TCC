@@ -26,6 +26,11 @@ namespace TCCESTOQUE.AutoMapper
 
             CreateMap<VendedorModel, VendedorEditViewModel>();
             CreateMap<VendedorEditViewModel, VendedorModel>();
+
+            CreateMap<ClienteEditViewModel, ClienteModel>();
+            CreateMap<ClienteEditViewModel, ClienteEnderecoModel>();
+            CreateMap<ClienteEnderecoModel, ClienteEditViewModel>();
+            CreateMap<ClienteModel, ClienteEditViewModel>();
         }
     }
 }
