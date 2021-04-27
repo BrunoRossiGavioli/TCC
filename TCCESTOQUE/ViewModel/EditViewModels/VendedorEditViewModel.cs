@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 using TCCESTOQUE.Models;
 
 namespace TCCESTOQUE.ViewModel.EditViewModels
 {
     public class VendedorEditViewModel : PessoaModel
     {
-        public int VendedorId { get; set; }        
-
-        [Required(ErrorMessage = "Informe o nome de usuario", AllowEmptyStrings = false)]
+        public int VendedorId { get; set; }
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "Informe a senha!", AllowEmptyStrings = false)]

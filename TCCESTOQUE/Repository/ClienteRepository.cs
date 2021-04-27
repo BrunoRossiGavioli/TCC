@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Models;
@@ -34,16 +32,16 @@ namespace TCCESTOQUE.Repository
 
         public object PostCriacao(ClienteViewModel cliViewModel)
         {
-                var cliente = _mapper.Map<ClienteModel>(cliViewModel);
-                _context.Add(cliente);
-                _context.SaveChanges();
+            var cliente = _mapper.Map<ClienteModel>(cliViewModel);
+            _context.Add(cliente);
+            _context.SaveChanges();
 
-                var endereco = _mapper.Map<ClienteEnderecoModel>(cliViewModel);
-                endereco.ClienteId = cliente.ClienteId;
-                _context.Add(endereco);
-                _context.SaveChanges();
+            var endereco = _mapper.Map<ClienteEnderecoModel>(cliViewModel);
+            endereco.ClienteId = cliente.ClienteId;
+            _context.Add(endereco);
+            _context.SaveChanges();
 
-                return true;
+            return true;
         }
 
         public ClienteEditViewModel GetEdicao(int? id)

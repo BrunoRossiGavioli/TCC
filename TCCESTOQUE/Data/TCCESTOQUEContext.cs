@@ -1,11 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TCCESTOQUE.Models;
 
 namespace TCCESTOQUE.Data
 {
     public class TCCESTOQUEContext : DbContext
     {
-        public TCCESTOQUEContext (DbContextOptions<TCCESTOQUEContext> options)
+        public TCCESTOQUEContext(DbContextOptions<TCCESTOQUEContext> options)
             : base(options)
         {
         }

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
 using TCCESTOQUE.Service;
 
 namespace TCCESTOQUE.Controllers

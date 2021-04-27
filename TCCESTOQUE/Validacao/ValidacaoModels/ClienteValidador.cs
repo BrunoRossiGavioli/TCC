@@ -1,9 +1,4 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TCCESTOQUE.Models;
 using TCCESTOQUE.Validacao.MensagensDeErro;
 using TCCESTOQUE.ViewModel;
 
@@ -15,7 +10,7 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
         {
             RuleFor(v => v.Nome).NotEmpty().WithMessage(MensagensErroCliente.NomeVazio)
                .MaximumLength(80).WithMessage(MensagensErroCliente.NomeTamanhoMaximo)
-               .MinimumLength(3).WithMessage(MensagensErroCliente.NomeTamanhoMinimo);          
+               .MinimumLength(3).WithMessage(MensagensErroCliente.NomeTamanhoMinimo);
 
             RuleFor(v => v.Telefone).NotEmpty().WithMessage(MensagensErroCliente.TelefoneVazio)
               .Length(11).WithMessage(MensagensErroCliente.TelefoneTamanho);

@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using TCCESTOQUE.Data;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
@@ -71,7 +64,7 @@ namespace TCCESTOQUE.Controllers
             {
                 return RedirectToAction("Index", "Venda");
             }
-            
+
             ViewData["ClienteId"] = _selectListRepository.SelectListCliente("ClienteId", "Nome", vendaViewModel.ClienteId);
             ViewData["VendedorId"] = _selectListRepository.SelectListVendedor("VendedorId", "Nome", vendaViewModel.VendedorId);
             ViewData["ProdutoId"] = _selectListRepository.SelectListProduto("ProdutoId", "Nome", vendaViewModel.ProdutoId);

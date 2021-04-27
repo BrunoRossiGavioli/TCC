@@ -33,7 +33,7 @@ namespace TCCESTOQUE
                     config.LoginPath = "/Vendedor/Login";
                     config.AccessDeniedPath = "/Vendedor/LoginInvalido";
                 });
-            
+
 
             services.AddControllersWithViews();
 
@@ -48,13 +48,13 @@ namespace TCCESTOQUE
 
             services.AddScoped<IVendedorService, VendedorService>();
             services.AddScoped<IVendedorRepository, VendedorRepository>();
-            
-            services.AddScoped<IFornecedorService,FornecedorService>();
+
+            services.AddScoped<IFornecedorService, FornecedorService>();
             services.AddScoped<IFornecedorRepository, FornecedorRepository>();
-            
+
             services.AddScoped<IProdutoService, ProdutoService>();
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
-            
+
             services.AddScoped<IVendaRepository, VendaRepository>();
             services.AddScoped<IVendaService, VendaService>();
 

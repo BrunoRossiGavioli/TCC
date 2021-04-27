@@ -11,10 +11,10 @@ namespace TCCESTOQUE.AutoMapper
         {
             CreateMap<FornecedorEnderecoViewModel, FornecedorModel>();
             CreateMap<FornecedorEnderecoViewModel, FornecedorEnderecoModel>();
-            
+
             CreateMap<FornecedorEnderecoModel, FornecedorEnderecoViewModel>();
             CreateMap<FornecedorModel, FornecedorEnderecoViewModel>();
-            
+
             CreateMap<VendaViewModel, VendaModel>();
             CreateMap<VendaViewModel, VendaItensModel>();
 
@@ -31,6 +31,9 @@ namespace TCCESTOQUE.AutoMapper
             CreateMap<ClienteEditViewModel, ClienteEnderecoModel>();
             CreateMap<ClienteEnderecoModel, ClienteEditViewModel>();
             CreateMap<ClienteModel, ClienteEditViewModel>();
+
+            CreateMap<ProdutoEditViewModel, ProdutoModel>();
+            CreateMap<ProdutoModel, ProdutoEditViewModel>();
         }
     }
 }

@@ -2,10 +2,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
-using TCCESTOQUE.ValidadorVendedor;
 using TCCESTOQUE.ViewModel;
 using TCCESTOQUE.ViewModel.EditViewModels;
 
@@ -70,7 +68,7 @@ namespace TCCESTOQUE.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult Edit(int id, [Bind("Nome,Email,Senha,Telefone")] VendedorEditViewModel vendedorModel)
+        public IActionResult Edit(int id, [Bind("VendedorId,Nome,Email,Senha,Telefone")] VendedorEditViewModel vendedorModel)
         {
             Autenticar();
             var res = _vendedorService.PutEdicao(id, vendedorModel);
@@ -112,6 +110,8 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             var res = _vendedorService.PostLogin(vendedor);
+            var getEmail = _vendedorService.GetEmail(vendedor.Email);
+            var getSenha = _vendedorService.GetSenha(vendedor.Senha);
             if (res != null)
             {
                 HttpContext.SignInAsync(res);

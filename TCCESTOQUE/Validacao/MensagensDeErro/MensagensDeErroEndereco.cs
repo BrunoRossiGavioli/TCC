@@ -30,7 +30,7 @@
         public static string ComplementoTamanhoMinimo = "O campo Complemento tem que ter no mínimo {0} caracteres!";
         public static string NumeroTamanhoMinimo = "O campo Número tem que ter no mínimo {0} caracteres!";
         public static string BairroTamanhoMinimo = "O campo Bairro tem que ter no mínimo {0} caracteres !";
-        public static string LocalidadeTamanhoMinimo = "O Localidade tem que ter no mínimo {0} caracteres !";        
+        public static string LocalidadeTamanhoMinimo = "O Localidade tem que ter no mínimo {0} caracteres !";
         #endregion
     }
 }

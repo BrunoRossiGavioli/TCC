@@ -9,7 +9,7 @@ namespace TCCESTOQUE.Models
     {
         [Key]
         public int VendaId { get; set; }
-        
+
         [Column(TypeName = "decimal(12,2)")]
         public decimal Valor { get; set; }
 
@@ -20,7 +20,7 @@ namespace TCCESTOQUE.Models
         public int VendedorId { get; set; }
         [ScaffoldColumn(false)]
         public VendedorModel Vendedor { get; set; }
-        
+
         [ForeignKey("Cliente")]
         [Required(ErrorMessage = "Informe o Nome do cliente", AllowEmptyStrings = false)]
         public int ClienteId { get; set; }

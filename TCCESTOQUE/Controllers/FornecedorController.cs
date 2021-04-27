@@ -1,7 +1,5 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.ViewModel;
 

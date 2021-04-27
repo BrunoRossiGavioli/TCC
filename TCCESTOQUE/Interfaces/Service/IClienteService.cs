@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TCCESTOQUE.Models;
+﻿using TCCESTOQUE.Models;
 using TCCESTOQUE.ViewModel;
 using TCCESTOQUE.ViewModel.EditViewModels;
 
@@ -14,7 +10,7 @@ namespace TCCESTOQUE.Interfaces.Service
 
         public ClienteModel GetDetalhes(int? id);
 
-        public object PostCriacao(ClienteViewModel cliente,int vendedorId);
+        public object PostCriacao(ClienteViewModel cliente, int vendedorId);
 
         public ClienteEditViewModel GetEdicao(int? id);
 

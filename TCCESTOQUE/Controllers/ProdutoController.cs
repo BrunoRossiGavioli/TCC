@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.ViewModel.EditViewModels;
 
 namespace TCCESTOQUE.Controllers
 {
@@ -68,7 +67,7 @@ namespace TCCESTOQUE.Controllers
             Autenticar();
             var produtoModel = _context.GetEdicao(id);
             ViewData["FornecedorId"] = _selectListRepository.SelectListFornecedor("ForncedorId", "NomeFantasia", produtoModel.FornecedorId);
-            ViewData["VendedorId"] = _selectListRepository.SelectListVendedor("VendedorId", "Nome", produtoModel.VendedorId);
+            //  ViewData["VendedorId"] = _selectListRepository.SelectListVendedor("VendedorId", "Nome", produtoModel.VendedorId);
             return View(produtoModel);
         }
 
@@ -78,7 +77,7 @@ namespace TCCESTOQUE.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult Edit(int id, [Bind("Id,Nome,Descricao,Custo,ValorUnitario,Quantidade,FornecedorId")] ProdutoModel produtoModel)
+        public IActionResult Edit(int id, [Bind("VendedorId,Nome,Custo,Descricao,Quantidade,ValorUnitario,FornecedorId")] ProdutoEditViewModel produtoModel)
         {
             Autenticar();
             var res = _context.PutEdicao(id, produtoModel);

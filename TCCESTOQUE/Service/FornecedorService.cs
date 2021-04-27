@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using TCCESTOQUE.Interfaces.Repository;
+﻿using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.Validacao.Formatacao;

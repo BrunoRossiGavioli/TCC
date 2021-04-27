@@ -55,12 +55,8 @@ namespace TCCESTOQUE.Repository
 
         public bool PutEdicao(int id, VendedorEditViewModel vendedorModel)
         {
+            vendedorModel.VendedorId = id;
             var mapeamento = _mapper.Map<VendedorModel>(vendedorModel);
-            //var complemento = _context.VendedorModel.Find(id);
-            //mapeamento.Senha = complemento.Senha;
-            //mapeamento.Nome = complemento.Nome;
-            //mapeamento.Email = complemento.Email;
-            //mapeamento.Telefone = complemento.Telefone;
 
             try
             {

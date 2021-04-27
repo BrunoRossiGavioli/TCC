@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using System.Linq;
 using System.Security.Claims;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;

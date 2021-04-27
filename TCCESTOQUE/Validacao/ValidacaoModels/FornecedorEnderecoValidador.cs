@@ -11,8 +11,8 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
         {
             RuleFor(f => f.Cnpj).Must(cnpj => fornecedor.GetByCnpj(cnpj) == null).WithMessage(MensagensErroFornecedor.CnpjJaCadastrado);
             RuleFor(f => f.RazaoSocial).Must(razaoSocial => fornecedor.GetByRazaoSocial(razaoSocial) == null).WithMessage(MensagensErroFornecedor.RazaoSocialJaCadastrada);
-           // RuleFor(f => f.NomeFantasia).Must(nomeFantasia => fornecedor.GetByNomeFantsia(nomeFantasia) == null).WithMessage(MensagensErroFornecedor.NomeFantaziajaCadastrado);
-          //  RuleFor(f => f.Email).Must(email => fornecedor.GetByEmail(email) == null).WithMessage(MensagensErroFornecedor.EmailJaCadastrado);
+            // RuleFor(f => f.NomeFantasia).Must(nomeFantasia => fornecedor.GetByNomeFantsia(nomeFantasia) == null).WithMessage(MensagensErroFornecedor.NomeFantaziajaCadastrado);
+            //  RuleFor(f => f.Email).Must(email => fornecedor.GetByEmail(email) == null).WithMessage(MensagensErroFornecedor.EmailJaCadastrado);
 
             RuleFor(f => f.NomeFantasia).MaximumLength(80).WithMessage(MensagensErroFornecedor.NomeFantasiaTamanhoMaximo)
                 .MinimumLength(3).WithMessage(MensagensErroFornecedor.NomeFantasiaTamanhoMinimo);

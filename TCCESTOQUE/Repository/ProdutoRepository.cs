@@ -1,20 +1,24 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.ViewModel.EditViewModels;
 
 namespace TCCESTOQUE.Repository
 {
     public class ProdutoRepository : IProdutoRepository
     {
         private readonly TCCESTOQUEContext _context;
+        private readonly IMapper _mapper;
 
-        public ProdutoRepository(TCCESTOQUEContext context)
+        public ProdutoRepository(TCCESTOQUEContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         public object GetIndex()
@@ -25,7 +29,7 @@ namespace TCCESTOQUE.Repository
 
         public object GetCriacao()
         {
-            var res  = new SelectList(_context.FornecedorModel, "FornecedorId", "NomeFantasia");
+            var res = new SelectList(_context.FornecedorModel, "FornecedorId", "NomeFantasia");
             return res;
         }
 
@@ -40,9 +44,9 @@ namespace TCCESTOQUE.Repository
             return produtoModel;
         }
 
-        public ProdutoModel GetEdicao(int? id)
+        public ProdutoEditViewModel GetEdicao(int? id)
         {
-            var produtoModel = _context.ProdutoModel.Find(id);
+            var produtoModel = _mapper.Map<ProdutoEditViewModel>(_context.ProdutoModel.Find(id));
             if (produtoModel == null)
                 return null;
 
@@ -71,7 +75,7 @@ namespace TCCESTOQUE.Repository
             catch (Exception)
             {
                 return false;
-            }       
+            }
         }
 
         public object PostExclusao(int id)
@@ -82,11 +86,12 @@ namespace TCCESTOQUE.Repository
             return nameof(Index);
         }
 
-        public bool PutEdicao(int id, ProdutoModel produtoModel)
+        public bool PutEdicao(int id, ProdutoEditViewModel produtoModel)
         {
+            var mapeamento = _mapper.Map<ProdutoModel>(produtoModel);
             try
             {
-                _context.Update(produtoModel);
+                _context.Update(mapeamento);
                 _context.SaveChanges();
                 return true;
             }
@@ -98,7 +103,7 @@ namespace TCCESTOQUE.Repository
 
         public VendedorModel GetByIdVendedor(int id)
         {
-            return _context.VendedorModel.Where( a=> a.VendedorId == id).FirstOrDefault();
+            return _context.VendedorModel.Where(a => a.VendedorId == id).FirstOrDefault();
         }
     }
 }

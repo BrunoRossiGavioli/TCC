@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using TCCESTOQUE.Data;
+﻿using Microsoft.AspNetCore.Mvc;
 using TCCESTOQUE.Interfaces.Service;
-using TCCESTOQUE.Models;
 using TCCESTOQUE.ViewModel;
 using TCCESTOQUE.ViewModel.EditViewModels;
 
@@ -61,8 +53,8 @@ namespace TCCESTOQUE.Controllers
             Autenticar();
             var res = _context.PostCriacao(clienteModel, Vendedorid);
             if (res != null)
-            {                             
-                return RedirectToAction(nameof(Index));                                
+            {
+                return RedirectToAction(nameof(Index));
             }
             return View(clienteModel);
         }
@@ -95,7 +87,7 @@ namespace TCCESTOQUE.Controllers
             if (ModelState.IsValid)
             {
                 var res = _context.PutEdicao(id, clienteModel, VendedorId);
-                if(res != null)
+                if (res != null)
                     return RedirectToAction(nameof(Index));
             }
             return View(clienteModel);

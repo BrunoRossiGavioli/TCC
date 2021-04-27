@@ -1,9 +1,4 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TCCESTOQUE.Models;
 using TCCESTOQUE.Validacao.MensagensDeErro;
 using TCCESTOQUE.ViewModel;
 
@@ -13,7 +8,7 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
     {
         public VendaValidador()
         {
-           
+
             RuleFor(a => a.ClienteId).NotEmpty().WithMessage(MensagensDeErroVenda.ClienteVazio)
                 .GreaterThanOrEqualTo(1).WithMessage(MensagensDeErroVenda.ClienteTamanhoMinimo);
 
@@ -31,6 +26,6 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
 
             RuleFor(a => a.Quantidade).NotEmpty().WithMessage(MensagensDeErroVenda.ClienteVazio)
             .GreaterThanOrEqualTo(1).WithMessage(MensagensDeErroVenda.QuantidadeTamanhoMinimo);
-        }       
+        }
     }
 }

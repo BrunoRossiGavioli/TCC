@@ -1,6 +1,4 @@
 using FluentValidation;
-using System;
-using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.Validacao.MensagensDeErro;
 
@@ -26,6 +24,6 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
 
             RuleFor(p => p.Quantidade).NotEmpty().WithMessage(MensagensErroProduto.QuantidadeVazia)
                 .GreaterThan(0).WithMessage(MensagensErroProduto.QuantidadeMinima);
-        }           
+        }
     }
 }

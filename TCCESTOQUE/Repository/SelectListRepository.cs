@@ -1,8 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Repository;
 
@@ -61,7 +57,7 @@ namespace TCCESTOQUE.Repository
 
         public SelectList SelectListFornecedor(string dataValue, string textValue, object selectedValueId)
         {
-            return new SelectList(_context.FornecedorModel, dataValue, textValue, selectedValueId); 
+            return new SelectList(_context.FornecedorModel, dataValue, textValue, selectedValueId);
         }
         #endregion
 

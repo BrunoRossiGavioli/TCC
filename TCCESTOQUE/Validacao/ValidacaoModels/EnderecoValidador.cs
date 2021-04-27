@@ -30,6 +30,6 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
                 .MaximumLength(80).WithMessage(MensagensDeErroEndereco.LocalidadeTamanhoMaximo)
                 .MinimumLength(3).WithMessage(MensagensDeErroEndereco.LocalidadeTamanhoMinimo);
         }
-       
+
     }
 }

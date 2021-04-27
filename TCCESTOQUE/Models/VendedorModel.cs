@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TCCESTOQUE.Models
 {
-    [Table("Vendedor")] 
+    [Table("Vendedor")]
     public class VendedorModel : PessoaModel
     {
         [Key]
@@ -29,7 +29,7 @@ namespace TCCESTOQUE.Models
 
         [ScaffoldColumn(false)]
         public bool Ativo { get; set; }
-        
+
         [ScaffoldColumn(false)]
         public bool Logado { get; set; }
     }

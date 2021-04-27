@@ -48,7 +48,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Create([Bind("VendaItensId,VendaId,ProdutoId,Quantidade")] VendaItensModel vendaItensModel, int id)
         {
             Autenticar();
-            
+
             if (ModelState.IsValid)
             {
                 _context.PostCriacao(vendaItensModel, id);
@@ -89,7 +89,7 @@ namespace TCCESTOQUE.Controllers
             if (ModelState.IsValid)
             {
                 _context.PutEdicao(id, vendaItensModel);
-                return RedirectToAction("Index","Venda");
+                return RedirectToAction("Index", "Venda");
             }
             ViewData["ProdutoId"] = _selectListRepository.SelectListProduto("ProdutoId", "Nome", vendaItensModel.ProdutoId);
             ViewData["VendaId"] = _selectListRepository.SelectListVenda("VendaId", "VendaId", vendaItensModel.VendaId);
@@ -118,7 +118,7 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             _context.PostExlusao(id);
-            return RedirectToAction("Index","Venda");
+            return RedirectToAction("Index", "Venda");
         }
     }
 }
