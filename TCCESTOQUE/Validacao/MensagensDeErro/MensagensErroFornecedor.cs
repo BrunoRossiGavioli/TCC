@@ -25,7 +25,7 @@ namespace TCCESTOQUE.Validacao.MensagensDeErro
         //
         #endregion
 
-        public static string EmailFormatoInvalido = "Email inválido, tente novamente!";
+        public static string EmailFormatoInvalido = "Email inválido!";
         public static string TelefoneTamanho = "O campo Telefone deve ter 11 caracteres!";
         public static string CnpjJaCadastrado = "O CNPJ já encontra-se cadastrado!";
 

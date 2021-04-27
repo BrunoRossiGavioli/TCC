@@ -7,11 +7,11 @@ namespace TCCESTOQUE.Controllers
 {
     public class FornecedorController : ControllerPai
     {
-        private readonly IFornecedorService _context;
+        private readonly IFornecedorService _fornecedorService;
 
         public FornecedorController(IFornecedorService context)
         {
-            _context = context;
+            _fornecedorService = context;
         }
 
         [Authorize]
@@ -27,7 +27,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult CadastroFull(FornecedorEnderecoViewModel feviewmodel)
         {
             Autenticar();
-            var res = _context.PostCadastroFull(feviewmodel);
+            var res = _fornecedorService.PostCadastroFull(feviewmodel);
             if (res)
                 return RedirectToAction("Index", "Fornecedor");
 
@@ -38,7 +38,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Index()
         {
             Autenticar();
-            return View(_context.GetIndex());
+            return View(_fornecedorService.GetIndex());
         }
 
         // GET: Fornecedor/Details/5
@@ -46,7 +46,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Details(int? id)
         {
             Autenticar();
-            return View(_context.GetDetalhes(id));
+            return View(_fornecedorService.GetDetalhes(id));
         }
 
         // GET: Fornecedor/EditFull/5
@@ -54,7 +54,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult EditFull(int? id)
         {
             Autenticar();
-            var info = _context.GetEditFull(id);
+            var info = _fornecedorService.GetEditFull(id);
 
             return View(info);
         }
@@ -68,7 +68,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult EditFull(int id, FornecedorEnderecoViewModel feviewmodel)
         {
             Autenticar();
-            var info = _context.PutEditFull(id, feviewmodel);
+            var info = _fornecedorService.PutEditFull(id, feviewmodel);
 
             if (info)
             {
@@ -83,7 +83,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Delete(int? id)
         {
             Autenticar();
-            return View(_context.GetExclusao(id));
+            return View(_fornecedorService.GetExclusao(id));
         }
 
         // POST: Fornecedor/Delete/5
@@ -93,7 +93,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult DeleteConfirmed(int id)
         {
             Autenticar();
-            _context.PostExclusao(id);
+            _fornecedorService.PostExclusao(id);
             return RedirectToAction("Index", "Fornecedor");
         }
     }

@@ -48,7 +48,8 @@ namespace TCCESTOQUE.Service
 
         public bool PutEditFull(int id, FornecedorEnderecoViewModel feviewmodel)
         {
-            var validator = new FornecedorEnderecoValidador(_fornecedorRepository).Validate(feviewmodel);
+            //var validator = new FornecedorEnderecoValidador(_fornecedorRepository).Validate(feviewmodel);
+            var validator = new FornecedorEnderecoValidador().Validate(feviewmodel);
             if (validator.IsValid)
                 return _fornecedorRepository.PutEditFull(id, feviewmodel);
 
@@ -57,7 +58,7 @@ namespace TCCESTOQUE.Service
 
         public bool PostCadastroFull(FornecedorEnderecoViewModel feviewmodel)
         {
-            var validacao = new FornecedorEnderecoValidador(_fornecedorRepository).Validate(feviewmodel);
+            var validacao = new FornecedorEnderecoValidador().Validate(feviewmodel);
 
             if (validacao.IsValid)
             {
