@@ -9,7 +9,6 @@ using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.Service;
 using TCCESTOQUE.ViewModel;
-using TCCESTOQUE.ViewModel.EditViewModels;
 
 namespace TCCESTOQUE.Repository
 {

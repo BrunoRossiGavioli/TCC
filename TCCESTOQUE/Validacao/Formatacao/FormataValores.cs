@@ -1,7 +1,6 @@
 using TCCESTOQUE.Models;
 using TCCESTOQUE.Service;
 using TCCESTOQUE.ViewModel;
-using TCCESTOQUE.ViewModel.EditViewModels;
 
 namespace TCCESTOQUE.Validacao.Formatacao
 {
@@ -14,13 +13,7 @@ namespace TCCESTOQUE.Validacao.Formatacao
             vendedor.Senha = SecurityService.Criptografar(vendedor.Senha);
             return vendedor;
         }
-        public static VendedorEditViewModel FormataValoresVendedorEdit(VendedorEditViewModel vendedor)
-        {
-            vendedor.Nome = vendedor.Nome.ToUpper().Trim();
-            vendedor.Email = vendedor.Email.Trim();
-            vendedor.Senha = SecurityService.Criptografar(vendedor.Senha);
-            return vendedor;
-        }
+       
         public static FornecedorEnderecoViewModel FormataValoresFornecedorView(FornecedorEnderecoViewModel fornecedor)
         {
             fornecedor.NomeFantasia = fornecedor.NomeFantasia != null ? fornecedor.NomeFantasia.ToUpper().Trim() : fornecedor.NomeFantasia;

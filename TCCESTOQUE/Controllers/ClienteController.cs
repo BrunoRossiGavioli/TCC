@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.ViewModel;
-using TCCESTOQUE.ViewModel.EditViewModels;
 
 namespace TCCESTOQUE.Controllers
 {
@@ -78,7 +77,7 @@ namespace TCCESTOQUE.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, ClienteEditViewModel clienteModel, int VendedorId)
+        public IActionResult Edit(int id, ClienteViewModel clienteModel, int VendedorId)
         {
             Autenticar();
             if (id != clienteModel.ClienteId)

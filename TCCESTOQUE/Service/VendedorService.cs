@@ -5,10 +5,8 @@ using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.Validacao.Formatacao;
 using TCCESTOQUE.Validacao.ValidacaoModels;
-using TCCESTOQUE.Validacao.ValidacaoModels.ValidaEdit;
 using TCCESTOQUE.ValidadorVendedor;
 using TCCESTOQUE.ViewModel;
-using TCCESTOQUE.ViewModel.EditViewModels;
 
 namespace TCCESTOQUE.Service
 {
@@ -34,7 +32,7 @@ namespace TCCESTOQUE.Service
             return _vendedorRepository.GetDetalhes(id);
         }
 
-        public VendedorEditViewModel GetEdicao(int? id)
+        public VendedorModel GetEdicao(int? id)
         {
             return _vendedorRepository.GetEdicao(id);
         }
@@ -57,14 +55,14 @@ namespace TCCESTOQUE.Service
             return false;
         }
 
-        public bool PutEdicao(int id, VendedorEditViewModel vendedorModel)
+        public bool PutEdicao(int id, VendedorModel vendedorModel)
         {
             vendedorModel.VendedorId = id;
 
-            var validacao = new VendedorEditValidador(_vendedorRepository).Validate(vendedorModel);
+            var validacao = new VendedorValidador(_vendedorRepository).Validate(vendedorModel);
             if (validacao.IsValid)
             {
-                vendedorModel = FormataValores.FormataValoresVendedorEdit(vendedorModel);
+                vendedorModel = FormataValores.FormataValoresVendedor(vendedorModel);
                 return _vendedorRepository.PutEdicao(id, vendedorModel);
             }
 

@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.ViewModel;
-using TCCESTOQUE.ViewModel.EditViewModels;
 
 namespace TCCESTOQUE.Controllers
 {
@@ -68,7 +67,7 @@ namespace TCCESTOQUE.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult Edit(int id, [Bind("VendedorId,Nome,Email,Senha,Telefone")] VendedorEditViewModel vendedorModel)
+        public IActionResult Edit(int id, [Bind("VendedorId,Nome,Email,Senha,Telefone")] VendedorModel vendedorModel)
         {
             Autenticar();
             var res = _vendedorService.PutEdicao(id, vendedorModel);

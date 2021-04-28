@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
-using TCCESTOQUE.ViewModel.EditViewModels;
 
 namespace TCCESTOQUE.Controllers
 {
@@ -77,7 +76,7 @@ namespace TCCESTOQUE.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult Edit(int id, [Bind("VendedorId,Nome,Custo,Descricao,Quantidade,ValorUnitario,FornecedorId")] ProdutoEditViewModel produtoModel)
+        public IActionResult Edit(int id, [Bind("VendedorId,Nome,Custo,Descricao,Quantidade,ValorUnitario,FornecedorId")] ProdutoModel produtoModel)
         {
             Autenticar();
             var res = _context.PutEdicao(id, produtoModel);

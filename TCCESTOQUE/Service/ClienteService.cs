@@ -1,28 +1,29 @@
-﻿using TCCESTOQUE.Interfaces.Repository;
+﻿using AutoMapper;
+using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.Validacao.Formatacao;
 using TCCESTOQUE.Validacao.ValidacaoModels;
-using TCCESTOQUE.Validacao.ValidacaoModels.ValidaEdit;
 using TCCESTOQUE.ViewModel;
-using TCCESTOQUE.ViewModel.EditViewModels;
 
 namespace TCCESTOQUE.Service
 {
     public class ClienteService : IClienteService
     {
         private readonly IClienteRepository _clienteRepository;
+        private readonly IMapper _mapper;
 
-        public ClienteService(IClienteRepository clienteRepository)
+        public ClienteService(IClienteRepository clienteRepository, IMapper mapper)
         {
             _clienteRepository = clienteRepository;
+            _mapper = mapper;
         }
         public ClienteModel GetDetalhes(int? id)
         {
             return _clienteRepository.GetDetalhes(id);
         }
 
-        public ClienteEditViewModel GetEdicao(int? id)
+        public ClienteViewModel GetEdicao(int? id)
         {
             return _clienteRepository.GetEdicao(id);
         }
@@ -57,11 +58,12 @@ namespace TCCESTOQUE.Service
             return _clienteRepository.PostExclusao(id);
         }
 
-        public object PutEdicao(int id, ClienteEditViewModel cliente, int vendedorId)
+        public object PutEdicao(int id, ClienteViewModel cliente, int vendedorId)
         {
             if (cliente.VendedorId != vendedorId)
                 return null;
-            var validacao = new ClienteEditValidador(_clienteRepository).Validate(cliente);
+           // var mapeamento = _mapper.Map<ClienteModel>(cliente);
+            var validacao = new ClienteValidador().Validate(cliente);
             if (!validacao.IsValid)
                 return null;
 

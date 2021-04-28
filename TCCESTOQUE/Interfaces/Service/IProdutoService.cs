@@ -1,5 +1,4 @@
 ﻿using TCCESTOQUE.Models;
-using TCCESTOQUE.ViewModel.EditViewModels;
 
 namespace TCCESTOQUE.Interfaces.Service
 {
@@ -13,9 +12,9 @@ namespace TCCESTOQUE.Interfaces.Service
 
         public bool PostCriacao(ProdutoModel produtoModel);
 
-        public ProdutoEditViewModel GetEdicao(int? id);
+        public ProdutoModel GetEdicao(int? id);
 
-        public bool PutEdicao(int id, ProdutoEditViewModel produtoModel);
+        public bool PutEdicao(int id, ProdutoModel produtoModel);
 
         public ProdutoModel GetExclusao(int? id);
 

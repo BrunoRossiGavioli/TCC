@@ -1,6 +1,5 @@
 ﻿using TCCESTOQUE.Models;
 using TCCESTOQUE.ViewModel;
-using TCCESTOQUE.ViewModel.EditViewModels;
 
 namespace TCCESTOQUE.Interfaces.Service
 {
@@ -12,9 +11,9 @@ namespace TCCESTOQUE.Interfaces.Service
 
         public object PostCriacao(ClienteViewModel cliente, int vendedorId);
 
-        public ClienteEditViewModel GetEdicao(int? id);
+        public ClienteViewModel GetEdicao(int? id);
 
-        public object PutEdicao(int id, ClienteEditViewModel cliente, int vendedorId);
+        public object PutEdicao(int id, ClienteViewModel cliente, int vendedorId);
 
         public ClienteModel GetExclusao(int? id);
 

@@ -82,5 +82,19 @@ namespace Estoque.Test.ValidationViewModelTests
             Assert.False(validationResult.IsValid);
             Assert.Contains(validationResult.Errors, x => x.ErrorMessage.Contains(MensagensErroFornecedor.EmailTamanhoMaximo));
         }
+        [Theory(DisplayName ="Telefone válido!")]
+        [InlineData("(11)99332-4966")]
+        [InlineData("(11)93232-4776")]
+        [InlineData("(11)94332-4886")]
+        [InlineData("(11)24322-8756")]
+        [InlineData("(11)95448-4153")]
+        [InlineData("(11)75943-3428")]
+        public async Task TelefoneValido(string telefone)
+        {
+            var instancia = _builder.With(a => a.Telefone = telefone).Build();
+            var validatioResult = await _validator.ValidateAsync(instancia);
+
+            Assert.False(validatioResult.IsValid);
+        }
     }
 }

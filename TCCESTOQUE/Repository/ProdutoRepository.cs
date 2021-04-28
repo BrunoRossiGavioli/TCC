@@ -6,7 +6,6 @@ using System.Linq;
 using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Models;
-using TCCESTOQUE.ViewModel.EditViewModels;
 
 namespace TCCESTOQUE.Repository
 {
@@ -44,9 +43,9 @@ namespace TCCESTOQUE.Repository
             return produtoModel;
         }
 
-        public ProdutoEditViewModel GetEdicao(int? id)
+        public ProdutoModel GetEdicao(int? id)
         {
-            var produtoModel = _mapper.Map<ProdutoEditViewModel>(_context.ProdutoModel.Find(id));
+            var produtoModel = _mapper.Map<ProdutoModel>(_context.ProdutoModel.Find(id));
             if (produtoModel == null)
                 return null;
 
@@ -86,12 +85,12 @@ namespace TCCESTOQUE.Repository
             return nameof(Index);
         }
 
-        public bool PutEdicao(int id, ProdutoEditViewModel produtoModel)
+        public bool PutEdicao(int id, ProdutoModel produtoModel)
         {
-            var mapeamento = _mapper.Map<ProdutoModel>(produtoModel);
+           // var mapeamento = _mapper.Map<ProdutoModel>(produtoModel);
             try
             {
-                _context.Update(mapeamento);
+                _context.Update(produtoModel);
                 _context.SaveChanges();
                 return true;
             }

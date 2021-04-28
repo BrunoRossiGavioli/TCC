@@ -3,8 +3,6 @@ using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.Validacao.Formatacao;
 using TCCESTOQUE.Validacao.ValidacaoModels;
-using TCCESTOQUE.Validacao.ValidacaoModels.ValidaEdit;
-using TCCESTOQUE.ViewModel.EditViewModels;
 
 namespace TCCESTOQUE.Service
 {
@@ -35,7 +33,7 @@ namespace TCCESTOQUE.Service
             return _produtoRepository.GetDetalhes(id);
         }
 
-        public ProdutoEditViewModel GetEdicao(int? id)
+        public ProdutoModel GetEdicao(int? id)
         {
             if (id == null)
                 return null;
@@ -69,12 +67,12 @@ namespace TCCESTOQUE.Service
             return _produtoRepository.PostExclusao(id);
         }
 
-        public bool PutEdicao(int id, ProdutoEditViewModel produtoModel)
+        public bool PutEdicao(int id, ProdutoModel produtoModel)
         {
             if (produtoModel.ProdutoId == 0)
                 produtoModel.ProdutoId = id;
 
-            var validador = new ProdutoEditValidador().Validate(produtoModel);
+            var validador = new ProdutoValidador().Validate(produtoModel);
             if (validador.IsValid)
                 return _produtoRepository.PutEdicao(id, produtoModel);
 

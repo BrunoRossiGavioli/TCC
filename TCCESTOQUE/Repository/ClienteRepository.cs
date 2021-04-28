@@ -5,7 +5,6 @@ using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.ViewModel;
-using TCCESTOQUE.ViewModel.EditViewModels;
 
 namespace TCCESTOQUE.Repository
 {
@@ -44,13 +43,13 @@ namespace TCCESTOQUE.Repository
             return true;
         }
 
-        public ClienteEditViewModel GetEdicao(int? id)
+        public ClienteViewModel GetEdicao(int? id)
         {
-            var cliente = _mapper.Map<ClienteEditViewModel>(_context.ClienteModel.Find(id));
+            var cliente = _mapper.Map<ClienteViewModel>(_context.ClienteModel.Find(id));
             return cliente;
         }
 
-        public object PutEdicao(int id, ClienteEditViewModel cliente)
+        public object PutEdicao(int id, ClienteViewModel cliente)
         {
             var cli = _mapper.Map<ClienteModel>(cliente);
             var endereco = _mapper.Map<ClienteEnderecoModel>(cliente);
