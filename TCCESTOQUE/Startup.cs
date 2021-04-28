@@ -11,6 +11,7 @@ using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Repository;
 using TCCESTOQUE.Service;
+using TCCESTOQUE.StartupOptions;
 
 namespace TCCESTOQUE
 {
@@ -34,10 +35,9 @@ namespace TCCESTOQUE
                     config.AccessDeniedPath = "/Vendedor/LoginInvalido";
                 });
 
-
             services.AddControllersWithViews();
 
-            services.AddAutoMapper(typeof(AutoMapperProfile));
+            ConfigureDI.ConfigureAutoMapper(services);
 
             services.AddDbContext<TCCESTOQUEContext>(options =>
                     options.UseMySql(Configuration.GetConnectionString("TCCESTOQUEContext")));
@@ -46,26 +46,7 @@ namespace TCCESTOQUE
                 .AddFluentValidation(c =>
                 c.RegisterValidatorsFromAssemblyContaining<Startup>());
 
-            services.AddScoped<IVendedorService, VendedorService>();
-            services.AddScoped<IVendedorRepository, VendedorRepository>();
-
-            services.AddScoped<IFornecedorService, FornecedorService>();
-            services.AddScoped<IFornecedorRepository, FornecedorRepository>();
-
-            services.AddScoped<IProdutoService, ProdutoService>();
-            services.AddScoped<IProdutoRepository, ProdutoRepository>();
-
-            services.AddScoped<IVendaRepository, VendaRepository>();
-            services.AddScoped<IVendaService, VendaService>();
-
-            services.AddScoped<IVendaItensRepository, VendaItensRepository>();
-            services.AddScoped<IVendaItensService, VendaItensService>();
-
-            services.AddScoped<IClienteRepository, ClienteRepository>();
-            services.AddScoped<IClienteService, ClienteService>();
-
-            services.AddScoped<ISelectListRepository, SelectListRepository>();
-
+            ConfigureDI.ConfigureServicesAndRepo(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

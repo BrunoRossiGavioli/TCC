@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Models;
@@ -27,7 +29,7 @@ namespace TCCESTOQUE.Repository
         public FornecedorModel GetDetalhes(int? id)
         {
             var fornecedorModel = _context.FornecedorModel
-                .FirstOrDefault(m => m.ForncedorId == id);
+                .FirstOrDefault(m => m.FornecedorId == id);
 
             if (fornecedorModel == null)
                 return null;
@@ -38,7 +40,7 @@ namespace TCCESTOQUE.Repository
         public FornecedorModel GetExclusao(int? id)
         {
             var fornecedorModel = _context.FornecedorModel
-                .FirstOrDefault(m => m.ForncedorId == id);
+                .FirstOrDefault(m => m.FornecedorId == id);
 
             if (fornecedorModel == null)
                 return null;
@@ -64,8 +66,8 @@ namespace TCCESTOQUE.Repository
             var fornecedor = _mapper.Map<FornecedorModel>(feviewmodel);
             var endereco = _mapper.Map<FornecedorEnderecoModel>(feviewmodel);
 
-            fornecedor.ForncedorId = id;
-            endereco.FornecedorId = fornecedor.ForncedorId;
+            fornecedor.FornecedorId = id;
+            endereco.FornecedorId = fornecedor.FornecedorId;
 
             try
             {
@@ -87,7 +89,7 @@ namespace TCCESTOQUE.Repository
             _context.SaveChanges();
 
             var endereco = _mapper.Map<FornecedorEnderecoModel>(feviewmodel);
-            endereco.FornecedorId = fornecedor.ForncedorId;
+            endereco.FornecedorId = fornecedor.FornecedorId;
             _context.Add(endereco);
             _context.SaveChanges();
 
@@ -96,7 +98,7 @@ namespace TCCESTOQUE.Repository
 
         public FornecedorEnderecoViewModel FeviewConvert(FornecedorModel fornecedor)
         {
-            var endereco = _context.FornecedorEnderecoModel.Where(e => e.FornecedorId == fornecedor.ForncedorId).FirstOrDefault();
+            var endereco = _context.FornecedorEnderecoModel.Where(e => e.FornecedorId == fornecedor.FornecedorId).FirstOrDefault();
             var info = _mapper.Map<FornecedorEnderecoViewModel>(fornecedor);
             info.Bairro = endereco.Bairro;
             info.Cep = endereco.Cep;
@@ -120,7 +122,7 @@ namespace TCCESTOQUE.Repository
             return _context.FornecedorModel.Where(f => f.RazaoSocial == razao).FirstOrDefault();
         }
 
-        public FornecedorModel GetByNomeFantsia(string nome)
+        public FornecedorModel GetByNomeFantasia(string nome)
         {
             return _context.FornecedorModel.Where(f => f.NomeFantasia == nome).FirstOrDefault();
         }
@@ -128,6 +130,36 @@ namespace TCCESTOQUE.Repository
         public FornecedorModel GetByEmail(string email)
         {
             return _context.FornecedorModel.Where(f => f.Email == email).FirstOrDefault();
+        }
+
+        public Task Create(FornecedorModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Update(FornecedorModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Delete(FornecedorModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> Delete(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<FornecedorModel> GetOne(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<FornecedorModel>> GetAll()
+        {
+            throw new NotImplementedException();
         }
     }
 }

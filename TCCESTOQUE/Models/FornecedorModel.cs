@@ -10,7 +10,7 @@ namespace TCCESTOQUE.Models
         [Key]
         [ScaffoldColumn(false)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ForncedorId { get; set; }
+        public int FornecedorId { get; set; }
 
         [MaxLength(50)]
         [Required(ErrorMessage = "Informe a RazãoSocial de usuario", AllowEmptyStrings = false)]

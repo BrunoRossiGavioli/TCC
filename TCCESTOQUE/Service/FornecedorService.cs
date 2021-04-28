@@ -50,7 +50,31 @@ namespace TCCESTOQUE.Service
         {
             //var validator = new FornecedorEnderecoValidador(_fornecedorRepository).Validate(feviewmodel);
             var validator = new FornecedorEnderecoValidador().Validate(feviewmodel);
-            if (validator.IsValid)
+            if (!validator.IsValid)
+                return false;
+
+            var fornecedor = _mapper.Map<FornecedorModel>(feviewmodel);
+            var endereco = _mapper.Map<FornecedorEnderecoModel>(feviewmodel);
+
+            fornecedor.FornecedorId = id;
+            endereco.FornecedorId = fornecedor.FornecedorId;
+
+            try
+            {
+                var resposta = _fornecedorRepository.Incluir(fornecedor);
+
+                
+                _fornecedorEnderecoRepository.incluir(endereco);
+                
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+
+
                 return _fornecedorRepository.PutEditFull(id, feviewmodel);
 
             return false;
@@ -58,14 +82,24 @@ namespace TCCESTOQUE.Service
 
         public bool PostCadastroFull(FornecedorEnderecoViewModel feviewmodel)
         {
+            
+            var fornecedor = _mapper.Map<FornecedorModel>(feviewmodel);
+            var endereco = _mapper.Map<FornecedorEnderecoModel>(feviewmodel);
+
+            
+            var validaBusiness = new FornecedorModelBusinessValidator()
+
             var validacao = new FornecedorEnderecoValidador().Validate(feviewmodel);
 
-            if (validacao.IsValid)
-            {
+            if (!validacao.IsValid)
+                return false;
+
+
+
                 feviewmodel = FormataValores.FormataValoresFornecedorView(feviewmodel);
                 _fornecedorRepository.PostCadastroFull(feviewmodel);
                 return true;
-            }
+            
 
             return false;
         }
