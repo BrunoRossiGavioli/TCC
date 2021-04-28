@@ -10,11 +10,15 @@ namespace TCCESTOQUE.Service
     public class FornecedorService : IFornecedorService
     {
         private readonly IFornecedorRepository _fornecedorRepository;
+        private readonly IFornecedorEnderecoRepository _fornecedorEnderecoRepo;
 
-        public FornecedorService(IFornecedorRepository fornecedorRepository)
+        public FornecedorService(IFornecedorRepository fornecedorRepository, IFornecedorEnderecoRepository fornecedorEnderecoRepo)
         {
             _fornecedorRepository = fornecedorRepository;
+            _fornecedorEnderecoRepo = fornecedorEnderecoRepo;
         }
+
+        
 
         public object GetIndex()
         {
@@ -83,18 +87,18 @@ namespace TCCESTOQUE.Service
         public bool PostCadastroFull(FornecedorEnderecoViewModel feviewmodel)
         {
             
-            var fornecedor = _mapper.Map<FornecedorModel>(feviewmodel);
-            var endereco = _mapper.Map<FornecedorEnderecoModel>(feviewmodel);
-
             
-            var validaBusiness = new FornecedorModelBusinessValidator()
 
             var validacao = new FornecedorEnderecoValidador().Validate(feviewmodel);
 
             if (!validacao.IsValid)
                 return false;
 
+            var fornecedor = _mapper.Map<FornecedorModel>(feviewmodel);
+            var endereco = _mapper.Map<FornecedorEnderecoModel>(feviewmodel);
 
+
+            var validaBusiness = new FornecedorModelBusinessValidator()
 
                 feviewmodel = FormataValores.FormataValoresFornecedorView(feviewmodel);
                 _fornecedorRepository.PostCadastroFull(feviewmodel);
