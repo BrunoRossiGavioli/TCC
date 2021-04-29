@@ -8,11 +8,11 @@ namespace TCCESTOQUE.ValidadorVendedor
 {
     public class VendedorValidador : AbstractValidator<VendedorModel>
     {
-        public VendedorValidador(IVendedorRepository vend)
+        public VendedorValidador()
         {
-            RuleFor(a => a.Cpf).Must(cpf => vend.GetByCpf(cpf) == null).WithMessage(MensagensErroVendedor.CpfjaCadastrado);
-            RuleFor(a => a.Email).Must(email => vend.GetByEmail(email) == null).WithMessage(MensagensErroVendedor.EmailJaCadastrado);
-            RuleFor(a => a.Telefone).Must(telefone => vend.GetByPhone(telefone) == null).WithMessage(MensagensErroVendedor.TelefoneJaCadastrado);
+            //RuleFor(a => a.Cpf).Must(cpf => vend.GetByCpf(cpf) == null).WithMessage(MensagensErroVendedor.CpfjaCadastrado);
+            //RuleFor(a => a.Email).Must(email => vend.GetByEmail(email) == null).WithMessage(MensagensErroVendedor.EmailJaCadastrado);
+            //RuleFor(a => a.Telefone).Must(telefone => vend.GetByPhone(telefone) == null).WithMessage(MensagensErroVendedor.TelefoneJaCadastrado);
 
             RuleFor(v => v.Nome).NotEmpty().WithMessage(MensagensErroVendedor.NomeVazio)
                 .MaximumLength(80).WithMessage(MensagensErroVendedor.NomeTamanhoMaximo)
@@ -20,12 +20,18 @@ namespace TCCESTOQUE.ValidadorVendedor
 
             RuleFor(v => v.Email).NotEmpty().WithMessage(MensagensErroVendedor.EmailVazio)
                 .EmailAddress().WithMessage(MensagensErroVendedor.EmailFormatoInvalido)
-                .MaximumLength(30).WithMessage(MensagensErroVendedor.EmailTamanhoMaximo)
-                .MinimumLength(13).WithMessage(MensagensErroVendedor.EmailTamanhoMinimo);
+                .MaximumLength(30).WithMessage(MensagensErroVendedor.EmailTamanhoMaximo);
 
-            RuleFor(v => v.Telefone).Length(11).WithMessage(MensagensErroVendedor.TelefoneTamanho);
+            When(v => !string.IsNullOrEmpty(v.Telefone), () =>
+            {
+                RuleFor(v => v.Telefone).Length(14).WithMessage(MensagensErroVendedor.TelefoneTamanho);
 
-            RuleFor(v => v.Cpf).Length(11).WithMessage(MensagensErroVendedor.CpfTamanho);
+            });
+            When(v => !string.IsNullOrEmpty(v.Cpf), () =>
+            {
+                RuleFor(v => v.Cpf).Length(14).WithMessage(MensagensErroVendedor.CpfTamanho);
+            });
+          
 
             RuleFor(v => v.Senha).NotEmpty().WithMessage(MensagensErroVendedor.SenhaVazia)
                 .MaximumLength(50).WithMessage(MensagensErroVendedor.SenhaTamanhoMaximo)

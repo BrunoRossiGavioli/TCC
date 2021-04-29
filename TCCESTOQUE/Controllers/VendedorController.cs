@@ -28,7 +28,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Details(int? id)
         {
             Autenticar();
-            return View(_vendedorService.GetDetalhes(id));
+            return View(_vendedorService.GetDetalheModel(id));
         }
 
         // GET: Vendedor/Create

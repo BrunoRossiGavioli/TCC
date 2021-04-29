@@ -7,7 +7,7 @@ namespace TCCESTOQUE.Models
         [Key]
         public int EnderecoId { get; set; }
 
-        [StringLength(8)]
+        [StringLength(9)]
         [Required(ErrorMessage = "Informe o Cep", AllowEmptyStrings = false)]
         public string Cep { get; set; }
 

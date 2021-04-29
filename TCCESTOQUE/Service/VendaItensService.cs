@@ -1,15 +1,20 @@
-﻿using TCCESTOQUE.Interfaces.Repository;
+﻿using AutoMapper;
+using FluentValidation;
+using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.Validacao.ValidacaoModels;
 
 namespace TCCESTOQUE.Service
 {
     public class VendaItensService : IVendaItensService
     {
         private readonly IVendaItensRepository _vendaItensRepository;
-        public VendaItensService(IVendaItensRepository vendaItensRepository)
+        private readonly IMapper _mapper;
+        public VendaItensService(IVendaItensRepository vendaItensRepository, IMapper mapper)
         {
             _vendaItensRepository = vendaItensRepository;
+            _mapper = mapper;
         }
 
         public VendaItensModel GetDetalhes(int? id)
@@ -31,7 +36,8 @@ namespace TCCESTOQUE.Service
         }
 
         public object PutEdicao(int? id, VendaItensModel vendaItens)
-        {
+        {         
+
             return _vendaItensRepository.PutEdicao(id, vendaItens);
         }
 

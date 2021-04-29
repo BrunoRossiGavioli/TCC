@@ -26,7 +26,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Custo" class="control-label"></label>
-                <input asp-for="Custo" class="form-control" />
+                <input asp-for="Custo" data-mask="000.000.000.00"  class="form-control" />
                 <span asp-validation-for="Custo" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -36,7 +36,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="ValorUnitario" class="control-label"></label>
-                <input asp-for="ValorUnitario" class="form-control" />
+                <input asp-for="ValorUnitario" data-mask="000.000.000.00" class="form-control" />
                 <span asp-validation-for="ValorUnitario" class="text-danger"></span>
             </div>
 
@@ -55,7 +55,7 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
+<script src="~/lib/jquery-mask-plugin/jquery.mask.js" type="text/javascript" asp-append-version="true"></script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -24,7 +24,7 @@ namespace TCCESTOQUE.Service
             return _vendedorRepository.GetCriacao();
         }
 
-        public VendedorModel GetDetalhes(int? id)
+        public VendedorModel GetDetalheModel(int? id)
         {
             if (id == null)
                 return null;
@@ -44,7 +44,7 @@ namespace TCCESTOQUE.Service
 
         public bool PostCriacao(VendedorModel vendedorModel)
         {
-            var validacao = new VendedorValidador(_vendedorRepository).Validate(vendedorModel);
+            var validacao = new VendedorValidador().Validate(vendedorModel);
 
             if (validacao.IsValid)
             {
@@ -59,7 +59,7 @@ namespace TCCESTOQUE.Service
         {
             vendedorModel.VendedorId = id;
 
-            var validacao = new VendedorValidador(_vendedorRepository).Validate(vendedorModel);
+            var validacao = new VendedorValidador().Validate(vendedorModel);
             if (validacao.IsValid)
             {
                 vendedorModel = FormataValores.FormataValoresVendedor(vendedorModel);
@@ -90,6 +90,7 @@ namespace TCCESTOQUE.Service
         public object GetSenha(string senha)
         {
             return _vendedorRepository.GetSenha(senha);
-        }
+        }       
+
     }
 }

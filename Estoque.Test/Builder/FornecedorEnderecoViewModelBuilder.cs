@@ -20,7 +20,6 @@ namespace Estoque.Test.Builder
                 .With(x => x.Complemento = "xxx complemento")
                 .With(x => x.Localidade = "Cidade xxx")
                 .With(x => x.NomeFantasia = "Nome fantasia");
-
         }
     }
 }

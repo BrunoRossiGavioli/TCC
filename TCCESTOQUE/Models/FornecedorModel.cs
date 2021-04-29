@@ -19,7 +19,7 @@ namespace TCCESTOQUE.Models
         [MaxLength(50)]
         public string NomeFantasia { get; set; }
 
-        [MaxLength(14)]
+        [MaxLength(18)]
         [Required(ErrorMessage = "Informe a RazãoSocial de usuario", AllowEmptyStrings = false)]
         public string Cnpj { get; set; }
 

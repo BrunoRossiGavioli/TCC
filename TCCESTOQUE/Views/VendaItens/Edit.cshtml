@@ -36,6 +36,7 @@
 <div>
     <a asp-controller="Venda" asp-action="Details" asp-route-id="@Model.VendaId">Back to List</a>
 </div>
+<script src="~/lib/jquery-mask-plugin/jquery.mask.js" type="text/javascript" asp-append-version="true"></script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

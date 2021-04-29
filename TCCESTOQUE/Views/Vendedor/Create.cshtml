@@ -39,7 +39,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="Cpf" class="control-label"></label>
-                        <input asp-for="Cpf" placeholder="Cpf" class="form-control" />
+                        <input asp-for="Cpf" data-mask="000.000.000-00" placeholder="Cpf" class="form-control" />
                         <span asp-validation-for="Cpf" class="text-danger"></span>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="Telefone" class="control-label"></label>
-                        <input asp-for="Telefone" placeholder="Telefone" class="form-control" />
+                        <input asp-for="Telefone" data-mask="(00)00000-0000" placeholder="Telefone" class="form-control" />
                         <span asp-validation-for="Telefone" class="text-danger"></span>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
 <div>
     <a asp-controller="Home" asp-action="Index">Voltar ao menu</a>
 </div>
-
+<script src="~/lib/jquery-mask-plugin/jquery.mask.js" type="text/javascript" asp-append-version="true"></script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

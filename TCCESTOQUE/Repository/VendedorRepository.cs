@@ -46,13 +46,13 @@ namespace TCCESTOQUE.Repository
             return vendedorModel;
         }
 
-        public VendedorEditViewModel GetEdicao(int? id)
+        public VendedorModel GetEdicao(int? id)
         {
-            var vendedor = _mapper.Map<VendedorEditViewModel>(_context.VendedorModel.Find(id));
+            var vendedor = _context.VendedorModel.Find(id);
             return vendedor;
         }
 
-        public bool PutEdicao(int id, VendedorEditViewModel vendedorModel)
+        public bool PutEdicao(int id, VendedorModel vendedorModel)
         {
             vendedorModel.VendedorId = id;
             var mapeamento = _mapper.Map<VendedorModel>(vendedorModel);

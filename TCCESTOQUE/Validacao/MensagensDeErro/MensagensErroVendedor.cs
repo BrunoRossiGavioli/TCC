@@ -20,7 +20,7 @@ namespace TCCESTOQUE.Validacao.MensagensDeErro
         public static string DataNascimentoTamanhoMaximo = "A Data de Nascimento não pode ser futura!";
         #endregion
 
-        public static string EmailFormatoInvalido = "Email inválido, tente novamente!";
+        public static string EmailFormatoInvalido = "Email inválido!";
         public static string TelefoneTamanho = "O Telefone deve ter 11 caracteres!";
         public static string CpfTamanho = "O CPF deve ter 11 caracteres!";
         public static string CpfjaCadastrado = "O CPF ja encontra-se cadastrado";
