@@ -2,41 +2,32 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Models;
 
 namespace TCCESTOQUE.Repository
 {
-    public class FornecedorEnderecoRepository : IFornecedorEnderecoRepository
+    public class FornecedorEnderecoRepository : BaseRepository<FornecedorEnderecoModel>, IFornecedorEnderecoRepository
     {
-        public Task Create(FornecedorEnderecoModel model)
+        public FornecedorEnderecoRepository(TCCESTOQUEContext context) : base(context)
         {
-            throw new NotImplementedException();
+
         }
 
-        public Task Delete(FornecedorEnderecoModel model)
+        public async Task<bool> Delete(int id)
         {
-            throw new NotImplementedException();
+            var obj = await this.GetOne(id);
+            if (obj == null)
+                return false;
+
+            var resposta =  base.Delete(obj);
+            return true;
         }
 
-        public Task<bool> Delete(Guid id)
+        public async Task<FornecedorEnderecoModel> GetOne(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<FornecedorEnderecoModel>> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<FornecedorEnderecoModel> GetOne(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task Update(FornecedorEnderecoModel model)
-        {
-            throw new NotImplementedException();
+            return _context.FornecedorEnderecoModel.Where(a => a.FornecedorId == id).FirstOrDefault();
         }
     }
 }

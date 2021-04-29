@@ -11,9 +11,11 @@ namespace TCCESTOQUE.Interfaces.Repository
         Task Update(T model);
         Task Delete(T model);
 
-        Task<bool> Delete(Guid id);
+        Task<bool> Delete(int id);
 
-        Task<T> GetOne(Guid id);
+        Task<T> GetOne(int id);
         Task<IEnumerable<T>> GetAll();
+
+        Task SaveChanges();
     }
 }

@@ -10,7 +10,5 @@ namespace TCCESTOQUE.Interfaces.Repository
         public FornecedorModel GetByNomeFantasia(string nome);
         public FornecedorModel GetByEmail(string email);
 
-
-
     }
 }

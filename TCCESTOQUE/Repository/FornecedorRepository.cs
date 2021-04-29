@@ -10,14 +10,13 @@ using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Repository
 {
-    public class FornecedorRepository : IFornecedorRepository
+    public class FornecedorRepository : BaseRepository<FornecedorModel>, IFornecedorRepository
     {
-        private readonly TCCESTOQUEContext _context;
+        
         private readonly IMapper _mapper;
 
-        public FornecedorRepository(TCCESTOQUEContext context, IMapper mapper)
+        public FornecedorRepository(TCCESTOQUEContext context, IMapper mapper) : base(context)
         {
-            _context = context;
             _mapper = mapper;
         }
 
@@ -25,28 +24,7 @@ namespace TCCESTOQUE.Repository
         {
             return _context.FornecedorModel.ToList();
         }
-
-        public FornecedorModel GetDetalhes(int? id)
-        {
-            var fornecedorModel = _context.FornecedorModel
-                .FirstOrDefault(m => m.FornecedorId == id);
-
-            if (fornecedorModel == null)
-                return null;
-
-            return fornecedorModel;
-        }
-
-        public FornecedorModel GetExclusao(int? id)
-        {
-            var fornecedorModel = _context.FornecedorModel
-                .FirstOrDefault(m => m.FornecedorId == id);
-
-            if (fornecedorModel == null)
-                return null;
-
-            return fornecedorModel;
-        }
+       
 
         public object PostExclusao(int id)
         {
@@ -132,34 +110,14 @@ namespace TCCESTOQUE.Repository
             return _context.FornecedorModel.Where(f => f.Email == email).FirstOrDefault();
         }
 
-        public Task Create(FornecedorModel model)
+        public Task<bool> Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task Update(FornecedorModel model)
+        public async Task<FornecedorModel> GetOne(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task Delete(FornecedorModel model)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> Delete(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<FornecedorModel> GetOne(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<FornecedorModel>> GetAll()
-        {
-            throw new NotImplementedException();
+            return _context.FornecedorModel.Where(f => f.FornecedorId == id).FirstOrDefault();
         }
     }
 }
