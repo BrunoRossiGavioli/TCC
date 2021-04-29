@@ -26,7 +26,7 @@ namespace TCCESTOQUE.Service
             return _vendaRepository.GetDetalhes(id);
         }
 
-        public object GetCricao(int id)
+        public object GetCriacao(int id)
         {
             return _vendaRepository.GetCricao(id);
         }

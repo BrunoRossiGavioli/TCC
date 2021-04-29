@@ -39,7 +39,7 @@ namespace TCCESTOQUE.Controllers
         public async Task<IActionResult> Edit(int id, [Bind("FornecedorId,Id,Cep,Logradouro,Complemento,Numero,Bairro,Localidade,Uf")] FornecedorEnderecoModel fornecedorEnderecoModel)
         {
             Autenticar();
-            if (id != fornecedorEnderecoModel.EnderecoId)
+            if (id != fornecedorEnderecoModel.Id)
                 return NotFound();
 
             if (ModelState.IsValid)
@@ -77,7 +77,7 @@ namespace TCCESTOQUE.Controllers
 
             var fornecedorEnderecoModel = await _context2.FornecedorEnderecoModel
                 .Include(f => f.Fornecedor)
-                .FirstOrDefaultAsync(m => m.EnderecoId == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (fornecedorEnderecoModel == null)
             {
                 return NotFound();

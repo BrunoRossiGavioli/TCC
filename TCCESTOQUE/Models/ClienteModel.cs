@@ -4,11 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace TCCESTOQUE.Models
 {
     [Table("Cliente")]
-    public class ClienteModel : PessoaModel
+    public class ClienteModel : BaseModel
     {
-        [Key]
-        public int ClienteId { get; set; }
-
         [MaxLength(50)]
         [Required(ErrorMessage = "Informe o Nome", AllowEmptyStrings = false)]
         public string Nome { get; set; }
@@ -23,6 +20,11 @@ namespace TCCESTOQUE.Models
         [ForeignKey("Vendedor")]
         public int VendedorId { get; set; }
         public VendedorModel Vendedor { get; set; }
+
+        [MaxLength(80)]
+        [DataType(System.ComponentModel.DataAnnotations.DataType.EmailAddress)]
+        public string Email { get; set; }
+        public string Telefone { get; set; }
 
     }
 }

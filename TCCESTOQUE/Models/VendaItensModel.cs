@@ -3,11 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TCCESTOQUE.Models
 {
-    public class VendaItensModel
+    public class VendaItensModel : BaseModel
     {
-        [Key]
-        public int VendaItensId { get; set; }
-
+        
         [ForeignKey("Venda")]
         public int VendaId { get; set; }
         public VendaModel Venda { get; set; }

@@ -5,9 +5,8 @@ using TCCESTOQUE.ViewModel.EditViewModels;
 
 namespace TCCESTOQUE.Interfaces.Service
 {
-    public interface IVendedorService
+    public interface IVendedorService: IBaseService<VendedorModel>
     {
-        public VendedorModel GetDetalhes(int? id);
         public object GetCriacao();
         public bool PostCriacao(VendedorModel vendedorModel);
         public VendedorEditViewModel GetEdicao(int? id);

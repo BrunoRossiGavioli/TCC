@@ -5,7 +5,13 @@ using System.Threading.Tasks;
 
 namespace TCCESTOQUE.Interfaces.Service
 {
-    interface IBaseService
+    public interface IBaseService<T> where T : class
     {
+        public object GetIndex();
+
+        public T GetDetalhes(int? id);
+
+        public object PostExclusao(int id);
+
     }
 }

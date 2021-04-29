@@ -5,11 +5,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TCCESTOQUE.Models
 {
-    public class VendaModel
+    public class VendaModel : BaseModel
     {
-        [Key]
-        public int VendaId { get; set; }
-
+        
         [Column(TypeName = "decimal(12,2)")]
         public decimal Valor { get; set; }
 

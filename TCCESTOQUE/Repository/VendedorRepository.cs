@@ -24,11 +24,6 @@ namespace TCCESTOQUE.Repository
             _mapper = mapper;
         }
 
-        public object GetCriacao()
-        {
-            return _context.VendedorModel.ToList();
-        }
-
         public bool PostCriacao(VendedorModel vendedorModel)
         {
             _context.Add(vendedorModel);

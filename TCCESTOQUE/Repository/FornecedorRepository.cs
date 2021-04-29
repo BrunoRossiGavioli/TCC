@@ -44,8 +44,8 @@ namespace TCCESTOQUE.Repository
             var fornecedor = _mapper.Map<FornecedorModel>(feviewmodel);
             var endereco = _mapper.Map<FornecedorEnderecoModel>(feviewmodel);
 
-            fornecedor.FornecedorId = id;
-            endereco.FornecedorId = fornecedor.FornecedorId;
+            fornecedor.Id = id;
+            endereco.FornecedorId = fornecedor.Id;
 
             try
             {
@@ -67,7 +67,7 @@ namespace TCCESTOQUE.Repository
             _context.SaveChanges();
 
             var endereco = _mapper.Map<FornecedorEnderecoModel>(feviewmodel);
-            endereco.FornecedorId = fornecedor.FornecedorId;
+            endereco.FornecedorId = fornecedor.Id;
             _context.Add(endereco);
             _context.SaveChanges();
 
@@ -76,7 +76,7 @@ namespace TCCESTOQUE.Repository
 
         public FornecedorEnderecoViewModel FeviewConvert(FornecedorModel fornecedor)
         {
-            var endereco = _context.FornecedorEnderecoModel.Where(e => e.FornecedorId == fornecedor.FornecedorId).FirstOrDefault();
+            var endereco = _context.FornecedorEnderecoModel.Where(e => e.FornecedorId == fornecedor.Id).FirstOrDefault();
             var info = _mapper.Map<FornecedorEnderecoViewModel>(fornecedor);
             info.Bairro = endereco.Bairro;
             info.Cep = endereco.Cep;
@@ -85,7 +85,7 @@ namespace TCCESTOQUE.Repository
             info.Logradouro = endereco.Logradouro;
             info.Numero = endereco.Numero;
             info.Uf = endereco.Uf;
-            info.EnderecoId = endereco.EnderecoId;
+            info.EnderecoId = endereco.Id;
 
             return info;
         }
@@ -117,7 +117,7 @@ namespace TCCESTOQUE.Repository
 
         public async Task<FornecedorModel> GetOne(int id)
         {
-            return _context.FornecedorModel.Where(f => f.FornecedorId == id).FirstOrDefault();
+            return _context.FornecedorModel.Where(f => f.Id == id).FirstOrDefault();
         }
     }
 }

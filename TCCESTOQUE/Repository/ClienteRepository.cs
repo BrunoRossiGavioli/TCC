@@ -27,21 +27,30 @@ namespace TCCESTOQUE.Repository
 
         public ClienteModel GetDetalhes(int? id)
         {
-            return _context.ClienteModel.FirstOrDefault(m => m.ClienteId == id);
+            return _context.ClienteModel.FirstOrDefault(m => m.Id == id);
         }
 
         public object PostCriacao(ClienteViewModel cliViewModel)
         {
-            var cliente = _mapper.Map<ClienteModel>(cliViewModel);
-            _context.Add(cliente);
-            _context.SaveChanges();
+            try
+            {
+                var cliente = _mapper.Map<ClienteModel>(cliViewModel);
+                _context.Add(cliente);
+                _context.SaveChanges();
 
-            var endereco = _mapper.Map<ClienteEnderecoModel>(cliViewModel);
-            endereco.ClienteId = cliente.ClienteId;
-            _context.Add(endereco);
-            _context.SaveChanges();
+                var endereco = _mapper.Map<ClienteEnderecoModel>(cliViewModel);
+                endereco.ClienteId = cliente.Id;
+                _context.Add(endereco);
+                _context.SaveChanges();
 
-            return true;
+                return true;
+            }
+            catch (Exception)
+            {
+                // gravar log
+                return false;
+            }
+            
         }
 
         public ClienteEditViewModel GetEdicao(int? id)
@@ -55,8 +64,8 @@ namespace TCCESTOQUE.Repository
             var cli = _mapper.Map<ClienteModel>(cliente);
             var endereco = _mapper.Map<ClienteEnderecoModel>(cliente);
 
-            cli.ClienteId = id;
-            endereco.EnderecoId = cli.ClienteId;
+            cli.Id = id;
+            endereco.ClienteId = cli.Id;
 
             try
             {
@@ -74,7 +83,7 @@ namespace TCCESTOQUE.Repository
 
         public ClienteModel GetExclusao(int? id)
         {
-            return _context.ClienteModel.FirstOrDefault(m => m.ClienteId == id);
+            return _context.ClienteModel.FirstOrDefault(m => m.Id == id);
         }
 
         public object PostExclusao(int id)
@@ -94,7 +103,7 @@ namespace TCCESTOQUE.Repository
 
         public ClienteViewModel ConvertCliViewModel(ClienteEnderecoModel cliEndereco)
         {
-            var cliente = _context.ClienteModel.Where(e => e.Endereco.EnderecoId == cliEndereco.EnderecoId).FirstOrDefault();
+            var cliente = _context.ClienteModel.Where(e => e.Endereco.Id == cliEndereco.Id).FirstOrDefault();
             var info = _mapper.Map<ClienteViewModel>(cliEndereco);
             info.Nome = cliente.Nome;
             info.Cpf = cliente.Cpf;

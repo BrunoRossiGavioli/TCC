@@ -40,7 +40,7 @@ namespace TCCESTOQUE.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("EnderecoId,Cep,Logradouro,Complemento,Numero,Bairro,Localidade,Uf")] ClienteEnderecoModel clienteEnderecoModel)
         {
-            if (id != clienteEnderecoModel.EnderecoId)
+            if (id != clienteEnderecoModel.Id)
             {
                 return NotFound();
             }
@@ -54,7 +54,7 @@ namespace TCCESTOQUE.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ClienteEnderecoModelExists(clienteEnderecoModel.EnderecoId))
+                    if (!ClienteEnderecoModelExists(clienteEnderecoModel.Id))
                     {
                         return NotFound();
                     }
@@ -77,7 +77,7 @@ namespace TCCESTOQUE.Controllers
             }
 
             var clienteEnderecoModel = await _context.ClienteEnderecoModel
-                .FirstOrDefaultAsync(m => m.EnderecoId == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (clienteEnderecoModel == null)
             {
                 return NotFound();
@@ -99,7 +99,7 @@ namespace TCCESTOQUE.Controllers
 
         private bool ClienteEnderecoModelExists(int id)
         {
-            return _context.ClienteEnderecoModel.Any(e => e.EnderecoId == id);
+            return _context.ClienteEnderecoModel.Any(e => e.Id == id);
         }
     }
 }

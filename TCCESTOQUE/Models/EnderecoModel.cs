@@ -2,11 +2,8 @@
 
 namespace TCCESTOQUE.Models
 {
-    public class EnderecoModel
+    public class EnderecoModel :BaseModel
     {
-        [Key]
-        public int EnderecoId { get; set; }
-
         [StringLength(8)]
         [Required(ErrorMessage = "Informe o Cep", AllowEmptyStrings = false)]
         public string Cep { get; set; }

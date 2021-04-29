@@ -5,11 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace TCCESTOQUE.Models
 {
     [Table("Produto")]
-    public class ProdutoModel
+    public class ProdutoModel :BaseModel
     {
-        [Key]
-        public int ProdutoId { get; set; }
-
         [MaxLength(50)]
         public string Nome { get; set; }
 

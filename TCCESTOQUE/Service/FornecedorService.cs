@@ -98,7 +98,7 @@ namespace TCCESTOQUE.Service
             var endereco = _mapper.Map<FornecedorEnderecoModel>(feviewmodel);
 
 
-            var validaBusiness = new FornecedorModelBusinessValidator()
+            var validaBusiness = new FornecedorModelBusinessValidator();
 
                 feviewmodel = FormataValores.FormataValoresFornecedorView(feviewmodel);
                 _fornecedorRepository.PostCadastroFull(feviewmodel);

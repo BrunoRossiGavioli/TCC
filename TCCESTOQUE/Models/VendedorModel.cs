@@ -5,13 +5,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace TCCESTOQUE.Models
 {
     [Table("Vendedor")]
-    public class VendedorModel : PessoaModel
+    public class VendedorModel : BaseModel
     {
-        [Key]
-        [ScaffoldColumn(false)]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int VendedorId { get; set; }
-
+        
         [MaxLength(50)]
         [Required(ErrorMessage = "Informe o nome de usuario", AllowEmptyStrings = false)]
         public string Nome { get; set; }
@@ -32,5 +28,10 @@ namespace TCCESTOQUE.Models
 
         [ScaffoldColumn(false)]
         public bool Logado { get; set; }
+        
+        [MaxLength(80)]
+        [DataType(System.ComponentModel.DataAnnotations.DataType.EmailAddress)]
+        public string Email { get; set; }
+        public string Telefone { get; set; }
     }
 }
