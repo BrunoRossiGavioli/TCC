@@ -10,11 +10,11 @@ namespace TCCESTOQUE.Interfaces.Repository
 
         public object GetCriacao();
 
-        public bool PostCriacao(ProdutoModel produtoModel);
+        public void PostCriacao(ProdutoModel produtoModel);
 
         public ProdutoModel GetEdicao(int? id);
 
-        public bool PutEdicao(int id, ProdutoModel produtoModel);
+        public void PutEdicao(int id, ProdutoModel produtoModel);
 
         public ProdutoModel GetExclusao(int? id);
 

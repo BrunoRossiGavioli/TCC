@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace TCCESTOQUE.Models
 {
     [Table("Vendedor")] 
-    public class VendedorModel : PessoaModel
+    public class VendedorModel
     {
         [Key]
         [ScaffoldColumn(false)]
@@ -27,6 +27,13 @@ namespace TCCESTOQUE.Models
         [MaxLength(11)]
         [Required(ErrorMessage = "Informe o cpf", AllowEmptyStrings = false)]
         public string Cpf { get; set; }
+
+        [MaxLength(80)]
+        [Required(ErrorMessage = "Informe o Email!")]
+        [DataType(System.ComponentModel.DataAnnotations.DataType.EmailAddress)]
+        public string Email { get; set; }
+
+        public string Telefone { get; set; }
 
         [ScaffoldColumn(false)]
         public bool Ativo { get; set; }

@@ -19,19 +19,18 @@ namespace TCCESTOQUE.Repository
             _context = context;
         }
 
-        public object GetCriacao()
+        public ICollection<VendedorModel> GetCriacao()
         {
             return _context.VendedorModel.ToList();
         }
 
-        public bool PostCriacao(VendedorModel vendedorModel)
+        public void PostCriacao(VendedorModel vendedorModel)
         {
             _context.Add(vendedorModel);
             _context.SaveChanges();
-            return true;
         }
 
-        public VendedorModel GetDetalhes(int? id)
+        public VendedorModel GetOne(int? id)
         {
             var vendedorModel = _context.VendedorModel
                 .FirstOrDefault(m => m.VendedorId == id);
@@ -47,29 +46,10 @@ namespace TCCESTOQUE.Repository
             return _context.VendedorModel.Find(id);
         }
 
-        public bool PutEdicao(int id, VendedorModel vendedorModel)
+        public void PutEdicao(VendedorModel vendedorModel)
         {
-            try
-            {
-                _context.Update(vendedorModel);
-                _context.SaveChanges();
-                return true;
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                return false;
-            }
-        }
-
-        public VendedorModel GetExclusao(int? id)
-        {
-            var vendedor = _context.VendedorModel
-                .FirstOrDefault(m => m.VendedorId == id);
-
-            if (vendedor == null)
-                return null;
-
-            return vendedor;
+            _context.VendedorModel.Update(vendedorModel);
+            _context.SaveChanges();
         }
 
         public object PostExclusao(int id)
@@ -92,15 +72,11 @@ namespace TCCESTOQUE.Repository
             if (vendedor.Senha != SecurityService.Criptografar(vendedorModel.Senha))
                 return null;
 
-
-            var claim1 = new Claim(ClaimTypes.Name, vendedor.Nome);
-            var claim2 = new Claim(ClaimTypes.Email, vendedor.Email);
-            var claim3 = new Claim(ClaimTypes.SerialNumber, Convert.ToString(vendedor.VendedorId));
             IList<Claim> Claims = new List<Claim>()
             {
-                claim1,
-                claim2,
-                claim3
+                new Claim(ClaimTypes.Name, vendedor.Nome),
+                new Claim(ClaimTypes.Email, vendedor.Email),
+                new Claim(ClaimTypes.SerialNumber, Convert.ToString(vendedor.VendedorId))
             };
 
             var minhaIdentity = new ClaimsIdentity(Claims, "Vendedor");

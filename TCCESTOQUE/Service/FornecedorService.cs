@@ -1,8 +1,11 @@
-﻿using System.Linq;
+﻿using AutoMapper;
+using FluentValidation.Results;
+using System.Linq;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.Validacao.Formatacao;
+using TCCESTOQUE.Validacao.ValidacaoBusiness;
 using TCCESTOQUE.Validacao.ValidacaoModels;
 using TCCESTOQUE.ViewModel;
 
@@ -11,10 +14,14 @@ namespace TCCESTOQUE.Service
     public class FornecedorService : IFornecedorService
     {
         private readonly IFornecedorRepository _fornecedorRepository;
+        private readonly IFornecedorEnderecoRepository _fornecedorEnderecoRepository;
+        private readonly IMapper _mapper;
 
-        public FornecedorService(IFornecedorRepository fornecedorRepository)
+        public FornecedorService(IFornecedorRepository fornecedorRepository,IFornecedorEnderecoRepository fornecedorEnderecoRepository ,IMapper mapper)
         {
             _fornecedorRepository = fornecedorRepository;
+            _fornecedorEnderecoRepository = fornecedorEnderecoRepository;
+            _mapper = mapper;
         }
 
         public object GetIndex()
@@ -44,30 +51,86 @@ namespace TCCESTOQUE.Service
 
         public FornecedorEnderecoViewModel GetEditFull(int? id)
         {
-            return _fornecedorRepository.GetEditFull(id);
+            return FeviewConvert(_fornecedorRepository.GetEditFull(id));
         }
 
-        public bool PutEditFull(int id, FornecedorEnderecoViewModel feviewmodel)
+        public ValidationResult PutEditFull(int id, FornecedorEnderecoViewModel feviewmodel)
         {
-            var validator = new FornecedorEnderecoValidador(_fornecedorRepository).Validate(feviewmodel);
-            if (validator.IsValid)
-                return _fornecedorRepository.PutEditFull(id, feviewmodel);
-
-            return false;
-        }
-
-        public bool PostCadastroFull(FornecedorEnderecoViewModel feviewmodel)
-        {
-            var validacao = new FornecedorEnderecoValidador(_fornecedorRepository).Validate(feviewmodel);
-
-            if (validacao.IsValid)
+            var validador = ValidarFornecedorEnderecoViewModel(feviewmodel);
+            if (validador.IsValid)
             {
                 feviewmodel = FormataValores.FormataValoresFornecedorView(feviewmodel);
-                _fornecedorRepository.PostCadastroFull(feviewmodel);
-                return true;
-            }
+                var fornecedor = ConvertFornecedor(id, feviewmodel);
+                _fornecedorRepository.PutEdit(fornecedor);
 
-            return false;
+                var endereco = _mapper.Map<FornecedorEnderecoModel>(feviewmodel);
+                endereco.FornecedorId = fornecedor.FornecedorId;
+                _fornecedorEnderecoRepository.PutEdit(endereco);
+            }
+            return validador;
+        }
+
+        public ValidationResult PostCadastroFull(FornecedorEnderecoViewModel feviewmodel)
+        {
+            var validador = ValidarFornecedorEnderecoViewModel(feviewmodel);
+
+            if (validador.IsValid)
+            {
+                feviewmodel = FormataValores.FormataValoresFornecedorView(feviewmodel);
+                var fornecedor = _mapper.Map<FornecedorModel>(feviewmodel);
+                _fornecedorRepository.PostCadastro(fornecedor);
+                
+                var endereco = _mapper.Map<FornecedorEnderecoModel>(feviewmodel);
+                endereco.FornecedorId = fornecedor.FornecedorId;
+                _fornecedorEnderecoRepository.PostCadastro(endereco);
+            }
+            return validador;
+        }
+
+        public ValidationResult ValidarFornecedorEnderecoViewModel(FornecedorEnderecoViewModel feViewModel)
+        {
+            var validacao = new FornecedorEnderecoValidador().Validate(feViewModel);
+            if (!validacao.IsValid)
+                return validacao;
+
+            var validacaoBusiness = new FornecedorEnderecoBusinessValidador(_fornecedorRepository).Validate(feViewModel);
+            if (!validacaoBusiness.IsValid)
+                return validacaoBusiness;
+
+            return validacao;
+        }
+
+        public FornecedorEnderecoViewModel FeviewConvert(FornecedorModel fornecedor)
+        {
+            if (fornecedor == null)
+                return null;
+
+            var endereco = _fornecedorEnderecoRepository.FindWhereFornecedorId(fornecedor);
+            var info = _mapper.Map<FornecedorEnderecoViewModel>(fornecedor);
+            info.Bairro = endereco.Bairro;
+            info.Cep = endereco.Cep;
+            info.Complemento = endereco.Complemento;
+            info.Localidade = endereco.Localidade;
+            info.Logradouro = endereco.Logradouro;
+            info.Numero = endereco.Numero;
+            info.Uf = endereco.Uf;
+            info.EnderecoId = endereco.EnderecoId;
+
+            return info;
+        }
+
+        public FornecedorModel ConvertFornecedor(int id, FornecedorEnderecoViewModel feViewModel)
+        {
+            var fornecedor = _mapper.Map<FornecedorModel>(feViewModel);
+            var info = _fornecedorRepository.GetByEmail(feViewModel.Email);
+            info.Cnpj = fornecedor.Cnpj;
+            info.Email = fornecedor.Email;
+            info.FornecedorId = id;
+            info.NomeFantasia = fornecedor.NomeFantasia;
+            info.RazaoSocial = fornecedor.RazaoSocial;
+            info.Telefone = fornecedor.Telefone;
+            info.VendedorId = fornecedor.VendedorId;
+            return info;
         }
     }
 }

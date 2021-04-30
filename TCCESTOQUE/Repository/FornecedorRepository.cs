@@ -27,7 +27,7 @@ namespace TCCESTOQUE.Repository
         public FornecedorModel GetDetalhes(int? id)
         {
             var fornecedorModel = _context.FornecedorModel
-                .FirstOrDefault(m => m.ForncedorId == id);
+                .FirstOrDefault(m => m.FornecedorId == id);
 
             if (fornecedorModel == null)
                 return null;
@@ -38,7 +38,7 @@ namespace TCCESTOQUE.Repository
         public FornecedorModel GetExclusao(int? id)
         {
             var fornecedorModel = _context.FornecedorModel
-                .FirstOrDefault(m => m.ForncedorId == id);
+                .FirstOrDefault(m => m.FornecedorId == id);
 
             if (fornecedorModel == null)
                 return null;
@@ -54,60 +54,21 @@ namespace TCCESTOQUE.Repository
             return nameof(Index);
         }
 
-        public FornecedorEnderecoViewModel GetEditFull(int? id)
+        public FornecedorModel GetEditFull(int? id)
         {
-            return FeviewConvert(_context.FornecedorModel.Find(id));
+            return _context.FornecedorModel.Find(id);
         }
 
-        public bool PutEditFull(int id, FornecedorEnderecoViewModel feviewmodel)
+        public void PutEdit(FornecedorModel fornecedorModel)
         {
-            var fornecedor = _mapper.Map<FornecedorModel>(feviewmodel);
-            var endereco = _mapper.Map<FornecedorEnderecoModel>(feviewmodel);
-
-            fornecedor.ForncedorId = id;
-            endereco.FornecedorId = fornecedor.ForncedorId;
-
-            try
-            {
-                _context.Update(fornecedor);
-                _context.Update(endereco);
-                _context.SaveChanges();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            _context.Update(fornecedorModel);
+            _context.SaveChanges();
         }
 
-        public bool PostCadastroFull(FornecedorEnderecoViewModel feviewmodel)
+        public void PostCadastro(FornecedorModel fornecedor)
         {
-            var fornecedor = _mapper.Map<FornecedorModel>(feviewmodel);
             _context.Add(fornecedor);
             _context.SaveChanges();
-
-            var endereco = _mapper.Map<FornecedorEnderecoModel>(feviewmodel);
-            endereco.FornecedorId = fornecedor.ForncedorId;
-            _context.Add(endereco);
-            _context.SaveChanges();
-
-            return true;
-        }
-
-        public FornecedorEnderecoViewModel FeviewConvert(FornecedorModel fornecedor)
-        {
-            var endereco = _context.FornecedorEnderecoModel.Where(e => e.FornecedorId == fornecedor.ForncedorId).FirstOrDefault();
-            var info = _mapper.Map<FornecedorEnderecoViewModel>(fornecedor);
-            info.Bairro = endereco.Bairro;
-            info.Cep = endereco.Cep;
-            info.Complemento = endereco.Complemento;
-            info.Localidade = endereco.Localidade;
-            info.Logradouro = endereco.Logradouro;
-            info.Numero = endereco.Numero;
-            info.Uf = endereco.Uf;
-            info.EnderecoId = endereco.EnderecoId;
-
-            return info;
         }
 
         public FornecedorModel GetByCnpj(string cnpj)

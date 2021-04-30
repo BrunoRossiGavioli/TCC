@@ -48,42 +48,20 @@ namespace TCCESTOQUE.Repository
         {
             throw new NotImplementedException();
         }
-        public object PostCricao(VendaViewModel venda)
+        public void PostCricao(VendaModel venda)
         {
-            try
-            {
-                var vendaModel = _mapper.Map<VendaModel>(venda);
-                var itens = _mapper.Map<VendaItensModel>(venda);
-
-                _context.Add(vendaModel);
-                _context.SaveChanges();
-                itens.VendaId = vendaModel.VendaId;
-                _context.Add(itens);
-                _context.SaveChanges();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            _context.Add(venda);
+            _context.SaveChanges();
         }
 
         public VendaModel GetEdicao(int? id)
         {
             return _context.VendaModel.Find(id);
         }
-        public object PutEdicao(int id, VendaModel venda)
+        public void PutEdicao(VendaModel venda)
         {
-            try
-            {
-                _context.Update(venda);
-                _context.SaveChangesAsync();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            _context.Update(venda);
+            _context.SaveChangesAsync();
         }
 
         public VendaModel GetExclusao(int? id)

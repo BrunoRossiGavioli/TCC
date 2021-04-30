@@ -17,11 +17,14 @@ namespace TCCESTOQUE.Models
         public string Descricao { get; set; }
 
         [Column(TypeName = "decimal(12,2)")]
+        [Required(ErrorMessage = "Informe o custo")]
         public decimal Custo { get; set; }
 
         [Column(TypeName = "decimal(12,2)")]
+        [Required(ErrorMessage = "Informe o valor unitario")]
         public decimal ValorUnitario { get; set; }
 
+        [Required(ErrorMessage = "Informe a quantidade")]
         public int Quantidade { get; set; }
 
         [ScaffoldColumn(false)]

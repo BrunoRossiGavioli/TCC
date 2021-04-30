@@ -24,9 +24,9 @@ namespace TCCESTOQUE.Service
         public object PostCriacao(VendaItensModel vendaItens, int id)
         {
             if (vendaItens.VendaId == id)
-                return _vendaItensRepository.PostCriacao(vendaItens, id);
+                _vendaItensRepository.PostCriacao(vendaItens);
 
-            return false;
+            return true;
         }
 
         public VendaItensModel GetEdicao(int? id)
@@ -36,7 +36,8 @@ namespace TCCESTOQUE.Service
 
         public object PutEdicao(int? id, VendaItensModel vendaItens)
         {
-            return _vendaItensRepository.PutEdicao(id, vendaItens);
+            _vendaItensRepository.PutEdicao(vendaItens);
+            return true;
         }
 
         public VendaItensModel GetExclusao(int? id)

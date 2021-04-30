@@ -1,4 +1,5 @@
-﻿using TCCESTOQUE.Interfaces.Repository;
+﻿using FluentValidation.Results;
+using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.Validacao.ValidacaoModels;
@@ -48,13 +49,14 @@ namespace TCCESTOQUE.Service
             return _produtoRepository.GetExclusao(id);
         }
 
-        public bool PostCriacao(ProdutoModel produtoModel)
+        public ValidationResult PostCriacao(ProdutoModel produtoModel)
         {
             var validador = new ProdutoValidador().Validate(produtoModel);
-            if (validador.IsValid)
-                return _produtoRepository.PostCriacao(produtoModel);
-
-            return false;
+            if (!validador.IsValid)
+                return validador;
+                    
+            _produtoRepository.PostCriacao(produtoModel);
+            return validador;
         }
 
         public object PostExclusao(int id)
@@ -62,16 +64,15 @@ namespace TCCESTOQUE.Service
             return _produtoRepository.PostExclusao(id);
         }
 
-        public bool PutEdicao(int id, ProdutoModel produtoModel)
+        public ValidationResult PutEdicao(int id, ProdutoModel produtoModel)
         {
-            if (produtoModel.ProdutoId == 0)
-                produtoModel.ProdutoId = id;
-
+            produtoModel.ProdutoId = id;
             var validador = new ProdutoValidador().Validate(produtoModel);
-            if (validador.IsValid)
-                return _produtoRepository.PutEdicao(id, produtoModel);
+            if (!validador.IsValid)
+                return validador;
 
-            return false;
+            _produtoRepository.PutEdicao(id, produtoModel);
+            return validador;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace TCCESTOQUE.Controllers
     {
         private readonly IFornecedorService _context;
 
-        public FornecedorController(IFornecedorService context, IMapper mapper, TCCESTOQUEContext context2)
+        public FornecedorController(IFornecedorService context)
         {
             _context = context;
         }
@@ -30,10 +30,10 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             var res = _context.PostCadastroFull(feviewmodel);
-            if (res)
-                return RedirectToAction("Index", "Fornecedor");
-
-            return View(feviewmodel);
+            if (!res.IsValid)
+                return View(MostrarErros(res, feviewmodel));
+                
+            return RedirectToAction("Index", "Fornecedor");
         }
         // GET: Fornecedor
         [Authorize]
@@ -56,9 +56,14 @@ namespace TCCESTOQUE.Controllers
         public IActionResult EditFull(int? id)
         {
             Autenticar();
-            var info = _context.GetEditFull(id);
+            var edit = _context.GetEditFull(id);
+            return View(edit);
+            
+            //if (edit == null) { 
+            //    Criar uma pagina para informar que Fornecedo não existe!
+            //return RedirectToAction();
+            //}
 
-            return View(info);
         }
 
         // POST: Fornecedor/Edit/5
@@ -70,14 +75,12 @@ namespace TCCESTOQUE.Controllers
         public IActionResult EditFull(int id, FornecedorEnderecoViewModel feviewmodel)
         {
             Autenticar();
-            var info = _context.PutEditFull(id, feviewmodel);
+            var res = _context.PutEditFull(id, feviewmodel);
 
-            if (info)
-            {
-                return RedirectToAction("Index", "Fornecedor");
-            }
-
-            return View();
+            if (!res.IsValid)
+                return View(MostrarErros(res, feviewmodel));
+                
+            return RedirectToAction("Index", "Fornecedor");
         }
 
         // GET: Fornecedor/Delete/5

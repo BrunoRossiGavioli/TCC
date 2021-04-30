@@ -1,4 +1,5 @@
-﻿using TCCESTOQUE.Models;
+﻿using FluentValidation.Results;
+using TCCESTOQUE.Models;
 using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Interfaces.Service
@@ -9,11 +10,11 @@ namespace TCCESTOQUE.Interfaces.Service
 
         public FornecedorModel GetDetalhes(int? id);
 
-        public bool PostCadastroFull(FornecedorEnderecoViewModel feviewmodel);
+        public ValidationResult PostCadastroFull(FornecedorEnderecoViewModel feviewmodel);
 
         public FornecedorEnderecoViewModel GetEditFull(int? id);
 
-        public bool PutEditFull(int id, FornecedorEnderecoViewModel feviewmodel);
+        public ValidationResult PutEditFull(int id, FornecedorEnderecoViewModel feviewmodel);
 
         public FornecedorModel GetExclusao(int? id);
 

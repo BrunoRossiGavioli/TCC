@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
@@ -29,7 +32,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Details(int? id)
         {
             Autenticar();
-            return View(_vendedorService.GetDetalhes(id));
+            return View(_vendedorService.GetOne(id));
         }
 
         // GET: Vendedor/Create
@@ -48,10 +51,10 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             var res = _vendedorService.PostCriacao(vendedorModel);
-            if (res)
-                return RedirectToAction("Index", "Home");
-            
-            return View(vendedorModel);
+            if (!res.IsValid)
+                return View(MostrarErros(res, vendedorModel));
+
+            return RedirectToAction("Index", "Home");    
         }
 
         // GET: Vendedor/Edit/5
@@ -68,14 +71,14 @@ namespace TCCESTOQUE.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult Edit(int id, [Bind("Senha,Cpf,Nome,Email,DataNascimento,Endereco,Telefone")] VendedorModel vendedorModel)
+        public IActionResult Edit(int id,VendedorModel vendedorModel)
         {
             Autenticar();
             var res = _vendedorService.PutEdicao(id, vendedorModel);
-            if(res)
-                return RedirectToAction("Index", "Home");
+            if (!res.IsValid)
+                return View(MostrarErros(res, vendedorModel));
 
-            return View(vendedorModel);
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: Vendedor/Delete/5
@@ -83,7 +86,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Delete(int? id)
         {
             Autenticar();
-            return View(_vendedorService.GetExclusao(id));
+            return View(_vendedorService.GetOne(id));
         }
 
         // POST: Vendedor/Delete/5

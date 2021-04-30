@@ -1,4 +1,5 @@
-﻿using TCCESTOQUE.Models;
+﻿using FluentValidation.Results;
+using TCCESTOQUE.Models;
 
 namespace TCCESTOQUE.Interfaces.Service
 {
@@ -10,11 +11,11 @@ namespace TCCESTOQUE.Interfaces.Service
 
         public object GetCriacao();
 
-        public bool PostCriacao(ProdutoModel produtoModel);
+        public ValidationResult PostCriacao(ProdutoModel produtoModel);
 
         public ProdutoModel GetEdicao(int? id);
 
-        public bool PutEdicao(int id, ProdutoModel produtoModel);
+        public ValidationResult PutEdicao(int id, ProdutoModel produtoModel);
 
         public ProdutoModel GetExclusao(int? id);
 

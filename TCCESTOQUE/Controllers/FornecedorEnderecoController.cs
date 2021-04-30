@@ -29,7 +29,7 @@ namespace TCCESTOQUE.Controllers
             if (fornecedorEnderecoModel == null)
                 return NotFound();
 
-            ViewData["FornecedorId"] = new SelectList(_context2.FornecedorModel, "ForncedorId", "Nome", fornecedorEnderecoModel.FornecedorId);
+            ViewData["FornecedorId"] = new SelectList(_context2.FornecedorModel, "FornecedorId", "Nome", fornecedorEnderecoModel.FornecedorId);
             return View(fornecedorEnderecoModel);
         }
 
@@ -62,7 +62,7 @@ namespace TCCESTOQUE.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FornecedorId"] = new SelectList(_context2.FornecedorModel, "ForncedorId", "Nome", fornecedorEnderecoModel.FornecedorId);
+            ViewData["FornecedorId"] = new SelectList(_context2.FornecedorModel, "FornecedorId", "Nome", fornecedorEnderecoModel.FornecedorId);
             return View(fornecedorEnderecoModel);
         }
 

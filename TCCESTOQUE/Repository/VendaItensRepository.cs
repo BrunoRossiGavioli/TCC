@@ -27,18 +27,10 @@ namespace TCCESTOQUE.Repository
             return vendaItensModel;
         }
 
-        public object PostCriacao(VendaItensModel vendaItens, int id)
+        public void PostCriacao(VendaItensModel vendaItens)
         {
-            try
-            {
-                _context.Add(vendaItens);
-                _context.SaveChanges();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            _context.Add(vendaItens);
+            _context.SaveChanges();
         }
 
         public VendaItensModel GetEdicao(int? id)
@@ -46,18 +38,10 @@ namespace TCCESTOQUE.Repository
             return _context.VendaItensModel.Find(id);
         }
 
-        public object PutEdicao(int? id, VendaItensModel vendaItens)
+        public void PutEdicao(VendaItensModel vendaItens)
         {
-            try
-            {
-                _context.Update(vendaItens);
-                _context.SaveChanges();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            _context.Update(vendaItens);
+            _context.SaveChanges();
         }
 
         public VendaItensModel GetExclusao(int? id)

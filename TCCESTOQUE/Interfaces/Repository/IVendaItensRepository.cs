@@ -10,11 +10,11 @@ namespace TCCESTOQUE.Interfaces.Repository
     {
         public VendaItensModel GetDetalhes(int? id);
 
-        public object PostCriacao(VendaItensModel vendaItens, int id);
+        public void PostCriacao(VendaItensModel vendaItens);
 
         public VendaItensModel GetEdicao(int? id);
 
-        public object PutEdicao(int? id, VendaItensModel vendaItens);
+        public void PutEdicao(VendaItensModel vendaItens);
 
         public VendaItensModel GetExclusao(int? id);
 

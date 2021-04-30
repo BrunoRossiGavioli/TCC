@@ -14,12 +14,12 @@ namespace TCCESTOQUE.Migrations
                 {
                     VendedorId = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Email = table.Column<string>(maxLength: 80, nullable: true),
-                    Telefone = table.Column<string>(nullable: false),
                     Nome = table.Column<string>(maxLength: 50, nullable: false),
                     Senha = table.Column<string>(maxLength: 70, nullable: false),
                     DataNascimento = table.Column<DateTime>(nullable: false),
                     Cpf = table.Column<string>(maxLength: 11, nullable: false),
+                    Email = table.Column<string>(maxLength: 80, nullable: false),
+                    Telefone = table.Column<string>(nullable: true),
                     Ativo = table.Column<bool>(nullable: false),
                     Logado = table.Column<bool>(nullable: false)
                 },
@@ -34,10 +34,10 @@ namespace TCCESTOQUE.Migrations
                 {
                     ClienteId = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Email = table.Column<string>(maxLength: 80, nullable: true),
-                    Telefone = table.Column<string>(nullable: false),
                     Nome = table.Column<string>(maxLength: 50, nullable: true),
                     Cpf = table.Column<string>(maxLength: 11, nullable: true),
+                    Email = table.Column<string>(maxLength: 80, nullable: false),
+                    Telefone = table.Column<string>(nullable: true),
                     VendedorId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -55,18 +55,18 @@ namespace TCCESTOQUE.Migrations
                 name: "Fornecedor",
                 columns: table => new
                 {
-                    ForncedorId = table.Column<int>(nullable: false)
+                    FornecedorId = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Email = table.Column<string>(maxLength: 80, nullable: true),
-                    Telefone = table.Column<string>(nullable: false),
                     RazaoSocial = table.Column<string>(maxLength: 50, nullable: false),
                     NomeFantasia = table.Column<string>(maxLength: 50, nullable: false),
                     Cnpj = table.Column<string>(maxLength: 14, nullable: false),
+                    Email = table.Column<string>(maxLength: 80, nullable: false),
+                    Telefone = table.Column<string>(nullable: true),
                     VendedorId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Fornecedor", x => x.ForncedorId);
+                    table.PrimaryKey("PK_Fornecedor", x => x.FornecedorId);
                     table.ForeignKey(
                         name: "FK_Fornecedor_Vendedor_VendedorId",
                         column: x => x.VendedorId,
@@ -151,7 +151,7 @@ namespace TCCESTOQUE.Migrations
                         name: "FK_FornecedorEndereco_Fornecedor_FornecedorId",
                         column: x => x.FornecedorId,
                         principalTable: "Fornecedor",
-                        principalColumn: "ForncedorId",
+                        principalColumn: "FornecedorId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -177,7 +177,7 @@ namespace TCCESTOQUE.Migrations
                         name: "FK_Produto_Fornecedor_FornecedorId",
                         column: x => x.FornecedorId,
                         principalTable: "Fornecedor",
-                        principalColumn: "ForncedorId",
+                        principalColumn: "FornecedorId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Produto_Vendedor_VendedorId",

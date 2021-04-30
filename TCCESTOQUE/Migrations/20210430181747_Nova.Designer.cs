@@ -9,7 +9,7 @@ using TCCESTOQUE.Data;
 namespace TCCESTOQUE.Migrations
 {
     [DbContext(typeof(TCCESTOQUEContext))]
-    [Migration("20210419193547_Nova")]
+    [Migration("20210430181747_Nova")]
     partial class Nova
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -80,6 +80,7 @@ namespace TCCESTOQUE.Migrations
                         .HasMaxLength(11);
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("varchar(80) CHARACTER SET utf8mb4")
                         .HasMaxLength(80);
 
@@ -88,7 +89,6 @@ namespace TCCESTOQUE.Migrations
                         .HasMaxLength(50);
 
                     b.Property<string>("Telefone")
-                        .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<int>("VendedorId")
@@ -153,7 +153,7 @@ namespace TCCESTOQUE.Migrations
 
             modelBuilder.Entity("TCCESTOQUE.Models.FornecedorModel", b =>
                 {
-                    b.Property<int>("ForncedorId")
+                    b.Property<int>("FornecedorId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -163,6 +163,7 @@ namespace TCCESTOQUE.Migrations
                         .HasMaxLength(14);
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("varchar(80) CHARACTER SET utf8mb4")
                         .HasMaxLength(80);
 
@@ -177,13 +178,12 @@ namespace TCCESTOQUE.Migrations
                         .HasMaxLength(50);
 
                     b.Property<string>("Telefone")
-                        .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<int>("VendedorId")
                         .HasColumnType("int");
 
-                    b.HasKey("ForncedorId");
+                    b.HasKey("FornecedorId");
 
                     b.HasIndex("VendedorId");
 
@@ -300,6 +300,7 @@ namespace TCCESTOQUE.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("varchar(80) CHARACTER SET utf8mb4")
                         .HasMaxLength(80);
 
@@ -317,7 +318,6 @@ namespace TCCESTOQUE.Migrations
                         .HasMaxLength(70);
 
                     b.Property<string>("Telefone")
-                        .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("VendedorId");

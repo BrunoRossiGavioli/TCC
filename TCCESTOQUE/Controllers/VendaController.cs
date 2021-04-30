@@ -16,12 +16,12 @@ namespace TCCESTOQUE.Controllers
 {
     public class VendaController : ControllerPai
     {
-        private readonly IVendaService _context;
+        private readonly IVendaService _vendaService;
         private readonly ISelectListRepository _selectListRepository;
 
         public VendaController(IVendaService context, ISelectListRepository selectListRepository)
         {
-            _context = context;
+            _vendaService = context;
             _selectListRepository = selectListRepository;
         }
 
@@ -29,7 +29,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Index()
         {
             Autenticar();
-            return View(_context.GetIndex());
+            return View(_vendaService.GetIndex());
         }
 
         // GET: Venda/Details/5
@@ -39,7 +39,7 @@ namespace TCCESTOQUE.Controllers
             if (id == null)
                 return NotFound();
 
-            var vendaModel = _context.GetDetalhes(id);
+            var vendaModel = _vendaService.GetDetalhes(id);
 
             if (vendaModel == null)
                 return NotFound();
@@ -54,8 +54,7 @@ namespace TCCESTOQUE.Controllers
             ViewData["ClienteId"] = _selectListRepository.SelectListCliente("ClienteId", "Nome");
             ViewData["VendedorId"] = _selectListRepository.SelectListVendedor("VendedorId", "Nome");
             ViewData["ProdutoId"] = _selectListRepository.SelectListProduto("ProdutoId", "Nome");
-            var res = View();
-            return res;
+            return View();
         }
 
         // POST: Venda/Create
@@ -68,7 +67,7 @@ namespace TCCESTOQUE.Controllers
             Autenticar();
             if (ModelState.IsValid)
             {
-                _context.PostCricao(vendaViewModel);
+                _vendaService.PostCricao(vendaViewModel);
                 return RedirectToAction("Index", "Venda");
             }
             ViewData["ClienteId"] = _selectListRepository.SelectListCliente("ClienteId", "Nome", vendaViewModel.ClienteId);
@@ -84,7 +83,7 @@ namespace TCCESTOQUE.Controllers
             if (id == null)
                 return NotFound();
 
-            var vendaModel = _context.GetEdicao(id);
+            var vendaModel = _vendaService.GetEdicao(id);
             if (vendaModel == null)
                 return NotFound();
 
@@ -108,7 +107,7 @@ namespace TCCESTOQUE.Controllers
             {
                 try
                 {
-                    _context.PutEdicao(id, vendaModel);
+                    _vendaService.PutEdicao(id, vendaModel);
                 }
                 catch (Exception)
                 {
@@ -128,7 +127,7 @@ namespace TCCESTOQUE.Controllers
             if (id == null)
                 return NotFound();
 
-            var vendaModel = _context.GetExclusao(id);
+            var vendaModel = _vendaService.GetExclusao(id);
             if (vendaModel == null)
                 return NotFound();
 
@@ -141,7 +140,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult DeleteConfirmed(int id)
         {
             Autenticar();
-            var vendaModel = _context.PostExclusao(id);
+            var vendaModel = _vendaService.PostExclusao(id);
             return RedirectToAction(nameof(Index));
         }
     }

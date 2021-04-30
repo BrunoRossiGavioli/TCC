@@ -13,13 +13,13 @@ namespace TCCESTOQUE.Interfaces.Repository
         public ICollection<VendaModel> GetIndex();
         public VendaModel GetDetalhes(int? id);
 
-        public object PostCricao(VendaViewModel venda);
+        public void PostCricao(VendaModel venda);
 
         public object GetCricao(int id);
 
         public VendaModel GetEdicao(int? id);
 
-        public object PutEdicao(int id, VendaModel venda);
+        public void PutEdicao(VendaModel venda);
 
         public VendaModel GetExclusao(int? id);
 

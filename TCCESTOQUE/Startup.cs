@@ -42,15 +42,12 @@ namespace TCCESTOQUE
             services.AddDbContext<TCCESTOQUEContext>(options =>
                     options.UseMySql(Configuration.GetConnectionString("TCCESTOQUEContext")));
 
-            services.AddMvc()
-                .AddFluentValidation(c =>
-                c.RegisterValidatorsFromAssemblyContaining<Startup>());
-
             services.AddScoped<IVendedorService, VendedorService>();
             services.AddScoped<IVendedorRepository, VendedorRepository>();
             
             services.AddScoped<IFornecedorService,FornecedorService>();
             services.AddScoped<IFornecedorRepository, FornecedorRepository>();
+            services.AddScoped<IFornecedorEnderecoRepository, FornecedorEnderecoRepository>();
             
             services.AddScoped<IProdutoService, ProdutoService>();
             services.AddScoped<IProdutoRepository, ProdutoRepository>();

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace TCCESTOQUE.Models
 {
     [Table("Cliente")]
-    public class ClienteModel : PessoaModel
+    public class ClienteModel
     {
         [Key]
         public int ClienteId { get; set; }
@@ -18,6 +18,13 @@ namespace TCCESTOQUE.Models
 
         [StringLength(11)]
         public string Cpf { get; set; }
+
+        [MaxLength(80)]
+        [Required(ErrorMessage = "Informe o Email!")]
+        [DataType(System.ComponentModel.DataAnnotations.DataType.EmailAddress)]
+        public string Email { get; set; }
+
+        public string Telefone { get; set; }
 
         [ScaffoldColumn(false)]
         public ClienteEnderecoModel Endereco { get; set; }

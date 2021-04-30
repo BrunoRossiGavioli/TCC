@@ -60,18 +60,10 @@ namespace TCCESTOQUE.Repository
             return produtoModel;
         }
 
-        public bool PostCriacao(ProdutoModel produtoModel)
+        public void PostCriacao(ProdutoModel produtoModel)
         {
-            try
-            {
-                _context.Add(produtoModel);
-                _context.SaveChanges();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }       
+            _context.Add(produtoModel);
+            _context.SaveChanges();   
         }
 
         public object PostExclusao(int id)
@@ -82,18 +74,10 @@ namespace TCCESTOQUE.Repository
             return nameof(Index);
         }
 
-        public bool PutEdicao(int id, ProdutoModel produtoModel)
+        public void PutEdicao(int id, ProdutoModel produtoModel)
         {
-            try
-            {
-                _context.Update(produtoModel);
-                _context.SaveChanges();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            _context.Update(produtoModel);
+            _context.SaveChanges();   
         }
     }
 }

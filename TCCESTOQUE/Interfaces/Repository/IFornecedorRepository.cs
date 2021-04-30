@@ -9,11 +9,11 @@ namespace TCCESTOQUE.Interfaces.Repository
 
         public FornecedorModel GetDetalhes(int? id);
 
-        public bool PostCadastroFull(FornecedorEnderecoViewModel feviewmodel);
+        public void PostCadastro(FornecedorModel fornecedorModel);
 
-        public FornecedorEnderecoViewModel GetEditFull(int? id);
+        public FornecedorModel GetEditFull(int? id);
 
-        public bool PutEditFull(int id, FornecedorEnderecoViewModel feviewmodel);
+        public void PutEdit(FornecedorModel fornecedorModel);
 
         public FornecedorModel GetExclusao(int? id);
 
