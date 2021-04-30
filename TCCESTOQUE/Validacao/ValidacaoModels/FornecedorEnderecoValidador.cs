@@ -6,16 +6,12 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
 {
     public class FornecedorEnderecoValidador : AbstractValidator<FornecedorEnderecoViewModel>
     {
-        public FornecedorEnderecoValidador() //IFornecedorRepository fornecedor)
+        public FornecedorEnderecoValidador() 
         {
-            //RuleFor(f => f.Cnpj).Must(cnpj => fornecedor.GetByCnpj(cnpj) == null).WithMessage(MensagensErroFornecedor.CnpjJaCadastrado);
-
-            //RuleFor(f => f.RazaoSocial).Must(razaoSocial => fornecedor.GetByRazaoSocial(razaoSocial) == null).WithMessage(MensagensErroFornecedor.RazaoSocialJaCadastrada);
-            // RuleFor(f => f.NomeFantasia).Must(nomeFantasia => fornecedor.GetByNomeFantsia(nomeFantasia) == null).WithMessage(MensagensErroFornecedor.NomeFantaziajaCadastrado);
-            //  RuleFor(f => f.Email).Must(email => fornecedor.GetByEmail(email) == null).WithMessage(MensagensErroFornecedor.EmailJaCadastrado);
             When(f => !string.IsNullOrEmpty(f.NomeFantasia), () =>
             {
-                RuleFor(f => f.NomeFantasia).MaximumLength(80).WithMessage(MensagensErroFornecedor.NomeFantasiaTamanhoMaximo)
+                RuleFor(f => f.NomeFantasia)
+                .MaximumLength(80).WithMessage(MensagensErroFornecedor.NomeFantasiaTamanhoMaximo)
                 .MinimumLength(3).WithMessage(MensagensErroFornecedor.NomeFantasiaTamanhoMinimo);
             });
             RuleFor(f => f.RazaoSocial).NotEmpty().WithMessage(MensagensErroFornecedor.RazaoSocialVazia)
