@@ -74,7 +74,7 @@ namespace TCCESTOQUE.Service
                 return validacao;
 
             var vendedor = _vendedorRepository.GetByEmail(vendedorModel.Email);
-            return _vendedorRepository.PostLogin(vendedorModel);
+            return _vendedorRepository.PostLogin(vendedor);
             
         }
 

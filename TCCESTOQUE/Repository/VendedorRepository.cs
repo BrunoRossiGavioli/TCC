@@ -67,14 +67,11 @@ namespace TCCESTOQUE.Repository
 
         public ClaimsPrincipal PostLogin(VendedorModel vendedorModel)
         {
-            var vendedor = _context.VendedorModel.Where(a => a.Email == vendedorModel.Email).FirstOrDefault();
-
-
             IList<Claim> Claims = new List<Claim>()
             {
-                new Claim(ClaimTypes.Name, vendedor.Nome),
-                new Claim(ClaimTypes.Email, vendedor.Email),
-                new Claim(ClaimTypes.SerialNumber, Convert.ToString(vendedor.VendedorId))
+                new Claim(ClaimTypes.Name, vendedorModel.Nome),
+                new Claim(ClaimTypes.Email, vendedorModel.Email),
+                new Claim(ClaimTypes.SerialNumber, Convert.ToString(vendedorModel.VendedorId))
             };
 
             var minhaIdentity = new ClaimsIdentity(Claims, "Vendedor");
