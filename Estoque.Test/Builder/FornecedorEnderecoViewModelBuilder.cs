@@ -1,7 +1,4 @@
 ﻿using FizzWare.NBuilder;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using TCCESTOQUE.ViewModel;
 
 namespace Estoque.Test.Builder
@@ -19,7 +16,6 @@ namespace Estoque.Test.Builder
                 .With(x => x.Cep = "12.345-678")
                 .With(x => x.Complemento = "xxx complemento")
                 .With(x => x.Localidade = "Cidade xxx")
-                .With(x => x.NomeFantasia = "Nome fantasia")
                 .With(x => x.Logradouro = "logradouro")
                 .With(x => x.Numero = 1)
                 .With(x => x.RazaoSocial = "Marcolino pereira");

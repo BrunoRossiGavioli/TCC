@@ -13,7 +13,7 @@ namespace TCCESTOQUE.Validacao.Formatacao
             vendedor.Senha = SecurityService.Criptografar(vendedor.Senha);
             return vendedor;
         }
-       
+
         public static FornecedorEnderecoViewModel FormataValoresFornecedorView(FornecedorEnderecoViewModel fornecedor)
         {
             fornecedor.NomeFantasia = fornecedor.NomeFantasia != null ? fornecedor.NomeFantasia.ToUpper().Trim() : fornecedor.NomeFantasia;

@@ -17,7 +17,7 @@ namespace TCCESTOQUE.Models
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "Informe a senha!", AllowEmptyStrings = false)]
-        [MaxLength(70)]
+        [MaxLength(50)]
         [DataType(System.ComponentModel.DataAnnotations.DataType.Password)]
         public string Senha { get; set; }
 

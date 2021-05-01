@@ -39,7 +39,7 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
 
             RuleFor(v => v.Email).EmailAddress().WithMessage(MensagensErroCliente.EmailFormatoInvalido)
                .MaximumLength(30).WithMessage(MensagensErroCliente.EmailTamanhoMaximo);
-             
+
 
             When(v => !string.IsNullOrEmpty(v.Cpf), () =>
             {

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace TCCESTOQUE.Interfaces.Service
+﻿namespace TCCESTOQUE.Interfaces.Service
 {
     public interface IServiceBase<T> where T : class
     {
@@ -16,6 +11,6 @@ namespace TCCESTOQUE.Interfaces.Service
 
         public bool PostCriacao(T model);
         public bool PutEdicao(int id, T model);
-        public object PostExclusao(int id);   
+        public object PostExclusao(int id);
     }
 }

@@ -1,8 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TCCESTOQUE.AutoMapper;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
@@ -26,7 +22,7 @@ namespace TCCESTOQUE.StartUpOpcoes
             services.AddScoped<IFornecedorService, FornecedorService>();
             services.AddScoped<IFornecedorRepository, FornecedorRepository>();
 
-         //   services.AddScoped<IFornecedorEnderecoRepository, FornecedorEnderecoRepository>();
+            //   services.AddScoped<IFornecedorEnderecoRepository, FornecedorEnderecoRepository>();
 
             services.AddScoped<IProdutoService, ProdutoService>();
             services.AddScoped<IProdutoRepository, ProdutoRepository>();

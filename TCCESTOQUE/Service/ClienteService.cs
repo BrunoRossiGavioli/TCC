@@ -62,7 +62,7 @@ namespace TCCESTOQUE.Service
         {
             if (cliente.VendedorId != vendedorId)
                 return null;
-           // var mapeamento = _mapper.Map<ClienteModel>(cliente);
+            // var mapeamento = _mapper.Map<ClienteModel>(cliente);
             var validacao = new ClienteValidador().Validate(cliente);
             if (!validacao.IsValid)
                 return null;

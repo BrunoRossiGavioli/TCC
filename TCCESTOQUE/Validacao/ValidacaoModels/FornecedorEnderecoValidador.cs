@@ -6,7 +6,7 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
 {
     public class FornecedorEnderecoValidador : AbstractValidator<FornecedorEnderecoViewModel>
     {
-        public FornecedorEnderecoValidador() 
+        public FornecedorEnderecoValidador()
         {
             When(f => !string.IsNullOrEmpty(f.NomeFantasia), () =>
             {
@@ -42,7 +42,7 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
                 RuleFor(e => e.Complemento).MaximumLength(50).WithMessage(MensagensDeErroEndereco.ComplementoTamanhoMaximo)
                 .MinimumLength(3).WithMessage(MensagensDeErroEndereco.ComplementoVazio);
             });
-            RuleFor(e => e.Numero).GreaterThanOrEqualTo(0).WithMessage(MensagensDeErroEndereco.NumeroTamanhoMinimo);
+            RuleFor(e => e.Numero).GreaterThan(0).WithMessage(MensagensDeErroEndereco.NumeroTamanhoMinimo);
 
             When(f => !string.IsNullOrEmpty(f.Bairro), () =>
             {

@@ -1,12 +1,8 @@
 ﻿using Estoque.Test.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using TCCESTOQUE.Validacao.MensagensDeErro;
 using TCCESTOQUE.Validacao.ValidacaoModels;
-using TCCESTOQUE.ViewModel;
 using Xunit;
 
 namespace Estoque.Test.ValidationViewModelTests
@@ -28,12 +24,13 @@ namespace Estoque.Test.ValidationViewModelTests
         [Fact(DisplayName = "A classe deve ser válida")]
         public async Task ClasseValida()
         {
-            var instancia = _builder.Build();
+            var instance = _builder.Build();
 
-            var validationResult = await _validator.ValidateAsync(instancia);
+            var validationResult = await _validator.ValidateAsync(instance);
 
             Assert.True(validationResult.IsValid);
         }
+
         #region Telefone
         [Theory(DisplayName = "Telefones válidos!")]
         [InlineData("(11)99332-4966")]
@@ -44,10 +41,10 @@ namespace Estoque.Test.ValidationViewModelTests
         [InlineData("(11)75943-3428")]
         public async Task TelefoneValido(string telefone)
         {
-            var instancia = _builder.With(a => a.Telefone = telefone).Build();
-            var validatioResult = await _validator.ValidateAsync(instancia);
+            var instance = _builder.With(a => a.Telefone = telefone).Build();
+            var validation = await _validator.ValidateAsync(instance);
 
-            Assert.True(validatioResult.IsValid);
+            Assert.True(validation.IsValid);
         }
         [Theory(DisplayName = "Telefones não válidos!")]
         [InlineData("(11)993-4966")]
@@ -59,10 +56,10 @@ namespace Estoque.Test.ValidationViewModelTests
         [InlineData("")]
         public async Task TelefoneNaoValido(string telefone)
         {
-            var instancia = _builder.With(a => a.Telefone = telefone).Build();
-            var validatioResult = await _validator.ValidateAsync(instancia);
+            var instance = _builder.With(a => a.Telefone = telefone).Build();
+            var validation = await _validator.ValidateAsync(instance);
 
-            Assert.False(validatioResult.IsValid);
+            Assert.False(validation.IsValid);
         }
         #endregion
 
@@ -74,9 +71,9 @@ namespace Estoque.Test.ValidationViewModelTests
         [InlineData("01.262.653/0001-49")]
         public async Task CnpjValido(string cnpj)
         {
-            var instancia = _builder.With(a => a.Cnpj = cnpj).Build();
+            var instance = _builder.With(a => a.Cnpj = cnpj).Build();
 
-            var validationResult = await _validator.ValidateAsync(instancia);
+            var validationResult = await _validator.ValidateAsync(instance);
 
             Assert.True(validationResult.IsValid);
         }
@@ -87,9 +84,9 @@ namespace Estoque.Test.ValidationViewModelTests
         [InlineData("01.262.65300-49")]
         public async Task CnpjNaoValido(string cnpj)
         {
-            var instancia = _builder.With(a => a.Cnpj = cnpj).Build();
+            var instance = _builder.With(a => a.Cnpj = cnpj).Build();
 
-            var validationResult = await _validator.ValidateAsync(instancia);
+            var validationResult = await _validator.ValidateAsync(instance);
 
             Assert.False(validationResult.IsValid);
         }
@@ -99,9 +96,9 @@ namespace Estoque.Test.ValidationViewModelTests
         [Fact(DisplayName = "O Email pode ser vazio")]
         public async Task EmailPodeSerVazio()
         {
-            var instancia = _builder.With(a => a.Email = "").Build();
+            var instance = _builder.With(a => a.Email = "").Build();
 
-            var validationResult = await _validator.ValidateAsync(instancia);
+            var validationResult = await _validator.ValidateAsync(instance);
 
             Assert.True(validationResult.IsValid);
         }
@@ -112,9 +109,9 @@ namespace Estoque.Test.ValidationViewModelTests
         [InlineData("marcio@nizzola.com.br")]
         public async Task EmailsValidos(string email)
         {
-            var instancia = _builder.With(a => a.Email = email).Build();
+            var instance = _builder.With(a => a.Email = email).Build();
 
-            var validationResult = await _validator.ValidateAsync(instancia);
+            var validationResult = await _validator.ValidateAsync(instance);
 
             Assert.True(validationResult.IsValid);
         }
@@ -125,9 +122,9 @@ namespace Estoque.Test.ValidationViewModelTests
         [InlineData("1")]
         public async Task EmailsInvalidos(string email)
         {
-            var instancia = _builder.With(a => a.Email = email).Build();
+            var instance = _builder.With(a => a.Email = email).Build();
 
-            var validationResult = await _validator.ValidateAsync(instancia);
+            var validationResult = await _validator.ValidateAsync(instance);
 
             Assert.False(validationResult.IsValid);
             Assert.Contains(validationResult.Errors, x => x.ErrorMessage.Contains(MensagensErroFornecedor.EmailFormatoInvalido));
@@ -137,9 +134,9 @@ namespace Estoque.Test.ValidationViewModelTests
         [InlineData("012345678900123456789001234567890012345678900123456789001234567890012345678900123456789001234567890")]
         public async Task EmailExcedeuTamanho(string email)
         {
-            var instancia = _builder.With(a => a.Email = email).Build();
+            var instance = _builder.With(a => a.Email = email).Build();
 
-            var validationResult = await _validator.ValidateAsync(instancia);
+            var validationResult = await _validator.ValidateAsync(instance);
 
             Assert.False(validationResult.IsValid);
             Assert.Contains(validationResult.Errors, x => x.ErrorMessage.Contains(MensagensErroFornecedor.EmailTamanhoMaximo));
@@ -155,26 +152,36 @@ namespace Estoque.Test.ValidationViewModelTests
         [InlineData("Amazon")]
         public async Task NomeFantasiaValido(string nome)
         {
-            var instancia = _builder.With(x => x.NomeFantasia = nome).Build();
-            var validacao = await _validator.ValidateAsync(instancia);
-            Assert.True(validacao.IsValid);
+            var instance = _builder.With(x => x.NomeFantasia = nome).Build();
+            var validation = await _validator.ValidateAsync(instance);
+            Assert.True(validation.IsValid);
         }
 
-        [Theory(DisplayName = "Nomes Fantasia não válidos")]
+        [Theory(DisplayName = "Nomes Fantasia tamanho mínimo")]
         [InlineData("a")]
         [InlineData("b")]
         [InlineData("jf")]
-        public async Task NomeFantasiaNaoValido(string nome)
+        public async Task NomeFantasiaTamanhoMinimo(string nome)
         {
-            var instancia = _builder.With(x => x.NomeFantasia = nome).Build();
-            var validacao = await _validator.ValidateAsync(instancia);
-            Assert.False(validacao.IsValid);
-            Assert.Contains(validacao.Errors, x => x.ErrorMessage.Contains(MensagensErroFornecedor.NomeFantasiaTamanhoMinimo));
+            var instance = _builder.With(x => x.NomeFantasia = nome).Build();
+            var validation = await _validator.ValidateAsync(instance);
+            Assert.False(validation.IsValid);
+            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensErroFornecedor.NomeFantasiaTamanhoMinimo));
+        }
+        [Theory(DisplayName = "Nomes Fantasia tamanho máximo")]
+        [InlineData("ddasdadasdasdasdasdadasdsafgghhggjhgjhjghjhgjhgbfdvvdfvdvdffvfdvfdvdfvdfvdfvdsadsaer")]
+        [InlineData("kfjdgsgen ejcnejn eew ewcwe cwcwec ewcewwc wecwecwec wecwecwe cwecwecwcec wewerwerwerewrew")]
+        [InlineData("teste do nome fantasia tamanho mínimoque o fornecedor pode colocar no input werwerwerewr")]
+        public async Task NomeFantasiaTamanhoMaximo(string nome)
+        {
+            var instance = _builder.With(x => x.NomeFantasia = nome).Build();
+            var validation = await _validator.ValidateAsync(instance);
+            Assert.False(validation.IsValid);
         }
         #endregion
 
         #region Bairro
-        [Theory(DisplayName ="Bairro deve ser válido!")]
+        [Theory(DisplayName = "Bairro deve ser válido!")]
         [InlineData("se")]
         [InlineData("alberto gomes")]
         [InlineData("santa maria")]
@@ -183,20 +190,232 @@ namespace Estoque.Test.ValidationViewModelTests
         [InlineData("jardin santos dumon")]
         public async Task BairroValido(string bairro)
         {
-            var instancia = _builder.With(x => x.Bairro = bairro).Build();
-            var validacao =  await _validator.ValidateAsync(instancia);
-            Assert.True(validacao.IsValid);
+            var instance = _builder.With(x => x.Bairro = bairro).Build();
+            var validation = await _validator.ValidateAsync(instance);
+            Assert.True(validation.IsValid);
         }
         [Theory(DisplayName = "Bairro excedeu o valor máximo!")]
         [InlineData("asndhidhuidihduihiuhiuuhuihuihiuhihuihuihuuihuihuhiuhiuhiuhiuuhuknkjnkjn")]
         [InlineData("ighiebhreieiiurevreverkvbrevreverveerarvarevevevevervrevevrevevfdvb")]
         [InlineData("hlsdjfsdfjfllsfjlsfksfkkjwfkjjnbvglogkdtjjsmdfsdfsfsdfscscs")]
-        public async Task BairroNaoValido(string bairro)
+        public async Task BairroTamanhoMaximo(string bairro)
         {
-            var instancia = _builder.With(x => x.Bairro = bairro).Build();
-            var validacao = await _validator.ValidateAsync(instancia);
-            Assert.False(validacao.IsValid);
-            Assert.Contains(validacao.Errors, x => x.ErrorMessage.Contains(MensagensDeErroEndereco.BairroTamanhoMaximo));
+            var instance = _builder.With(x => x.Bairro = bairro).Build();
+            var validation = await _validator.ValidateAsync(instance);
+            Assert.False(validation.IsValid);
+            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroEndereco.BairroTamanhoMaximo));
+        }
+        [Theory(DisplayName = "Bairro tamanho mínimo!")]
+        [InlineData("g")]
+        [InlineData("s")]
+        [InlineData("1")]
+        public async Task BairroTamanhoMinimoValido(string bairro)
+        {
+            var instance = _builder.With(x => x.Bairro = bairro).Build();
+            var validation = await _validator.ValidateAsync(instance);
+            Assert.False(validation.IsValid);
+            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroEndereco.BairroTamanhoMinimo));
+        }
+        #endregion
+
+        #region Cep
+        [Theory(DisplayName = "Teste de Ceps válidos")]
+        [InlineData("12.345-678")]
+        [InlineData("13.425-678")]
+        [InlineData("55.455-678")]
+        [InlineData("32.895-678")]
+        public async Task CepValido(string cep)
+        {
+            var instance = _builder.With(x => x.Cep = cep).Build();
+            var validation = await _validator.ValidateAsync(instance);
+            Assert.True(validation.IsValid);
+        }
+        [Theory(DisplayName = "Teste de Ceps não válidos")]
+        [InlineData("2.345-678")]
+        [InlineData("1.345-678")]
+        [InlineData("125-678")]
+        [InlineData("12.3467")]
+        [InlineData("12.35-68")]
+        public async Task CepNaoValido(string cep)
+        {
+            var instance = _builder.With(x => x.Cep = cep).Build();
+            var validation = await _validator.ValidateAsync(instance);
+            Assert.False(validation.IsValid);
+            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroEndereco.CepTamanho));
+        }
+        #endregion
+
+        #region Localidade
+        [Theory(DisplayName = "Teste tamanho mínimo localidade")]
+        [InlineData("")]
+        [InlineData("12")]
+        [InlineData("h")]
+        [InlineData("jd")]
+        public async Task LocalidadeTamanhoMinimo(string localidade)
+        {
+            var instance = _builder.With(x => x.Localidade = localidade).Build();
+            var validation = await _validator.ValidateAsync(instance);
+            Assert.False(validation.IsValid);
+            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroEndereco.LocalidadeTamanhoMinimo));
+        }
+        [Theory(DisplayName = "Teste tamanho máximo localidade")]
+        [InlineData("hfhfhfgggdhdsasdsadasdasdsadaddwqdqwdwqdqwdwqdwqdwdwqdwqdwqdqd")]
+        [InlineData("teste do tamanho máximo do campo de localidade que é de 30 caracteres")]
+        [InlineData("teste de localidade adequada para o tamanho proposto no validadeo")]
+        public async Task LocalidadeTamanhoMaximo(string localidade)
+        {
+            var instance = _builder.With(x => x.Localidade = localidade).Build();
+            var validation = await _validator.ValidateAsync(instance);
+            Assert.False(validation.IsValid);
+            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroEndereco.LocalidadeTamanhoMaximo));
+        }
+        [Theory(DisplayName = "Teste localidades valida")]
+        [InlineData("teste localidade válida")]
+        [InlineData("bairro de la")]
+        [InlineData("brasil")]
+        public async Task LocalidadeValida(string localidade)
+        {
+            var instance = _builder.With(x => x.Localidade = localidade).Build();
+            var validation = await _validator.ValidateAsync(instance);
+            Assert.True(validation.IsValid);
+        }
+
+        #endregion
+
+        #region Logradouro
+        [Theory(DisplayName = "Teste tamanho mínimo logradouro")]
+        [InlineData("12")]
+        [InlineData("h")]
+        [InlineData("jd")]
+        public async Task LogradouroTamanhoMinimo(string logradouro)
+        {
+            var instance = _builder.With(x => x.Logradouro = logradouro).Build();
+            var validation = await _validator.ValidateAsync(instance);
+            Assert.False(validation.IsValid);
+            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroEndereco.LogradouroTamanhoMinimo));
+        }
+        [Theory(DisplayName = "Teste tamanho máximo logradouro")]
+        [InlineData("jdjdjfjfhdgsgdgeftfdrtgyhjykdfghtyuhgfrdswertgfdfss")]
+        [InlineData("jdjdjfjfhdgsgdgeftfdrtgyhjykdfghtyuhgfrdswertgsasdsafdfss")]
+        [InlineData("jdjdjfjfhdgsgdgeftfdrtgyhjykdfghtyuhgfrdswertgfdfssdsjfhdf")]
+        public async Task LogradouroTamanhoMaximo(string logradouro)
+        {
+            var instance = _builder.With(x => x.Logradouro = logradouro).Build();
+            var validation = await _validator.ValidateAsync(instance);
+            Assert.False(validation.IsValid);
+            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroEndereco.LogradouroTamanhoMaximo));
+        }
+        [Theory(DisplayName = "Teste tamanho máximo localidade")]
+        [InlineData("rua tal")]
+        [InlineData("teste de localidade")]
+        [InlineData("localidade válida")]
+        public async Task LogradouroValido(string logradouro)
+        {
+            var instance = _builder.With(x => x.Logradouro = logradouro).Build();
+            var validation = await _validator.ValidateAsync(instance);
+            Assert.True(validation.IsValid);
+        }
+        #endregion
+
+        #region Complemento
+        [Theory(DisplayName = "Teste de Complementos válidos")]
+        [InlineData("sea")]
+        [InlineData("padovani")]
+        [InlineData("marechal")]
+        [InlineData("mercado")]
+        public async Task ComplementoValido(string complemento)
+        {
+            var instance = _builder.With(x => x.Complemento = complemento).Build();
+            var validation = await _validator.ValidateAsync(instance);
+            Assert.True(validation.IsValid);
+        }
+
+        [Theory(DisplayName = "Teste de Complementos não válidos")]
+        [InlineData("se")]
+        [InlineData("1")]
+        [InlineData("d")]
+        [InlineData("32")]
+        public async Task ComplementoTamanhoMinimo(string complemento)
+        {
+            var instance = _builder.With(x => x.Complemento = complemento).Build();
+            var validation = await _validator.ValidateAsync(instance);
+            Assert.False(validation.IsValid);
+        }
+        [Theory(DisplayName = "Teste de Complementos tamanho máximo")]
+        [InlineData("teste do complemento tamanho máximo do endereço do fornecedomodel que é de 50 caracteres no máximo")]
+        [InlineData("jdjdjfjfhdgsgdgeftfdrtgyhjykdfghtyuhgfrdswertgfdfss")]
+        [InlineData("iuhiuwciuwhiuchuihuicuiwechiewhiuceoccwlewldedlwdwjedlwdwe")]
+        [InlineData("lgkfhhjfdjjfkdhiudwehiudewuhdhdiuwehiudewuidhuediedhweuhdiewhddew")]
+        public async Task ComplementoTamanhoMaximo(string complemento)
+        {
+            var instance = _builder.With(x => x.Complemento = complemento).Build();
+            var validation = await _validator.ValidateAsync(instance);
+            Assert.False(validation.IsValid);
+        }
+        #endregion
+
+        #region Numero
+        [Theory(DisplayName = "teste de números válidos")]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(3)]
+        [InlineData(500)]
+        [InlineData(37)]
+        public async Task NumerosValidos(int numero)
+        {
+            var instance = _builder.With(x => x.Numero = numero).Build();
+            var validation = await _validator.ValidateAsync(instance);
+            Assert.True(validation.IsValid);
+        }
+        [Theory(DisplayName = "teste de números inválidos")]
+        [InlineData(-1)]
+        [InlineData(0)]
+        [InlineData(-30)]
+        [InlineData(-48)]
+        public async Task NumerosInvalidos(int numero)
+        {
+            var instance = _builder.With(x => x.Numero = numero).Build();
+            var validation = await _validator.ValidateAsync(instance);
+            Assert.False(validation.IsValid);
+        }
+        #endregion
+
+        #region Razao Social
+        [Theory(DisplayName = "teste de razões sociais válidas")]
+        [InlineData("josé augusto")]
+        [InlineData("Paulo fernandes")]
+        [InlineData("Antônio rocheda")]
+        [InlineData("Marcia algusta da silva")]
+        public async Task RazaoSocialValida(string razao)
+        {
+            var instance = _builder.With(x => x.RazaoSocial = razao).Build();
+            var validation = await _validator.ValidateAsync(instance);
+            Assert.True(validation.IsValid);
+        }
+
+        [Theory(DisplayName = "teste de razões sociais Tamanho máximo")]
+        [InlineData("jdjdjfjfhdgsgdgeftfdrtgyhjykdfghtyuhgfrdswertgfdfsfewqkjnkjnsdjkfjdsfksdjfkjsjfsjdjfksd")]
+        [InlineData("jdjssfdffffjfhdgsgdgeftfdrtgyhjykdfghtyuhgfrdswertgfdfsfewqkjnkjnsdjkfjdsfksdjfkjsjfsjdjfksd")]
+        public async Task RazaoSocialTamanhoMaximo(string razao)
+        {
+            var instance = _builder.With(x => x.RazaoSocial = razao).Build();
+            var validation = await _validator.ValidateAsync(instance);
+            Assert.False(validation.IsValid);
+            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensErroFornecedor.RazaoSocialTamanhoMaximo));
+        }
+
+        [Theory(DisplayName = "teste de razões sociais Tamanho mínimo")]
+        [InlineData("te")]
+        [InlineData("s")]
+        [InlineData("1")]
+        [InlineData("h")]
+        [InlineData("ks")]
+        public async Task RazaoSocialTamanhoMinimo(string razao)
+        {
+            var instance = _builder.With(x => x.RazaoSocial = razao).Build();
+            var validation = await _validator.ValidateAsync(instance);
+            Assert.False(validation.IsValid);
+            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensErroFornecedor.RazaoSocialTamanhoMinimo));
         }
         #endregion
     }

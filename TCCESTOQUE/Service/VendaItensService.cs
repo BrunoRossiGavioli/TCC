@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
-using FluentValidation;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
-using TCCESTOQUE.Validacao.ValidacaoModels;
 
 namespace TCCESTOQUE.Service
 {
@@ -36,7 +34,7 @@ namespace TCCESTOQUE.Service
         }
 
         public object PutEdicao(int? id, VendaItensModel vendaItens)
-        {         
+        {
 
             return _vendaItensRepository.PutEdicao(id, vendaItens);
         }

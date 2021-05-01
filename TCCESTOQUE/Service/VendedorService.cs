@@ -90,7 +90,7 @@ namespace TCCESTOQUE.Service
         public object GetSenha(string senha)
         {
             return _vendedorRepository.GetSenha(senha);
-        }       
+        }
 
     }
 }
