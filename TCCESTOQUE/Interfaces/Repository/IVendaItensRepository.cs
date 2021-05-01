@@ -8,7 +8,7 @@ namespace TCCESTOQUE.Interfaces.Repository
 {
     public interface IVendaItensRepository
     {
-        public VendaItensModel GetDetalhes(int? id);
+        public VendaItensModel GetOne(int? id);
 
         public void PostCriacao(VendaItensModel vendaItens);
 
@@ -16,8 +16,6 @@ namespace TCCESTOQUE.Interfaces.Repository
 
         public void PutEdicao(VendaItensModel vendaItens);
 
-        public VendaItensModel GetExclusao(int? id);
-
-        public object PostExlusao(int id);
+        public void PostExlusao(VendaItensModel vendaItens);
     }
 }

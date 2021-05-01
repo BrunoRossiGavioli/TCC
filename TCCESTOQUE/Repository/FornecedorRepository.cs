@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Repository;
@@ -11,20 +12,18 @@ namespace TCCESTOQUE.Repository
     public class FornecedorRepository : IFornecedorRepository
     {
         private readonly TCCESTOQUEContext _context;
-        private readonly IMapper _mapper;
 
-        public FornecedorRepository(TCCESTOQUEContext context, IMapper mapper)
-        {
-            _context = context;
-            _mapper = mapper;
-        }
-
-        public object GetIndex()
+        public ICollection<FornecedorModel> GetAll()
         {
             return _context.FornecedorModel.ToList();
         }
 
-        public FornecedorModel GetDetalhes(int? id)
+        public FornecedorRepository(TCCESTOQUEContext context)
+        {
+            _context = context;
+        }
+
+        public FornecedorModel GetOne(int? id)
         {
             var fornecedorModel = _context.FornecedorModel
                 .FirstOrDefault(m => m.FornecedorId == id);
@@ -35,23 +34,10 @@ namespace TCCESTOQUE.Repository
             return fornecedorModel;
         }
 
-        public FornecedorModel GetExclusao(int? id)
+        public void PostExclusao(FornecedorModel fornecedor)
         {
-            var fornecedorModel = _context.FornecedorModel
-                .FirstOrDefault(m => m.FornecedorId == id);
-
-            if (fornecedorModel == null)
-                return null;
-
-            return fornecedorModel;
-        }
-
-        public object PostExclusao(int id)
-        {
-            var fornecedorModel = _context.FornecedorModel.Find(id);
-            _context.FornecedorModel.Remove(fornecedorModel);
+            _context.FornecedorModel.Remove(fornecedor);
             _context.SaveChanges();
-            return nameof(Index);
         }
 
         public FornecedorModel GetEditFull(int? id)

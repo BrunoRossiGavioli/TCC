@@ -1,13 +1,15 @@
-﻿using TCCESTOQUE.Models;
-using TCCESTOQUE.ViewModel;
+﻿using System.Collections.Generic;
+using TCCESTOQUE.Models;
+
 
 namespace TCCESTOQUE.Interfaces.Repository
 {
     public interface IFornecedorRepository
     {
-        public object GetIndex();
 
-        public FornecedorModel GetDetalhes(int? id);
+        public ICollection<FornecedorModel> GetAll();
+
+        public FornecedorModel GetOne(int? id);
 
         public void PostCadastro(FornecedorModel fornecedorModel);
 
@@ -15,9 +17,7 @@ namespace TCCESTOQUE.Interfaces.Repository
 
         public void PutEdit(FornecedorModel fornecedorModel);
 
-        public FornecedorModel GetExclusao(int? id);
-
-        public object PostExclusao(int id);
+        public void PostExclusao(FornecedorModel fornecedor);
 
         public FornecedorModel GetByCnpj(string cnpj);
 

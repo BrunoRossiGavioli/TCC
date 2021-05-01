@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation.Results;
+using System.Collections.Generic;
 using System.Linq;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
@@ -24,29 +25,28 @@ namespace TCCESTOQUE.Service
             _mapper = mapper;
         }
 
-        public object GetIndex()
+        public ICollection<FornecedorModel> GetAll()
         {
-            return _fornecedorRepository.GetIndex();
+            return _fornecedorRepository.GetAll();
         }
-        public FornecedorModel GetDetalhes(int? id)
+
+        public FornecedorModel GetOne(int? id)
         {
             if (id == null)
                 return null;
 
-            return _fornecedorRepository.GetDetalhes(id);
+            return _fornecedorRepository.GetOne(id);
         }
 
-        public FornecedorModel GetExclusao(int? id)
+        public bool PostExclusao(int id)
         {
-            if (id == null)
-                return null;
-
-            return _fornecedorRepository.GetExclusao(id);
-        }
-
-        public object PostExclusao(int id)
-        {
-            return _fornecedorRepository.PostExclusao(id);
+            var res = _fornecedorRepository.GetOne(id);
+            if (res != null)
+            {
+                _fornecedorRepository.PostExclusao(res);
+                return true;
+            }
+            return false;
         }
 
         public FornecedorEnderecoViewModel GetEditFull(int? id)

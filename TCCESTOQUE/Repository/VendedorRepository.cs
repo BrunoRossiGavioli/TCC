@@ -53,25 +53,19 @@ namespace TCCESTOQUE.Repository
             _context.SaveChanges();
         }
 
-        public object PostExclusao(int id)
-        {
-            var vendedorModel = _context.VendedorModel.Find(id);
-            if (vendedorModel.VendedorId == id)
-            {
-                _context.VendedorModel.Remove(vendedorModel);
-                _context.SaveChanges();
-            }
-            return null;
-
+        public void PostExclusao(VendedorModel vendedor)
+        { 
+            _context.VendedorModel.Remove(vendedor);
+            _context.SaveChanges();
         }
 
-        public ClaimsPrincipal PostLogin(VendedorModel vendedorModel)
+        public ClaimsPrincipal PostLogin(VendedorModel vendedor)
         {
             IList<Claim> Claims = new List<Claim>()
             {
-                new Claim(ClaimTypes.Name, vendedorModel.Nome),
-                new Claim(ClaimTypes.Email, vendedorModel.Email),
-                new Claim(ClaimTypes.SerialNumber, Convert.ToString(vendedorModel.VendedorId))
+                new Claim(ClaimTypes.Name, vendedor.Nome),
+                new Claim(ClaimTypes.Email, vendedor.Email),
+                new Claim(ClaimTypes.SerialNumber, Convert.ToString(vendedor.VendedorId))
             };
 
             var minhaIdentity = new ClaimsIdentity(Claims, "Vendedor");

@@ -13,7 +13,7 @@
         #endregion
 
         #region tamanho máximo
-        public static string CepTamanho = "O campo Cep tem que ter 8 caracteres !";
+        public static string CepTamanho = "O campo Cep tem que ter 9 caracteres !";
         public static string LogradouroTamanhoMaximo = "O campo Logradouro excedeu o numero maximo de caracteres !";
         public static string ComplementoTamanhoMaximo = "O campo Complemento excedeu o numero maximo de caracteres!";
         public static string NumeroTamanhoMaximo = "O campo Número excedeu o numero maximo de caracteres !";

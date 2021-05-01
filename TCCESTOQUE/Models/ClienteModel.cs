@@ -16,7 +16,7 @@ namespace TCCESTOQUE.Models
         [MaxLength(50)]
         public string Nome { get; set; }
 
-        [StringLength(11)]
+        [StringLength(14)]
         public string Cpf { get; set; }
 
         [MaxLength(80)]

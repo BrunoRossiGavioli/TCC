@@ -1,23 +1,20 @@
-﻿using TCCESTOQUE.Models;
+﻿using System.Collections.Generic;
+using TCCESTOQUE.Models;
 
 namespace TCCESTOQUE.Interfaces.Repository
 {
     public interface IProdutoRepository
     {
-        public object GetIndex();
+        public ICollection<ProdutoModel> GetAll();
 
-        public ProdutoModel GetDetalhes(int? id);
-
-        public object GetCriacao();
+        public ProdutoModel GetOne(int? id);
 
         public void PostCriacao(ProdutoModel produtoModel);
 
         public ProdutoModel GetEdicao(int? id);
 
-        public void PutEdicao(int id, ProdutoModel produtoModel);
+        public void PutEdicao(ProdutoModel produtoModel);
 
-        public ProdutoModel GetExclusao(int? id);
-
-        public object PostExclusao(int id);
+        public void PostExclusao(ProdutoModel produtoModel);
     }
 }

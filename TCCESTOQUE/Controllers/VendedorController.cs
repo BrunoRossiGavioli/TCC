@@ -26,7 +26,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Index()
         {
             Autenticar();
-            return View(_vendedorService.GetCriacao());
+            return View(_vendedorService.GetAll());
         }
 
         // GET: Vendedor/Details/5
@@ -98,8 +98,12 @@ namespace TCCESTOQUE.Controllers
         public IActionResult DeleteConfirmed(int id)
         {
             Autenticar();
-            _vendedorService.PostExclusao(id);
-            return RedirectToAction("Index","Home");
+            var res = _vendedorService.PostExclusao(id);
+            if(res)
+                return RedirectToAction("Index","Home");
+
+            ModelState.AddModelError("", "Não foi possivel deletar sua conta, tente novamente mais tarde!");
+            return View(_vendedorService.GetOne(id));
         }
 
         // GET
@@ -133,7 +137,7 @@ namespace TCCESTOQUE.Controllers
         //POST
         [Authorize]
         [HttpPost, ActionName("Logout")]
-        public async Task<IActionResult> Logout(VendedorModel vendedor)
+        public async Task<IActionResult> LogoutConfirmado()
         {
             Autenticar();
             await HttpContext.SignOutAsync();

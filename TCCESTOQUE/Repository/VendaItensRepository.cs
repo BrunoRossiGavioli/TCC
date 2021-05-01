@@ -17,7 +17,7 @@ namespace TCCESTOQUE.Repository
         {
             _context = context;
         }
-        public VendaItensModel GetDetalhes(int? id)
+        public VendaItensModel GetOne(int? id)
         {
             var vendaItensModel = _context.VendaItensModel
                 .Include(v => v.Produto)
@@ -44,29 +44,10 @@ namespace TCCESTOQUE.Repository
             _context.SaveChanges();
         }
 
-        public VendaItensModel GetExclusao(int? id)
+        public void PostExlusao(VendaItensModel vendaItens)
         {
-            var vendaItens = _context.VendaItensModel
-                .Include(v => v.Produto)
-                .Include(v => v.Venda)
-                .FirstOrDefault(m => m.VendaItensId == id);
-
-            return vendaItens;
-        }
-
-        public object PostExlusao(int id)
-        {
-            var vendaItens = _context.VendaItensModel.Find(id);
-            try
-            {
-                _context.VendaItensModel.Remove(vendaItens);
-                _context.SaveChanges();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            _context.VendaItensModel.Remove(vendaItens);
+            _context.SaveChanges();
         }
 
     }

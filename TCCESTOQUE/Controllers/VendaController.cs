@@ -29,7 +29,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Index()
         {
             Autenticar();
-            return View(_vendaService.GetIndex());
+            return View(_vendaService.GetAll());
         }
 
         // GET: Venda/Details/5
@@ -39,7 +39,7 @@ namespace TCCESTOQUE.Controllers
             if (id == null)
                 return NotFound();
 
-            var vendaModel = _vendaService.GetDetalhes(id);
+            var vendaModel = _vendaService.GetOne(id);
 
             if (vendaModel == null)
                 return NotFound();
@@ -97,7 +97,7 @@ namespace TCCESTOQUE.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("VendaId,Valor,DataVenda,VendedorId,ClienteId")] VendaModel vendaModel)
+        public IActionResult Edit(int id,VendaModel vendaModel)
         {
             Autenticar();
             if (id != vendaModel.VendaId)
@@ -127,7 +127,7 @@ namespace TCCESTOQUE.Controllers
             if (id == null)
                 return NotFound();
 
-            var vendaModel = _vendaService.GetExclusao(id);
+            var vendaModel = _vendaService.GetOne(id);
             if (vendaModel == null)
                 return NotFound();
 
@@ -140,8 +140,12 @@ namespace TCCESTOQUE.Controllers
         public IActionResult DeleteConfirmed(int id)
         {
             Autenticar();
-            var vendaModel = _vendaService.PostExclusao(id);
-            return RedirectToAction(nameof(Index));
+            var res = _vendaService.PostExclusao(id);
+            if(res)
+                return RedirectToAction("Index","Venda");
+
+            ModelState.AddModelError("", "Não foi possivel deletar essa venda, tente novamente mais tarde!");
+            return View(_vendaService.GetOne(id));
         }
     }
 }

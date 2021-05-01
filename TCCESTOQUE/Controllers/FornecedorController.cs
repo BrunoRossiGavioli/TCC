@@ -9,11 +9,11 @@ namespace TCCESTOQUE.Controllers
 {
     public class FornecedorController : ControllerPai
     {
-        private readonly IFornecedorService _context;
+        private readonly IFornecedorService _fornecedorService;
 
         public FornecedorController(IFornecedorService context)
         {
-            _context = context;
+            _fornecedorService = context;
         }
 
         [Authorize]
@@ -29,7 +29,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult CadastroFull(FornecedorEnderecoViewModel feviewmodel)
         {
             Autenticar();
-            var res = _context.PostCadastroFull(feviewmodel);
+            var res = _fornecedorService.PostCadastroFull(feviewmodel);
             if (!res.IsValid)
                 return View(MostrarErros(res, feviewmodel));
                 
@@ -40,7 +40,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Index()
         {
             Autenticar();
-            return View(_context.GetIndex());
+            return View(_fornecedorService.GetAll());
         }
 
         // GET: Fornecedor/Details/5
@@ -48,7 +48,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Details(int? id)
         {
             Autenticar();
-            return View(_context.GetDetalhes(id));
+            return View(_fornecedorService.GetOne(id));
         }
 
         // GET: Fornecedor/EditFull/5
@@ -56,7 +56,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult EditFull(int? id)
         {
             Autenticar();
-            var edit = _context.GetEditFull(id);
+            var edit = _fornecedorService.GetEditFull(id);
             return View(edit);
             
             //if (edit == null) { 
@@ -75,7 +75,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult EditFull(int id, FornecedorEnderecoViewModel feviewmodel)
         {
             Autenticar();
-            var res = _context.PutEditFull(id, feviewmodel);
+            var res = _fornecedorService.PutEditFull(id, feviewmodel);
 
             if (!res.IsValid)
                 return View(MostrarErros(res, feviewmodel));
@@ -88,7 +88,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Delete(int? id)
         {
             Autenticar();
-            return View(_context.GetExclusao(id));
+            return View(_fornecedorService.GetOne(id));
         }
 
         // POST: Fornecedor/Delete/5
@@ -98,8 +98,12 @@ namespace TCCESTOQUE.Controllers
         public IActionResult DeleteConfirmed(int id)
         {
             Autenticar();
-            _context.PostExclusao(id);
-            return RedirectToAction("Index", "Fornecedor");
+            var res = _fornecedorService.PostExclusao(id);
+            if(res)
+                return RedirectToAction("Index", "Fornecedor");
+
+            ModelState.AddModelError("", "Não foi possivel deletar o fornecedor, tente novamente mais tarde!");
+            return View(_fornecedorService.GetOne(id));
         }
     }
 }

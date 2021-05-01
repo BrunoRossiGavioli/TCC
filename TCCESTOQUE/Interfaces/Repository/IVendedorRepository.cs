@@ -17,7 +17,7 @@ namespace TCCESTOQUE.Interfaces.Repository
 
         public void PutEdicao(VendedorModel vendedorModel);
 
-        public object PostExclusao(int id);
+        public void PostExclusao(VendedorModel model);
 
         public ClaimsPrincipal PostLogin(VendedorModel vendedorModel);
 

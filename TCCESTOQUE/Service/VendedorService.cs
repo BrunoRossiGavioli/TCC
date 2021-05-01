@@ -22,7 +22,7 @@ namespace TCCESTOQUE.Service
         {
             _vendedorRepository = vendedorRepository;
         }
-        public ICollection<VendedorModel> GetCriacao()
+        public ICollection<VendedorModel> GetAll()
         {
             return _vendedorRepository.GetCriacao();
         }
@@ -62,9 +62,15 @@ namespace TCCESTOQUE.Service
             return validacao;
         }
 
-        public object PostExclusao(int id)
+        public bool PostExclusao(int id)
         {
-            return _vendedorRepository.PostExclusao(id);
+            var res = _vendedorRepository.GetOne(id);
+            if (res != null)
+            {
+                _vendedorRepository.PostExclusao(res);
+                return true;
+            }
+            return false;
         }
 
         public object PostLogin(VendedorModel vendedorModel)
@@ -75,7 +81,6 @@ namespace TCCESTOQUE.Service
 
             var vendedor = _vendedorRepository.GetByEmail(vendedorModel.Email);
             return _vendedorRepository.PostLogin(vendedor);
-            
         }
 
         private ValidationResult ValidarVendedor(VendedorModel vendedor)

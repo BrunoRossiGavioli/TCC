@@ -9,18 +9,16 @@ namespace TCCESTOQUE.Interfaces.Repository
 {
     public interface IClienteRepository
     {
-        public object GetIndex();
+        public ICollection<ClienteModel> GetIndex();
 
-        public ClienteModel GetDetalhes(int? id);
+        public ClienteModel GetOne(int? id);
 
-        public object PostCriacao(ClienteViewModel cliente);
+        public void PostCriacao(ClienteModel cliente);
 
-        public ClienteViewModel GetEdicao(int? id);
+        public ClienteModel GetEdicao(int? id);
 
-        public object PutEdicao(int id, ClienteViewModel cliente);
+        public void PutEdicao(ClienteModel cliente);
 
-        public ClienteModel GetExclusao(int? id);
-
-        public object PostExclusao(int id);
+        public void PostExclusao(ClienteModel cliente);
     }
 }

@@ -26,30 +26,29 @@ namespace TCCESTOQUE.Service
             _mapper = mapper;
         }
 
-        public ICollection<VendaModel> GetIndex()
+        public ICollection<VendaModel> GetAll()
         {
-            return _vendaRepository.GetIndex();
+            return _vendaRepository.GetAll();
         }
 
-        public VendaModel GetDetalhes(int? id)
+        public VendaModel GetOne(int? id)
         {
-            return _vendaRepository.GetDetalhes(id);
+            return _vendaRepository.GetOne(id);
         }
 
-        public object GetCricao(int id)
+        public ValidationResult PostCricao(VendaViewModel vendaVM)
         {
-            return _vendaRepository.GetCricao(id);
-        }
+            var validacao = new VendaViewModelValidador().Validate(vendaVM);
+            if (!validacao.IsValid)
+                return validacao;
 
-        public object PostCricao(VendaViewModel vendaVM)
-        {
             var vendaModel = _mapper.Map<VendaModel>(vendaVM);
             _vendaRepository.PostCricao(vendaModel);
             
             var itens = _mapper.Map<VendaItensModel>(vendaVM);
             itens.VendaId = vendaModel.VendaId;
             _vendaItensRepository.PostCriacao(itens);
-            return true;
+            return validacao;
         }
 
         public VendaModel GetEdicao(int? id)
@@ -64,14 +63,14 @@ namespace TCCESTOQUE.Service
             return true;
         }
 
-        public VendaModel GetExclusao(int? id)
+        public bool PostExclusao(int id)
         {
-            return _vendaRepository.GetExclusao(id);
-        }
-
-        public VendaModel PostExclusao(int id)
-        {
-            return _vendaRepository.PostExclusao(id);
+            var res = _vendaRepository.GetOne(id);
+            if(res != null) { 
+                _vendaRepository.PostExclusao(res);
+                return true;
+            }
+            return false;
         }
     }
 }

@@ -15,15 +15,13 @@ namespace TCCESTOQUE.Repository
     public class VendaRepository : IVendaRepository
     {
         private readonly TCCESTOQUEContext _context;
-        private readonly IMapper _mapper;
 
-        public VendaRepository(TCCESTOQUEContext context, IMapper mapper)
+        public VendaRepository(TCCESTOQUEContext context)
         {
             _context = context;
-            _mapper = mapper;
         }
 
-        public VendaModel GetDetalhes(int? id)
+        public VendaModel GetOne(int? id)
         {
             var vendaModel = _context.VendaModel
                 .Include(v => v.Itens)
@@ -39,15 +37,11 @@ namespace TCCESTOQUE.Repository
             return vendaModel;
         }
 
-        public ICollection<VendaModel> GetIndex()
+        public ICollection<VendaModel> GetAll()
         {
             return _context.VendaModel.Include(v => v.Cliente).Include(v => v.Vendedor).ToList();
         }
 
-        public object GetCricao(int id)
-        {
-            throw new NotImplementedException();
-        }
         public void PostCricao(VendaModel venda)
         {
             _context.Add(venda);
@@ -64,21 +58,10 @@ namespace TCCESTOQUE.Repository
             _context.SaveChangesAsync();
         }
 
-        public VendaModel GetExclusao(int? id)
+        public void PostExclusao(VendaModel venda)
         {
-            var vendaModel = _context.VendaModel
-            .Include(v => v.Cliente)
-            .Include(v => v.Vendedor)
-            .FirstOrDefault(m => m.VendaId == id);
-            return vendaModel;
-        }
-
-        public VendaModel PostExclusao(int id)
-        {
-            var vendaModel = _context.VendaModel.Find(id);
-            _context.VendaModel.Remove(vendaModel);
+            _context.VendaModel.Remove(venda);
             _context.SaveChanges();
-            return vendaModel;
         }
     }
 }

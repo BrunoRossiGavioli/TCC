@@ -1,4 +1,6 @@
 ﻿using FluentValidation.Results;
+using System.Collections;
+using System.Collections.Generic;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
@@ -15,22 +17,17 @@ namespace TCCESTOQUE.Service
             _produtoRepository = produtoRepository;
         }
 
-        public object GetIndex()
+        public ICollection<ProdutoModel> GetAll()
         {
-            return _produtoRepository.GetIndex();
+            return _produtoRepository.GetAll();
         }
 
-        public object GetCriacao()
-        {
-            return _produtoRepository.GetCriacao();
-        }
-
-        public ProdutoModel GetDetalhes(int? id)
+        public ProdutoModel GetOne(int? id)
         {
             if (id == null)
                 return null;
 
-            return _produtoRepository.GetDetalhes(id);
+            return _produtoRepository.GetOne(id);
         }
 
         public ProdutoModel GetEdicao(int? id)
@@ -39,14 +36,6 @@ namespace TCCESTOQUE.Service
                 return null;
 
             return _produtoRepository.GetEdicao(id);
-        }
-
-        public ProdutoModel GetExclusao(int? id)
-        {
-            if (id == null)
-                return null;
-
-            return _produtoRepository.GetExclusao(id);
         }
 
         public ValidationResult PostCriacao(ProdutoModel produtoModel)
@@ -59,19 +48,24 @@ namespace TCCESTOQUE.Service
             return validador;
         }
 
-        public object PostExclusao(int id)
+        public bool PostExclusao(int id)
         {
-            return _produtoRepository.PostExclusao(id);
+            var produto = _produtoRepository.GetOne(id);
+            if(produto != null)
+            {
+                _produtoRepository.PostExclusao(produto);
+                return true;
+            }
+            return false;
         }
 
-        public ValidationResult PutEdicao(int id, ProdutoModel produtoModel)
+        public ValidationResult PutEdicao(ProdutoModel produtoModel)
         {
-            produtoModel.ProdutoId = id;
             var validador = new ProdutoValidador().Validate(produtoModel);
             if (!validador.IsValid)
                 return validador;
 
-            _produtoRepository.PutEdicao(id, produtoModel);
+            _produtoRepository.PutEdicao(produtoModel);
             return validador;
         }
     }

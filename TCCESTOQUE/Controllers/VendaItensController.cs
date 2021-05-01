@@ -7,12 +7,12 @@ namespace TCCESTOQUE.Controllers
 {
     public class VendaItensController : ControllerPai
     {
-        private readonly IVendaItensService _context;
+        private readonly IVendaItensService _VendaItensService;
         private readonly ISelectListRepository _selectListRepository;
 
         public VendaItensController(IVendaItensService context, ISelectListRepository selectListRepository)
         {
-            _context = context;
+            _VendaItensService = context;
             _selectListRepository = selectListRepository;
         }
 
@@ -23,7 +23,7 @@ namespace TCCESTOQUE.Controllers
             if (id == null)
                 return NotFound();
 
-            var vendaItensModel = _context.GetDetalhes(id);
+            var vendaItensModel = _VendaItensService.GetOne(id);
 
             if (vendaItensModel == null)
                 return NotFound();
@@ -45,17 +45,21 @@ namespace TCCESTOQUE.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("VendaItensId,VendaId,ProdutoId,Quantidade")] VendaItensModel vendaItensModel, int id)
+        public IActionResult Create(VendaItensModel vendaItensModel, int vendaId)
         {
             Autenticar();
+            if (vendaItensModel.VendaId != vendaId)
+                return NotFound();
 
             if (ModelState.IsValid)
             {
-                _context.PostCriacao(vendaItensModel, id);
-                return RedirectToAction("Index", "Venda");
+                var res = _VendaItensService.PostCriacao(vendaItensModel);
+                if(res)
+                    return RedirectToAction("Index", "Venda");
             }
+
             ViewData["ProdutoId"] = _selectListRepository.SelectListProduto("ProdutoId", "Nome", vendaItensModel.ProdutoId);
-            ViewData["VendaId"] = _selectListRepository.SelectListVenda("VendaId", "VendaId", id);
+            ViewData["VendaId"] = _selectListRepository.SelectListVenda("VendaId", "VendaId", vendaItensModel.VendaId);
             return View(vendaItensModel);
         }
 
@@ -66,7 +70,7 @@ namespace TCCESTOQUE.Controllers
             if (id == null)
                 return NotFound();
 
-            var vendaItensModel = _context.GetEdicao(id);
+            var vendaItensModel = _VendaItensService.GetOne(id);
             if (vendaItensModel == null)
                 return NotFound();
 
@@ -80,7 +84,7 @@ namespace TCCESTOQUE.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("VendaItensId,VendaId,ProdutoId,Quantidade")] VendaItensModel vendaItensModel)
+        public IActionResult Edit(VendaItensModel vendaItensModel, int id)
         {
             Autenticar();
             if (id != vendaItensModel.VendaItensId)
@@ -88,7 +92,7 @@ namespace TCCESTOQUE.Controllers
 
             if (ModelState.IsValid)
             {
-                _context.PutEdicao(id, vendaItensModel);
+                _VendaItensService.PutEdicao(vendaItensModel);
                 return RedirectToAction("Index","Venda");
             }
             ViewData["ProdutoId"] = _selectListRepository.SelectListProduto("ProdutoId", "Nome", vendaItensModel.ProdutoId);
@@ -103,7 +107,7 @@ namespace TCCESTOQUE.Controllers
             if (id == null)
                 return NotFound();
 
-            var vendaItensModel = _context.GetExclusao(id);
+            var vendaItensModel = _VendaItensService.GetOne(id);
 
             if (vendaItensModel == null)
                 return NotFound();
@@ -117,8 +121,12 @@ namespace TCCESTOQUE.Controllers
         public IActionResult DeleteConfirmed(int id)
         {
             Autenticar();
-            _context.PostExlusao(id);
-            return RedirectToAction("Index","Venda");
+            var res = _VendaItensService.PostExclusao(id);
+            if(res)
+                return RedirectToAction("Index","Venda");
+
+            ModelState.AddModelError("", "Não foi possivel excluir o item, tente novamente mais tarde!");
+            return View(_VendaItensService.GetOne(id));
         }
     }
 }
