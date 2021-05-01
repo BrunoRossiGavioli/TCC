@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,10 +68,7 @@ namespace TCCESTOQUE.Repository
         public ClaimsPrincipal PostLogin(VendedorModel vendedorModel)
         {
             var vendedor = _context.VendedorModel.Where(a => a.Email == vendedorModel.Email).FirstOrDefault();
-            if (vendedor == null)
-                return null;
-            if (vendedor.Senha != SecurityService.Criptografar(vendedorModel.Senha))
-                return null;
+
 
             IList<Claim> Claims = new List<Claim>()
             {
@@ -101,6 +99,7 @@ namespace TCCESTOQUE.Repository
 
         public VendedorModel GetSenha(string senha)
         {
+            senha = SecurityService.Criptografar(senha);
             return _context.VendedorModel.Where(a => a.Senha == senha).FirstOrDefault();
         }
     }

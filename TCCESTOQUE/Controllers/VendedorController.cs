@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using FluentValidation.Results;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
@@ -113,12 +115,11 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             var res = _vendedorService.PostLogin(vendedor);
-            if (res != null)
-            {
-                HttpContext.SignInAsync(res);
+            if (res.GetType() == typeof(ClaimsPrincipal)) { 
+                HttpContext.SignInAsync((ClaimsPrincipal)res);
                 return RedirectToAction("Index", "Home");
             }
-            return View(vendedor);           
+            return View(MostrarErros((ValidationResult)res, vendedor));
         }
 
         //GET

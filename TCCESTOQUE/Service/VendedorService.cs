@@ -4,11 +4,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using TCCESTOQUE.Controllers;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.Validacao.Formatacao;
 using TCCESTOQUE.Validacao.ValidacaoBusiness;
+using TCCESTOQUE.Validacao.ValidacaoModels;
 using TCCESTOQUE.ValidadorVendedor;
 
 namespace TCCESTOQUE.Service
@@ -65,9 +67,15 @@ namespace TCCESTOQUE.Service
             return _vendedorRepository.PostExclusao(id);
         }
 
-        public ClaimsPrincipal PostLogin(VendedorModel vendedorModel)
+        public object PostLogin(VendedorModel vendedorModel)
         {
+            var validacao = new LoginValidador(_vendedorRepository, vendedorModel).Validate(vendedorModel);
+            if (!validacao.IsValid)
+                return validacao;
+
+            var vendedor = _vendedorRepository.GetByEmail(vendedorModel.Email);
             return _vendedorRepository.PostLogin(vendedorModel);
+            
         }
 
         private ValidationResult ValidarVendedor(VendedorModel vendedor)
