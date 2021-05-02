@@ -31,7 +31,7 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
                 .Length(18).WithMessage(MensagensErroFornecedor.CnpjTamanho);
 
 
-            RuleFor(e => e.Cep).NotEmpty().Length(10).WithMessage(MensagensDeErroEndereco.CepTamanho);
+            RuleFor(e => e.Cep).NotEmpty().Length(9).WithMessage(MensagensDeErroEndereco.CepTamanho);
             When(f => !string.IsNullOrEmpty(f.Logradouro), () =>
             {
                 RuleFor(e => e.Logradouro).MaximumLength(50).WithMessage(MensagensDeErroEndereco.LogradouroTamanhoMaximo)

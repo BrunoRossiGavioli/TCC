@@ -13,7 +13,7 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
                .MinimumLength(3).WithMessage(MensagensErroCliente.NomeTamanhoMinimo);
 
             RuleFor(v => v.Telefone).NotEmpty().WithMessage(MensagensErroCliente.TelefoneVazio)
-              .Length(11).WithMessage(MensagensErroCliente.TelefoneTamanho);
+              .Length(14).WithMessage(MensagensErroCliente.TelefoneTamanho);
 
             RuleFor(e => e.Cep).NotEmpty().WithMessage(MensagensDeErroEndereco.CepVazio)
                 .Length(9).WithMessage(MensagensDeErroEndereco.CepTamanho);
@@ -27,7 +27,7 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
                 .MinimumLength(3).WithMessage(MensagensDeErroEndereco.ComplementoVazio);
 
             RuleFor(e => e.Numero).NotEmpty().WithMessage(MensagensDeErroEndereco.NumeroVazio)
-                .GreaterThanOrEqualTo(0).WithMessage(MensagensDeErroEndereco.NumeroTamanhoMinimo);
+                .GreaterThan(0).WithMessage(MensagensDeErroEndereco.NumeroTamanhoMinimo);
 
             RuleFor(e => e.Bairro).NotEmpty().WithMessage(MensagensDeErroEndereco.BairroVazio)
                 .MaximumLength(80).WithMessage(MensagensDeErroEndereco.BairroTamanhoMaximo)
@@ -37,9 +37,12 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
                 .MaximumLength(80).WithMessage(MensagensDeErroEndereco.LocalidadeTamanhoMaximo)
                 .MinimumLength(3).WithMessage(MensagensDeErroEndereco.LocalidadeTamanhoMinimo);
 
-            RuleFor(v => v.Email).EmailAddress().WithMessage(MensagensErroCliente.EmailFormatoInvalido)
+            RuleFor(v => v.Email).NotEmpty().WithMessage(MensagensErroCliente.EmailVazio)
+                .EmailAddress().WithMessage(MensagensErroCliente.EmailFormatoInvalido)
                .MaximumLength(30).WithMessage(MensagensErroCliente.EmailTamanhoMaximo);
 
+            RuleFor(v => v.Uf).NotEmpty().WithMessage(MensagensDeErroEndereco.UfVazio)
+             .Length(2).WithMessage(MensagensDeErroEndereco.UfTamanho);
 
             When(v => !string.IsNullOrEmpty(v.Cpf), () =>
             {

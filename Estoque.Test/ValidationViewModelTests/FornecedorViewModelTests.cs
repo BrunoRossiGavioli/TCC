@@ -26,9 +26,9 @@ namespace Estoque.Test.ValidationViewModelTests
         {
             var instance = _builder.Build();
 
-            var validationResult = await _validator.ValidateAsync(instance);
+            var validation = await _validator.ValidateAsync(instance);
 
-            Assert.True(validationResult.IsValid);
+            Assert.True(validation.IsValid);
         }
 
         #region Telefone
@@ -73,9 +73,9 @@ namespace Estoque.Test.ValidationViewModelTests
         {
             var instance = _builder.With(a => a.Cnpj = cnpj).Build();
 
-            var validationResult = await _validator.ValidateAsync(instance);
+            var validation = await _validator.ValidateAsync(instance);
 
-            Assert.True(validationResult.IsValid);
+            Assert.True(validation.IsValid);
         }
         [Theory(DisplayName = "Cnpj válidos")]
         [InlineData("01.222.43/0001-79")]
@@ -86,23 +86,13 @@ namespace Estoque.Test.ValidationViewModelTests
         {
             var instance = _builder.With(a => a.Cnpj = cnpj).Build();
 
-            var validationResult = await _validator.ValidateAsync(instance);
+            var validation = await _validator.ValidateAsync(instance);
 
-            Assert.False(validationResult.IsValid);
+            Assert.False(validation.IsValid);
         }
         #endregion
 
         #region Email
-        [Fact(DisplayName = "O Email pode ser vazio")]
-        public async Task EmailPodeSerVazio()
-        {
-            var instance = _builder.With(a => a.Email = "").Build();
-
-            var validationResult = await _validator.ValidateAsync(instance);
-
-            Assert.True(validationResult.IsValid);
-        }
-
         [Theory(DisplayName = "Validar tipos diferentes de emails válidos")]
         [InlineData("a@a.com")]
         [InlineData("joao@maria.com")]
@@ -111,9 +101,9 @@ namespace Estoque.Test.ValidationViewModelTests
         {
             var instance = _builder.With(a => a.Email = email).Build();
 
-            var validationResult = await _validator.ValidateAsync(instance);
+            var validation = await _validator.ValidateAsync(instance);
 
-            Assert.True(validationResult.IsValid);
+            Assert.True(validation.IsValid);
         }
 
         [Theory(DisplayName = "Validar emails incorretos")]
@@ -124,10 +114,10 @@ namespace Estoque.Test.ValidationViewModelTests
         {
             var instance = _builder.With(a => a.Email = email).Build();
 
-            var validationResult = await _validator.ValidateAsync(instance);
+            var validation = await _validator.ValidateAsync(instance);
 
-            Assert.False(validationResult.IsValid);
-            Assert.Contains(validationResult.Errors, x => x.ErrorMessage.Contains(MensagensErroFornecedor.EmailFormatoInvalido));
+            Assert.False(validation.IsValid);
+            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensErroFornecedor.EmailFormatoInvalido));
         }
 
         [Theory(DisplayName = "O email não pode exceder 80 caracteres")]
@@ -136,10 +126,10 @@ namespace Estoque.Test.ValidationViewModelTests
         {
             var instance = _builder.With(a => a.Email = email).Build();
 
-            var validationResult = await _validator.ValidateAsync(instance);
+            var validation = await _validator.ValidateAsync(instance);
 
-            Assert.False(validationResult.IsValid);
-            Assert.Contains(validationResult.Errors, x => x.ErrorMessage.Contains(MensagensErroFornecedor.EmailTamanhoMaximo));
+            Assert.False(validation.IsValid);
+            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensErroFornecedor.EmailTamanhoMaximo));
         }
         #endregion
 
@@ -220,10 +210,10 @@ namespace Estoque.Test.ValidationViewModelTests
 
         #region Cep
         [Theory(DisplayName = "Teste de Ceps válidos")]
-        [InlineData("12.345-678")]
-        [InlineData("13.425-678")]
-        [InlineData("55.455-678")]
-        [InlineData("32.895-678")]
+        [InlineData("13455-678")]
+        [InlineData("13425-678")]
+        [InlineData("55455-678")]
+        [InlineData("32895-678")]
         public async Task CepValido(string cep)
         {
             var instance = _builder.With(x => x.Cep = cep).Build();
@@ -231,8 +221,8 @@ namespace Estoque.Test.ValidationViewModelTests
             Assert.True(validation.IsValid);
         }
         [Theory(DisplayName = "Teste de Ceps não válidos")]
-        [InlineData("2.345-678")]
-        [InlineData("1.345-678")]
+        [InlineData("345-67")]
+        [InlineData("134-678")]
         [InlineData("125-678")]
         [InlineData("12.3467")]
         [InlineData("12.35-68")]

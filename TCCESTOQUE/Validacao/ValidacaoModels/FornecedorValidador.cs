@@ -22,11 +22,11 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
                 .MinimumLength(13).WithMessage(MensagensErroFornecedor.EmailTamanhoMinimo);
 
             RuleFor(f => f.Telefone).NotEmpty().WithMessage(MensagensErroFornecedor.TelefoneVazio)
-                .Length(11).WithMessage(MensagensErroFornecedor.TelefoneTamanho);
+                .Length(14).WithMessage(MensagensErroFornecedor.TelefoneTamanho);
 
 
             RuleFor(f => f.Cnpj).NotEmpty().WithMessage(MensagensErroFornecedor.CnpjVazio)
-                .Length(14).WithMessage(MensagensErroFornecedor.CnpjTamanho);
+                .Length(18).WithMessage(MensagensErroFornecedor.CnpjTamanho);
 
         }
 

@@ -13,7 +13,7 @@ namespace Estoque.Test.Builder
                 .With(x => x.Email = "mail@mail.com")
                 .With(x => x.NomeFantasia = "Nome do Fornecedor")
                 .With(x => x.Bairro = "Bairro central")
-                .With(x => x.Cep = "12.345-678")
+                .With(x => x.Cep = "86945-857")
                 .With(x => x.Complemento = "xxx complemento")
                 .With(x => x.Localidade = "Cidade xxx")
                 .With(x => x.Logradouro = "logradouro")
