@@ -11,6 +11,7 @@ namespace TCCESTOQUE.Models
         public int ProdutoId { get; set; }
 
         [MaxLength(50)]
+        [Required(ErrorMessage = "Informe o nome do produto")]
         public string Nome { get; set; }
 
         [MaxLength(50)]
@@ -28,7 +29,7 @@ namespace TCCESTOQUE.Models
         public int Quantidade { get; set; }
 
         [ScaffoldColumn(false)]
-        public DateTime DataEntrada { get; set; } = DateTime.Today;
+        public DateTime DataEntrada { get; set; } = DateTime.Now;
 
         [ForeignKey("Fornecedor")]
         public int FornecedorId { get; set; }

@@ -15,7 +15,8 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
             RuleFor(v => v.Telefone)
               .Length(14).WithMessage(MensagensErroCliente.TelefoneTamanho);
 
-            RuleFor(v => v.Email).EmailAddress().WithMessage(MensagensErroCliente.EmailFormatoInvalido)
+            RuleFor(v => v.Email).NotEmpty().WithMessage(MensagensErroCliente.EmailVazio)
+                .EmailAddress().WithMessage(MensagensErroCliente.EmailFormatoInvalido)
                .MaximumLength(80).WithMessage(MensagensErroCliente.EmailTamanhoMaximo);
 
             RuleFor(v => v.Cpf).Length(14).WithMessage(MensagensErroCliente.CpfTamanho);

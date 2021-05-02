@@ -14,6 +14,7 @@ namespace TCCESTOQUE.Models
         public int ClienteId { get; set; }
 
         [MaxLength(50)]
+        [Required(ErrorMessage = "Informe o nome")]
         public string Nome { get; set; }
 
         [StringLength(14)]

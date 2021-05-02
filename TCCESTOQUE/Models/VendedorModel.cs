@@ -24,7 +24,7 @@ namespace TCCESTOQUE.Models
         [Required(ErrorMessage = "Informe a data de nascimento", AllowEmptyStrings = false)]
         public DateTime DataNascimento { get; set; }
 
-        [MaxLength(11)]
+        [MaxLength(14)]
         [Required(ErrorMessage = "Informe o cpf", AllowEmptyStrings = false)]
         public string Cpf { get; set; }
 
@@ -33,6 +33,7 @@ namespace TCCESTOQUE.Models
         [DataType(System.ComponentModel.DataAnnotations.DataType.EmailAddress)]
         public string Email { get; set; }
 
+        [MaxLength(14)]
         public string Telefone { get; set; }
 
         [ScaffoldColumn(false)]
