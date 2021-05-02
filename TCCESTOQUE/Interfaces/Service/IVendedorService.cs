@@ -5,7 +5,7 @@ using TCCESTOQUE.Models;
 
 namespace TCCESTOQUE.Interfaces.Service
 {
-    public interface IVendedorService : IServiceBase<VendedorModel>
+    public interface IVendedorService : IBaseService<VendedorModel>
     {
         public ValidationResult PostCriacao(VendedorModel vendedorModel);
 

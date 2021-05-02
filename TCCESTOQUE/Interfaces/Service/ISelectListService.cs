@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TCCESTOQUE.Interfaces.Repository
+namespace TCCESTOQUE.Interfaces.Service
 {
-    public interface ISelectListRepository
+    public interface ISelectListService
     {
         public SelectList SelectListCliente(string dataValue, string textValue);
         public SelectList SelectListCliente(string dataValue, string textValue, object selectedValue);

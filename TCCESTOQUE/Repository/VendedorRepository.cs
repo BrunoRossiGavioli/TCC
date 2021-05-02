@@ -11,27 +11,19 @@ using TCCESTOQUE.Service;
 
 namespace TCCESTOQUE.Repository
 {
-    public class VendedorRepository : IVendedorRepository
+    public class VendedorRepository : BaseRepository<VendedorModel>, IVendedorRepository
     {
-        private readonly TCCESTOQUEContext _context;
-
-        public VendedorRepository(TCCESTOQUEContext context)
+        public VendedorRepository(TCCESTOQUEContext context) :base(context)
         {
-            _context = context;
+            
         }
 
-        public ICollection<VendedorModel> GetCriacao()
+        public ICollection<VendedorModel> GetAll()
         {
             return _context.VendedorModel.ToList();
         }
 
-        public void PostCriacao(VendedorModel vendedorModel)
-        {
-            _context.Add(vendedorModel);
-            _context.SaveChanges();
-        }
-
-        public VendedorModel GetOne(int? id)
+        public override VendedorModel GetOne(int? id)
         {
             var vendedorModel = _context.VendedorModel
                 .FirstOrDefault(m => m.VendedorId == id);
@@ -40,23 +32,6 @@ namespace TCCESTOQUE.Repository
                 return null;
 
             return vendedorModel;
-        }
-
-        public VendedorModel GetEdicao(int? id)
-        {
-            return _context.VendedorModel.Find(id);
-        }
-
-        public void PutEdicao(VendedorModel vendedorModel)
-        {
-            _context.VendedorModel.Update(vendedorModel);
-            _context.SaveChanges();
-        }
-
-        public void PostExclusao(VendedorModel vendedor)
-        { 
-            _context.VendedorModel.Remove(vendedor);
-            _context.SaveChanges();
         }
 
         public ClaimsPrincipal PostLogin(VendedorModel vendedor)
@@ -69,8 +44,7 @@ namespace TCCESTOQUE.Repository
             };
 
             var minhaIdentity = new ClaimsIdentity(Claims, "Vendedor");
-            var vendPrincipal = new ClaimsPrincipal(new[] { minhaIdentity });
-            return vendPrincipal;
+            return new ClaimsPrincipal(new[] { minhaIdentity });
         }
 
         public VendedorModel GetByCpf(string cpf)
@@ -78,7 +52,7 @@ namespace TCCESTOQUE.Repository
             return _context.VendedorModel.Where(a => a.Cpf == cpf).FirstOrDefault();
         }
 
-        public VendedorModel GetByPhone(string telefone)
+        public VendedorModel GetByTelefone(string telefone)
         {
             return _context.VendedorModel.Where(a => a.Telefone == telefone).FirstOrDefault();
         }
@@ -88,7 +62,7 @@ namespace TCCESTOQUE.Repository
             return _context.VendedorModel.Where(a => a.Email == email).FirstOrDefault();
         }
 
-        public VendedorModel GetSenha(string senha)
+        public VendedorModel GetBySenha(string senha)
         {
             senha = SecurityService.Criptografar(senha);
             return _context.VendedorModel.Where(a => a.Senha == senha).FirstOrDefault();

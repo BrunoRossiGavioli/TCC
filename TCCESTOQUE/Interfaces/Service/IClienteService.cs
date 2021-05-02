@@ -8,7 +8,7 @@ using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Interfaces.Service
 {
-    public interface IClienteService : IServiceBase<ClienteModel>
+    public interface IClienteService : IBaseService<ClienteModel>
     {
 
         public ValidationResult PostCriacao(ClienteViewModel cliente);

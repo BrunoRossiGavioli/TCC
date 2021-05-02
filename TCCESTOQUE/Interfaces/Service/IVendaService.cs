@@ -9,7 +9,7 @@ using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Interfaces.Service
 {
-    public interface IVendaService : IServiceBase<VendaModel>
+    public interface IVendaService : IBaseService<VendaModel>
     {
         public ValidationResult PostCricao(VendaViewModel venda);
 

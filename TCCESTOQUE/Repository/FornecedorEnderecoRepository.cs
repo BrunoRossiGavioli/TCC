@@ -17,7 +17,7 @@ namespace TCCESTOQUE.Repository
             _context = context;
         }
 
-        public FornecedorEnderecoModel FindWhereFornecedorId(FornecedorModel fornecedor)
+        public FornecedorEnderecoModel GetEnderecoByFornecedorId(FornecedorModel fornecedor)
         {
             return _context.FornecedorEnderecoModel.Where(e => e.FornecedorId == fornecedor.FornecedorId)?.FirstOrDefault();
         }

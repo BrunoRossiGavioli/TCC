@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TCCESTOQUE.Data;
-using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.ViewModel;
@@ -17,9 +16,9 @@ namespace TCCESTOQUE.Controllers
     public class VendaController : ControllerPai
     {
         private readonly IVendaService _vendaService;
-        private readonly ISelectListRepository _selectListRepository;
+        private readonly ISelectListService _selectListRepository;
 
-        public VendaController(IVendaService context, ISelectListRepository selectListRepository)
+        public VendaController(IVendaService context, ISelectListService selectListRepository)
         {
             _vendaService = context;
             _selectListRepository = selectListRepository;

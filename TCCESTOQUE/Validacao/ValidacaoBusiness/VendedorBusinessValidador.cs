@@ -23,8 +23,8 @@ namespace TCCESTOQUE.Validacao.ValidacaoBusiness
 
             When(v => !string.IsNullOrEmpty(v.Telefone), () => 
             {
-                When(v => vendRepo.GetByPhone(v.Telefone)?.VendedorId != v.VendedorId, () => {
-                    RuleFor(a => a.Telefone).Must(telefone => vendRepo.GetByPhone(telefone) == null).WithMessage(MensagensErroVendedor.TelefoneJaCadastrado);
+                When(v => vendRepo.GetByTelefone(v.Telefone)?.VendedorId != v.VendedorId, () => {
+                    RuleFor(a => a.Telefone).Must(telefone => vendRepo.GetByTelefone(telefone) == null).WithMessage(MensagensErroVendedor.TelefoneJaCadastrado);
                 });
             });
         }

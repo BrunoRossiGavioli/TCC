@@ -6,16 +6,8 @@ using TCCESTOQUE.Models;
 
 namespace TCCESTOQUE.Interfaces.Repository
 {
-    public interface IVendaItensRepository
+    public interface IVendaItensRepository : IBaseRepository<VendaItensModel>
     {
-        public VendaItensModel GetOne(int? id);
 
-        public void PostCriacao(VendaItensModel vendaItens);
-
-        public VendaItensModel GetEdicao(int? id);
-
-        public void PutEdicao(VendaItensModel vendaItens);
-
-        public void PostExlusao(VendaItensModel vendaItens);
     }
 }

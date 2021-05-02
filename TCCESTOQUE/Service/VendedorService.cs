@@ -24,7 +24,7 @@ namespace TCCESTOQUE.Service
         }
         public ICollection<VendedorModel> GetAll()
         {
-            return _vendedorRepository.GetCriacao();
+            return _vendedorRepository.GetAll();
         }
 
         public VendedorModel GetOne(int? id)

@@ -4,7 +4,7 @@ using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Interfaces.Service
 {
-    public interface IFornecedorService : IServiceBase<FornecedorModel>
+    public interface IFornecedorService : IBaseService<FornecedorModel>
     {
         public ValidationResult PostCadastroFull(FornecedorEnderecoViewModel feviewmodel);
 

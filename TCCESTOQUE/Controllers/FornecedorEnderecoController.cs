@@ -11,11 +11,11 @@ namespace TCCESTOQUE.Controllers
 {
     public class FornecedorEnderecoController : ControllerPai
     {
-        private readonly TCCESTOQUEContext _context2;
+        private readonly TCCESTOQUEContext _context;
 
         public FornecedorEnderecoController(TCCESTOQUEContext context2)
         {
-            _context2 = context2;
+            _context = context2;
         }
 
         // GET: FornecedorEndereco/Edit/5
@@ -25,11 +25,11 @@ namespace TCCESTOQUE.Controllers
             if (id == null)
                 return NotFound();
 
-            var fornecedorEnderecoModel = await _context2.FornecedorEnderecoModel.FindAsync(id);
+            var fornecedorEnderecoModel = await _context.FornecedorEnderecoModel.FindAsync(id);
             if (fornecedorEnderecoModel == null)
                 return NotFound();
 
-            ViewData["FornecedorId"] = new SelectList(_context2.FornecedorModel, "FornecedorId", "Nome", fornecedorEnderecoModel.FornecedorId);
+            ViewData["FornecedorId"] = new SelectList(_context.FornecedorModel, "FornecedorId", "Nome", fornecedorEnderecoModel.FornecedorId);
             return View(fornecedorEnderecoModel);
         }
 
@@ -46,8 +46,8 @@ namespace TCCESTOQUE.Controllers
             {
                 try
                 {
-                    _context2.Update(fornecedorEnderecoModel);
-                    await _context2.SaveChangesAsync();
+                    _context.Update(fornecedorEnderecoModel);
+                    await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -62,7 +62,7 @@ namespace TCCESTOQUE.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FornecedorId"] = new SelectList(_context2.FornecedorModel, "FornecedorId", "Nome", fornecedorEnderecoModel.FornecedorId);
+            ViewData["FornecedorId"] = new SelectList(_context.FornecedorModel, "FornecedorId", "Nome", fornecedorEnderecoModel.FornecedorId);
             return View(fornecedorEnderecoModel);
         }
 
@@ -75,7 +75,7 @@ namespace TCCESTOQUE.Controllers
                 return NotFound();
             }
 
-            var fornecedorEnderecoModel = await _context2.FornecedorEnderecoModel
+            var fornecedorEnderecoModel = await _context.FornecedorEnderecoModel
                 .Include(f => f.Fornecedor)
                 .FirstOrDefaultAsync(m => m.EnderecoId == id);
             if (fornecedorEnderecoModel == null)
@@ -92,15 +92,15 @@ namespace TCCESTOQUE.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             Autenticar();
-            var fornecedorEnderecoModel = await _context2.FornecedorEnderecoModel.FindAsync(id);
-            _context2.FornecedorEnderecoModel.Remove(fornecedorEnderecoModel);
-            await _context2.SaveChangesAsync();
+            var fornecedorEnderecoModel = await _context.FornecedorEnderecoModel.FindAsync(id);
+            _context.FornecedorEnderecoModel.Remove(fornecedorEnderecoModel);
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool FornecedorEnderecoModelExists(int id)
         {
-            return _context2.FornecedorEnderecoModel.Any(e => e.EnderecoId == id);
+            return _context.FornecedorEnderecoModel.Any(e => e.EnderecoId == id);
         }
     }
 }

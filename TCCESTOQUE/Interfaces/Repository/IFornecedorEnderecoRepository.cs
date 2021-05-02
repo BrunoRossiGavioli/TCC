@@ -9,8 +9,9 @@ namespace TCCESTOQUE.Interfaces.Repository
     public interface IFornecedorEnderecoRepository
     {
         public void PostCadastro(FornecedorEnderecoModel endereco);
+
         public void PutEdit(FornecedorEnderecoModel endereco);
 
-        public FornecedorEnderecoModel FindWhereFornecedorId(FornecedorModel fornecedor);
+        public FornecedorEnderecoModel GetEnderecoByFornecedorId(FornecedorModel fornecedor);
     }
 }

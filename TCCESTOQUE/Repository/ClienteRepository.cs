@@ -10,47 +10,21 @@ using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Repository
 {
-    public class ClienteRepository : IClienteRepository
+    public class ClienteRepository : BaseRepository<ClienteModel>,  IClienteRepository
     {
-        private readonly TCCESTOQUEContext _context;
-
-
-        public ClienteRepository(TCCESTOQUEContext context)
+        public ClienteRepository(TCCESTOQUEContext context) :base(context)
         {
-            _context = context;
+            
         }
 
-        public ICollection<ClienteModel> GetIndex()
+        public ICollection<ClienteModel> GetAll()
         {
             return _context.ClienteModel.ToList();
         }
 
-        public ClienteModel GetOne(int? id)
+        public override ClienteModel GetOne(int? id)
         {
             return _context.ClienteModel.FirstOrDefault(m => m.ClienteId == id);
-        }
-
-        public void PostCriacao(ClienteModel cliente)
-        {
-                _context.Add(cliente);
-                _context.SaveChanges();
-        }
-
-        public ClienteModel GetEdicao(int? id)
-        {
-            return _context.ClienteModel.Find(id);
-        }
-
-        public void PutEdicao(ClienteModel cliente)
-        {
-            _context.Update(cliente);
-            _context.SaveChanges();
-        }
-
-        public void PostExclusao(ClienteModel cliente)
-        {
-            _context.ClienteModel.Remove(cliente);
-            _context.SaveChanges();
         }
     }
 }

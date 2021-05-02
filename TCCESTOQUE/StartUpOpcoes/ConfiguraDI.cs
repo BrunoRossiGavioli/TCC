@@ -40,7 +40,7 @@ namespace TCCESTOQUE.StartUpOpcoes
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<IClienteEnderecoRepository, ClienteEnderecoRepository>();
 
-            services.AddScoped<ISelectListRepository, SelectListRepository>();
+            services.AddScoped<ISelectListService, SelectListService>();
         }
     }
 }

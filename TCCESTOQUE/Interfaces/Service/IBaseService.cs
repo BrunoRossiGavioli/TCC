@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TCCESTOQUE.Interfaces.Service
 {
-    public interface IServiceBase<T> where T : class
+    public interface IBaseService<T> where T : class
     {
         public T GetOne(int? id);
 

@@ -9,21 +9,19 @@ using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Repository
 {
-    public class FornecedorRepository : IFornecedorRepository
+    public class FornecedorRepository : BaseRepository<FornecedorModel>, IFornecedorRepository
     {
-        private readonly TCCESTOQUEContext _context;
+        public FornecedorRepository(TCCESTOQUEContext context) : base(context)
+        {
+            
+        }
 
         public ICollection<FornecedorModel> GetAll()
         {
             return _context.FornecedorModel.ToList();
         }
 
-        public FornecedorRepository(TCCESTOQUEContext context)
-        {
-            _context = context;
-        }
-
-        public FornecedorModel GetOne(int? id)
+        public override FornecedorModel GetOne(int? id)
         {
             var fornecedorModel = _context.FornecedorModel
                 .FirstOrDefault(m => m.FornecedorId == id);
@@ -32,29 +30,6 @@ namespace TCCESTOQUE.Repository
                 return null;
 
             return fornecedorModel;
-        }
-
-        public void PostExclusao(FornecedorModel fornecedor)
-        {
-            _context.FornecedorModel.Remove(fornecedor);
-            _context.SaveChanges();
-        }
-
-        public FornecedorModel GetEditFull(int? id)
-        {
-            return _context.FornecedorModel.Find(id);
-        }
-
-        public void PutEdit(FornecedorModel fornecedorModel)
-        {
-            _context.Update(fornecedorModel);
-            _context.SaveChanges();
-        }
-
-        public void PostCadastro(FornecedorModel fornecedor)
-        {
-            _context.Add(fornecedor);
-            _context.SaveChanges();
         }
 
         public FornecedorModel GetByCnpj(string cnpj)

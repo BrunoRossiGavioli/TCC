@@ -36,7 +36,7 @@ namespace TCCESTOQUE.Service
 
         public ICollection<ClienteModel> GetAll()
         {
-            return _clienteRepository.GetIndex();
+            return _clienteRepository.GetAll();
         }
 
         public ValidationResult PostCriacao(ClienteViewModel clienteVM)
@@ -82,7 +82,7 @@ namespace TCCESTOQUE.Service
 
         public ClienteViewModel ClienteParaClienteView(ClienteModel cliente)
         {
-            var endereco = _cliEnderecoRepo.GetCliEnderecoByCliId(cliente);
+            var endereco = _cliEnderecoRepo.GetEnderecoByClienteId(cliente);
             var info = _mapper.Map<ClienteViewModel>(cliente);
             info.Bairro = endereco.Bairro;
             info.Cep = endereco.Cep;

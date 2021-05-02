@@ -12,16 +12,15 @@ using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Repository
 {
-    public class VendaRepository : IVendaRepository
+    public class VendaRepository : BaseRepository<VendaModel>,IVendaRepository
     {
-        private readonly TCCESTOQUEContext _context;
 
-        public VendaRepository(TCCESTOQUEContext context)
+        public VendaRepository(TCCESTOQUEContext context) : base(context)
         {
-            _context = context;
+
         }
 
-        public VendaModel GetOne(int? id)
+        public override VendaModel GetOne(int? id)
         {
             var vendaModel = _context.VendaModel
                 .Include(v => v.Itens)
@@ -40,28 +39,6 @@ namespace TCCESTOQUE.Repository
         public ICollection<VendaModel> GetAll()
         {
             return _context.VendaModel.Include(v => v.Cliente).Include(v => v.Vendedor).ToList();
-        }
-
-        public void PostCricao(VendaModel venda)
-        {
-            _context.Add(venda);
-            _context.SaveChanges();
-        }
-
-        public VendaModel GetEdicao(int? id)
-        {
-            return _context.VendaModel.Find(id);
-        }
-        public void PutEdicao(VendaModel venda)
-        {
-            _context.Update(venda);
-            _context.SaveChangesAsync();
-        }
-
-        public void PostExclusao(VendaModel venda)
-        {
-            _context.VendaModel.Remove(venda);
-            _context.SaveChanges();
         }
     }
 }

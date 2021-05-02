@@ -3,7 +3,7 @@ using TCCESTOQUE.Models;
 
 namespace TCCESTOQUE.Interfaces.Service
 {
-    public interface IProdutoService : IServiceBase<ProdutoModel>
+    public interface IProdutoService : IBaseService<ProdutoModel>
     {
         public ValidationResult PostCriacao(ProdutoModel produtoModel);
 

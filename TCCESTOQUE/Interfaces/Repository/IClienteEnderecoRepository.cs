@@ -12,6 +12,6 @@ namespace TCCESTOQUE.Interfaces.Repository
 
         public void PutEdicao(ClienteEnderecoModel endereco);
 
-        public ClienteEnderecoModel GetCliEnderecoByCliId(ClienteModel cli);
+        public ClienteEnderecoModel GetEnderecoByClienteId(ClienteModel cliente);
     }
 }

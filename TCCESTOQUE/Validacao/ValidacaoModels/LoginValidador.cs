@@ -15,7 +15,7 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
         public LoginValidador(IVendedorRepository vend, VendedorModel vendedor)
         {
             RuleFor(v => v.Email).Must(email => vend.GetByEmail(email) != null).WithMessage(MensagensErroVendedor.EmailNaoEncontrado);
-            RuleFor(v => v.Senha).Must(senha => vend.GetSenha(senha)?.Senha == SecurityService.Criptografar(vendedor.Senha)).WithMessage(MensagensErroVendedor.SenhaIncorreta);
+            RuleFor(v => v.Senha).Must(senha => vend.GetBySenha(senha)?.Senha == SecurityService.Criptografar(vendedor.Senha)).WithMessage(MensagensErroVendedor.SenhaIncorreta);
         }
     }
 }

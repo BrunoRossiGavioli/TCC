@@ -51,7 +51,7 @@ namespace TCCESTOQUE.Service
 
         public FornecedorEnderecoViewModel GetEditFull(int? id)
         {
-            return FeviewConvert(_fornecedorRepository.GetEditFull(id));
+            return FeviewConvert(_fornecedorRepository.GetEdicao(id));
         }
 
         public ValidationResult PutEditFull(int id, FornecedorEnderecoViewModel feviewmodel)
@@ -61,7 +61,7 @@ namespace TCCESTOQUE.Service
             {
                 feviewmodel = FormataValores.FormataValoresFornecedorView(feviewmodel);
                 var fornecedor = ConvertFornecedor(id, feviewmodel);
-                _fornecedorRepository.PutEdit(fornecedor);
+                _fornecedorRepository.PutEdicao(fornecedor);
 
                 var endereco = _mapper.Map<FornecedorEnderecoModel>(feviewmodel);
                 endereco.FornecedorId = fornecedor.FornecedorId;
@@ -78,7 +78,7 @@ namespace TCCESTOQUE.Service
             {
                 feviewmodel = FormataValores.FormataValoresFornecedorView(feviewmodel);
                 var fornecedor = _mapper.Map<FornecedorModel>(feviewmodel);
-                _fornecedorRepository.PostCadastro(fornecedor);
+                _fornecedorRepository.PostCriacao(fornecedor);
                 
                 var endereco = _mapper.Map<FornecedorEnderecoModel>(feviewmodel);
                 endereco.FornecedorId = fornecedor.FornecedorId;
@@ -105,7 +105,7 @@ namespace TCCESTOQUE.Service
             if (fornecedor == null)
                 return null;
 
-            var endereco = _fornecedorEnderecoRepository.FindWhereFornecedorId(fornecedor);
+            var endereco = _fornecedorEnderecoRepository.GetEnderecoByFornecedorId(fornecedor);
             var info = _mapper.Map<FornecedorEnderecoViewModel>(fornecedor);
             info.Bairro = endereco.Bairro;
             info.Cep = endereco.Cep;

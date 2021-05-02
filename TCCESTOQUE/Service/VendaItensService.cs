@@ -17,6 +17,11 @@ namespace TCCESTOQUE.Service
             _vendaItensRepository = vendaItensRepository;
         }
 
+        public ICollection<VendaItensModel> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
         public VendaItensModel GetOne(int? id)
         {
             return _vendaItensRepository.GetOne(id);
@@ -38,16 +43,10 @@ namespace TCCESTOQUE.Service
         {
             var model = _vendaItensRepository.GetOne(id);
             if(model != null) { 
-                _vendaItensRepository.PostExlusao(model);
+                _vendaItensRepository.PostExclusao(model);
                 return true;
             }
-
             return false;
-        }
-
-        public ICollection<VendaItensModel> GetAll()
-        {
-            throw new NotImplementedException();
         }
     }
 }

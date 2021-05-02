@@ -28,7 +28,7 @@ namespace TCCESTOQUE.Repository
             _context.SaveChanges();
         }
 
-        public ClienteEnderecoModel GetCliEnderecoByCliId(ClienteModel cli)
+        public ClienteEnderecoModel GetEnderecoByClienteId(ClienteModel cli)
         {
             return _context.ClienteEnderecoModel.Where(e => e.ClienteId == cli.ClienteId).FirstOrDefault();
         }

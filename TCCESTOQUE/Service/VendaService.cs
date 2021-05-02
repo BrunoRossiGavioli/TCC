@@ -43,7 +43,7 @@ namespace TCCESTOQUE.Service
                 return validacao;
 
             var vendaModel = _mapper.Map<VendaModel>(vendaVM);
-            _vendaRepository.PostCricao(vendaModel);
+            _vendaRepository.PostCriacao(vendaModel);
             
             var itens = _mapper.Map<VendaItensModel>(vendaVM);
             itens.VendaId = vendaModel.VendaId;

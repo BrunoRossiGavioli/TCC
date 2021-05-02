@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using TCCESTOQUE.Data;
-using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
 
@@ -11,9 +10,9 @@ namespace TCCESTOQUE.Controllers
     public class ProdutoController : ControllerPai
     {
         private readonly IProdutoService _produtoService;
-        private readonly ISelectListRepository _selectListRepository;
+        private readonly ISelectListService _selectListRepository;
 
-        public ProdutoController(IProdutoService context, ISelectListRepository selectListRepository)
+        public ProdutoController(IProdutoService context, ISelectListService selectListRepository)
         {
             _produtoService = context;
             _selectListRepository = selectListRepository;

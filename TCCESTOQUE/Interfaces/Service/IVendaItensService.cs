@@ -7,7 +7,7 @@ using TCCESTOQUE.Models;
 
 namespace TCCESTOQUE.Interfaces.Service
 {
-    public interface IVendaItensService : IServiceBase<VendaItensModel>
+    public interface IVendaItensService : IBaseService<VendaItensModel>
     {
         public bool PostCriacao(VendaItensModel vendaItens);
 
