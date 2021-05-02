@@ -4,73 +4,86 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Cadastro</h1>
+<div class="login">
+    <div class="row">
+        <div class="col align-self-center">
+            <div class="col-sm">
+                <div class="txtcad">
+                    <h3>Cadastro</h3>
+                </div>
+                <hr />
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label asp-for="Nome" class="control-label"></label>
+                                <input asp-for="Nome" placeholder="Nome" class="form-control" />
+                                <span asp-validation-for="Nome" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label asp-for="Email" class="control-label">Email</label>
+                                <input asp-for="Email" placeholder="Email" class="form-control" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label asp-for="Senha" class="control-label"></label>
+                                <input asp-for="Senha" placeholder="Senha" class="form-control" />
+                                <span asp-validation-for="Senha" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label asp-for="Cpf" class="control-label"></label>
+                                <input asp-for="Cpf" placeholder="Cpf" class="form-control" />
+                                <span asp-validation-for="Cpf" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label asp-for="Telefone" class="control-label"></label>
+                                <input asp-for="Telefone" placeholder="Telefone" class="form-control" />
+                                <span asp-validation-for="Telefone" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label asp-for="DataNascimento" class="control-label">Data de nascimento</label>
+                                <input type="date" asp-for="DataNascimento" class="form-control" />
+                                <span asp-validation-for="DataNascimento" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-check privacy">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">
+                            Concordo com as <a href="#"> Políticas de Privacidade</a>  
+                        </label>
+                    </div>
+                    <div class="button2">
+                        <button class="button" style="vertical-align:middle"><span>Cadastrar</span></button>
+                    </div>
+                    <div class="haveaccount">
+                        <span>
+                            Já possui uma Conta?<a href="#">
+                                <div class="cadc">Login
+                            </a>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
 
-<h4>Vendedor</h4>
-<hr />
-<div class="row">
-    <div class="col-md-12">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label asp-for="Nome" class="control-label"></label>
-                        <input asp-for="Nome" placeholder="Nome" class="form-control" />
-                        <span asp-validation-for="Nome" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label asp-for="Email" class="control-label">Email</label>
-                        <input asp-for="Email" placeholder="Email" class="form-control" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label asp-for="Senha" class="control-label"></label>
-                        <input asp-for="Senha" placeholder="Senha" class="form-control" />
-                        <span asp-validation-for="Senha" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label asp-for="Cpf" class="control-label"></label>
-                        <input asp-for="Cpf" placeholder="Cpf" class="form-control" />
-                        <span asp-validation-for="Cpf" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label asp-for="Telefone" class="control-label"></label>
-                        <input asp-for="Telefone" placeholder="Telefone" class="form-control" />
-                        <span asp-validation-for="Telefone" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label asp-for="DataNascimento" class="control-label">Data de nascimento</label>
-                        <input type="date" asp-for="DataNascimento" class="form-control" />
-                        <span asp-validation-for="DataNascimento" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Cadastrar" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+       
 
-<div>
-    <a asp-controller="Home" asp-action="Index">Voltar ao menu</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+        @section Scripts {
+            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        }

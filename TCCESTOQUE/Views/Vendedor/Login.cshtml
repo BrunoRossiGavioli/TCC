@@ -4,36 +4,51 @@
     ViewData["Title"] = "Login";
 }
 
-<h1>Login</h1>
 
-<h4>Vendedor</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Login">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="VendedorId" />
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" placeholder="Email"/>
-                <span asp-validation-for="Email" class="text-danger"></span>
+<div class="login">
+    <div class="container">
+        <div class="row">
+            <div class="col align-self-center">
+                <div class="col-sm">
+                    <div class="txtcad">
+                        <h3>Login</h3>
+                    </div>
+                    <hr />
+                    <form asp-action="Login">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="VendedorId" />
+                        <div class="form-group">
+                            <label asp-for="Email" class="control-label"></label>
+                            <input asp-for="Email" class="form-control" placeholder="Email" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Senha" class="control-label"></label>
+                            <input asp-for="Senha" class="form-control" placeholder="Senha" />
+                            <span asp-validation-for="Senha" class="text-danger"></span>
+                        </div>
+                        <div class="nosenha">
+                            <a asp-controller="#" asp-action="#">Esqueceu a Senha ?</a>
+                        </div>
+                        <div class="button2">
+                            <button class="button" style="vertical-align:middle"><span>Entrar</span></button>
+                        </div>
+                        <div class="noac">
+                            <span>
+                                Ainda não possui uma Conta?<a href="Tela Cadastro.html">
+                                    <div class="cadc">Cadastrar
+                                </a>
+                            </span>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Senha" class="control-label"></label>
-                <input asp-for="Senha" class="form-control" placeholder="Senha" />
-                <span asp-validation-for="Senha" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Login" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
 
-<div>
-    <a asp-controller="Home" asp-action="Index">Voltar ao menu</a>
-</div>
+            <div>
+                <a asp-controller="Home" asp-action="Index">Voltar ao menu</a>
+            </div>
+            
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+            @section Scripts {
+                @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+            }
