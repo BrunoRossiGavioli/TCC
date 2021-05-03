@@ -12,15 +12,16 @@ namespace TCCESTOQUE.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ForncedorId { get; set; }
 
-        [MaxLength(50)]
+        [MaxLength(80)]
         [Required(ErrorMessage = "Informe a RazãoSocial de usuario", AllowEmptyStrings = false)]
         public string RazaoSocial { get; set; }
 
-        [MaxLength(50)]
+        [MaxLength(80)]
+        [Required(ErrorMessage = "Informe o NomeFantasia", AllowEmptyStrings = false)]
         public string NomeFantasia { get; set; }
 
         [MaxLength(18)]
-        [Required(ErrorMessage = "Informe a RazãoSocial de usuario", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Informe o Cnpj", AllowEmptyStrings = false)]
         public string Cnpj { get; set; }
 
         [ScaffoldColumn(false)]

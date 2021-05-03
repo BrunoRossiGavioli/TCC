@@ -7,6 +7,7 @@ namespace TCCESTOQUE.Models
         [MaxLength(80)]
         [DataType(System.ComponentModel.DataAnnotations.DataType.EmailAddress)]
         public string Email { get; set; }
+        [StringLength(14)]
         public string Telefone { get; set; }
     }
 }

@@ -24,6 +24,8 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
 
             RuleFor(p => p.Quantidade).NotEmpty().WithMessage(MensagensErroProduto.QuantidadeVazia)
                 .GreaterThan(0).WithMessage(MensagensErroProduto.QuantidadeMinima);
+
+            RuleFor(p => p.Fornecedor).NotEmpty().WithMessage(MensagensErroProduto.FornecedorVazio);
         }
     }
 }

@@ -8,51 +8,49 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
     {
         public FornecedorEnderecoValidador()
         {
-            When(f => !string.IsNullOrEmpty(f.NomeFantasia), () =>
-            {
-                RuleFor(f => f.NomeFantasia)
-                .MaximumLength(80).WithMessage(MensagensErroFornecedor.NomeFantasiaTamanhoMaximo)
-                .MinimumLength(3).WithMessage(MensagensErroFornecedor.NomeFantasiaTamanhoMinimo);
-            });
+            RuleFor(f => f.NomeFantasia).NotEmpty().WithMessage(MensagensErroFornecedor.NomeFantasiaVazio)
+            .MaximumLength(80).WithMessage(MensagensErroFornecedor.NomeFantasiaTamanhoMaximo)
+            .MinimumLength(3).WithMessage(MensagensErroFornecedor.NomeFantasiaTamanhoMinimo);
+
             RuleFor(f => f.RazaoSocial).NotEmpty().WithMessage(MensagensErroFornecedor.RazaoSocialVazia)
                .MaximumLength(80).WithMessage(MensagensErroFornecedor.RazaoSocialTamanhoMaximo)
                .MinimumLength(3).WithMessage(MensagensErroFornecedor.RazaoSocialTamanhoMinimo);
 
-            When(f => !string.IsNullOrEmpty(f.Email), () =>
-            {
-                RuleFor(f => f.Email)
-                    .EmailAddress().WithMessage(MensagensErroFornecedor.EmailFormatoInvalido)
-                    .MaximumLength(80).WithMessage(MensagensErroFornecedor.EmailTamanhoMaximo);
-            });
-            RuleFor(f => f.Telefone).NotEmpty().WithMessage(MensagensErroFornecedor.TelefoneVazio)
-            .Length(14).WithMessage(MensagensErroFornecedor.TelefoneTamanho);
+
+            RuleFor(f => f.Email).NotEmpty().WithMessage(MensagensErroFornecedor.EmailVazio)
+                .EmailAddress().WithMessage(MensagensErroFornecedor.EmailFormatoInvalido)
+                .MaximumLength(80).WithMessage(MensagensErroFornecedor.EmailTamanhoMaximo);
+
+            RuleFor(f => f.Telefone).Length(14).WithMessage(MensagensErroFornecedor.TelefoneTamanho);
 
             RuleFor(f => f.Cnpj).NotEmpty().WithMessage(MensagensErroFornecedor.CnpjVazio)
                 .Length(18).WithMessage(MensagensErroFornecedor.CnpjTamanho);
 
 
-            RuleFor(e => e.Cep).NotEmpty().Length(9).WithMessage(MensagensDeErroEndereco.CepTamanho);
-            When(f => !string.IsNullOrEmpty(f.Logradouro), () =>
-            {
-                RuleFor(e => e.Logradouro).MaximumLength(50).WithMessage(MensagensDeErroEndereco.LogradouroTamanhoMaximo)
-                .MinimumLength(3).WithMessage(MensagensDeErroEndereco.LogradouroTamanhoMinimo);
-            });
-            When(f => !string.IsNullOrEmpty(f.Complemento), () =>
-            {
-                RuleFor(e => e.Complemento).MaximumLength(50).WithMessage(MensagensDeErroEndereco.ComplementoTamanhoMaximo)
-                .MinimumLength(3).WithMessage(MensagensDeErroEndereco.ComplementoVazio);
-            });
-            RuleFor(e => e.Numero).GreaterThan(0).WithMessage(MensagensDeErroEndereco.NumeroTamanhoMinimo);
+            RuleFor(e => e.Cep).NotEmpty().WithMessage(MensagensDeErroEndereco.CepVazio)
+               .Length(9).WithMessage(MensagensDeErroEndereco.CepTamanho);
 
-            When(f => !string.IsNullOrEmpty(f.Bairro), () =>
-            {
-                RuleFor(e => e.Bairro).MaximumLength(50).WithMessage(MensagensDeErroEndereco.BairroTamanhoMaximo)
+            RuleFor(e => e.Logradouro).NotEmpty().WithMessage(MensagensDeErroEndereco.LogradouroVazio)
+                .MaximumLength(80).WithMessage(MensagensDeErroEndereco.LogradouroTamanhoMaximo)
+                .MinimumLength(3).WithMessage(MensagensDeErroEndereco.LogradouroTamanhoMinimo);
+
+            RuleFor(e => e.Complemento).NotEmpty().WithMessage(MensagensDeErroEndereco.ComplementoVazio)
+                .MaximumLength(80).WithMessage(MensagensDeErroEndereco.ComplementoTamanhoMaximo)
+                .MinimumLength(3).WithMessage(MensagensDeErroEndereco.ComplementoVazio);
+
+            RuleFor(e => e.Numero).NotEmpty().WithMessage(MensagensDeErroEndereco.NumeroVazio)
+                .GreaterThan(0).WithMessage(MensagensDeErroEndereco.NumeroTamanhoMinimo);
+
+            RuleFor(e => e.Bairro).NotEmpty().WithMessage(MensagensDeErroEndereco.BairroVazio)
+                .MaximumLength(80).WithMessage(MensagensDeErroEndereco.BairroTamanhoMaximo)
                 .MinimumLength(2).WithMessage(MensagensDeErroEndereco.BairroTamanhoMinimo);
-            });
 
             RuleFor(e => e.Localidade).NotEmpty().WithMessage(MensagensDeErroEndereco.LocalidadeVazio)
-            .MaximumLength(30).WithMessage(MensagensDeErroEndereco.LocalidadeTamanhoMaximo)
-            .MinimumLength(3).WithMessage(MensagensDeErroEndereco.LocalidadeTamanhoMinimo);
+                .MaximumLength(80).WithMessage(MensagensDeErroEndereco.LocalidadeTamanhoMaximo)
+                .MinimumLength(3).WithMessage(MensagensDeErroEndereco.LocalidadeTamanhoMinimo);
+
+            RuleFor(v => v.Uf).NotEmpty().WithMessage(MensagensDeErroEndereco.UfVazio)
+             .Length(2).WithMessage(MensagensDeErroEndereco.UfTamanho);
         }
     }
 }

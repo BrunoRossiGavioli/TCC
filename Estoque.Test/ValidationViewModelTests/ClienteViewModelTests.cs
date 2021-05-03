@@ -1,9 +1,5 @@
 ﻿using Estoque.Test.Builder;
-using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using TCCESTOQUE.Validacao.MensagensDeErro;
 using TCCESTOQUE.Validacao.ValidacaoModels;
@@ -160,14 +156,13 @@ namespace Estoque.Test.ValidationViewModelTests
 
         #region Email
         [Fact(DisplayName = "O Email pode ser vazio")]
-        public async Task EmailNaoPodeSerVazio()
+        public async Task EmailPodeSerVazio()
         {
             var instance = _builder.With(a => a.Email = "").Build();
 
             var validation = await _validator.ValidateAsync(instance);
 
             Assert.False(validation.IsValid);
-            Assert.Contains(validation.Errors,x=>x.ErrorMessage.Contains(MensagensErroCliente.EmailVazio));
         }
 
         [Theory(DisplayName = "Validar tipos diferentes de emails válidos")]
@@ -211,7 +206,7 @@ namespace Estoque.Test.ValidationViewModelTests
         #endregion
 
         #region Localidade
-        [Theory(DisplayName ="Teste de localidades válidas")]
+        [Theory(DisplayName = "Teste de localidades válidas")]
         [InlineData("São Paulo")]
         [InlineData("Campinas")]
         [InlineData("Sei")]
@@ -273,7 +268,7 @@ namespace Estoque.Test.ValidationViewModelTests
             Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroEndereco.LogradouroTamanhoMaximo));
         }
 
-        [Fact(DisplayName ="Teste logradouro não pode ser vazio")]
+        [Fact(DisplayName = "Teste logradouro não pode ser vazio")]
         public async Task LogradouroVazio()
         {
             var instance = _builder.With(x => x.Logradouro = "").Build();
@@ -283,7 +278,7 @@ namespace Estoque.Test.ValidationViewModelTests
         #endregion
 
         #region Nome
-        [Theory(DisplayName ="Teste nomes válidos")]
+        [Theory(DisplayName = "Teste nomes válidos")]
         [InlineData("Joaquin")]
         [InlineData("Eva")]
         [InlineData("Juliana")]
@@ -330,7 +325,7 @@ namespace Estoque.Test.ValidationViewModelTests
         #endregion
 
         #region Número
-        [Theory(DisplayName ="Números válidos")]
+        [Theory(DisplayName = "Números válidos")]
         [InlineData(1)]
         [InlineData(2)]
         [InlineData(3)]
@@ -355,11 +350,11 @@ namespace Estoque.Test.ValidationViewModelTests
             var validation = await _validator.ValidateAsync(instance);
             Assert.False(validation.IsValid);
             Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroEndereco.NumeroTamanhoMinimo));
-        }      
+        }
         #endregion
 
         #region Telefone
-        [Theory(DisplayName ="Telefones válidos")]
+        [Theory(DisplayName = "Telefones válidos")]
         [InlineData("(11)99443-2283")]
         [InlineData("(12)13324-5675")]
         [InlineData("(13)97425-8975")]
@@ -367,7 +362,7 @@ namespace Estoque.Test.ValidationViewModelTests
         public async Task TelefonesValidos(string telefone)
         {
             var instance = _builder.With(x => x.Telefone = telefone).Build();
-            var validation =await _validator.ValidateAsync(instance);
+            var validation = await _validator.ValidateAsync(instance);
             Assert.True(validation.IsValid);
         }
 
@@ -383,7 +378,7 @@ namespace Estoque.Test.ValidationViewModelTests
             Assert.False(validation.IsValid);
             Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensErroCliente.TelefoneTamanho));
         }
-        [Fact(DisplayName ="Telefone vazio")]
+        [Fact(DisplayName = "Telefone vazio")]
         public async Task TelefoneVazio()
         {
             var instance = _builder.With(x => x.Telefone = "").Build();
@@ -394,7 +389,7 @@ namespace Estoque.Test.ValidationViewModelTests
         #endregion
 
         #region Uf
-        [Theory(DisplayName ="Ufs válidas")]
+        [Theory(DisplayName = "Ufs válidas")]
         [InlineData("SP")]
         [InlineData("TO")]
         [InlineData("GO")]

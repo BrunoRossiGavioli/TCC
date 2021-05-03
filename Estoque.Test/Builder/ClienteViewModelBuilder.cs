@@ -1,7 +1,4 @@
 ﻿using FizzWare.NBuilder;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using TCCESTOQUE.ViewModel;
 
 namespace Estoque.Test.Builder

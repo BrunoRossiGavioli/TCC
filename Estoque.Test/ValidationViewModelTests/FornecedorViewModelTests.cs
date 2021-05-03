@@ -171,23 +171,22 @@ namespace Estoque.Test.ValidationViewModelTests
         #endregion
 
         #region Bairro
-        [Theory(DisplayName = "Bairro deve ser válido!")]
-        [InlineData("se")]
-        [InlineData("alberto gomes")]
-        [InlineData("santa maria")]
-        [InlineData("jesus dos campos")]
-        [InlineData("marcos antonio")]
-        [InlineData("jardin santos dumon")]
-        public async Task BairroValido(string bairro)
+        [Theory(DisplayName = "Teste Bairros válidos")]
+        [InlineData("Bairro São João Doc Campos")]
+        [InlineData("Bairro São Augustin")]
+        [InlineData("Se")]
+        public async Task BairrosVailidos(string bairro)
         {
             var instance = _builder.With(x => x.Bairro = bairro).Build();
             var validation = await _validator.ValidateAsync(instance);
             Assert.True(validation.IsValid);
         }
+
+
         [Theory(DisplayName = "Bairro excedeu o valor máximo!")]
-        [InlineData("asndhidhuidihduihiuhiuuhuihuihiuhihuihuihuuihuihuhiuhiuhiuhiuuhuknkjnkjn")]
-        [InlineData("ighiebhreieiiurevreverkvbrevreverveerarvarevevevevervrevevrevevfdvb")]
-        [InlineData("hlsdjfsdfjfllsfjlsfksfkkjwfkjjnbvglogkdtjjsmdfsdfsfsdfscscs")]
+        [InlineData("asndhidhuidihduihiusfdsfdsfdsfsdfsdfsdfsdfhiuuhuihuihiuhihuihuihuuihuihuhiuhiuhiuhiuuhuknkjnkjn")]
+        [InlineData("ighiebhreieiiurevreverkvbrevrevfsdfsdfsdfsddfwefwefefsdfsferveerarvarevevevevervrevevrevevfdvb")]
+        [InlineData("hlsdjfsdfjfllsfjlsfksfkkjwfkjjnbvglfwefwfwefewwefwefwfewfwefwefwefwefwefogkdtjjsmdfsdfsfsdfscscs")]
         public async Task BairroTamanhoMaximo(string bairro)
         {
             var instance = _builder.With(x => x.Bairro = bairro).Build();
@@ -211,7 +210,7 @@ namespace Estoque.Test.ValidationViewModelTests
         #region Cep
         [Theory(DisplayName = "Teste de Ceps válidos")]
         [InlineData("13455-678")]
-        [InlineData("13425-678")]
+        [InlineData("75865-231")]
         [InlineData("55455-678")]
         [InlineData("32895-678")]
         public async Task CepValido(string cep)
@@ -249,9 +248,9 @@ namespace Estoque.Test.ValidationViewModelTests
             Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroEndereco.LocalidadeTamanhoMinimo));
         }
         [Theory(DisplayName = "Teste tamanho máximo localidade")]
-        [InlineData("hfhfhfgggdhdsasdsadasdasdsadaddwqdqwdwqdqwdwqdwqdwdwqdwqdwqdqd")]
-        [InlineData("teste do tamanho máximo do campo de localidade que é de 30 caracteres")]
-        [InlineData("teste de localidade adequada para o tamanho proposto no validadeo")]
+        [InlineData("hfhfhfgggdhdsasdsadasdasdsadaddwqdqwdwqdqwdwqdwqdwdwqdwqdwqdqdyubuuyyyuububbyuyubbbyubbuyybbub")]
+        [InlineData("teste do tamanho máximo do campo de localidade que é de 80 caracteres no campo em que temos que escrever")]
+        [InlineData("teste de localidade adequada para o tamanho proposto no validadeo xsnxkxkjnjkjnkncjkjnnknkjkndcsucbsdcbusdbc")]
         public async Task LocalidadeTamanhoMaximo(string localidade)
         {
             var instance = _builder.With(x => x.Localidade = localidade).Build();
@@ -285,15 +284,14 @@ namespace Estoque.Test.ValidationViewModelTests
             Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroEndereco.LogradouroTamanhoMinimo));
         }
         [Theory(DisplayName = "Teste tamanho máximo logradouro")]
-        [InlineData("jdjdjfjfhdgsgdgeftfdrtgyhjykdfghtyuhgfrdswertgfdfss")]
-        [InlineData("jdjdjfjfhdgsgdgeftfdrtgyhjykdfghtyuhgfrdswertgsasdsafdfss")]
-        [InlineData("jdjdjfjfhdgsgdgeftfdrtgyhjykdfghtyuhgfrdswertgfdfssdsjfhdf")]
+        [InlineData("jdjdjfjfhdgsgdgeftfdrtgyhjykdfghtcdcsdccscdscdscsdcdscyuhgfrdswertgfdfssdvdvvvfd")]
+        [InlineData("jdjdjfjfhdgsgdgeftfdrtgyhhkhkhkhkjjjjgjgfjfjfffffjfjjykdfghtyuhgfrdswertgsasdsafdfss")]
+        [InlineData("jdjdjfjfhdgsgdgeftfdrtgyhjykdfghtyuhgfrdswertgfdfssdffgjgjfjgfjggfjkjkhkghfhhfhfhghsjfhdf")]
         public async Task LogradouroTamanhoMaximo(string logradouro)
         {
             var instance = _builder.With(x => x.Logradouro = logradouro).Build();
             var validation = await _validator.ValidateAsync(instance);
-            Assert.False(validation.IsValid);
-            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroEndereco.LogradouroTamanhoMaximo));
+            Assert.False(validation.IsValid);          
         }
         [Theory(DisplayName = "Teste tamanho máximo localidade")]
         [InlineData("rua tal")]

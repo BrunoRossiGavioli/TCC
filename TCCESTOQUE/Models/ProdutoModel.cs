@@ -11,17 +11,21 @@ namespace TCCESTOQUE.Models
         public int ProdutoId { get; set; }
 
         [MaxLength(50)]
+        [Required(ErrorMessage = "Informe o nome do produto", AllowEmptyStrings = false)]
         public string Nome { get; set; }
 
-        [MaxLength(50)]
+        [MaxLength(30)]
         public string Descricao { get; set; }
 
         [Column(TypeName = "decimal(12,2)")]
+        [Required(ErrorMessage = "Informe o Custo do produto", AllowEmptyStrings = false)]
         public decimal Custo { get; set; }
 
         [Column(TypeName = "decimal(12,2)")]
+        [Required(ErrorMessage = "Informe o Valor Unitario do produto", AllowEmptyStrings = false)]
         public decimal ValorUnitario { get; set; }
 
+        [Required(ErrorMessage = "Informe a Quantidade do produto", AllowEmptyStrings = false)]
         public int Quantidade { get; set; }
 
         [ScaffoldColumn(false)]
