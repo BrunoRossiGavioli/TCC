@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace TCCESTOQUE.Models
 {
+    [Table("VendaItens")]
     public class VendaItensModel
     {
         [Key]
@@ -16,6 +17,10 @@ namespace TCCESTOQUE.Models
         public int VendaId { get; set; }
         public VendaModel Venda { get; set; }
 
+        [ForeignKey("Vendedor")]
+        [ScaffoldColumn(false)]
+        public int VendedorId { get; set; }
+        public VendedorModel Vendedor { get; set; }
 
         [ForeignKey("Produto")]
         public int ProdutoId { get; set; }

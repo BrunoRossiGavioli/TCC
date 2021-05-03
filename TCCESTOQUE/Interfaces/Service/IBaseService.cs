@@ -11,7 +11,5 @@ namespace TCCESTOQUE.Interfaces.Service
         public T GetOne(int? id);
 
         public ICollection<T> GetAll();
-
-        public bool PostExclusao(int id);
     }
 }

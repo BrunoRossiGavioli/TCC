@@ -11,5 +11,7 @@ namespace TCCESTOQUE.Interfaces.Service
         public FornecedorEnderecoViewModel GetEditFull(int? id);
 
         public ValidationResult PutEditFull(int id, FornecedorEnderecoViewModel feviewmodel);
+
+        public object PostExclusao(int id);
     }
 }

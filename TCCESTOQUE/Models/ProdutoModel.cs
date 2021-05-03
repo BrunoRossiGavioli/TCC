@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -30,6 +31,9 @@ namespace TCCESTOQUE.Models
 
         [ScaffoldColumn(false)]
         public DateTime DataEntrada { get; set; } = DateTime.Now;
+
+        [ScaffoldColumn(false)]
+        public ICollection<VendaItensModel> Itens { get; set; }
 
         [ForeignKey("Fornecedor")]
         public int FornecedorId { get; set; }

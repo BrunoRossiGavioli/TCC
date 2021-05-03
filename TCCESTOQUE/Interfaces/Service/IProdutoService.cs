@@ -10,5 +10,7 @@ namespace TCCESTOQUE.Interfaces.Service
         public ValidationResult PutEdicao(ProdutoModel produtoModel);
 
         public ProdutoModel GetEdicao(int? id);
+
+        public bool PostExclusao(int id);
     }
 }

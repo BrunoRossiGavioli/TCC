@@ -13,6 +13,8 @@ namespace TCCESTOQUE.Interfaces.Service
 
         public ValidationResult PutEdicao(int id, VendedorModel vendedorModel);
 
+        public bool PostExclusao(int id);
+
         public object PostLogin(VendedorModel vendedorModel);
     }
 }
