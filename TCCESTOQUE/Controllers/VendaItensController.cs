@@ -172,9 +172,6 @@ namespace TCCESTOQUE.Controllers
 
         #endregion
 
-
-
-
         // GET: VendaItens/Delete/5
         public IActionResult Delete(int? id)
         {

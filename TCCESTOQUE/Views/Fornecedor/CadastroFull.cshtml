@@ -33,7 +33,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="Cnpj" class="control-label"></label>
-                        <input asp-for="Cnpj" class="form-control" />
+                        <input asp-for="Cnpj" data-mask="000.000.000/0000-00" class="form-control" />
                         <span asp-validation-for="Cnpj" class="text-danger"></span>
                     </div>
                 </div>
@@ -49,14 +49,14 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="Cep" class="control-label"></label>
-                        <input asp-for="Cep" id="cep" class="form-control" />
+                        <input asp-for="Cep" data-mask="00000-000" id="cep" class="form-control" />
                         <span asp-validation-for="Cep" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="Telefone" class="control-label"></label>
-                        <input asp-for="Telefone" class="form-control" />
+                        <input asp-for="Telefone" data-mask="(00)00000-0000" class="form-control" />
                         <span asp-validation-for="Telefone" class="text-danger"></span>
                     </div>
                 </div>
@@ -88,7 +88,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="Numero" class="control-label"></label>
-                        <input asp-for="Numero" id="numero" class="form-control" />
+                        <input asp-for="Numero" data-mask="000000" id="numero" class="form-control" />
                         <span asp-validation-for="Numero" class="text-danger"></span>
                     </div>
                 </div>
