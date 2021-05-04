@@ -15,21 +15,18 @@ namespace TCCESTOQUE.ValidadorVendedor
 
             RuleFor(v => v.Email).NotEmpty().WithMessage(MensagensErroVendedor.EmailVazio)
                 .EmailAddress().WithMessage(MensagensErroVendedor.EmailFormatoInvalido)
-                .MaximumLength(30).WithMessage(MensagensErroVendedor.EmailTamanhoMaximo)
-                .MinimumLength(13).WithMessage(MensagensErroVendedor.EmailTamanhoMinimo);
-                
-            RuleFor(v => v.Telefone).Length(11).WithMessage(MensagensErroVendedor.TelefoneTamanho);
-
-                
-            RuleFor(v => v.Cpf).NotEmpty().WithMessage(MensagensErroVendedor.CpfVazio)
-                .Length(11).WithMessage(MensagensErroVendedor.CpfTamanho);
+                .MaximumLength(30).WithMessage(MensagensErroVendedor.EmailTamanhoMaximo);
 
             RuleFor(v => v.Senha).NotEmpty().WithMessage(MensagensErroVendedor.SenhaVazia)
                 .MaximumLength(50).WithMessage(MensagensErroVendedor.SenhaTamanhoMaximo)
                 .MinimumLength(8).WithMessage(MensagensErroVendedor.SenhaTamanhoMinimo);
 
-             RuleFor(v => v.DataNascimento).NotEmpty().WithMessage(MensagensErroVendedor.DataNascimentoVazia)
-                .Must(IdadeMinima).WithMessage(MensagensErroVendedor.DataTamanhoMinimo);                    
+            RuleFor(v => v.DataNascimento).NotEmpty().WithMessage(MensagensErroVendedor.DataNascimentoVazia)
+                .Must(IdadeMinima).WithMessage(MensagensErroVendedor.DataTamanhoMinimo);
+
+            RuleFor(v => v.Telefone).Length(14).WithMessage(MensagensErroVendedor.TelefoneTamanho);
+
+            RuleFor(v => v.Cpf).Length(14).WithMessage(MensagensErroVendedor.CpfTamanho);
         }
         private static bool IdadeMinima(DateTime data)
         {
