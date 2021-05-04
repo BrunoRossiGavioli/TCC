@@ -1,0 +1,103 @@
+﻿@model TCCESTOQUE.Models.CarrinhoModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Carrinho</h1>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Valor)
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                foreach (var item in Model.Itens)
+                {
+                    if (Model.CarrinhoId == item.CarrinhoId)
+                        Model.Valor += item.Produto.ValorUnitario * item.Quantidade;
+                }
+            }
+            @Html.DisplayFor(model => model.Valor)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Vendedor)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Vendedor.Nome)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cliente)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cliente.Nome)
+        </dd>
+    </dl>
+</div>
+<div class="row py-3 px-3">
+    <a asp-controller="VendaItens" asp-action="ItemCarrinho" asp-route-id="@ViewBag.CarrinhoId">
+        <input type="button" class="btn btn-success" value="Adicionar produto">
+    </a>
+    <form asp-action="AdicionarVenda">
+        <select asp-for="ClienteId" class="form-control" asp-items="ViewBag.ClienteId" ></select>
+        <input type="hidden" asp-for="CarrinhoId" value="@ViewBag.CarrinhoId"/>
+        <input type="submit" class="btn btn-primary" value="Finalizar" />
+    </form>
+    
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Código
+            </th>
+            <th>
+                Produto
+            </th>
+            <th>
+                Quantidade
+            </th>
+            <th>
+                Fornecedor
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Itens != null)
+        {
+            @foreach (var item in Model.Itens)
+            {
+                if (item.CarrinhoId == Model.CarrinhoId)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VendaItensId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Produto.Nome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantidade)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Produto.Fornecedor.NomeFantasia)
+                        </td>
+                        <td>
+                            <a asp-controller="VendaItens" asp-action="EditItemCarrinho" asp-route-id="@item.VendaItensId">Edit</a> |
+                            <a asp-controller="VendaItens" asp-action="Delete" asp-route-id="@item.VendaItensId">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

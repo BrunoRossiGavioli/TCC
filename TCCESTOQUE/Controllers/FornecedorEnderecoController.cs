@@ -36,7 +36,7 @@ namespace TCCESTOQUE.Controllers
         // POST: FornecedorEndereco/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("FornecedorId,Id,Cep,Logradouro,Complemento,Numero,Bairro,Localidade,Uf")] FornecedorEnderecoModel fornecedorEnderecoModel)
+        public async Task<IActionResult> Edit(int id,FornecedorEnderecoModel fornecedorEnderecoModel)
         {
             Autenticar();
             if (id != fornecedorEnderecoModel.EnderecoId)

@@ -36,7 +36,7 @@
     </dl>
 </div>
 <div class="row py-3 px-3">
-    <a asp-controller="VendaItens" asp-action="Create" asp-route-id="@Model.VendaId">
+    <a asp-controller="VendaItens" asp-action="ItemVenda" asp-route-id="@Model.VendaId">
         <input type="button" class="btn btn-success" value="Adicionar produto">
     </a>
 </div>
@@ -83,8 +83,7 @@
                         @Html.DisplayFor(modelItem => item.Venda.DataVenda)
                     </td>
                     <td>
-                        <a asp-controller="VendaItens" asp-action="Edit" asp-route-id="@item.VendaItensId">Edit</a> |
-                        <a asp-controller="VendaItens" asp-action="Details" asp-route-id="@item.VendaItensId">Details</a> |
+                        <a asp-controller="VendaItens" asp-action="EditItemVenda" asp-route-id="@item.VendaItensId">Edit</a> |
                         <a asp-controller="VendaItens" asp-action="Delete" asp-route-id="@item.VendaItensId">Delete</a>
                     </td>
                 </tr>

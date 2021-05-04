@@ -27,7 +27,7 @@ namespace TCCESTOQUE.Service
             return _vendaItensRepository.GetOne(id);
         }
 
-        public bool PostCriacao(VendaItensModel vendaItens)
+        public bool PostItem(VendaItensModel vendaItens)
         {
             _vendaItensRepository.PostCriacao(vendaItens);
             return true;

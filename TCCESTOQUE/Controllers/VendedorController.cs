@@ -49,7 +49,7 @@ namespace TCCESTOQUE.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Senha,Cpf,Nome,Email,DataNascimento,Endereco,Telefone")] VendedorModel vendedorModel)
+        public IActionResult Create(VendedorModel vendedorModel)
         {
             Autenticar();
             var res = _vendedorService.PostCriacao(vendedorModel);

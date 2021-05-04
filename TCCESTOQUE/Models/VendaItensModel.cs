@@ -14,8 +14,14 @@ namespace TCCESTOQUE.Models
         public int VendaItensId { get; set; }
 
         [ForeignKey("Venda")]
-        public int VendaId { get; set; }
+        public int? VendaId { get; set; }
         public VendaModel Venda { get; set; }
+
+        [ForeignKey("Carrinho")]
+        [ScaffoldColumn(false)]
+        public int? CarrinhoId { get; set; }
+        [ScaffoldColumn(false)] 
+        public CarrinhoModel Carrinho { get; set; }
 
         [ForeignKey("Vendedor")]
         [ScaffoldColumn(false)]

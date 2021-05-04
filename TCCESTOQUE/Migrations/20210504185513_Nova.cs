@@ -29,6 +29,27 @@ namespace TCCESTOQUE.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Carrinho",
+                columns: table => new
+                {
+                    CarrinhoId = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Valor = table.Column<decimal>(type: "decimal(12,2)", nullable: false),
+                    DataVenda = table.Column<DateTime>(nullable: false),
+                    VendedorId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Carrinho", x => x.CarrinhoId);
+                    table.ForeignKey(
+                        name: "FK_Carrinho_Vendedor_VendedorId",
+                        column: x => x.VendedorId,
+                        principalTable: "Vendedor",
+                        principalColumn: "VendedorId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Cliente",
                 columns: table => new
                 {
@@ -120,7 +141,7 @@ namespace TCCESTOQUE.Migrations
                         column: x => x.ClienteId,
                         principalTable: "Cliente",
                         principalColumn: "ClienteId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Venda_Vendedor_VendedorId",
                         column: x => x.VendedorId,
@@ -178,7 +199,7 @@ namespace TCCESTOQUE.Migrations
                         column: x => x.FornecedorId,
                         principalTable: "Fornecedor",
                         principalColumn: "FornecedorId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Produto_Vendedor_VendedorId",
                         column: x => x.VendedorId,
@@ -193,7 +214,9 @@ namespace TCCESTOQUE.Migrations
                 {
                     VendaItensId = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    VendaId = table.Column<int>(nullable: false),
+                    VendaId = table.Column<int>(nullable: true),
+                    CarrinhoId = table.Column<int>(nullable: true),
+                    VendedorId = table.Column<int>(nullable: false),
                     ProdutoId = table.Column<int>(nullable: false),
                     Quantidade = table.Column<int>(nullable: false)
                 },
@@ -201,18 +224,35 @@ namespace TCCESTOQUE.Migrations
                 {
                     table.PrimaryKey("PK_VendaItens", x => x.VendaItensId);
                     table.ForeignKey(
+                        name: "FK_VendaItens_Carrinho_CarrinhoId",
+                        column: x => x.CarrinhoId,
+                        principalTable: "Carrinho",
+                        principalColumn: "CarrinhoId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_VendaItens_Produto_ProdutoId",
                         column: x => x.ProdutoId,
                         principalTable: "Produto",
                         principalColumn: "ProdutoId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_VendaItens_Venda_VendaId",
                         column: x => x.VendaId,
                         principalTable: "Venda",
                         principalColumn: "VendaId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_VendaItens_Vendedor_VendedorId",
+                        column: x => x.VendedorId,
+                        principalTable: "Vendedor",
+                        principalColumn: "VendedorId",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Carrinho_VendedorId",
+                table: "Carrinho",
+                column: "VendedorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cliente_VendedorId",
@@ -257,6 +297,11 @@ namespace TCCESTOQUE.Migrations
                 column: "VendedorId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_VendaItens_CarrinhoId",
+                table: "VendaItens",
+                column: "CarrinhoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_VendaItens_ProdutoId",
                 table: "VendaItens",
                 column: "ProdutoId");
@@ -265,6 +310,11 @@ namespace TCCESTOQUE.Migrations
                 name: "IX_VendaItens_VendaId",
                 table: "VendaItens",
                 column: "VendaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VendaItens_VendedorId",
+                table: "VendaItens",
+                column: "VendedorId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -277,6 +327,9 @@ namespace TCCESTOQUE.Migrations
 
             migrationBuilder.DropTable(
                 name: "VendaItens");
+
+            migrationBuilder.DropTable(
+                name: "Carrinho");
 
             migrationBuilder.DropTable(
                 name: "Produto");

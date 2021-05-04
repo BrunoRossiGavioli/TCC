@@ -27,14 +27,6 @@ namespace TCCESTOQUE.Data
                 .WithMany(p => p.Venda)
                 .HasForeignKey(c => c.ClienteId)
                 .OnDelete(DeleteBehavior.Restrict);
-
-            //restringe a exclusao de um produto se ele estiver em uma VendaItens
-            modelBuilder.Entity<VendaItensModel>()
-                .HasOne(c => c.Produto)
-                .WithMany(p => p.Itens)
-                .HasForeignKey(c => c.ProdutoId)
-                .OnDelete(DeleteBehavior.Restrict);
-
         }
 
         public DbSet<TCCESTOQUE.Models.VendedorModel> VendedorModel { get; set; }
@@ -52,5 +44,7 @@ namespace TCCESTOQUE.Data
         public DbSet<TCCESTOQUE.Models.VendaItensModel> VendaItensModel { get; set; }
 
         public DbSet<TCCESTOQUE.Models.ClienteEnderecoModel> ClienteEnderecoModel { get; set; }
+
+        public DbSet<TCCESTOQUE.Models.CarrinhoModel> CarrinhoModel { get; set; }
     }
 }

@@ -5,6 +5,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\**" />
+    <Content Remove="Migrations\**" />
+    <EmbeddedResource Remove="Migrations\**" />
+    <None Remove="Migrations\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Migrations\20210504185513_Nova.cs" />
+    <Compile Include="Migrations\20210504185513_Nova.Designer.cs" />
+    <Compile Include="Migrations\20210504190135_Nova2.cs" />
+    <Compile Include="Migrations\20210504190135_Nova2.Designer.cs" />
+    <Compile Include="Migrations\20210504192943_Nova3.cs" />
+    <Compile Include="Migrations\20210504192943_Nova3.Designer.cs" />
+    <Compile Include="Migrations\TCCESTOQUEContextModelSnapshot.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="10.0.2" />
