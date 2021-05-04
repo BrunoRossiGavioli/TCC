@@ -18,7 +18,8 @@ namespace Estoque.Test.Builder
                 .With(x => x.Localidade = "Cidade xxx")
                 .With(x => x.Logradouro = "logradouro")
                 .With(x => x.Numero = 1)
-                .With(x => x.RazaoSocial = "Marcolino pereira");
+                .With(x => x.RazaoSocial = "Marcolino pereira")
+                .With(x=>x.Uf = "SP");
         }
     }
 }

@@ -210,7 +210,7 @@ namespace Estoque.Test.ValidationViewModelTests
         #region Cep
         [Theory(DisplayName = "Teste de Ceps válidos")]
         [InlineData("13455-678")]
-        [InlineData("75865-231")]
+        [InlineData("75862-231")]
         [InlineData("55455-678")]
         [InlineData("32895-678")]
         public async Task CepValido(string cep)
@@ -284,7 +284,7 @@ namespace Estoque.Test.ValidationViewModelTests
             Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroEndereco.LogradouroTamanhoMinimo));
         }
         [Theory(DisplayName = "Teste tamanho máximo logradouro")]
-        [InlineData("jdjdjfjfhdgsgdgeftfdrtgyhjykdfghtcdcsdccscdscdscsdcdscyuhgfrdswertgfdfssdvdvvvfd")]
+        [InlineData("jdjdjfjfhdgsgdgeftfdrtgyhjykdfghtcdcsdccscdscdscsdcdscyuhgfrdswertgfdfssdvdvvvfddsfff")]
         [InlineData("jdjdjfjfhdgsgdgeftfdrtgyhhkhkhkhkjjjjgjgfjfjfffffjfjjykdfghtyuhgfrdswertgsasdsafdfss")]
         [InlineData("jdjdjfjfhdgsgdgeftfdrtgyhjykdfghtyuhgfrdswertgfdfssdffgjgjfjgfjggfjkjkhkghfhhfhfhghsjfhdf")]
         public async Task LogradouroTamanhoMaximo(string logradouro)
@@ -330,10 +330,10 @@ namespace Estoque.Test.ValidationViewModelTests
             Assert.False(validation.IsValid);
         }
         [Theory(DisplayName = "Teste de Complementos tamanho máximo")]
-        [InlineData("teste do complemento tamanho máximo do endereço do fornecedomodel que é de 50 caracteres no máximo")]
-        [InlineData("jdjdjfjfhdgsgdgeftfdrtgyhjykdfghtyuhgfrdswertgfdfss")]
-        [InlineData("iuhiuwciuwhiuchuihuicuiwechiewhiuceoccwlewldedlwdwjedlwdwe")]
-        [InlineData("lgkfhhjfdjjfkdhiudwehiudewuhdhdiuwehiudewuidhuediedhweuhdiewhddew")]
+        [InlineData("teste do complemento tamanho máximo do endereço do fornecedomodel que é de 80 caracteres no máximo")]
+        [InlineData("jdjdjfjfhdgsgdgeftfdrtgyhjykdfghtyuhgfrdswertgfdfssbhjbehrebjffjhrebfhbfhjefjbrhfefcdscferfrfrefr")]
+        [InlineData("iuhiuwciuwhiuchuihuicuiwechiewhiuceoccwlewldedlwdwjedlwdcsdcdscdscsdcsdcscscsdcdcscdcdscsdcdcsdcwe")]
+        [InlineData("lgkfhhjfdjjfkdhiudwehiudewuhdhdiuwehiudewuidhuediedhweuhdiewdscsdcsdcsdcsdcdscdscsdcsdcscsdcscschddew")]
         public async Task ComplementoTamanhoMaximo(string complemento)
         {
             var instance = _builder.With(x => x.Complemento = complemento).Build();
@@ -404,6 +404,29 @@ namespace Estoque.Test.ValidationViewModelTests
             var validation = await _validator.ValidateAsync(instance);
             Assert.False(validation.IsValid);
             Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensErroFornecedor.RazaoSocialTamanhoMinimo));
+        }
+        #endregion
+
+        #region Uf
+        [Theory(DisplayName = "Teste UF válido")]
+        [InlineData("BH")]
+        [InlineData("SP")]
+        [InlineData("MT")]
+        public async Task UfValido(string uf)
+        {
+            var instance = _builder.With(x => x.Uf = uf).Build();
+            var validation = await _validator.ValidateAsync(instance);
+            Assert.True(validation.IsValid);
+        }
+
+        [Fact(DisplayName = "Teste UF vazio")]
+        
+        public async Task UfVazio()
+        {
+            var instance = _builder.With(x => x.Uf = "").Build();
+            var validation = await _validator.ValidateAsync(instance);
+            Assert.False(validation.IsValid);
+            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroEndereco.UfVazio));
         }
         #endregion
     }
