@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
 
@@ -16,6 +17,7 @@ namespace TCCESTOQUE.Controllers
         }
 
         // GET: VendaItens/Details/5
+        [Authorize]
         public IActionResult Details(int? id)
         {
             Autenticar();
@@ -32,6 +34,7 @@ namespace TCCESTOQUE.Controllers
 
         #region ItemCarrinho
         //GET
+        [Authorize]
         public IActionResult ItemCarrinho(int id)
         {
             Autenticar();
@@ -44,6 +47,7 @@ namespace TCCESTOQUE.Controllers
         // POST: VendaItens/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public IActionResult AdicionarItemCarrinho(VendaItensModel vendaItensModel, int carrinhoId)
         {
             Autenticar();
@@ -63,6 +67,7 @@ namespace TCCESTOQUE.Controllers
         }
 
         // GET: VendaItens/Edit/5
+        [Authorize]
         public IActionResult EditItemCarrinho(int? id)
         {
             Autenticar();
@@ -83,6 +88,7 @@ namespace TCCESTOQUE.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public IActionResult EditItemCarrinho(VendaItensModel vendaItensModel, int id)
         {
             Autenticar();
@@ -104,6 +110,7 @@ namespace TCCESTOQUE.Controllers
         #region ItemVenda
 
         // GET: VendaItens/Create
+        [Authorize]
         public IActionResult ItemVenda(int id)
         {
             Autenticar();
@@ -115,6 +122,7 @@ namespace TCCESTOQUE.Controllers
         // POST: VendaItens/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public IActionResult AdicionarItemVenda(VendaItensModel vendaItensModel, int vendaId)
         {
             Autenticar();
@@ -134,6 +142,7 @@ namespace TCCESTOQUE.Controllers
         }
 
         // GET: VendaItens/Edit/5
+        [Authorize]
         public IActionResult EditItemVenda(int? id)
         {
             Autenticar();
@@ -154,6 +163,7 @@ namespace TCCESTOQUE.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public IActionResult EditItemVenda(VendaItensModel vendaItensModel, int id)
         {
             Autenticar();
@@ -173,6 +183,7 @@ namespace TCCESTOQUE.Controllers
         #endregion
 
         // GET: VendaItens/Delete/5
+        [Authorize]
         public IActionResult Delete(int? id)
         {
             Autenticar();
@@ -190,6 +201,7 @@ namespace TCCESTOQUE.Controllers
         // POST: VendaItens/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public IActionResult DeleteConfirmed(int id)
         {
             Autenticar();

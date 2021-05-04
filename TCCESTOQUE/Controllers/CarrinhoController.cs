@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,7 @@ namespace TCCESTOQUE.Controllers
         }
 
         // GET: Carrinho/Details/5
+        [Authorize]
         public IActionResult Details(int? id)
         {
             Autenticar();
@@ -41,6 +43,7 @@ namespace TCCESTOQUE.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult AdicionarVenda(CarrinhoModel carrinho)
         {
             var car = _carrinhoService.Finalizar(carrinho);

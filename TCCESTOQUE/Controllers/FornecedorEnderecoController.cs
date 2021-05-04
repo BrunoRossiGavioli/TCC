@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,6 +20,7 @@ namespace TCCESTOQUE.Controllers
         }
 
         // GET: FornecedorEndereco/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             Autenticar();
@@ -36,6 +38,7 @@ namespace TCCESTOQUE.Controllers
         // POST: FornecedorEndereco/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id,FornecedorEnderecoModel fornecedorEnderecoModel)
         {
             Autenticar();
@@ -67,6 +70,7 @@ namespace TCCESTOQUE.Controllers
         }
 
         // GET: FornecedorEndereco/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             Autenticar();
@@ -89,6 +93,7 @@ namespace TCCESTOQUE.Controllers
         // POST: FornecedorEndereco/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             Autenticar();

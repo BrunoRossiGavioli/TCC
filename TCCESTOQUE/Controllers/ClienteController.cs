@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,7 @@ namespace TCCESTOQUE.Controllers
         }
 
         // GET: Cliente
+        [Authorize]
         public IActionResult Index()
         {
             Autenticar();
@@ -29,6 +31,7 @@ namespace TCCESTOQUE.Controllers
         }
 
         // GET: Cliente/Details/5
+        [Authorize]
         public IActionResult Details(int? id)
         {
             Autenticar();
@@ -44,6 +47,7 @@ namespace TCCESTOQUE.Controllers
         }
 
         // GET: Cliente/Create
+        [Authorize]
         public IActionResult Create()
         {
             Autenticar();
@@ -55,6 +59,7 @@ namespace TCCESTOQUE.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public IActionResult Create(ClienteViewModel cliVM)
         {
             Autenticar();
@@ -66,6 +71,7 @@ namespace TCCESTOQUE.Controllers
         }
 
         // GET: Cliente/Edit/5/VendedorId
+        [Authorize]
         public IActionResult Edit(int? id)
         {
             Autenticar();
@@ -84,6 +90,7 @@ namespace TCCESTOQUE.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public IActionResult Edit(int id, ClienteViewModel cliVM)
         {
             Autenticar();
@@ -98,6 +105,7 @@ namespace TCCESTOQUE.Controllers
         }
 
         // GET: Cliente/Delete/5
+        [Authorize]
         public IActionResult Delete(int? id)
         {
             Autenticar();
@@ -115,6 +123,7 @@ namespace TCCESTOQUE.Controllers
         // POST: Cliente/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public IActionResult DeleteConfirmed(int id)
         {
             Autenticar();

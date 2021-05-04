@@ -75,7 +75,7 @@ namespace TCCESTOQUE
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Vendedor}/{action=Login}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}");
             });
         }
     }

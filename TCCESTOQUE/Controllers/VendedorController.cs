@@ -23,6 +23,7 @@ namespace TCCESTOQUE.Controllers
             _vendedorService = vendedorService;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             Autenticar();
@@ -92,9 +93,9 @@ namespace TCCESTOQUE.Controllers
         }
 
         // POST: Vendedor/Delete/5
-        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public IActionResult DeleteConfirmed(int id)
         {
             Autenticar();
