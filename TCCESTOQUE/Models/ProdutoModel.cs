@@ -15,7 +15,7 @@ namespace TCCESTOQUE.Models
         [Required(ErrorMessage = "Informe o nome do produto")]
         public string Nome { get; set; }
 
-        [MaxLength(50)]
+        [MaxLength(100)]
         public string Descricao { get; set; }
 
         [Column(TypeName = "decimal(12,2)")]
@@ -28,9 +28,6 @@ namespace TCCESTOQUE.Models
 
         [Required(ErrorMessage = "Informe a quantidade")]
         public int Quantidade { get; set; }
-
-        [ScaffoldColumn(false)]
-        public DateTime DataEntrada { get; set; } = DateTime.Now;
 
         [ScaffoldColumn(false)]
         public ICollection<VendaItensModel> Itens { get; set; }

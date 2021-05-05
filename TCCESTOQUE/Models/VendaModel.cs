@@ -9,13 +9,13 @@ namespace TCCESTOQUE.Models
     public class VendaModel
     {
         [Key]
-        public int VendaId { get; set; }
-        
-        [Column(TypeName = "decimal(12,2)")]
-        public decimal Valor { get; set; }
+        public int VendaId { get; set; }    
 
         [Required(ErrorMessage = "Data de venda é obrigatoria!", AllowEmptyStrings = false)]
         public DateTime DataVenda { get; set; }
+
+        [ScaffoldColumn(false)]
+        public bool Cancelada { get; set; }
 
         [ForeignKey("Vendedor")]
         public int VendedorId { get; set; }

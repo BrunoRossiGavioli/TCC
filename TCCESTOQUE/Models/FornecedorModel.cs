@@ -42,5 +42,8 @@ namespace TCCESTOQUE.Models
         public int VendedorId { get; set; }
         public VendedorModel Vendedor { get; set; }
 
+        [ScaffoldColumn(false)]
+        public bool Ativo { get; set; }
+
     }
 }

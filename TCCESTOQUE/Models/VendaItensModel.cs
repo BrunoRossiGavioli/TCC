@@ -13,6 +13,15 @@ namespace TCCESTOQUE.Models
         [Key]
         public int VendaItensId { get; set; }
 
+        [Required(ErrorMessage = "Informe a quantidade!")]
+        public double Quantidade { get; set; }
+
+        [Required]
+        public decimal PrecoProduto { get { return Produto.ValorUnitario; } }
+
+        [Required]
+        public decimal CustoProduto { get { return Produto.Custo; } }
+
         [ForeignKey("Venda")]
         public int? VendaId { get; set; }
         public VendaModel Venda { get; set; }
@@ -20,7 +29,6 @@ namespace TCCESTOQUE.Models
         [ForeignKey("Carrinho")]
         [ScaffoldColumn(false)]
         public int? CarrinhoId { get; set; }
-        [ScaffoldColumn(false)] 
         public CarrinhoModel Carrinho { get; set; }
 
         [ForeignKey("Vendedor")]
@@ -31,9 +39,5 @@ namespace TCCESTOQUE.Models
         [ForeignKey("Produto")]
         public int ProdutoId { get; set; }
         public ProdutoModel Produto { get; set; }
-
-        [Required(ErrorMessage = "Informe a quantidade!")]
-        public int Quantidade { get; set; }
-
     }
 }
