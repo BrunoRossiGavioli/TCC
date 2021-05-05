@@ -9,8 +9,10 @@ namespace TCCESTOQUE.Interfaces.Service
 {
     public interface IVendaItensService : IBaseService<VendaItensModel>
     {
-        public bool PostCriacao(VendaItensModel vendaItens);
+        public bool PostItem(VendaItensModel vendaItens);
 
         public bool PutEdicao(VendaItensModel vendaItens);
+
+        public bool PostExclusao(int id);
     }
 }

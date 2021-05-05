@@ -10,10 +10,13 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="AdicionarItemCarrinho">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div hidden class="form-group">
-                <select asp-for="VendaId" class ="form-control" asp-items="ViewBag.VendaId"></select>
+                <input type="hidden" asp-for="VendedorId" class="form-control" value="@ViewBag.usuarioId" />
+            </div>
+            <div hidden class="form-group">
+                <input type="hidden" asp-for="CarrinhoId" class="form-control" value="@ViewBag.CarrinhoId" />
             </div>
             <div class="form-group">
                 <label asp-for="ProdutoId" class="control-label"></label>
@@ -32,7 +35,7 @@
 </div>
 
 <div>
-    <a asp-controller="Venda" asp-action="Index">Back to List</a>
+    <a asp-controller="Carrinho" asp-action="Details" asp-route-id="@ViewBag.CarrinhoId">Back to List</a>
 </div>
 
 @section Scripts {

@@ -21,7 +21,7 @@ namespace TCCESTOQUE.Models
         [Required(ErrorMessage = "Informe a RazãoSocial de usuario", AllowEmptyStrings = false)]
         public string NomeFantasia { get; set; }
 
-        [MaxLength(14)]
+        [MaxLength(18)]
         [Required(ErrorMessage = "Informe a RazãoSocial de usuario", AllowEmptyStrings = false)]
         public string Cnpj { get; set; }
 
@@ -30,6 +30,7 @@ namespace TCCESTOQUE.Models
         [DataType(System.ComponentModel.DataAnnotations.DataType.EmailAddress)]
         public string Email { get; set; }
 
+        [MaxLength(14)]
         public string Telefone { get; set; }
 
         [ScaffoldColumn(false)]
@@ -41,6 +42,9 @@ namespace TCCESTOQUE.Models
         [ForeignKey("Vendedor")]
         public int VendedorId { get; set; }
         public VendedorModel Vendedor { get; set; }
+
+        [ScaffoldColumn(false)]
+        public bool Ativo { get; set; }
 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,8 @@ namespace TCCESTOQUE.Repository
         public override FornecedorModel GetOne(int? id)
         {
             var fornecedorModel = _context.FornecedorModel
+                .Include(e => e.Endereco)
+                .Include(p => p.Produtos)
                 .FirstOrDefault(m => m.FornecedorId == id);
 
             if (fornecedorModel == null)

@@ -23,6 +23,9 @@ namespace TCCESTOQUE.StartUpOpcoes
             services.AddScoped<IVendedorService, VendedorService>();
             services.AddScoped<IVendedorRepository, VendedorRepository>();
 
+            services.AddScoped<ICarrinhoRepository, CarrinhoRepository>();
+            services.AddScoped<ICarrinhoService, CarrinhoService>();
+
             services.AddScoped<IFornecedorService, FornecedorService>();
             services.AddScoped<IFornecedorRepository, FornecedorRepository>();
             services.AddScoped<IFornecedorEnderecoRepository, FornecedorEnderecoRepository>();

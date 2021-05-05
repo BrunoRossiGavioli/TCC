@@ -18,9 +18,11 @@ namespace TCCESTOQUE.Service
     public class VendedorService : IVendedorService
     {
         private readonly IVendedorRepository _vendedorRepository;
-        public VendedorService(IVendedorRepository vendedorRepository)
+        private readonly ICarrinhoRepository _carrinhoRepo;
+        public VendedorService(IVendedorRepository vendedorRepository, ICarrinhoRepository carrinhoRepo)
         {
             _vendedorRepository = vendedorRepository;
+            _carrinhoRepo = carrinhoRepo;
         }
         public ICollection<VendedorModel> GetAll()
         {
@@ -44,8 +46,9 @@ namespace TCCESTOQUE.Service
         {
             var validacao = ValidarVendedor(vendedorModel);
             if (validacao.IsValid) { 
-            vendedorModel = FormataValores.FormataValoresVendedor(vendedorModel);
-            _vendedorRepository.PostCriacao(vendedorModel);
+                vendedorModel = FormataValores.FormataValoresVendedor(vendedorModel);
+                _vendedorRepository.PostCriacao(vendedorModel);
+                _carrinhoRepo.PostCriacao(new CarrinhoModel() { VendedorId = vendedorModel.VendedorId });
             }
             return validacao;
         }

@@ -9,7 +9,7 @@ using TCCESTOQUE.Data;
 namespace TCCESTOQUE.Migrations
 {
     [DbContext(typeof(TCCESTOQUEContext))]
-    [Migration("20210430181747_Nova")]
+    [Migration("20210504185513_Nova")]
     partial class Nova
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,6 +18,28 @@ namespace TCCESTOQUE.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            modelBuilder.Entity("TCCESTOQUE.Models.CarrinhoModel", b =>
+                {
+                    b.Property<int>("CarrinhoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DataVenda")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<decimal>("Valor")
+                        .HasColumnType("decimal(12,2)");
+
+                    b.Property<int>("VendedorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CarrinhoId");
+
+                    b.HasIndex("VendedorId");
+
+                    b.ToTable("Carrinho");
+                });
 
             modelBuilder.Entity("TCCESTOQUE.Models.ClienteEnderecoModel", b =>
                 {
@@ -32,8 +54,8 @@ namespace TCCESTOQUE.Migrations
 
                     b.Property<string>("Cep")
                         .IsRequired()
-                        .HasColumnType("varchar(8) CHARACTER SET utf8mb4")
-                        .HasMaxLength(8);
+                        .HasColumnType("varchar(9) CHARACTER SET utf8mb4")
+                        .HasMaxLength(9);
 
                     b.Property<int>("ClienteId")
                         .HasColumnType("int");
@@ -54,7 +76,7 @@ namespace TCCESTOQUE.Migrations
 
                     b.Property<int>("Numero")
                         .HasColumnType("int")
-                        .HasMaxLength(10);
+                        .HasMaxLength(6);
 
                     b.Property<string>("Uf")
                         .IsRequired()
@@ -76,8 +98,8 @@ namespace TCCESTOQUE.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Cpf")
-                        .HasColumnType("varchar(11) CHARACTER SET utf8mb4")
-                        .HasMaxLength(11);
+                        .HasColumnType("varchar(14) CHARACTER SET utf8mb4")
+                        .HasMaxLength(14);
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -85,6 +107,7 @@ namespace TCCESTOQUE.Migrations
                         .HasMaxLength(80);
 
                     b.Property<string>("Nome")
+                        .IsRequired()
                         .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
                         .HasMaxLength(50);
 
@@ -114,8 +137,8 @@ namespace TCCESTOQUE.Migrations
 
                     b.Property<string>("Cep")
                         .IsRequired()
-                        .HasColumnType("varchar(8) CHARACTER SET utf8mb4")
-                        .HasMaxLength(8);
+                        .HasColumnType("varchar(9) CHARACTER SET utf8mb4")
+                        .HasMaxLength(9);
 
                     b.Property<string>("Complemento")
                         .HasColumnType("varchar(80) CHARACTER SET utf8mb4")
@@ -136,7 +159,7 @@ namespace TCCESTOQUE.Migrations
 
                     b.Property<int>("Numero")
                         .HasColumnType("int")
-                        .HasMaxLength(10);
+                        .HasMaxLength(6);
 
                     b.Property<string>("Uf")
                         .IsRequired()
@@ -159,8 +182,8 @@ namespace TCCESTOQUE.Migrations
 
                     b.Property<string>("Cnpj")
                         .IsRequired()
-                        .HasColumnType("varchar(14) CHARACTER SET utf8mb4")
-                        .HasMaxLength(14);
+                        .HasColumnType("varchar(18) CHARACTER SET utf8mb4")
+                        .HasMaxLength(18);
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -178,7 +201,8 @@ namespace TCCESTOQUE.Migrations
                         .HasMaxLength(50);
 
                     b.Property<string>("Telefone")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(14) CHARACTER SET utf8mb4")
+                        .HasMaxLength(14);
 
                     b.Property<int>("VendedorId")
                         .HasColumnType("int");
@@ -210,6 +234,7 @@ namespace TCCESTOQUE.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
                         .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
                         .HasMaxLength(50);
 
@@ -237,22 +262,32 @@ namespace TCCESTOQUE.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int?>("CarrinhoId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ProdutoId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");
 
-                    b.Property<int>("VendaId")
+                    b.Property<int?>("VendaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VendedorId")
                         .HasColumnType("int");
 
                     b.HasKey("VendaItensId");
+
+                    b.HasIndex("CarrinhoId");
 
                     b.HasIndex("ProdutoId");
 
                     b.HasIndex("VendaId");
 
-                    b.ToTable("VendaItensModel");
+                    b.HasIndex("VendedorId");
+
+                    b.ToTable("VendaItens");
                 });
 
             modelBuilder.Entity("TCCESTOQUE.Models.VendaModel", b =>
@@ -279,7 +314,7 @@ namespace TCCESTOQUE.Migrations
 
                     b.HasIndex("VendedorId");
 
-                    b.ToTable("VendaModel");
+                    b.ToTable("Venda");
                 });
 
             modelBuilder.Entity("TCCESTOQUE.Models.VendedorModel", b =>
@@ -293,8 +328,8 @@ namespace TCCESTOQUE.Migrations
 
                     b.Property<string>("Cpf")
                         .IsRequired()
-                        .HasColumnType("varchar(11) CHARACTER SET utf8mb4")
-                        .HasMaxLength(11);
+                        .HasColumnType("varchar(14) CHARACTER SET utf8mb4")
+                        .HasMaxLength(14);
 
                     b.Property<DateTime>("DataNascimento")
                         .HasColumnType("datetime(6)");
@@ -318,11 +353,21 @@ namespace TCCESTOQUE.Migrations
                         .HasMaxLength(70);
 
                     b.Property<string>("Telefone")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(14) CHARACTER SET utf8mb4")
+                        .HasMaxLength(14);
 
                     b.HasKey("VendedorId");
 
                     b.ToTable("Vendedor");
+                });
+
+            modelBuilder.Entity("TCCESTOQUE.Models.CarrinhoModel", b =>
+                {
+                    b.HasOne("TCCESTOQUE.Models.VendedorModel", "Vendedor")
+                        .WithMany()
+                        .HasForeignKey("VendedorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("TCCESTOQUE.Models.ClienteEnderecoModel", b =>
@@ -378,15 +423,23 @@ namespace TCCESTOQUE.Migrations
 
             modelBuilder.Entity("TCCESTOQUE.Models.VendaItensModel", b =>
                 {
+                    b.HasOne("TCCESTOQUE.Models.CarrinhoModel", "Carrinho")
+                        .WithMany("Itens")
+                        .HasForeignKey("CarrinhoId");
+
                     b.HasOne("TCCESTOQUE.Models.ProdutoModel", "Produto")
-                        .WithMany()
+                        .WithMany("Itens")
                         .HasForeignKey("ProdutoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("TCCESTOQUE.Models.VendaModel", "Venda")
                         .WithMany("Itens")
-                        .HasForeignKey("VendaId")
+                        .HasForeignKey("VendaId");
+
+                    b.HasOne("TCCESTOQUE.Models.VendedorModel", "Vendedor")
+                        .WithMany()
+                        .HasForeignKey("VendedorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -394,7 +447,7 @@ namespace TCCESTOQUE.Migrations
             modelBuilder.Entity("TCCESTOQUE.Models.VendaModel", b =>
                 {
                     b.HasOne("TCCESTOQUE.Models.ClienteModel", "Cliente")
-                        .WithMany()
+                        .WithMany("Venda")
                         .HasForeignKey("ClienteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

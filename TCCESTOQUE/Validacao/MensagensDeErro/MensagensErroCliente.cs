@@ -22,8 +22,8 @@
         #endregion
 
         public static string EmailFormatoInvalido = "Email inválido, tente novamente!";
-        public static string TelefoneTamanho = "O Telefone deve ter 14 caracteres!";
-        public static string CpfTamanho = "O CPF deve ter 14 caracteres!";
+        public static string TelefoneTamanho = "O Telefone deve ter 11 caracteres!";
+        public static string CpfTamanho = "O CPF deve ter 11 caracteres!";
         public static string CpfjaCadastrado = "O CPF ja encontra-se cadastrado";
         public static string EmailNaoEncontrado = "Email não encontrado!";
 

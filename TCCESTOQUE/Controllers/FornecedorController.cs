@@ -99,10 +99,12 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             var res = _fornecedorService.PostExclusao(id);
-            if(res)
+            if(res.GetType() == typeof(bool)) {
+                ViewBag.ErroExcluir = "";
                 return RedirectToAction("Index", "Fornecedor");
+            }
 
-            ModelState.AddModelError("", "Não foi possivel deletar o fornecedor, tente novamente mais tarde!");
+            ViewBag.FornecedorErroExcluir = (string)res;
             return View(_fornecedorService.GetOne(id));
         }
     }

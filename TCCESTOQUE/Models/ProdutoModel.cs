@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,9 +12,10 @@ namespace TCCESTOQUE.Models
         public Guid ProdutoId { get; set; }
 
         [MaxLength(50)]
+        [Required(ErrorMessage = "Informe o nome do produto")]
         public string Nome { get; set; }
 
-        [MaxLength(50)]
+        [MaxLength(100)]
         public string Descricao { get; set; }
 
         [Column(TypeName = "decimal(12,2)")]
@@ -28,7 +30,7 @@ namespace TCCESTOQUE.Models
         public int Quantidade { get; set; }
 
         [ScaffoldColumn(false)]
-        public DateTime DataEntrada { get; set; } = DateTime.Today;
+        public ICollection<VendaItensModel> Itens { get; set; }
 
         [ForeignKey("Fornecedor")]
         public int FornecedorId { get; set; }

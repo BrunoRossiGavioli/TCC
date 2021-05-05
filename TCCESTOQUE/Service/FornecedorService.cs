@@ -39,9 +39,11 @@ namespace TCCESTOQUE.Service
             return _fornecedorRepository.GetOne(id);
         }
 
-        public bool PostExclusao(int id)
+        public object PostExclusao(int id)
         {
             var res = _fornecedorRepository.GetOne(id);
+            if (res.Produtos.Count > 0)
+                return "Não é possivel deletar esse fornecedor, ele tem produtos";
             if (res != null)
             {
                 _fornecedorRepository.PostExclusao(res);
