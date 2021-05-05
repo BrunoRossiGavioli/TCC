@@ -22,6 +22,11 @@ namespace TCCESTOQUE.Service
             throw new NotImplementedException();
         }
 
+        public ICollection<VendaItensModel> GetByVendaId(int vendaId)
+        {
+            return _vendaItensRepository.GetByVendaId(vendaId);
+        }
+
         public VendaItensModel GetOne(int? id)
         {
             return _vendaItensRepository.GetOne(id);

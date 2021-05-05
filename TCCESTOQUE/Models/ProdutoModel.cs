@@ -27,23 +27,24 @@ namespace TCCESTOQUE.Models
         public decimal ValorUnitario { get; set; }
 
         [Required(ErrorMessage = "Informe a quantidade")]
-        public int Quantidade { get; set; }
+        public double Quantidade { get; set; }
+
+        
+        public UnidadeDeMedidaEnum UnidadeDeMedida { get; set; }
 
         [ScaffoldColumn(false)]
         public DateTime DataEntrada { get; set; } = DateTime.Now;
 
+        //[ForeignKey("Fornecedor")]
+        //public int FornecedorId { get; set; }
+        //public FornecedorModel Fornecedor { get; set; }
+
+
+        #region NavigationProperty
         [ScaffoldColumn(false)]
         public ICollection<VendaItensModel> Itens { get; set; }
-
-        [ForeignKey("Fornecedor")]
-        public int FornecedorId { get; set; }
-        public FornecedorModel Fornecedor { get; set; }
-
-        [ForeignKey("Vendedor")]
-        public int VendedorId { get; set; }
-        public VendedorModel Vendedor { get; set; }
-
-
+        
+        #endregion
     }
 
 }

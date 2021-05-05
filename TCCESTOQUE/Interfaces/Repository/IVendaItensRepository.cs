@@ -8,6 +8,6 @@ namespace TCCESTOQUE.Interfaces.Repository
 {
     public interface IVendaItensRepository : IBaseRepository<VendaItensModel>
     {
-
+        ICollection<VendaItensModel> GetByVendaId(int vendaId);
     }
 }

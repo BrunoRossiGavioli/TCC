@@ -14,5 +14,7 @@ namespace TCCESTOQUE.Interfaces.Service
         public bool PutEdicao(VendaItensModel vendaItens);
 
         public bool PostExclusao(int id);
+
+        ICollection<VendaItensModel> GetByVendaId(int vendaId);
     }
 }

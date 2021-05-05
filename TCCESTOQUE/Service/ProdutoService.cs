@@ -68,5 +68,15 @@ namespace TCCESTOQUE.Service
             _produtoRepository.PutEdicao(produtoModel);
             return validador;
         }
+
+        public bool BaixarEstoque(int produtoId, double quantidade)
+        {
+
+        }
+
+        public bool AdicionarEstoque(int produtoId, double quantidade)
+        {
+
+        }
     }
 }
