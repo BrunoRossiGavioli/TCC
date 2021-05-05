@@ -8,7 +8,7 @@ namespace TCCESTOQUE.Models
     public class ProdutoModel
     {
         [Key]
-        public int ProdutoId { get; set; }
+        public Guid ProdutoId { get; set; }
 
         [MaxLength(50)]
         public string Nome { get; set; }

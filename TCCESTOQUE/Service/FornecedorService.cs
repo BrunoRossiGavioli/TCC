@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation.Results;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TCCESTOQUE.Interfaces.Repository;
@@ -54,7 +55,7 @@ namespace TCCESTOQUE.Service
             return FeviewConvert(_fornecedorRepository.GetEdicao(id));
         }
 
-        public ValidationResult PutEditFull(int id, FornecedorEnderecoViewModel feviewmodel)
+        public ValidationResult PutEditFull(Guid id, FornecedorEnderecoViewModel feviewmodel)
         {
             var validador = ValidarFornecedorEnderecoViewModel(feviewmodel);
             if (validador.IsValid)
@@ -119,7 +120,7 @@ namespace TCCESTOQUE.Service
             return info;
         }
 
-        public FornecedorModel ConvertFornecedor(int id, FornecedorEnderecoViewModel feViewModel)
+        public FornecedorModel ConvertFornecedor(Guid id, FornecedorEnderecoViewModel feViewModel)
         {
             var fornecedor = _mapper.Map<FornecedorModel>(feViewModel);
             var info = _fornecedorRepository.GetByEmail(feViewModel.Email);

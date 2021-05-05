@@ -1,9 +1,11 @@
-﻿namespace TCCESTOQUE.ViewModel
+﻿using System;
+
+namespace TCCESTOQUE.ViewModel
 {
     public class FornecedorEnderecoViewModel
     {
         #region Fornecedor
-        public int FornecedorId { get; set; }
+        public Guid FornecedorId { get; set; }
         public string NomeFantasia { get; set; }
         public string Cnpj { get; set; }
         public string RazaoSocial { get; set; }
@@ -13,7 +15,7 @@
         #endregion
 
         #region Endereco
-        public int EnderecoId { get; set; }
+        public Guid EnderecoId { get; set; }
         public string Cep { get; set; }
         public string Logradouro { get; set; }
         public string Complemento { get; set; }

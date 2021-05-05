@@ -11,7 +11,7 @@ namespace TCCESTOQUE.Models
     public class ClienteEnderecoModel : EnderecoModel
     {
         [ForeignKey("Cliente")]
-        public int ClienteId { get; set; }
+        public Guid ClienteId { get; set; }
 
         public ClienteModel Cliente { get; set; }
 

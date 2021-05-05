@@ -11,7 +11,7 @@ namespace TCCESTOQUE.Models
     public class ClienteModel
     {
         [Key]
-        public int ClienteId { get; set; }
+        public Guid ClienteId { get; set; }
 
         [MaxLength(50)]
         public string Nome { get; set; }

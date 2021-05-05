@@ -1,4 +1,5 @@
 ﻿using FluentValidation.Results;
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using TCCESTOQUE.Models;
@@ -11,7 +12,7 @@ namespace TCCESTOQUE.Interfaces.Service
 
         public VendedorModel GetEdicao(int? id);
 
-        public ValidationResult PutEdicao(int id, VendedorModel vendedorModel);
+        public ValidationResult PutEdicao(Guid id, VendedorModel vendedorModel);
 
         public object PostLogin(VendedorModel vendedorModel);
     }

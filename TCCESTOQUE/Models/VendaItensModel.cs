@@ -10,7 +10,7 @@ namespace TCCESTOQUE.Models
     public class VendaItensModel
     {
         [Key]
-        public int VendaItensId { get; set; }
+        public Guid VendaItensId { get; set; }
 
         [ForeignKey("Venda")]
         public int VendaId { get; set; }

@@ -13,8 +13,8 @@ namespace TCCESTOQUE.Interfaces.Service
     {
         public ValidationResult PostCricao(VendaViewModel venda);
 
-        public VendaModel GetEdicao(int? id);
+        public VendaModel GetEdicao(Guid? id);
 
-        public object PutEdicao(int id, VendaModel venda);
+        public object PutEdicao(Guid id, VendaModel venda);
     }
 }

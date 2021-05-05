@@ -10,7 +10,7 @@ namespace TCCESTOQUE.Models
         [Key]
         [ScaffoldColumn(false)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int VendedorId { get; set; }
+        public Guid VendedorId { get; set; }
 
         [MaxLength(50)]
         [Required(ErrorMessage = "Informe o nome de usuario", AllowEmptyStrings = false)]

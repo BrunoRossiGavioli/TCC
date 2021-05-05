@@ -13,11 +13,11 @@ namespace TCCESTOQUE.Interfaces.Repository
 
         public ICollection<T> GetAll();
 
-        public T GetOne(int? id);
+        public T GetOne(Guid? id);
 
         public void PostCriacao(T model);
 
-        public T GetEdicao(int? id);
+        public T GetEdicao(Guid? id);
 
         public void PutEdicao(T model);
 

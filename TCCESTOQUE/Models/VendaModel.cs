@@ -8,7 +8,7 @@ namespace TCCESTOQUE.Models
     public class VendaModel
     {
         [Key]
-        public int VendaId { get; set; }
+        public Guid VendaId { get; set; }
         
         [Column(TypeName = "decimal(12,2)")]
         public decimal Valor { get; set; }
