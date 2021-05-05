@@ -12,18 +12,15 @@ using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Repository
 {
-    public class VendaRepository : IVendaRepository
+    public class VendaRepository : BaseRepository<VendaModel>,IVendaRepository
     {
-        private readonly TCCESTOQUEContext _context;
-        private readonly IMapper _mapper;
 
-        public VendaRepository(TCCESTOQUEContext context, IMapper mapper)
+        public VendaRepository(TCCESTOQUEContext context) : base(context)
         {
-            _context = context;
-            _mapper = mapper;
+
         }
 
-        public VendaModel GetDetalhes(int? id)
+        public override VendaModel GetOne(int? id)
         {
             var vendaModel = _context.VendaModel
                 .Include(v => v.Itens)
@@ -39,68 +36,9 @@ namespace TCCESTOQUE.Repository
             return vendaModel;
         }
 
-        public ICollection<VendaModel> GetIndex()
+        public ICollection<VendaModel> GetAll()
         {
             return _context.VendaModel.Include(v => v.Cliente).Include(v => v.Vendedor).ToList();
-        }
-
-        public object GetCricao(int id)
-        {
-            throw new NotImplementedException();
-        }
-        public object PostCricao(VendaViewModel venda)
-        {
-            try
-            {
-                var vendaModel = _mapper.Map<VendaModel>(venda);
-                var itens = _mapper.Map<VendaItensModel>(venda);
-
-                _context.Add(vendaModel);
-                _context.SaveChanges();
-                itens.VendaId = vendaModel.VendaId;
-                _context.Add(itens);
-                _context.SaveChanges();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
-        public VendaModel GetEdicao(int? id)
-        {
-            return _context.VendaModel.Find(id);
-        }
-        public object PutEdicao(int id, VendaModel venda)
-        {
-            try
-            {
-                _context.Update(venda);
-                _context.SaveChangesAsync();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
-        public VendaModel GetExclusao(int? id)
-        {
-            var vendaModel = _context.VendaModel
-            .Include(v => v.Cliente)
-            .Include(v => v.Vendedor)
-            .FirstOrDefault(m => m.VendaId == id);
-            return vendaModel;
-        }
-
-        public VendaModel PostExclusao(int id)
-        {
-            var vendaModel = _context.VendaModel.Find(id);
-            _context.VendaModel.Remove(vendaModel);
-            _context.SaveChanges();
-            return vendaModel;
         }
     }
 }

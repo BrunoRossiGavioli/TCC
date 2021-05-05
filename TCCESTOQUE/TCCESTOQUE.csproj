@@ -5,8 +5,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20210419193408_Nova.cs" />
-    <Compile Remove="Migrations\20210419193408_Nova.Designer.cs" />
+    <Compile Remove="Migrations\**" />
+    <Content Remove="Migrations\**" />
+    <EmbeddedResource Remove="Migrations\**" />
+    <None Remove="Migrations\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Migrations\20210504185513_Nova.cs" />
+    <Compile Include="Migrations\20210504185513_Nova.Designer.cs" />
+    <Compile Include="Migrations\20210504190135_Nova2.cs" />
+    <Compile Include="Migrations\20210504190135_Nova2.Designer.cs" />
+    <Compile Include="Migrations\20210504192943_Nova3.cs" />
+    <Compile Include="Migrations\20210504192943_Nova3.Designer.cs" />
+    <Compile Include="Migrations\TCCESTOQUEContextModelSnapshot.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,10 +33,6 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

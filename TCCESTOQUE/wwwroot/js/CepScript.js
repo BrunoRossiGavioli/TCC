@@ -1,16 +1,6 @@
-﻿function SetNum() {
-    var num = $("#numero").val();
-    if (num == "" || num < 0)
-        return num = 0;
-}
-
-$("#numero").val(SetNum());
-
-$('#cep').keyup(function GetCep() {
-    var cep = $(this).val().replace('-', '');
-    $("#cep").val(cep);
+﻿$('#cep').keyup(function GetCep() {
     $.ajax({
-        url: 'https://viacep.com.br/ws/' + cep + '/json',
+        url: 'https://viacep.com.br/ws/' + $(this).val() + '/json',
         dataType: 'json',
         success: function (resposta) {
             $("#logradouro").val(resposta.logradouro);
@@ -18,8 +8,6 @@ $('#cep').keyup(function GetCep() {
             $("#bairro").val(resposta.bairro);
             $("#localidade").val(resposta.localidade);
             $("#uf").val(resposta.uf);
-            $("#numero").val(SetNum());
-            $("#numero").focus();
         }
     })
 });

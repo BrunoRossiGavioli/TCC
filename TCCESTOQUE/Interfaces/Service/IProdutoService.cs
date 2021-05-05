@@ -1,23 +1,16 @@
-﻿using TCCESTOQUE.Models;
+﻿using FluentValidation.Results;
+using TCCESTOQUE.Models;
 
 namespace TCCESTOQUE.Interfaces.Service
 {
-    public interface IProdutoService
+    public interface IProdutoService : IBaseService<ProdutoModel>
     {
-        public object GetIndex();
+        public ValidationResult PostCriacao(ProdutoModel produtoModel);
 
-        public ProdutoModel GetDetalhes(int? id);
-
-        public object GetCriacao();
-
-        public bool PostCriacao(ProdutoModel produtoModel);
+        public ValidationResult PutEdicao(ProdutoModel produtoModel);
 
         public ProdutoModel GetEdicao(int? id);
 
-        public bool PutEdicao(int id, ProdutoModel produtoModel);
-
-        public ProdutoModel GetExclusao(int? id);
-
-        public object PostExclusao(int id);
+        public bool PostExclusao(int id);
     }
 }

@@ -1,9 +1,15 @@
-﻿using System.Linq;
+﻿using FluentValidation;
+using FluentValidation.Results;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
+using TCCESTOQUE.Controllers;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.Validacao.Formatacao;
+using TCCESTOQUE.Validacao.ValidacaoBusiness;
 using TCCESTOQUE.Validacao.ValidacaoModels;
 using TCCESTOQUE.ValidadorVendedor;
 
@@ -12,21 +18,23 @@ namespace TCCESTOQUE.Service
     public class VendedorService : IVendedorService
     {
         private readonly IVendedorRepository _vendedorRepository;
-        public VendedorService(IVendedorRepository vendedorRepository)
+        private readonly ICarrinhoRepository _carrinhoRepo;
+        public VendedorService(IVendedorRepository vendedorRepository, ICarrinhoRepository carrinhoRepo)
         {
             _vendedorRepository = vendedorRepository;
+            _carrinhoRepo = carrinhoRepo;
         }
-        public object GetCriacao()
+        public ICollection<VendedorModel> GetAll()
         {
-            return _vendedorRepository.GetCriacao();
+            return _vendedorRepository.GetAll();
         }
 
-        public VendedorModel GetDetalhes(int? id)
+        public VendedorModel GetOne(int? id)
         {
             if (id == null)
                 return null;
 
-            return _vendedorRepository.GetDetalhes(id);
+            return _vendedorRepository.GetOne(id);
         }
 
         public VendedorModel GetEdicao(int? id)
@@ -34,48 +42,73 @@ namespace TCCESTOQUE.Service
             return _vendedorRepository.GetEdicao(id);
         }
 
-        public VendedorModel GetExclusao(int? id)
+        public ValidationResult PostCriacao(VendedorModel vendedorModel)
         {
-            return _vendedorRepository.GetExclusao(id);
+            var validacao = ValidarVendedor(vendedorModel);
+            if (validacao.IsValid) { 
+                vendedorModel = FormataValores.FormataValoresVendedor(vendedorModel);
+                _vendedorRepository.PostCriacao(vendedorModel);
+                _carrinhoRepo.PostCriacao(new CarrinhoModel() { VendedorId = vendedorModel.VendedorId });
+            }
+            return validacao;
         }
 
-        public bool PostCriacao(VendedorModel vendedorModel)
+        public ValidationResult PutEdicao(int id, VendedorModel vendedorModel)
         {
-            var validacao = new VendedorValidador(_vendedorRepository).Validate(vendedorModel);
-
+            var validacao = ValidarVendedor(vendedorModel);
             if (validacao.IsValid)
             {
-                vendedorModel = FormataValores.FormataValoresVendedor(vendedorModel);
-                return _vendedorRepository.PostCriacao(vendedorModel);
+                var vendedor = ConvertVendedor(vendedorModel);
+                vendedor = FormataValores.FormataValoresVendedor(vendedor);
+                _vendedorRepository.PutEdicao(vendedor);
             }
+            return validacao;
+        }
 
+        public bool PostExclusao(int id)
+        {
+            var res = _vendedorRepository.GetOne(id);
+            if (res != null)
+            {
+                _vendedorRepository.PostExclusao(res);
+                return true;
+            }
             return false;
         }
 
-        public bool PutEdicao(int id, VendedorModel vendedorModel)
+        public object PostLogin(VendedorModel vendedorModel)
         {
-            vendedorModel.VendedorId = id;
+            var validacao = new LoginValidador(_vendedorRepository, vendedorModel).Validate(vendedorModel);
+            if (!validacao.IsValid)
+                return validacao;
 
-            var validacao = new VendedorValidador(_vendedorRepository).Validate(vendedorModel);
-
-            if (validacao.IsValid)
-            {
-                vendedorModel = FormataValores.FormataValoresVendedor(vendedorModel);
-                return _vendedorRepository.PutEdicao(id, vendedorModel);
-            }
-
-            return false;
+            var vendedor = _vendedorRepository.GetByEmail(vendedorModel.Email);
+            return _vendedorRepository.PostLogin(vendedor);
         }
 
-        public object PostExclusao(int id)
+        private ValidationResult ValidarVendedor(VendedorModel vendedor)
         {
-            return _vendedorRepository.PostExclusao(id);
+            var validacao = new VendedorValidador().Validate(vendedor);
+            if (!validacao.IsValid)
+                return validacao;
+
+            var validacaoBusiness = new VendedorBusinessValidador(_vendedorRepository).Validate(vendedor);
+            if (!validacaoBusiness.IsValid)
+                return validacaoBusiness;
+
+            return validacao;
         }
 
-        public ClaimsPrincipal PostLogin(VendedorModel vendedorModel)
+        private VendedorModel ConvertVendedor(VendedorModel vendedorModel)
         {
-            return _vendedorRepository.PostLogin(vendedorModel);
-
+            var vendedor = _vendedorRepository.GetByCpf(vendedorModel.Cpf);
+            vendedor.Cpf = vendedorModel.Cpf;
+            vendedor.Email = vendedorModel.Email;
+            vendedor.DataNascimento = vendedor.DataNascimento;
+            vendedor.Nome = vendedorModel.Nome;
+            vendedor.Senha = vendedorModel.Senha;
+            vendedor.Telefone = vendedorModel.Telefone;
+            return vendedor;
         }
     }
 }

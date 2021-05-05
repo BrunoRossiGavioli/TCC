@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FluentValidation.Results;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,37 +17,36 @@ namespace TCCESTOQUE.Service
             _vendaItensRepository = vendaItensRepository;
         }
 
-        public VendaItensModel GetDetalhes(int? id)
+        public ICollection<VendaItensModel> GetAll()
         {
-            return _vendaItensRepository.GetDetalhes(id);
+            throw new NotImplementedException();
         }
 
-        public object PostCriacao(VendaItensModel vendaItens, int id)
+        public VendaItensModel GetOne(int? id)
         {
-            if (vendaItens.VendaId == id)
-                return _vendaItensRepository.PostCriacao(vendaItens, id);
+            return _vendaItensRepository.GetOne(id);
+        }
 
+        public bool PostItem(VendaItensModel vendaItens)
+        {
+            _vendaItensRepository.PostCriacao(vendaItens);
+            return true;
+        }
+
+        public bool PutEdicao(VendaItensModel vendaItens)
+        {
+            _vendaItensRepository.PutEdicao(vendaItens);
+            return true;
+        }
+
+        public bool PostExclusao(int id)
+        {
+            var model = _vendaItensRepository.GetOne(id);
+            if(model != null) { 
+                _vendaItensRepository.PostExclusao(model);
+                return true;
+            }
             return false;
-        }
-
-        public VendaItensModel GetEdicao(int? id)
-        {
-            return _vendaItensRepository.GetEdicao(id);
-        }
-
-        public object PutEdicao(int? id, VendaItensModel vendaItens)
-        {
-            return _vendaItensRepository.PutEdicao(id, vendaItens);
-        }
-
-        public VendaItensModel GetExclusao(int? id)
-        {
-            return _vendaItensRepository.GetExclusao(id);
-        }
-
-        public object PostExlusao(int id)
-        {
-            return _vendaItensRepository.PostExlusao(id);
         }
     }
 }

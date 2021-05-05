@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,21 +12,28 @@ namespace TCCESTOQUE.Models
         public int ProdutoId { get; set; }
 
         [MaxLength(50)]
+        [Required(ErrorMessage = "Informe o nome do produto")]
         public string Nome { get; set; }
 
         [MaxLength(50)]
         public string Descricao { get; set; }
 
         [Column(TypeName = "decimal(12,2)")]
+        [Required(ErrorMessage = "Informe o custo")]
         public decimal Custo { get; set; }
 
         [Column(TypeName = "decimal(12,2)")]
+        [Required(ErrorMessage = "Informe o valor unitario")]
         public decimal ValorUnitario { get; set; }
 
+        [Required(ErrorMessage = "Informe a quantidade")]
         public int Quantidade { get; set; }
 
         [ScaffoldColumn(false)]
-        public DateTime DataEntrada { get; set; } = DateTime.Today;
+        public DateTime DataEntrada { get; set; } = DateTime.Now;
+
+        [ScaffoldColumn(false)]
+        public ICollection<VendaItensModel> Itens { get; set; }
 
         [ForeignKey("Fornecedor")]
         public int FornecedorId { get; set; }

@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TCCESTOQUE.Models
 {
+    [Table("Venda")]
     public class VendaModel
     {
         [Key]

@@ -14,8 +14,7 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
                 .MaximumLength(80).WithMessage(MensagensErroProduto.NomeTamanhoMaximo)
                 .MinimumLength(3).WithMessage(MensagensErroProduto.NomeTamanhoMinimo);
  
-            RuleFor(p => p.Descricao).NotEmpty().WithMessage(MensagensErroProduto.DescricaoVazia)
-                .MaximumLength(30).WithMessage(MensagensErroProduto.DescricaoTamanhoMaximo)
+            RuleFor(p => p.Descricao).MaximumLength(30).WithMessage(MensagensErroProduto.DescricaoTamanhoMaximo)
                 .MinimumLength(3).WithMessage(MensagensErroProduto.DescricaoTamanhoMinimo);
 
             RuleFor(p => p.Custo).NotEmpty().WithMessage(MensagensErroProduto.CustoVazio)

@@ -42,13 +42,16 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Produto" asp-action="Create">Adicionar produto</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Venda" asp-action="Create">Adicionar Venda</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Venda" asp-action="Index">Vendas</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Create" asp-route-id="@ViewBag.usuarioId">Adicionar Cliente</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Vendedor" asp-action="Logout">Desconectar</a>
+                                    <a class="nav-link text-dark" asp-controller="Carrinho" asp-action="Details" asp-route-id="@ViewBag.usuarioId">Carrinho</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Vendedor" asp-action="Logout" asp-route-id="@ViewBag.usuarioId">Desconectar</a>
                                 </li>
                             }
                         }
@@ -70,6 +73,7 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery-mask-plugin/jquery.mask.js" type="text/javascript"  asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>

@@ -11,6 +11,7 @@ using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Repository;
 using TCCESTOQUE.Service;
+using TCCESTOQUE.StartUpOpcoes;
 
 namespace TCCESTOQUE
 {
@@ -37,34 +38,12 @@ namespace TCCESTOQUE
 
             services.AddControllersWithViews();
 
-            services.AddAutoMapper(typeof(AutoMapperProfile));
-
             services.AddDbContext<TCCESTOQUEContext>(options =>
                     options.UseMySql(Configuration.GetConnectionString("TCCESTOQUEContext")));
 
-            services.AddMvc()
-                .AddFluentValidation(c =>
-                c.RegisterValidatorsFromAssemblyContaining<Startup>());
+            ConfiguraDI.ConfigureAutoMapper(services);
 
-            services.AddScoped<IVendedorService, VendedorService>();
-            services.AddScoped<IVendedorRepository, VendedorRepository>();
-            
-            services.AddScoped<IFornecedorService,FornecedorService>();
-            services.AddScoped<IFornecedorRepository, FornecedorRepository>();
-            
-            services.AddScoped<IProdutoService, ProdutoService>();
-            services.AddScoped<IProdutoRepository, ProdutoRepository>();
-            
-            services.AddScoped<IVendaRepository, VendaRepository>();
-            services.AddScoped<IVendaService, VendaService>();
-
-            services.AddScoped<IVendaItensRepository, VendaItensRepository>();
-            services.AddScoped<IVendaItensService, VendaItensService>();
-
-            services.AddScoped<IClienteRepository, ClienteRepository>();
-            services.AddScoped<IClienteService, ClienteService>();
-
-            services.AddScoped<ISelectListRepository, SelectListRepository>();
+            ConfiguraDI.ConfigureServicesAndRepo(services);
 
         }
 
@@ -96,7 +75,7 @@ namespace TCCESTOQUE
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Vendedor}/{action=Login}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}");
             });
         }
     }

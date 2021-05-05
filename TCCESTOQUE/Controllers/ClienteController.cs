@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -14,28 +15,30 @@ namespace TCCESTOQUE.Controllers
 {
     public class ClienteController : ControllerPai
     {
-        private readonly IClienteService _context;
+        private readonly IClienteService _cliService;
 
         public ClienteController(IClienteService context)
         {
-            _context = context;
+            _cliService = context;
         }
 
         // GET: Cliente
+        [Authorize]
         public IActionResult Index()
         {
             Autenticar();
-            return View(_context.GetIndex());
+            return View(_cliService.GetAll());
         }
 
         // GET: Cliente/Details/5
+        [Authorize]
         public IActionResult Details(int? id)
         {
             Autenticar();
             if (id == null)
                 return NotFound();
 
-            var clienteModel = _context.GetDetalhes(id);
+            var clienteModel = _cliService.GetOne(id);
 
             if (clienteModel == null)
                 return NotFound();
@@ -44,6 +47,7 @@ namespace TCCESTOQUE.Controllers
         }
 
         // GET: Cliente/Create
+        [Authorize]
         public IActionResult Create()
         {
             Autenticar();
@@ -55,29 +59,26 @@ namespace TCCESTOQUE.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(ClienteViewModel clienteModel, int Vendedorid)
+        [Authorize]
+        public IActionResult Create(ClienteViewModel cliVM)
         {
             Autenticar();
-            if (ModelState.IsValid)
-            {
-                var res =_context.PostCriacao(clienteModel, Vendedorid);
-                if(res != null)
-                    return RedirectToAction(nameof(Index));
+            var res =_cliService.PostCriacao(cliVM);
+            if (!res.IsValid)
+                return View(MostrarErros(res, cliVM));
 
-                return View(clienteModel);
-                
-            }
-            return View(clienteModel);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Cliente/Edit/5/VendedorId
+        [Authorize]
         public IActionResult Edit(int? id)
         {
             Autenticar();
             if (id == null)
                 return NotFound();
 
-            var clienteModel = _context.GetEdicao(id);
+            var clienteModel = _cliService.GetEdicao(id);
             if (clienteModel == null)
                 return NotFound();
 
@@ -89,29 +90,29 @@ namespace TCCESTOQUE.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, ClienteViewModel clienteModel, int VendedorId)
+        [Authorize]
+        public IActionResult Edit(int id, ClienteViewModel cliVM)
         {
             Autenticar();
-            if (id != clienteModel.ClienteId)
+            if (id != cliVM.ClienteId)
                 return NotFound();
 
-            if (ModelState.IsValid)
-            {
-                var res = _context.PutEdicao(id, clienteModel, VendedorId);
-                if(res != null)
-                    return RedirectToAction(nameof(Index));
-            }
-            return View(clienteModel);
+            var res = _cliService.PutEdicao(cliVM);
+            if (!res.IsValid)
+                return View(MostrarErros(res, cliVM));
+
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Cliente/Delete/5
+        [Authorize]
         public IActionResult Delete(int? id)
         {
             Autenticar();
             if (id == null)
                 return NotFound();
 
-            var clienteModel = _context.GetExclusao(id);
+            var clienteModel = _cliService.GetOne(id);
 
             if (clienteModel == null)
                 return NotFound();
@@ -122,11 +123,16 @@ namespace TCCESTOQUE.Controllers
         // POST: Cliente/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public IActionResult DeleteConfirmed(int id)
         {
             Autenticar();
-            _context.PostExclusao(id);
-            return RedirectToAction(nameof(Index));
+            var res = _cliService.PostExclusao(id);
+            if(res)
+                return RedirectToAction(nameof(Index));
+
+            ModelState.AddModelError("", "Não foi possivel deletar o cliente, tente novamente mais tarde!");
+            return View(_cliService.GetOne(id));
         }
     }
 }

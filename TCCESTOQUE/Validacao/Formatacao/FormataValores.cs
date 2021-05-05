@@ -10,7 +10,7 @@ namespace TCCESTOQUE.Validacao.Formatacao
         {
             vendedor.Nome = vendedor.Nome.ToUpper().Trim();
             vendedor.Cpf = vendedor.Cpf.Trim();
-            vendedor.Telefone = vendedor.Telefone.Trim();
+            vendedor.Telefone = vendedor.Telefone?.Trim();
             vendedor.Email = vendedor.Email.Trim();
             vendedor.Senha = SecurityService.Criptografar(vendedor.Senha);
             return vendedor;

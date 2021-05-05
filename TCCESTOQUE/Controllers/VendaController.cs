@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TCCESTOQUE.Data;
-using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.ViewModel;
@@ -16,30 +16,32 @@ namespace TCCESTOQUE.Controllers
 {
     public class VendaController : ControllerPai
     {
-        private readonly IVendaService _context;
-        private readonly ISelectListRepository _selectListRepository;
+        private readonly IVendaService _vendaService;
+        private readonly ISelectListService _selectListRepository;
 
-        public VendaController(IVendaService context, ISelectListRepository selectListRepository)
+        public VendaController(IVendaService context, ISelectListService selectListRepository)
         {
-            _context = context;
+            _vendaService = context;
             _selectListRepository = selectListRepository;
         }
 
         // GET: Venda
+        [Authorize]
         public IActionResult Index()
         {
             Autenticar();
-            return View(_context.GetIndex());
+            return View(_vendaService.GetAll());
         }
 
         // GET: Venda/Details/5
+        [Authorize]
         public IActionResult Details(int? id)
         {
             Autenticar();
             if (id == null)
                 return NotFound();
 
-            var vendaModel = _context.GetDetalhes(id);
+            var vendaModel = _vendaService.GetOne(id);
 
             if (vendaModel == null)
                 return NotFound();
@@ -48,14 +50,14 @@ namespace TCCESTOQUE.Controllers
         }
 
         // GET: Venda/Create
+        [Authorize]
         public IActionResult Create()
         {
             Autenticar();
             ViewData["ClienteId"] = _selectListRepository.SelectListCliente("ClienteId", "Nome");
             ViewData["VendedorId"] = _selectListRepository.SelectListVendedor("VendedorId", "Nome");
             ViewData["ProdutoId"] = _selectListRepository.SelectListProduto("ProdutoId", "Nome");
-            var res = View();
-            return res;
+            return View();
         }
 
         // POST: Venda/Create
@@ -63,12 +65,13 @@ namespace TCCESTOQUE.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public IActionResult Create(VendaViewModel vendaViewModel)
         {
             Autenticar();
             if (ModelState.IsValid)
             {
-                _context.PostCricao(vendaViewModel);
+                _vendaService.PostCricao(vendaViewModel);
                 return RedirectToAction("Index", "Venda");
             }
             ViewData["ClienteId"] = _selectListRepository.SelectListCliente("ClienteId", "Nome", vendaViewModel.ClienteId);
@@ -78,13 +81,14 @@ namespace TCCESTOQUE.Controllers
         }
 
         // GET: Venda/Edit/5
+        [Authorize]
         public IActionResult Edit(int? id)
         {
             Autenticar();
             if (id == null)
                 return NotFound();
 
-            var vendaModel = _context.GetEdicao(id);
+            var vendaModel = _vendaService.GetEdicao(id);
             if (vendaModel == null)
                 return NotFound();
 
@@ -98,7 +102,8 @@ namespace TCCESTOQUE.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("VendaId,Valor,DataVenda,VendedorId,ClienteId")] VendaModel vendaModel)
+        [Authorize]
+        public IActionResult Edit(int id,VendaModel vendaModel)
         {
             Autenticar();
             if (id != vendaModel.VendaId)
@@ -108,7 +113,7 @@ namespace TCCESTOQUE.Controllers
             {
                 try
                 {
-                    _context.PutEdicao(id, vendaModel);
+                    _vendaService.PutEdicao(id, vendaModel);
                 }
                 catch (Exception)
                 {
@@ -122,13 +127,14 @@ namespace TCCESTOQUE.Controllers
         }
 
         // GET: Venda/Delete/5
+        [Authorize]
         public IActionResult Delete(int? id)
         {
             Autenticar();
             if (id == null)
                 return NotFound();
 
-            var vendaModel = _context.GetExclusao(id);
+            var vendaModel = _vendaService.GetOne(id);
             if (vendaModel == null)
                 return NotFound();
 
@@ -138,11 +144,16 @@ namespace TCCESTOQUE.Controllers
         // POST: Venda/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public IActionResult DeleteConfirmed(int id)
         {
             Autenticar();
-            var vendaModel = _context.PostExclusao(id);
-            return RedirectToAction(nameof(Index));
+            var res = _vendaService.PostExclusao(id);
+            if(res)
+                return RedirectToAction("Index","Venda");
+
+            ModelState.AddModelError("", "Não foi possivel deletar essa venda, tente novamente mais tarde!");
+            return View(_vendaService.GetOne(id));
         }
     }
 }
