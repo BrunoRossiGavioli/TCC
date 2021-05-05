@@ -35,5 +35,8 @@ namespace TCCESTOQUE.Models
         [Required(ErrorMessage = "Informe a quantidade!")]
         public int Quantidade { get; set; }
 
+        public double ValorUnitario { get; set; }
+
+        public double ValorTotal { get { return this.ValorUnitario * this.Quantidade; } }
     }
 }

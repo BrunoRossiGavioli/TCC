@@ -27,6 +27,7 @@ namespace TCCESTOQUE.Models
         [ScaffoldColumn(false)]
         public ClienteModel Cliente { get; set; }
 
+        
         public ICollection<VendaItensModel> Itens { get; set; }
     }
 }

@@ -21,6 +21,11 @@ namespace TCCESTOQUE.Repository
             throw new NotImplementedException();
         }
 
+        public ICollection<VendaItensModel> GetByVendaId(int vendaId)
+        {
+            throw new NotImplementedException();
+        }
+
         public override VendaItensModel GetOne(int? id)
         {
             var vendaItensModel = _context.VendaItensModel

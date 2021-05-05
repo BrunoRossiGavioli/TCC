@@ -29,26 +29,26 @@ namespace TCCESTOQUE.Service
         public bool Finalizar(CarrinhoModel carrinho)
         {
             var car = _carrinhoRepo.GetOne(carrinho.CarrinhoId);
-            if(car.Itens.Count > 0) { 
-                var venda = new VendaModel() { ClienteId = carrinho.ClienteId, DataVenda = DateTime.Now, VendedorId = car.VendedorId};
+            if (car.Itens.Any())
+            {
+                var venda = new VendaModel() { ClienteId = carrinho.ClienteId, DataVenda = DateTime.Now, VendedorId = car.VendedorId };
                 _vendaRepo.PostCriacao(venda);
+                
                 foreach (var item in car.Itens)
                 {
-                    if(item.CarrinhoId != null) { 
-                    item.CarrinhoId = null;
-                    item.VendaId = venda.VendaId;
-                    venda.Valor += item.Produto.ValorUnitario * item.Quantidade;
+                    if (item.CarrinhoId != null)
+                    {
+                        item.CarrinhoId = null;
+                        item.VendaId = venda.VendaId;
+
+                        _vendaItensRepo.PutEdicao(item);
                     }
                 }
-                venda.Itens = car.Itens;
-                _vendaRepo.PutEdicao(venda);
-            
+
                 return true;
             }
             return false;
         }
-            
-            
 
         public CarrinhoModel GetOne(int? id)
         {
