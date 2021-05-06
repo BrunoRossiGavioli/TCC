@@ -1,10 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation.Results;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
@@ -44,7 +40,7 @@ namespace TCCESTOQUE.Service
 
             var vendaModel = _mapper.Map<VendaModel>(vendaVM);
             _vendaRepository.PostCriacao(vendaModel);
-            
+
             var itens = _mapper.Map<VendaItensModel>(vendaVM);
             itens.VendaId = vendaModel.VendaId;
             _vendaItensRepository.PostCriacao(itens);
@@ -66,7 +62,8 @@ namespace TCCESTOQUE.Service
         public bool PostExclusao(int id)
         {
             var res = _vendaRepository.GetOne(id);
-            if(res != null) { 
+            if (res != null)
+            {
                 _vendaRepository.PostExclusao(res);
                 return true;
             }

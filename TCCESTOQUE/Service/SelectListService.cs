@@ -1,9 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 
@@ -16,15 +11,15 @@ namespace TCCESTOQUE.Service
         private readonly IProdutoRepository _produtoRepo;
         private readonly IFornecedorRepository _fornecedorRepo;
         private readonly IVendaRepository _vendaRepo;
-        public SelectListService(IVendaRepository vendaRepo,IProdutoRepository produtoRepo,IClienteRepository clienteRepo,
-                                 IVendedorRepository vendedorRepo,IFornecedorRepository fornecedorRepo)
-            {
-                _produtoRepo = produtoRepo;
-                _vendaRepo = vendaRepo;
-                _clienteRepo = clienteRepo;
-                _vendedorRepo = vendedorRepo;
-                _fornecedorRepo = fornecedorRepo;
-            }
+        public SelectListService(IVendaRepository vendaRepo, IProdutoRepository produtoRepo, IClienteRepository clienteRepo,
+                                 IVendedorRepository vendedorRepo, IFornecedorRepository fornecedorRepo)
+        {
+            _produtoRepo = produtoRepo;
+            _vendaRepo = vendaRepo;
+            _clienteRepo = clienteRepo;
+            _vendedorRepo = vendedorRepo;
+            _fornecedorRepo = fornecedorRepo;
+        }
 
         #region ListCliente
         public SelectList SelectListCliente(string dataValue, string textValue)
@@ -70,7 +65,7 @@ namespace TCCESTOQUE.Service
 
         public SelectList SelectListFornecedor(string dataValue, string textValue, object selectedValueId)
         {
-            return new SelectList(_fornecedorRepo.GetContext(), dataValue, textValue, selectedValueId); 
+            return new SelectList(_fornecedorRepo.GetContext(), dataValue, textValue, selectedValueId);
         }
         #endregion
 

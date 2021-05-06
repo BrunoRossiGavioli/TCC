@@ -18,11 +18,11 @@ namespace TCCESTOQUE.ValidadorVendedor
                 .MaximumLength(30).WithMessage(MensagensErroVendedor.EmailTamanhoMaximo);
 
             RuleFor(v => v.Senha).NotEmpty().WithMessage(MensagensErroVendedor.SenhaVazia)
-                .MaximumLength(50).WithMessage(MensagensErroVendedor.SenhaTamanhoMaximo)
-                .MinimumLength(8).WithMessage(MensagensErroVendedor.SenhaTamanhoMinimo);
+            .MaximumLength(50).WithMessage(MensagensErroVendedor.SenhaTamanhoMaximo)
+            .MinimumLength(8).WithMessage(MensagensErroVendedor.SenhaTamanhoMinimo);
 
             RuleFor(v => v.DataNascimento).NotEmpty().WithMessage(MensagensErroVendedor.DataNascimentoVazia)
-                .Must(IdadeMinima).WithMessage(MensagensErroVendedor.DataTamanhoMinimo);
+          .Must(IdadeMinima).WithMessage(MensagensErroVendedor.DataTamanhoMinimo);
 
             RuleFor(v => v.Telefone).Length(14).WithMessage(MensagensErroVendedor.TelefoneTamanho);
 
@@ -30,8 +30,8 @@ namespace TCCESTOQUE.ValidadorVendedor
         }
         private static bool IdadeMinima(DateTime data)
         {
-           return data <= DateTime.Today.AddYears(-18);
-        }   
+            return data <= DateTime.Today.AddYears(-18);
+        }
 
     }
 }

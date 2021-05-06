@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace TCCESTOQUE.Models
 {
@@ -13,8 +10,8 @@ namespace TCCESTOQUE.Models
         [Key]
         public int ClienteId { get; set; }
 
-        [MaxLength(50)]
-        [Required(ErrorMessage = "Informe o nome")]
+        [MaxLength(80)]
+        [Required(ErrorMessage = "Informe o Nome")]
         public string Nome { get; set; }
 
         [StringLength(14)]
@@ -24,7 +21,8 @@ namespace TCCESTOQUE.Models
         [Required(ErrorMessage = "Informe o Email!")]
         [DataType(System.ComponentModel.DataAnnotations.DataType.EmailAddress)]
         public string Email { get; set; }
-
+        [StringLength(14)]
+        [Required(ErrorMessage = "Informe o Telefone", AllowEmptyStrings = false)]
         public string Telefone { get; set; }
 
         [ScaffoldColumn(false)]

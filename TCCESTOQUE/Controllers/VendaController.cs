@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using TCCESTOQUE.Data;
+using System;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.ViewModel;
@@ -103,7 +96,7 @@ namespace TCCESTOQUE.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult Edit(int id,VendaModel vendaModel)
+        public IActionResult Edit(int id, VendaModel vendaModel)
         {
             Autenticar();
             if (id != vendaModel.VendaId)
@@ -149,8 +142,8 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             var res = _vendaService.PostExclusao(id);
-            if(res)
-                return RedirectToAction("Index","Venda");
+            if (res)
+                return RedirectToAction("Index", "Venda");
 
             ModelState.AddModelError("", "Não foi possivel deletar essa venda, tente novamente mais tarde!");
             return View(_vendaService.GetOne(id));

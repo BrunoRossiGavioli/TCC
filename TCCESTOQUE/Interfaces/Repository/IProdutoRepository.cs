@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using TCCESTOQUE.Models;
+﻿using TCCESTOQUE.Models;
 
 namespace TCCESTOQUE.Interfaces.Repository
 {

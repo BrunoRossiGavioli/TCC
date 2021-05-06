@@ -1,12 +1,10 @@
 ﻿using AutoMapper;
 using FluentValidation.Results;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.Validacao.Formatacao;
 using TCCESTOQUE.Validacao.ValidacaoModels;
 using TCCESTOQUE.ViewModel;
 
@@ -45,6 +43,8 @@ namespace TCCESTOQUE.Service
             if (!validacao.IsValid)
                 return validacao;
 
+            FormataValores.FormataCliente(clienteVM);
+
             var cliente = _mapper.Map<ClienteModel>(clienteVM);
             _clienteRepository.PostCriacao(cliente);
 
@@ -58,7 +58,8 @@ namespace TCCESTOQUE.Service
         public bool PostExclusao(int id)
         {
             var res = _clienteRepository.GetOne(id);
-            if(res != null) { 
+            if (res != null)
+            {
                 _clienteRepository.PostExclusao(res);
                 return true;
             }

@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
 
@@ -47,8 +40,8 @@ namespace TCCESTOQUE.Controllers
         public IActionResult AdicionarVenda(CarrinhoModel carrinho)
         {
             var car = _carrinhoService.Finalizar(carrinho);
-            if(car)
-                return RedirectToAction("Index","Venda");
+            if (car)
+                return RedirectToAction("Index", "Venda");
 
             return BadRequest();
         }

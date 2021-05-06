@@ -18,6 +18,8 @@
     <Compile Include="Migrations\20210504190135_Nova2.Designer.cs" />
     <Compile Include="Migrations\20210504192943_Nova3.cs" />
     <Compile Include="Migrations\20210504192943_Nova3.Designer.cs" />
+    <Compile Include="Migrations\20210505115719_AjustesBd.cs" />
+    <Compile Include="Migrations\20210505115719_AjustesBd.Designer.cs" />
     <Compile Include="Migrations\TCCESTOQUEContextModelSnapshot.cs" />
   </ItemGroup>
 

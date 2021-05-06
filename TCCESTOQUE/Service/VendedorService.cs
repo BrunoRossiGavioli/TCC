@@ -1,10 +1,5 @@
-﻿using FluentValidation;
-using FluentValidation.Results;
-using System.Collections;
+﻿using FluentValidation.Results;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using TCCESTOQUE.Controllers;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
@@ -45,7 +40,8 @@ namespace TCCESTOQUE.Service
         public ValidationResult PostCriacao(VendedorModel vendedorModel)
         {
             var validacao = ValidarVendedor(vendedorModel);
-            if (validacao.IsValid) { 
+            if (validacao.IsValid)
+            {
                 vendedorModel = FormataValores.FormataValoresVendedor(vendedorModel);
                 _vendedorRepository.PostCriacao(vendedorModel);
                 _carrinhoRepo.PostCriacao(new CarrinhoModel() { VendedorId = vendedorModel.VendedorId });

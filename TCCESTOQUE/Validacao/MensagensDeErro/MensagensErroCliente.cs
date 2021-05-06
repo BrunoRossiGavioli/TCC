@@ -38,10 +38,9 @@
         public static string EmailJaCadastrado = "O Email ja encontra-se cadastrado";
 
         #region Erros ao não alcançar o mínimo de caracteres        
-        public static string NomeTamanhoMinimo = "O Nome tem que ter no mínimo {0} caracteres!";
-        public static string SenhaTamanhoMinimo = "A Seha tem que ter no mínimo {0} caracteres!";
-        public static string EmailTamanhoMinimo = "O Email tem que ter no mínimo {0} caracteres!";
-        public static string EnderecoTamanhoMinimo = "O Endereço tem que ter no mínimo {0} caracteres!";
+        public static string NomeTamanhoMinimo = "O Nome tem que ter no mínimo 3 caracteres!";
+        public static string SenhaTamanhoMinimo = "A Seha tem que ter no mínimo 8 caracteres!";
+        public static string EmailTamanhoMinimo = "O Email tem que ter no mínimo 7 caracteres!";
         public static string DataTamanhoMinimo = "Você deve ter no mínimo 18 anos!";
         #endregion
     }

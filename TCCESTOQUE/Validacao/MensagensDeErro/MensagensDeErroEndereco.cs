@@ -15,7 +15,7 @@
         //
 
         #region tamanho máximo
-        public static string CepTamanho = "O campo Cep tem que ter {0} caracteres !";
+        public static string CepTamanho = "O campo Cep tem que ter 9 digitos!";
         public static string LogradouroTamanhoMaximo = "O campo Logradouro excedeu o numero maximo de caracteres !";
         public static string ComplementoTamanhoMaximo = "O campo Complemento excedeu o numero maximo de caracteres!";
         public static string NumeroTamanhoMaximo = "O campo Número excedeu o numero maximo de caracteres !";
@@ -26,11 +26,11 @@
         //
 
         #region tamanho mínimo
-        public static string LogradouroTamanhoMinimo = "O campo Logradouro tem que ter no mínimo {0} caracteres!";
-        public static string ComplementoTamanhoMinimo = "O campo Complemento tem que ter no mínimo {0} caracteres!";
+        public static string LogradouroTamanhoMinimo = "O campo Logradouro tem que ter no mínimo 3 caracteres!";
+        public static string ComplementoTamanhoMinimo = "O campo Complemento tem que ter no mínimo 3 caracteres!";
         public static string NumeroTamanhoMinimo = "O campo Número tem ser maior ou igual a 1!";
-        public static string BairroTamanhoMinimo = "O campo Bairro tem que ter no mínimo {0} caracteres !";
-        public static string LocalidadeTamanhoMinimo = "O Localidade tem que ter no mínimo {0} caracteres !";
+        public static string BairroTamanhoMinimo = "O campo Bairro tem que ter no mínimo 2 caracteres !";
+        public static string LocalidadeTamanhoMinimo = "O Localidade tem que ter no mínimo 3 caracteres !";
         #endregion
     }
 }

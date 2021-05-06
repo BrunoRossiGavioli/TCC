@@ -11,11 +11,11 @@ namespace TCCESTOQUE.Models
         [Key]
         public int ProdutoId { get; set; }
 
-        [MaxLength(50)]
+        [MaxLength(80)]
         [Required(ErrorMessage = "Informe o nome do produto")]
         public string Nome { get; set; }
 
-        [MaxLength(50)]
+        [MaxLength(80)]
         public string Descricao { get; set; }
 
         [Column(TypeName = "decimal(12,2)")]
@@ -27,7 +27,9 @@ namespace TCCESTOQUE.Models
         public decimal ValorUnitario { get; set; }
 
         [Required(ErrorMessage = "Informe a quantidade")]
-        public int Quantidade { get; set; }
+        public double Quantidade { get; set; }
+
+        public UnidadeDeMedida UnidadeDeMedida { get; set; }
 
         [ScaffoldColumn(false)]
         public DateTime DataEntrada { get; set; } = DateTime.Now;

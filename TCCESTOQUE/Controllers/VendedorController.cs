@@ -2,15 +2,10 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
-using TCCESTOQUE.ValidadorVendedor;
 
 namespace TCCESTOQUE.Controllers
 {
@@ -57,7 +52,7 @@ namespace TCCESTOQUE.Controllers
             if (!res.IsValid)
                 return View(MostrarErros(res, vendedorModel));
 
-            return RedirectToAction("Index", "Home");    
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: Vendedor/Edit/5
@@ -74,7 +69,7 @@ namespace TCCESTOQUE.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult Edit(int id,VendedorModel vendedorModel)
+        public IActionResult Edit(int id, VendedorModel vendedorModel)
         {
             Autenticar();
             var res = _vendedorService.PutEdicao(id, vendedorModel);
@@ -100,8 +95,8 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             var res = _vendedorService.PostExclusao(id);
-            if(res)
-                return RedirectToAction("Index","Home");
+            if (res)
+                return RedirectToAction("Index", "Home");
 
             ModelState.AddModelError("", "Não foi possivel deletar sua conta, tente novamente mais tarde!");
             return View(_vendedorService.GetOne(id));
@@ -115,12 +110,13 @@ namespace TCCESTOQUE.Controllers
         }
 
         //POST
-        [HttpPost,ActionName("Login")]
+        [HttpPost, ActionName("Login")]
         public IActionResult Login(VendedorModel vendedor)
         {
             Autenticar();
             var res = _vendedorService.PostLogin(vendedor);
-            if (res.GetType() == typeof(ClaimsPrincipal)) { 
+            if (res.GetType() == typeof(ClaimsPrincipal))
+            {
                 HttpContext.SignInAsync((ClaimsPrincipal)res);
                 return RedirectToAction("Index", "Home");
             }

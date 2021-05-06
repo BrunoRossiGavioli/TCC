@@ -55,6 +55,21 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
+                        <label asp-for="UnidadeDeMedida" class="control-label"></label>
+                        <select asp-for="UnidadeDeMedida" class="form-control">
+                            <option value="0">Unidade</option>
+                            <option value="1">Metro</option>
+                            <option value="2">Kg</option>
+                            <option value="3">Duzia</option>
+                            <option value="4">Saco</option>
+                            <option value="5">Grama</option>
+                        </select>
+                        <span asp-validation-for="UnidadeDeMedida" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
                         <label asp-for="FornecedorId" class="control-label"></label>
                         <select asp-for="FornecedorId" class="form-control" asp-items="ViewBag.FornecedorId"></select>
                     </div>

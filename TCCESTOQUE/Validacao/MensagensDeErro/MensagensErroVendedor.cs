@@ -21,8 +21,8 @@ namespace TCCESTOQUE.Validacao.MensagensDeErro
         #endregion
 
         public static string EmailFormatoInvalido = "Email inválido!";
-        public static string TelefoneTamanho = "O Telefone deve ter 11 caracteres!";
-        public static string CpfTamanho = "O CPF deve ter 11 caracteres!";
+        public static string TelefoneTamanho = "O Telefone deve ter 11 digitos!";
+        public static string CpfTamanho = "O CPF deve ter 11 digitos!";
         public static string CpfjaCadastrado = "O CPF ja encontra-se cadastrado";
         public static string EmailNaoEncontrado = "Email não encontrado!";
 
@@ -32,10 +32,10 @@ namespace TCCESTOQUE.Validacao.MensagensDeErro
         public static string TelefoneJaCadastrado = "O Telefone ja encontra-se cadastrado";
         public static string EmailJaCadastrado = "O Email ja encontra-se cadastrado";
         #region Erros ao não alcançar o mínimo de caracteres        
-        public static string NomeTamanhoMinimo = "O Nome tem que ter no mínimo {0} caracteres!";
-        public static string SenhaTamanhoMinimo = "A Seha tem que ter no mínimo {0} caracteres!";
-        public static string EmailTamanhoMinimo = "O Email tem que ter no mínimo {0} caracteres!";
-        public static string EnderecoTamanhoMinimo = "O Endereço tem que ter no mínimo {0} caracteres!";
+        public static string NomeTamanhoMinimo = "O Nome tem que ter no mínimo 3 caracteres!";
+        public static string SenhaTamanhoMinimo = "A Seha tem que ter no mínimo 8 caracteres!";
+        public static string EmailTamanhoMinimo = "O Email tem que ter no mínimo 7 caracteres!";
+        public static string EnderecoTamanhoMinimo = "O Endereço tem que ter no mínimo 3 caracteres!";
         public static string DataTamanhoMinimo = "Você deve ter no mínimo 18 anos!";
         #endregion
     }

@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation.Results;
 using System.Collections.Generic;
-using System.Linq;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
@@ -18,7 +17,7 @@ namespace TCCESTOQUE.Service
         private readonly IFornecedorEnderecoRepository _fornecedorEnderecoRepository;
         private readonly IMapper _mapper;
 
-        public FornecedorService(IFornecedorRepository fornecedorRepository,IFornecedorEnderecoRepository fornecedorEnderecoRepository ,IMapper mapper)
+        public FornecedorService(IFornecedorRepository fornecedorRepository, IFornecedorEnderecoRepository fornecedorEnderecoRepository, IMapper mapper)
         {
             _fornecedorRepository = fornecedorRepository;
             _fornecedorEnderecoRepository = fornecedorEnderecoRepository;
@@ -81,7 +80,7 @@ namespace TCCESTOQUE.Service
                 feviewmodel = FormataValores.FormataValoresFornecedorView(feviewmodel);
                 var fornecedor = _mapper.Map<FornecedorModel>(feviewmodel);
                 _fornecedorRepository.PostCriacao(fornecedor);
-                
+
                 var endereco = _mapper.Map<FornecedorEnderecoModel>(feviewmodel);
                 endereco.FornecedorId = fornecedor.FornecedorId;
                 _fornecedorEnderecoRepository.PostCadastro(endereco);

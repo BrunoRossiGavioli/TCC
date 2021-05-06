@@ -16,9 +16,11 @@ namespace TCCESTOQUE.Models
         public string Logradouro { get; set; }
 
         [MaxLength(80)]
+        [Required(ErrorMessage = "Informe o Logradouro", AllowEmptyStrings = false)]
         public string Complemento { get; set; }
 
         [MaxLength(6)]
+        [Required(ErrorMessage = "Informe o Número", AllowEmptyStrings = false)]
         public int Numero { get; set; }
 
         [MaxLength(80)]

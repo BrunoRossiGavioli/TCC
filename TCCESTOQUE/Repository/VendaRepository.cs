@@ -1,18 +1,13 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Models;
-using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Repository
 {
-    public class VendaRepository : BaseRepository<VendaModel>,IVendaRepository
+    public class VendaRepository : BaseRepository<VendaModel>, IVendaRepository
     {
 
         public VendaRepository(TCCESTOQUEContext context) : base(context)

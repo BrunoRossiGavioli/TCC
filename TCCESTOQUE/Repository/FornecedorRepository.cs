@@ -1,12 +1,9 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Models;
-using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Repository
 {
@@ -14,7 +11,7 @@ namespace TCCESTOQUE.Repository
     {
         public FornecedorRepository(TCCESTOQUEContext context) : base(context)
         {
-            
+
         }
 
         public ICollection<FornecedorModel> GetAll()
@@ -53,6 +50,11 @@ namespace TCCESTOQUE.Repository
         public FornecedorModel GetByEmail(string email)
         {
             return _context.FornecedorModel.Where(f => f.Email == email).FirstOrDefault();
+        }
+
+        public FornecedorModel GetByPhone(string phone)
+        {
+            return _context.FornecedorModel.Where(f => f.Telefone == phone).FirstOrDefault();
         }
     }
 }

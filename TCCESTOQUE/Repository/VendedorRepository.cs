@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -13,9 +11,9 @@ namespace TCCESTOQUE.Repository
 {
     public class VendedorRepository : BaseRepository<VendedorModel>, IVendedorRepository
     {
-        public VendedorRepository(TCCESTOQUEContext context) :base(context)
+        public VendedorRepository(TCCESTOQUEContext context) : base(context)
         {
-            
+
         }
 
         public ICollection<VendedorModel> GetAll()

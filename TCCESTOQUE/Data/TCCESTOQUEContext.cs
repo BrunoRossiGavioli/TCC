@@ -5,7 +5,7 @@ namespace TCCESTOQUE.Data
 {
     public class TCCESTOQUEContext : DbContext
     {
-        public TCCESTOQUEContext (DbContextOptions<TCCESTOQUEContext> options)
+        public TCCESTOQUEContext(DbContextOptions<TCCESTOQUEContext> options)
             : base(options)
         {
         }
@@ -43,8 +43,10 @@ namespace TCCESTOQUE.Data
 
         public DbSet<TCCESTOQUE.Models.VendaItensModel> VendaItensModel { get; set; }
 
+
         public DbSet<TCCESTOQUE.Models.ClienteEnderecoModel> ClienteEnderecoModel { get; set; }
 
         public DbSet<TCCESTOQUE.Models.CarrinhoModel> CarrinhoModel { get; set; }
+
     }
 }

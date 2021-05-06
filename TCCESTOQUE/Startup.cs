@@ -1,16 +1,10 @@
-﻿using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using TCCESTOQUE.AutoMapper;
 using TCCESTOQUE.Data;
-using TCCESTOQUE.Interfaces.Repository;
-using TCCESTOQUE.Interfaces.Service;
-using TCCESTOQUE.Repository;
-using TCCESTOQUE.Service;
 using TCCESTOQUE.StartUpOpcoes;
 
 namespace TCCESTOQUE
@@ -34,7 +28,7 @@ namespace TCCESTOQUE
                     config.LoginPath = "/Vendedor/Login";
                     config.AccessDeniedPath = "/Vendedor/LoginInvalido";
                 });
-            
+
 
             services.AddControllersWithViews();
 

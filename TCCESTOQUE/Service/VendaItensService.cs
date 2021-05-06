@@ -1,8 +1,5 @@
-﻿using FluentValidation.Results;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
@@ -42,7 +39,8 @@ namespace TCCESTOQUE.Service
         public bool PostExclusao(int id)
         {
             var model = _vendaItensRepository.GetOne(id);
-            if(model != null) { 
+            if (model != null)
+            {
                 _vendaItensRepository.PostExclusao(model);
                 return true;
             }

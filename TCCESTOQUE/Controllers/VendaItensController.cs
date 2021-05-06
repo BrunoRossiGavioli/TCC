@@ -58,7 +58,7 @@ namespace TCCESTOQUE.Controllers
             {
                 var res = _VendaItensService.PostItem(vendaItensModel);
                 if (res)
-                    return RedirectToAction("Details","Carrinho",new { id = carrinhoId});
+                    return RedirectToAction("Details", "Carrinho", new { id = carrinhoId });
             }
 
             ViewData["ProdutoId"] = _selectListRepository.SelectListProduto("ProdutoId", "Nome", vendaItensModel.ProdutoId);
@@ -206,8 +206,8 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             var res = _VendaItensService.PostExclusao(id);
-            if(res)
-                return RedirectToAction("Index","Venda");
+            if (res)
+                return RedirectToAction("Index", "Venda");
 
             ModelState.AddModelError("", "Não foi possivel excluir o item, tente novamente mais tarde!");
             return View(_VendaItensService.GetOne(id));

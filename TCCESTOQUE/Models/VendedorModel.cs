@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TCCESTOQUE.Models
 {
-    [Table("Vendedor")] 
+    [Table("Vendedor")]
     public class VendedorModel
     {
         [Key]
@@ -12,7 +12,7 @@ namespace TCCESTOQUE.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int VendedorId { get; set; }
 
-        [MaxLength(50)]
+        [MaxLength(80)]
         [Required(ErrorMessage = "Informe o nome de usuario", AllowEmptyStrings = false)]
         public string Nome { get; set; }
 
@@ -38,7 +38,7 @@ namespace TCCESTOQUE.Models
 
         [ScaffoldColumn(false)]
         public bool Ativo { get; set; }
-        
+
         [ScaffoldColumn(false)]
         public bool Logado { get; set; }
     }

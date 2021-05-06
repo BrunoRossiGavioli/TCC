@@ -1,9 +1,9 @@
 ﻿using FluentValidation.Results;
-using System.Collections;
 using System.Collections.Generic;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.Validacao.Formatacao;
 using TCCESTOQUE.Validacao.ValidacaoModels;
 
 namespace TCCESTOQUE.Service
@@ -43,7 +43,8 @@ namespace TCCESTOQUE.Service
             var validador = new ProdutoValidador().Validate(produtoModel);
             if (!validador.IsValid)
                 return validador;
-                    
+
+            FormataValores.FormataProduto(produtoModel);
             _produtoRepository.PostCriacao(produtoModel);
             return validador;
         }
@@ -51,7 +52,7 @@ namespace TCCESTOQUE.Service
         public bool PostExclusao(int id)
         {
             var produto = _produtoRepository.GetOne(id);
-            if(produto != null)
+            if (produto != null)
             {
                 _produtoRepository.PostExclusao(produto);
                 return true;

@@ -19,12 +19,12 @@ namespace TCCESTOQUE.Validacao.MensagensDeErro
         //
 
         #region Tamanho minimo
-        public static string NomeTamanhoMinimo = "O campo Nome tem que ter no mínimo {0} caracteres !";
-        public static string DescricaoTamanhoMinimo = "O campo Nome tem que ter no mínimo {0} caracteres !";
-        public static string DataDeEntradaFutura = "O campo Nome tem que ter no mínimo {0} caracteres !";
-        public static string CustoMinimo = "O campo Custo tem que ter no mínimo {0} caracteres !";
-        public static string ValorUnitarioMinimo = "O campo Valor Unitário tem que ter no mínimo {0} caracteres !";
-        public static string QuantidadeMinima = "O campo Quantidade tem que ter no mínimo {0} caracteres !";
+        public static string NomeTamanhoMinimo = "O campo Nome tem que ter no mínimo 3 caracteres !";
+        public static string DescricaoTamanhoMinimo = "O campo Descrição tem que ter no mínimo 3 caracteres !";
+        public static string DataDeEntradaFutura = "O campo Data não pode ser futura!";
+        public static string CustoMinimo = "O campo Custo tem que ter no mínimo 1 valor!";
+        public static string ValorUnitarioMinimo = "O campo Valor Unitário tem que ter no mínimo 1 valor!";
+        public static string QuantidadeMinima = "O campo Quantidade tem que ter no mínimo 1 valor!";
         #endregion
 
     }

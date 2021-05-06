@@ -1,7 +1,5 @@
 ﻿using FizzWare.NBuilder;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using TCCESTOQUE.Models;
 
 namespace Estoque.Test.Builder
@@ -14,7 +12,8 @@ namespace Estoque.Test.Builder
                 .With(x => x.Custo = Convert.ToDecimal(12.00))
                 .With(x => x.Nome = "Cleberson")
                 .With(x => x.ValorUnitario = Convert.ToDecimal(12.00))
-                .With(x => x.Quantidade = 40);
+                .With(x => x.Quantidade = 40)
+                .With(x=>x.FornecedorId = 1);
         }
     }
 }

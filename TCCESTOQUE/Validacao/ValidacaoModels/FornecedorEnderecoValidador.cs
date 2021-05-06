@@ -9,12 +9,13 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
         public FornecedorEnderecoValidador()
         {
             RuleFor(f => f.NomeFantasia).NotEmpty().WithMessage(MensagensErroFornecedor.NomeFantasiaVazio)
-                .MaximumLength(80).WithMessage(MensagensErroFornecedor.NomeFantasiaTamanhoMaximo)
-                .MinimumLength(3).WithMessage(MensagensErroFornecedor.NomeFantasiaTamanhoMinimo);
+            .MaximumLength(80).WithMessage(MensagensErroFornecedor.NomeFantasiaTamanhoMaximo)
+            .MinimumLength(3).WithMessage(MensagensErroFornecedor.NomeFantasiaTamanhoMinimo);
 
             RuleFor(f => f.RazaoSocial).NotEmpty().WithMessage(MensagensErroFornecedor.RazaoSocialVazia)
                .MaximumLength(80).WithMessage(MensagensErroFornecedor.RazaoSocialTamanhoMaximo)
                .MinimumLength(3).WithMessage(MensagensErroFornecedor.RazaoSocialTamanhoMinimo);
+
 
             RuleFor(f => f.Email).NotEmpty().WithMessage(MensagensErroFornecedor.EmailVazio)
                 .EmailAddress().WithMessage(MensagensErroFornecedor.EmailFormatoInvalido)
@@ -22,13 +23,12 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
 
             RuleFor(f => f.Telefone).Length(14).WithMessage(MensagensErroFornecedor.TelefoneTamanho);
 
-
             RuleFor(f => f.Cnpj).NotEmpty().WithMessage(MensagensErroFornecedor.CnpjVazio)
                 .Length(18).WithMessage(MensagensErroFornecedor.CnpjTamanho);
 
 
             RuleFor(e => e.Cep).NotEmpty().WithMessage(MensagensDeErroEndereco.CepVazio)
-                .Length(9).WithMessage(MensagensDeErroEndereco.CepTamanho);
+               .Length(9).WithMessage(MensagensDeErroEndereco.CepTamanho);
 
             RuleFor(e => e.Logradouro).NotEmpty().WithMessage(MensagensDeErroEndereco.LogradouroVazio)
                 .MaximumLength(80).WithMessage(MensagensDeErroEndereco.LogradouroTamanhoMaximo)
@@ -51,7 +51,6 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
 
             RuleFor(v => v.Uf).NotEmpty().WithMessage(MensagensDeErroEndereco.UfVazio)
              .Length(2).WithMessage(MensagensDeErroEndereco.UfTamanho);
-
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Estoque.Test.Builder
                 .With(x => x.Logradouro = "logradouro")
                 .With(x => x.Numero = 1)
                 .With(x => x.RazaoSocial = "Marcolino pereira")
-                .With(x=>x.Uf = "SP");
+                .With(x => x.Uf = "SP");
         }
     }
 }

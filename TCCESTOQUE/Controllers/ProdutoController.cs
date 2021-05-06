@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
 
@@ -52,13 +50,13 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Create(ProdutoModel produtoModel)
         {
             Autenticar();
-            var res =_produtoService.PostCriacao(produtoModel);
+            var res = _produtoService.PostCriacao(produtoModel);
             if (!res.IsValid)
             {
                 ViewData["FornecedorId"] = _selectListRepository.SelectListFornecedor("FornecedorId", "NomeFantasia", produtoModel.FornecedorId);
                 return View(MostrarErros(res, produtoModel));
             }
-            
+
             return RedirectToAction("Index", "Produto");
         }
 
@@ -78,10 +76,10 @@ namespace TCCESTOQUE.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult Edit(int id,ProdutoModel produtoModel)
+        public IActionResult Edit(int id, ProdutoModel produtoModel)
         {
             Autenticar();
-            var res =_produtoService.PutEdicao(produtoModel);
+            var res = _produtoService.PutEdicao(produtoModel);
             if (!res.IsValid)
             {
                 ViewData["FornecedorId"] = _selectListRepository.SelectListFornecedor("FornecedorId", "NomeFantasia", produtoModel.FornecedorId);
@@ -107,7 +105,7 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             var res = _produtoService.PostExclusao(id);
-            if(res)
+            if (res)
                 return RedirectToAction("Index", "Produto");
 
             ModelState.AddModelError("", "Não foi possivel excluir esse produto, tente novamente mais tarde!");

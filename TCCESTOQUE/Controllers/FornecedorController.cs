@@ -1,7 +1,5 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.ViewModel;
 
@@ -32,7 +30,7 @@ namespace TCCESTOQUE.Controllers
             var res = _fornecedorService.PostCadastroFull(feviewmodel);
             if (!res.IsValid)
                 return View(MostrarErros(res, feviewmodel));
-                
+
             return RedirectToAction("Index", "Fornecedor");
         }
         // GET: Fornecedor
@@ -58,7 +56,7 @@ namespace TCCESTOQUE.Controllers
             Autenticar();
             var edit = _fornecedorService.GetEditFull(id);
             return View(edit);
-            
+
             //if (edit == null) { 
             //    Criar uma pagina para informar que Fornecedo não existe!
             //return RedirectToAction();
@@ -79,7 +77,7 @@ namespace TCCESTOQUE.Controllers
 
             if (!res.IsValid)
                 return View(MostrarErros(res, feviewmodel));
-                
+
             return RedirectToAction("Index", "Fornecedor");
         }
 
@@ -99,7 +97,8 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             var res = _fornecedorService.PostExclusao(id);
-            if(res.GetType() == typeof(bool)) {
+            if (res.GetType() == typeof(bool))
+            {
                 ViewBag.ErroExcluir = "";
                 return RedirectToAction("Index", "Fornecedor");
             }

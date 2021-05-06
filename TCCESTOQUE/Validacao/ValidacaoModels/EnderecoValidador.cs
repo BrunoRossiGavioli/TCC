@@ -9,7 +9,7 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
         public EnderecoValidador()
         {
             RuleFor(e => e.Cep).NotEmpty().WithMessage(MensagensDeErroEndereco.CepVazio)
-                .Length(8).WithMessage(MensagensDeErroEndereco.CepTamanho);
+                .Length(9).WithMessage(MensagensDeErroEndereco.CepTamanho);
 
             RuleFor(e => e.Logradouro).NotEmpty().WithMessage(MensagensDeErroEndereco.LogradouroVazio)
                 .MaximumLength(80).WithMessage(MensagensDeErroEndereco.LogradouroTamanhoMaximo)
@@ -20,7 +20,6 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
                 .MinimumLength(3).WithMessage(MensagensDeErroEndereco.ComplementoVazio);
 
             RuleFor(e => e.Numero).NotEmpty().WithMessage(MensagensDeErroEndereco.NumeroVazio)
-                .LessThanOrEqualTo(999999999).WithMessage(MensagensDeErroEndereco.NumeroTamanhoMaximo)
                 .GreaterThan(0).WithMessage(MensagensDeErroEndereco.NumeroTamanhoMinimo);
 
             RuleFor(e => e.Bairro).NotEmpty().WithMessage(MensagensDeErroEndereco.BairroVazio)
@@ -30,7 +29,10 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
             RuleFor(e => e.Localidade).NotEmpty().WithMessage(MensagensDeErroEndereco.LocalidadeVazio)
                 .MaximumLength(80).WithMessage(MensagensDeErroEndereco.LocalidadeTamanhoMaximo)
                 .MinimumLength(3).WithMessage(MensagensDeErroEndereco.LocalidadeTamanhoMinimo);
+
+
+            RuleFor(v => v.Uf).NotEmpty().WithMessage(MensagensDeErroEndereco.UfVazio)
+             .Length(2).WithMessage(MensagensDeErroEndereco.UfTamanho);
         }
-       
     }
 }

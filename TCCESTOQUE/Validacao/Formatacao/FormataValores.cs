@@ -25,5 +25,24 @@ namespace TCCESTOQUE.Validacao.Formatacao
             fornecedor.Bairro = fornecedor.Bairro.ToUpper().Trim();
             return fornecedor;
         }
+        public static ProdutoModel FormataProduto(ProdutoModel prod)
+        {
+            prod.Nome = prod.Nome.ToUpper().Trim();
+            return prod;
+        }
+
+        public static ClienteViewModel FormataCliente(ClienteViewModel cli)
+        {
+            cli.Nome = cli.Nome.Trim().ToUpper();
+            cli.Telefone = cli.Telefone.Trim().ToUpper();
+            cli.Cep = cli.Cep.Trim().ToUpper();
+            cli.Bairro = cli.Bairro.Trim().ToUpper();
+            cli.Complemento = cli.Complemento.Trim().ToUpper();
+            cli.Cpf = cli.Cpf != null? cli.Cpf.Trim().ToUpper():cli.Cpf;
+            cli.Email = cli.Email != null ? cli.Email = cli.Email.Trim() : cli.Email;
+            cli.Localidade = cli.Localidade.Trim().ToUpper();
+            cli.Logradouro = cli.Logradouro.Trim().ToUpper();
+            return cli;
+        }
     }
 }
