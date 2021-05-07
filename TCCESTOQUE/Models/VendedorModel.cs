@@ -10,7 +10,6 @@ namespace TCCESTOQUE.Models
     {
         [Key]
         [ScaffoldColumn(false)]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid VendedorId { get; set; }
 
         [MaxLength(50)]
@@ -23,6 +22,7 @@ namespace TCCESTOQUE.Models
         public string Senha { get; set; }
 
         [Required(ErrorMessage = "Informe a data de nascimento", AllowEmptyStrings = false)]
+        [DataType(DataType.Date)]
         public DateTime DataNascimento { get; set; }
 
         [MaxLength(14)]
@@ -37,6 +37,8 @@ namespace TCCESTOQUE.Models
         [MaxLength(14)]
         public string Telefone { get; set; }
 
+        [Required(ErrorMessage = "Escolha uma das opções")]
+       
         public SexoEnum Sexo { get; set; }
 
         [ScaffoldColumn(false)]

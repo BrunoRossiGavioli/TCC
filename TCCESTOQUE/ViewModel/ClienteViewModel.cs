@@ -15,6 +15,9 @@ namespace TCCESTOQUE.ViewModel
         public string Cpf { get; set; }
         public string Email { get; set; }
         public string Telefone { get; set; }
+
+        public SexoEnum Sexo { get; set; }
+
         public Guid VendedorId { get; set; }
         #endregion
 
