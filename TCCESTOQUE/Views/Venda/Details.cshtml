@@ -93,7 +93,7 @@
                             @Html.DisplayFor(modelItem => item.Venda.DataVenda)
                         </td>
                         <td>
-                            <a asp-controller="VendaItens" asp-action="EditItemVenda" asp-route-id="@item.VendaItensId">Edit</a> |
+                            <a asp-controller="VendaItens" asp-action="EditItemVenda" asp-route-vendaitensId="@item.VendaItensId">Edit</a> |
                             <a asp-controller="VendaItens" asp-action="Delete" asp-route-id="@item.VendaItensId">Delete</a>
                         </td>
                     </tr>

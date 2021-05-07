@@ -33,7 +33,7 @@ namespace TCCESTOQUE.Controllers
 
             var carrinhoModel = _carrinhoService.GetOne(id);
 
-            ViewData["ClienteId"] = _selectListService.SelectListCliente("ClienteId", "Nome");
+            ViewData["ClienteId"] = _selectListService.SelectListCliente("ClienteId", "Nome", ViewBag.usuarioId);
             ViewData["CarrinhoId"] = carrinhoModel.CarrinhoId;
 
             if (carrinhoModel == null)

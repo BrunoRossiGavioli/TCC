@@ -17,9 +17,9 @@ namespace TCCESTOQUE.Repository
             
         }
 
-        public ICollection<FornecedorModel> GetAll()
+        public ICollection<FornecedorModel> GetAll(Guid vendedorId)
         {
-            return _context.FornecedorModel.ToList();
+            return _context.FornecedorModel.Where(v => v.VendedorId == vendedorId).ToList();
         }
 
         public override FornecedorModel GetOne(Guid? id)

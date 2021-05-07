@@ -38,7 +38,7 @@ namespace TCCESTOQUE.Repository
             return carrinhoModel;
         }
 
-        public ICollection<CarrinhoModel> GetAll()
+        public ICollection<CarrinhoModel> GetAll(Guid vendedorId)
         {
             throw new NotImplementedException();
         }

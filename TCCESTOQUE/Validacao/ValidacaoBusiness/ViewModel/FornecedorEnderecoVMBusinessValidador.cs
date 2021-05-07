@@ -7,11 +7,11 @@ using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Validacao.MensagensDeErro;
 using TCCESTOQUE.ViewModel;
 
-namespace TCCESTOQUE.Validacao.ValidacaoBusiness
+namespace TCCESTOQUE.Validacao.ValidacaoBusiness.ViewModel
 {
-    public class FornecedorEnderecoBusinessValidador : AbstractValidator<FornecedorEnderecoViewModel>
+    public class FornecedorEnderecoVMBusinessValidador : AbstractValidator<FornecedorEnderecoViewModel>
     {
-        public FornecedorEnderecoBusinessValidador(IFornecedorRepository fornecedor)
+        public FornecedorEnderecoVMBusinessValidador(IFornecedorRepository fornecedor)
         {
             When(fe => fornecedor.GetByCnpj(fe.Cnpj)?.FornecedorId != fe.FornecedorId, () => 
             {

@@ -30,7 +30,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Index()
         {
             Autenticar();
-            return View(_vendaService.GetAll());
+            return View(_vendaService.GetAll(ViewBag.usuarioId));
         }
 
         // GET: Venda/Details/5
@@ -68,15 +68,15 @@ namespace TCCESTOQUE.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult DeleteConfirmed(Guid id)
+        public IActionResult DeleteConfirmed(VendaModel vendaModel)
         {
             Autenticar();
-            var res = _vendaService.PostExclusao(id);
+            var res = _vendaService.PostExclusao(vendaModel.VendaId);
             if(res)
                 return RedirectToAction("Index","Venda");
 
             ModelState.AddModelError("", "Não foi possivel deletar essa venda, tente novamente mais tarde!");
-            return View(_vendaService.GetOne(id));
+            return View(_vendaService.GetOne(vendaModel.VendaId));
         }
     }
 }

@@ -2,11 +2,11 @@
 using TCCESTOQUE.Validacao.MensagensDeErro;
 using TCCESTOQUE.ViewModel;
 
-namespace TCCESTOQUE.Validacao.ValidacaoModels
+namespace TCCESTOQUE.Validacao.ValidacaoModels.ViewModel
 {
-    public class FornecedorEnderecoValidador : AbstractValidator<FornecedorEnderecoViewModel>
+    public class FornecedorEnderecoVMValidador : AbstractValidator<FornecedorEnderecoViewModel>
     {
-        public FornecedorEnderecoValidador()
+        public FornecedorEnderecoVMValidador()
         {
             RuleFor(f => f.NomeFantasia).NotEmpty().WithMessage(MensagensErroFornecedor.NomeFantasiaVazio)
                 .MaximumLength(80).WithMessage(MensagensErroFornecedor.NomeFantasiaTamanhoMaximo)
@@ -25,7 +25,6 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
 
             RuleFor(f => f.Cnpj).NotEmpty().WithMessage(MensagensErroFornecedor.CnpjVazio)
                 .Length(18).WithMessage(MensagensErroFornecedor.CnpjTamanho);
-
 
             RuleFor(e => e.Cep).NotEmpty().WithMessage(MensagensDeErroEndereco.CepVazio)
                 .Length(9).WithMessage(MensagensDeErroEndereco.CepTamanho);

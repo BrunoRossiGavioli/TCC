@@ -24,7 +24,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Index()
         {
             Autenticar();
-            return View(_produtoService.GetAll());
+            return View(_produtoService.GetAll(ViewBag.usuarioId));
         }
 
         // GET: Produto/Details/5
@@ -40,7 +40,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Create()
         {
             Autenticar();
-            ViewData["FornecedorId"] = _selectListRepository.SelectListFornecedor("FornecedorId", "NomeFantasia");
+            ViewData["FornecedorId"] = _selectListRepository.SelectListFornecedor("FornecedorId", "NomeFantasia", ViewBag.usuarioId);
             return View();
         }
 
@@ -56,7 +56,7 @@ namespace TCCESTOQUE.Controllers
             var res =_produtoService.PostCriacao(produtoModel);
             if (!res.IsValid)
             {
-                ViewData["FornecedorId"] = _selectListRepository.SelectListFornecedor("FornecedorId", "NomeFantasia", produtoModel.FornecedorId);
+                ViewData["FornecedorId"] = _selectListRepository.SelectListFornecedor("FornecedorId", "NomeFantasia", produtoModel.FornecedorId, ViewBag.usuarioId);
                 return View(MostrarErros(res, produtoModel));
             }
             
@@ -69,7 +69,7 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             var produtoModel = _produtoService.GetEdicao(id);
-            ViewData["FornecedorId"] = _selectListRepository.SelectListFornecedor("FornecedorId", "NomeFantasia", produtoModel.FornecedorId);
+            ViewData["FornecedorId"] = _selectListRepository.SelectListFornecedor("FornecedorId", "NomeFantasia", produtoModel.FornecedorId, ViewBag.usuarioId);
             return View(produtoModel);
         }
 
@@ -85,7 +85,7 @@ namespace TCCESTOQUE.Controllers
             var res =_produtoService.PutEdicao(produtoModel);
             if (!res.IsValid)
             {
-                ViewData["FornecedorId"] = _selectListRepository.SelectListFornecedor("FornecedorId", "NomeFantasia", produtoModel.FornecedorId);
+                ViewData["FornecedorId"] = _selectListRepository.SelectListFornecedor("FornecedorId", "NomeFantasia", produtoModel.FornecedorId, ViewBag.usuarioId);
                 return View(MostrarErros(res, produtoModel));
             }
             return RedirectToAction("Index", "Produto");

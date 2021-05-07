@@ -14,7 +14,7 @@ namespace TCCESTOQUE.Interfaces.Repository
 
         public DbSet<T> GetContext();
 
-        public ICollection<T> GetAll();
+        public ICollection<T> GetAll(Guid vendedorId);
 
         public T GetOne(Guid? id);
 

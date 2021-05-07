@@ -26,9 +26,9 @@ namespace TCCESTOQUE.Service
             _mapper = mapper;
         }
 
-        public ICollection<VendaModel> GetAll()
+        public ICollection<VendaModel> GetAll(Guid vendedorId)
         {
-            return _vendaRepository.GetAll();
+            return _vendaRepository.GetAll(vendedorId);
         }
 
         public VendaModel GetOne(Guid? id)

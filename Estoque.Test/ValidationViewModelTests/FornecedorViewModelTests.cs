@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 using TCCESTOQUE.Validacao.MensagensDeErro;
-using TCCESTOQUE.Validacao.ValidacaoModels;
+using TCCESTOQUE.Validacao.ValidacaoModels.ViewModel;
 using Xunit;
 
 namespace Estoque.Test.ValidationViewModelTests
@@ -11,14 +11,14 @@ namespace Estoque.Test.ValidationViewModelTests
     public class FornecedorViewModelTests
     {
         private readonly FornecedorEnderecoViewModelBuilder _builder;
-        private readonly FornecedorEnderecoValidador _validator;
+        private readonly FornecedorEnderecoVMValidador _validator;
 
         public FornecedorViewModelTests()
         {
-            var provider = new ServiceCollection().AddScoped<FornecedorEnderecoValidador>().BuildServiceProvider();
+            var provider = new ServiceCollection().AddScoped<FornecedorEnderecoVMValidador>().BuildServiceProvider();
 
             _builder = new FornecedorEnderecoViewModelBuilder();
-            _validator = provider.GetService<FornecedorEnderecoValidador>();
+            _validator = provider.GetService<FornecedorEnderecoVMValidador>();
         }
 
         [Fact(DisplayName = "A classe deve ser válida")]

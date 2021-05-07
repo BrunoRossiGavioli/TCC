@@ -17,7 +17,7 @@ namespace TCCESTOQUE.Service
             _vendaItensRepository = vendaItensRepository;
         }
 
-        public ICollection<VendaItensModel> GetAll()
+        public ICollection<VendaItensModel> GetAll(Guid vendedorId)
         {
             throw new NotImplementedException();
         }

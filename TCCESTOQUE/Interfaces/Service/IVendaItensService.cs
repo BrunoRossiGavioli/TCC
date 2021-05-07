@@ -13,6 +13,6 @@ namespace TCCESTOQUE.Interfaces.Service
 
         public bool PutEdicao(VendaItensModel vendaItens);
 
-        public bool PostExclusao(Guid id);
+        public bool PostExclusao(Guid vendaItensId);
     }
 }

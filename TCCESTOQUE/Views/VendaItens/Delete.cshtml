@@ -11,35 +11,40 @@
     <h4>VendaItensModel</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Venda)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Venda.VendaId)
-        </dd class>
-        <dt class = "col-sm-2">
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Produto)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Produto.Nome)
-        </dd class>
-        <dt class = "col-sm-2">
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Quantidade)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Quantidade)
         </dd>
     </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="VendaItensId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        @if(Model.VendaId != null) { 
+    @if(Model.VendaId != null) 
+    { 
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="VendaItensId" />
+            <input type="hidden" asp-for="VendaId" />
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
             <a asp-controller="Venda" asp-action="Details" asp-route-id="@Model.VendaId">Back to List Venda</a>
-        }
-        else if(Model.CarrinhoId != null)
-        {
+        </form>
+    }
+    @if(Model.CarrinhoId != null) 
+    { 
+        <form asp-action="DeleteItemCarrinho">
+            <input type="hidden" asp-for="VendaItensId" />
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
             <a asp-controller="Carrinho" asp-action="Details" asp-route-id="@Model.VendedorId">Back to List Carrinho</a>
-        }
-    </form>
+        </form>
+    }
 </div>

@@ -42,7 +42,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Index()
         {
             Autenticar();
-            return View(_fornecedorService.GetAll());
+            return View(_fornecedorService.GetAll(ViewBag.usuarioId));
         }
 
         // GET: Fornecedor/Details/5

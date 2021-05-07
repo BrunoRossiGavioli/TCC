@@ -18,9 +18,9 @@ namespace TCCESTOQUE.Service
             _produtoRepository = produtoRepository;
         }
 
-        public ICollection<ProdutoModel> GetAll()
+        public ICollection<ProdutoModel> GetAll(Guid vendedorId)
         {
-            return _produtoRepository.GetAll();
+            return _produtoRepository.GetAll(vendedorId);
         }
 
         public ProdutoModel GetOne(Guid? id)

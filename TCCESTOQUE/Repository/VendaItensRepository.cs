@@ -16,7 +16,7 @@ namespace TCCESTOQUE.Repository
 
         }
 
-        public ICollection<VendaItensModel> GetAll()
+        public ICollection<VendaItensModel> GetAll(Guid vendedorId)
         {
             throw new NotImplementedException();
         }
@@ -26,6 +26,7 @@ namespace TCCESTOQUE.Repository
             var vendaItensModel = _context.VendaItensModel
                 .Include(v => v.Produto)
                 .Include(v => v.Venda)
+                .Include(c => c.Carrinho)
                 .FirstOrDefault(m => m.VendaItensId == id);
 
             return vendaItensModel;

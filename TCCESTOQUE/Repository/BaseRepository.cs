@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TCCESTOQUE.Data;
+using TCCESTOQUE.Models;
 
 namespace TCCESTOQUE.Repository
 {
@@ -23,7 +24,8 @@ namespace TCCESTOQUE.Repository
 
         public DbSet<T> GetContext()
         {
-            return _context.Set<T>();
+            var res1 = _context.Set<T>();
+            return res1;
         }
 
         public virtual T GetOne(Guid? id)

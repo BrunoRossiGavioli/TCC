@@ -9,7 +9,7 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
         public EnderecoValidador()
         {
             RuleFor(e => e.Cep).NotEmpty().WithMessage(MensagensDeErroEndereco.CepVazio)
-                .Length(8).WithMessage(MensagensDeErroEndereco.CepTamanho);
+                .Length(9).WithMessage(MensagensDeErroEndereco.CepTamanho);
 
             RuleFor(e => e.Logradouro).NotEmpty().WithMessage(MensagensDeErroEndereco.LogradouroVazio)
                 .MaximumLength(80).WithMessage(MensagensDeErroEndereco.LogradouroTamanhoMaximo)

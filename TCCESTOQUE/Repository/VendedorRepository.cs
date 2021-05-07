@@ -18,7 +18,8 @@ namespace TCCESTOQUE.Repository
             
         }
 
-        public ICollection<VendedorModel> GetAll()
+        //Apenas ADM pode acessar essa informação!!!
+        public ICollection<VendedorModel> GetAll(Guid vendedorId)
         {
             return _context.VendedorModel.ToList();
         }

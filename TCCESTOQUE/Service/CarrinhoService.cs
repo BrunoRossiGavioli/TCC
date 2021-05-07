@@ -21,7 +21,7 @@ namespace TCCESTOQUE.Service
             _vendaItensRepo = vendaItensRepo;
         }
 
-        public ICollection<CarrinhoModel> GetAll()
+        public ICollection<CarrinhoModel> GetAll(Guid vendedorId)
         {
             throw new NotImplementedException();
         }

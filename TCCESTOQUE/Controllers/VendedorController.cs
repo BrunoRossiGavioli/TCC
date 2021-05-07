@@ -27,7 +27,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Index()
         {
             Autenticar();
-            return View(_vendedorService.GetAll());
+            return View(_vendedorService.GetAll(ViewBag.usuarioId));
         }
 
         // GET: Vendedor/Details/5

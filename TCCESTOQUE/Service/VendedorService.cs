@@ -25,9 +25,9 @@ namespace TCCESTOQUE.Service
             _vendedorRepository = vendedorRepository;
             _carrinhoRepo = carrinhoRepo;
         }
-        public ICollection<VendedorModel> GetAll()
+        public ICollection<VendedorModel> GetAll(Guid vendedorId)
         {
-            return _vendedorRepository.GetAll();
+            return _vendedorRepository.GetAll(vendedorId);
         }
 
         public VendedorModel GetOne(Guid? id)

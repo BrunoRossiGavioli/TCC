@@ -31,11 +31,11 @@ namespace TCCESTOQUE.Repository
             return vendaModel;
         }
 
-        public ICollection<VendaModel> GetAll()
+        public ICollection<VendaModel> GetAll(Guid vendedorId)
         {
             return _context.VendaModel.Include(v => v.Cliente)
                 .Include(v => v.Vendedor)
-                .Include(i => i.Itens).ThenInclude(e => e.Produto).ToList();
+                .Include(i => i.Itens).ThenInclude(e => e.Produto).Where(v => v.VendedorId == vendedorId).ToList();
         }
     }
 }

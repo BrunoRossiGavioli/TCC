@@ -34,9 +34,9 @@ namespace TCCESTOQUE.Service
             return ClienteParaClienteView(_clienteRepository.GetEdicao(id));
         }
 
-        public ICollection<ClienteModel> GetAll()
+        public ICollection<ClienteModel> GetAll(Guid vendedorId)
         {
-            return _clienteRepository.GetAll();
+            return _clienteRepository.GetAll(vendedorId);
         }
 
         public ValidationResult PostCriacao(ClienteViewModel clienteVM)
