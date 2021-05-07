@@ -10,9 +10,9 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
         public ProdutoValidador()
         { 
 
-        RuleFor(p => p.Nome).NotEmpty().WithMessage(MensagensErroProduto.NomeVazio)
-                .MaximumLength(80).WithMessage(MensagensErroProduto.NomeTamanhoMaximo)
-                .MinimumLength(3).WithMessage(MensagensErroProduto.NomeTamanhoMinimo);
+        RuleFor(p => p.Nome).NotEmpty().WithMessage(MensagensDeErroPadrao.NomeVazio)
+                .MaximumLength(80).WithMessage(MensagensDeErroPadrao.NomeTamanhoMaximo)
+                .MinimumLength(3).WithMessage(MensagensDeErroPadrao.NomeTamanhoMinimo);
  
             RuleFor(p => p.Descricao).MaximumLength(30).WithMessage(MensagensErroProduto.DescricaoTamanhoMaximo)
                 .MinimumLength(3).WithMessage(MensagensErroProduto.DescricaoTamanhoMinimo);

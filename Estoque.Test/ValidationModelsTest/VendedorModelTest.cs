@@ -19,6 +19,7 @@ namespace Estoque.Test.ValidationModelTests
             _builder = new VendedorModelBuilder();
             _validator = provider.GetService<VendedorValidador>();
         }
+
         [Fact(DisplayName = "A classe deve ser válida")]
         public async Task ClasseValida()
         {
@@ -101,7 +102,7 @@ namespace Estoque.Test.ValidationModelTests
             var instance = _builder.With(x => x.Email = email).Build();
             var validation = await _validator.ValidateAsync(instance);
             Assert.False(validation.IsValid);
-            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensErroVendedor.EmailTamanhoMaximo));
+            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroPadrao.EmailTamanhoMaximo));
         }
         [Fact(DisplayName = "Email nulo!")]
         public async Task EmailsNulo()
@@ -109,7 +110,7 @@ namespace Estoque.Test.ValidationModelTests
             var instance = _builder.With(x => x.Email = "").Build();
             var validation = await _validator.ValidateAsync(instance);
             Assert.False(validation.IsValid);
-            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensErroVendedor.EmailVazio));
+            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroPadrao.EmailVazio));
         }
 
         [Theory(DisplayName = "Teste de emails formato inválidos")]
@@ -122,7 +123,7 @@ namespace Estoque.Test.ValidationModelTests
             var instance = _builder.With(x => x.Email = email).Build();
             var validation = await _validator.ValidateAsync(instance);
             Assert.False(validation.IsValid);
-            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensErroVendedor.EmailFormatoInvalido));
+            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroPadrao.EmailFormatoInvalido));
         }
         #endregion
 
@@ -147,7 +148,7 @@ namespace Estoque.Test.ValidationModelTests
             var instance = _builder.With(x => x.Nome = nome).Build();
             var validation = await _validator.ValidateAsync(instance);
             Assert.False(validation.IsValid);
-            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensErroVendedor.NomeTamanhoMaximo));
+            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroPadrao.NomeTamanhoMaximo));
         }
 
         [Theory(DisplayName = "Nome tamanho mínimo")]
@@ -159,7 +160,7 @@ namespace Estoque.Test.ValidationModelTests
             var instance = _builder.With(x => x.Nome = nome).Build();
             var validation = await _validator.ValidateAsync(instance);
             Assert.False(validation.IsValid);
-            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensErroVendedor.NomeTamanhoMinimo));
+            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroPadrao.NomeTamanhoMinimo));
         }
 
         [Fact(DisplayName = "Nome nulo")]
@@ -168,7 +169,7 @@ namespace Estoque.Test.ValidationModelTests
             var instance = _builder.With(x => x.Nome = "").Build();
             var validation = await _validator.ValidateAsync(instance);
             Assert.False(validation.IsValid);
-            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensErroVendedor.NomeVazio));
+            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroPadrao.NomeVazio));
         }
         #endregion
 
@@ -246,7 +247,7 @@ namespace Estoque.Test.ValidationModelTests
             var instancia = _builder.With(x => x.Telefone = telefone).Build();
             var validation = await _validator.ValidateAsync(instancia);
             Assert.False(validation.IsValid);
-            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensErroVendedor.TelefoneTamanho));
+            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroPadrao.TelefoneTamanho));
         }
         #endregion
     }

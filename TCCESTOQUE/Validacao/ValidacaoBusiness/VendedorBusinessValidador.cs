@@ -12,19 +12,19 @@ namespace TCCESTOQUE.Validacao.ValidacaoBusiness
             When(v => !string.IsNullOrEmpty(v.Cpf), () =>
             {
                 When(v => vendRepo.GetByCpf(v.Cpf)?.VendedorId != v.VendedorId, () => {
-                    RuleFor(a => a.Cpf).Must(cpf => vendRepo.GetByCpf(cpf) == null).WithMessage(MensagensErroVendedor.CpfjaCadastrado);
+                    RuleFor(a => a.Cpf).Must(cpf => vendRepo.GetByCpf(cpf) == null).WithMessage(MensagensDeErroPadrao.CpfJaCadastrado);
                 });
             });
 
             When(v => vendRepo.GetByEmail(v.Email)?.VendedorId != v.VendedorId, () => 
             { 
-                RuleFor(a => a.Email).Must(email => vendRepo.GetByEmail(email) == null).WithMessage(MensagensErroVendedor.EmailJaCadastrado);
+                RuleFor(a => a.Email).Must(email => vendRepo.GetByEmail(email) == null).WithMessage(MensagensDeErroPadrao.EmailJaCadastrado);
             });
 
             When(v => !string.IsNullOrEmpty(v.Telefone), () => 
             {
                 When(v => vendRepo.GetByTelefone(v.Telefone)?.VendedorId != v.VendedorId, () => {
-                    RuleFor(a => a.Telefone).Must(telefone => vendRepo.GetByTelefone(telefone) == null).WithMessage(MensagensErroVendedor.TelefoneJaCadastrado);
+                    RuleFor(a => a.Telefone).Must(telefone => vendRepo.GetByTelefone(telefone) == null).WithMessage(MensagensDeErroPadrao.TelefoneJaCadastrado);
                 });
             });
         }

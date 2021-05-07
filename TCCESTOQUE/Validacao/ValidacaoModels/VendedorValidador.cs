@@ -9,13 +9,13 @@ namespace TCCESTOQUE.ValidadorVendedor
     {
         public VendedorValidador()
         {
-            RuleFor(v => v.Nome).NotEmpty().WithMessage(MensagensErroVendedor.NomeVazio)
-                .MaximumLength(80).WithMessage(MensagensErroVendedor.NomeTamanhoMaximo)
-                .MinimumLength(3).WithMessage(MensagensErroVendedor.NomeTamanhoMinimo);
+            RuleFor(v => v.Nome).NotEmpty().WithMessage(MensagensDeErroPadrao.NomeVazio)
+                .MaximumLength(80).WithMessage(MensagensDeErroPadrao.NomeTamanhoMaximo)
+                .MinimumLength(3).WithMessage(MensagensDeErroPadrao.NomeTamanhoMinimo);
 
-            RuleFor(v => v.Email).NotEmpty().WithMessage(MensagensErroVendedor.EmailVazio)
-                .EmailAddress().WithMessage(MensagensErroVendedor.EmailFormatoInvalido)
-                .MaximumLength(30).WithMessage(MensagensErroVendedor.EmailTamanhoMaximo);
+            RuleFor(v => v.Email).NotEmpty().WithMessage(MensagensDeErroPadrao.EmailVazio)
+                .EmailAddress().WithMessage(MensagensDeErroPadrao.EmailFormatoInvalido)
+                .MaximumLength(30).WithMessage(MensagensDeErroPadrao.EmailTamanhoMaximo);
 
             RuleFor(v => v.Senha).NotEmpty().WithMessage(MensagensErroVendedor.SenhaVazia)
                 .MaximumLength(50).WithMessage(MensagensErroVendedor.SenhaTamanhoMaximo)
@@ -24,9 +24,9 @@ namespace TCCESTOQUE.ValidadorVendedor
             RuleFor(v => v.DataNascimento).NotEmpty().WithMessage(MensagensErroVendedor.DataNascimentoVazia)
                 .Must(IdadeMinima).WithMessage(MensagensErroVendedor.DataTamanhoMinimo);
 
-            RuleFor(v => v.Telefone).Length(14).WithMessage(MensagensErroVendedor.TelefoneTamanho);
+            RuleFor(v => v.Telefone).Length(14).WithMessage(MensagensDeErroPadrao.TelefoneTamanho);
 
-            RuleFor(v => v.Cpf).Length(14).WithMessage(MensagensErroVendedor.CpfTamanho);
+            RuleFor(v => v.Cpf).Length(14).WithMessage(MensagensDeErroPadrao.CpfTamanho);
         }
         private static bool IdadeMinima(DateTime data)
         {
