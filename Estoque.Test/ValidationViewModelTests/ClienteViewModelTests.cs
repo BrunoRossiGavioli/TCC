@@ -1,6 +1,7 @@
 ﻿using Estoque.Test.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
+using TCCESTOQUE.Models.Enum;
 using TCCESTOQUE.Validacao.MensagensDeErro;
 using TCCESTOQUE.Validacao.ValidacaoModels;
 using Xunit;
@@ -381,13 +382,13 @@ namespace Estoque.Test.ValidationViewModelTests
 
         #region Uf
         [Theory(DisplayName = "Ufs válidas")]
-        [InlineData("SP")]
-        [InlineData("TO")]
-        [InlineData("GO")]
-        [InlineData("MG")]
-        [InlineData("PR")]
-        [InlineData("MT")]
-        public async Task UfValidas(string uf)
+        [InlineData(UnidadeFederalEnum.SP)]
+        [InlineData(UnidadeFederalEnum.TO)]
+        [InlineData(UnidadeFederalEnum.GO)]
+        [InlineData(UnidadeFederalEnum.MG)]
+        [InlineData(UnidadeFederalEnum.PR)]
+        [InlineData(UnidadeFederalEnum.MT)]
+        public async Task UfValidas(UnidadeFederalEnum uf)
         {
             var instance = _builder.With(x => x.Uf = uf).Build();
             var validation = await _validator.ValidateAsync(instance);
@@ -397,7 +398,7 @@ namespace Estoque.Test.ValidationViewModelTests
         [Fact(DisplayName = "Uf vazia")]
         public async Task UfVazia()
         {
-            var instance = _builder.With(x => x.Uf = "").Build();
+            var instance = _builder.With(x => x.Uf = UnidadeFederalEnum.Null).Build();
             var validation = await _validator.ValidateAsync(instance);
             Assert.False(validation.IsValid);
             Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroEndereco.UfVazio));

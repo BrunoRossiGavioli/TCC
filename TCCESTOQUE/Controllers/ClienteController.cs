@@ -99,7 +99,7 @@ namespace TCCESTOQUE.Controllers
 
             var res = _cliService.PutEdicao(cliVM);
             if (!res.IsValid)
-                return View(MostrarErros(res, cliVM));
+                return View(MostrarErros(res, cliVM));  
 
             return RedirectToAction(nameof(Index));
         }

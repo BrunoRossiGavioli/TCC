@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TCCESTOQUE.Data;
 
 namespace TCCESTOQUE.Migrations
 {
     [DbContext(typeof(TCCESTOQUEContext))]
-    partial class TCCESTOQUEContextModelSnapshot : ModelSnapshot
+    [Migration("20210507165612_Nova3")]
+    partial class Nova3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,8 +72,10 @@ namespace TCCESTOQUE.Migrations
                         .HasColumnType("int")
                         .HasMaxLength(6);
 
-                    b.Property<int>("Uf")
-                        .HasColumnType("int");
+                    b.Property<string>("Uf")
+                        .IsRequired()
+                        .HasColumnType("varchar(2) CHARACTER SET utf8mb4")
+                        .HasMaxLength(2);
 
                     b.HasKey("EnderecoId");
 
@@ -183,8 +187,10 @@ namespace TCCESTOQUE.Migrations
                         .HasColumnType("int")
                         .HasMaxLength(6);
 
-                    b.Property<int>("Uf")
-                        .HasColumnType("int");
+                    b.Property<string>("Uf")
+                        .IsRequired()
+                        .HasColumnType("varchar(2) CHARACTER SET utf8mb4")
+                        .HasMaxLength(2);
 
                     b.HasKey("EnderecoId");
 

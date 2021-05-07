@@ -16,6 +16,10 @@
     <Compile Include="Migrations\20210506200728_Nova.Designer.cs" />
     <Compile Include="Migrations\20210506212309_Nova2.cs" />
     <Compile Include="Migrations\20210506212309_Nova2.Designer.cs" />
+    <Compile Include="Migrations\20210507165612_Nova3.cs" />
+    <Compile Include="Migrations\20210507165612_Nova3.Designer.cs" />
+    <Compile Include="Migrations\20210507193612_Nova4.cs" />
+    <Compile Include="Migrations\20210507193612_Nova4.Designer.cs" />
     <Compile Include="Migrations\TCCESTOQUEContextModelSnapshot.cs" />
   </ItemGroup>
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TCCESTOQUE.Models.Enum;
 
 namespace TCCESTOQUE.ViewModel
 {
@@ -25,7 +26,7 @@ namespace TCCESTOQUE.ViewModel
         public int Numero { get; set; }
         public string Bairro { get; set; }
         public string Localidade { get; set; }
-        public string Uf { get; set; }
+        public UnidadeFederalEnum Uf { get; set; }
         #endregion
     }
 }

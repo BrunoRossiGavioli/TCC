@@ -25,7 +25,8 @@ namespace TCCESTOQUE.Repository
             var vendaModel = _context.VendaModel
                 .Include(v => v.Cliente)
                 .Include(v => v.Vendedor)
-                .Include(v => v.Itens).ThenInclude(p => p.Produto).ThenInclude(f => f.Fornecedor)
+                .Include(v => v.Itens)
+                .ThenInclude(p => p.Produto)
                 .FirstOrDefault(m => m.VendaId == id);
 
             return vendaModel;

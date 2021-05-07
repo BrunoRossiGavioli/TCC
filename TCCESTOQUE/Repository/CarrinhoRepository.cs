@@ -22,7 +22,6 @@ namespace TCCESTOQUE.Repository
                 .Include(c => c.Vendedor)
                 .Include(i => i.Itens)
                 .ThenInclude(v => v.Produto)
-                .ThenInclude(v => v.Fornecedor)
                 .FirstOrDefault(m => m.VendedorId == id);
 
             return carrinhoModel;

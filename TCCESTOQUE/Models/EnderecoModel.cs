@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using TCCESTOQUE.Models.Enum;
 
 namespace TCCESTOQUE.Models
 {
@@ -20,7 +21,7 @@ namespace TCCESTOQUE.Models
         public string Complemento { get; set; }
 
         [MaxLength(6)]
-        [Required]
+        [Required(ErrorMessage = "Informe o numero")]
         public int Numero { get; set; }
 
         [MaxLength(80)]
@@ -31,8 +32,6 @@ namespace TCCESTOQUE.Models
         [Required(ErrorMessage = "Informe a Localidade", AllowEmptyStrings = false)]
         public string Localidade { get; set; }
 
-        [StringLength(2, ErrorMessage = "O Campo deve ter {0} caracteres")]
-        [Required(ErrorMessage = "Informe a Unidade Federativa", AllowEmptyStrings = false)]
-        public string Uf { get; set; }
+        public UnidadeFederalEnum Uf { get; set; }
     }
 }

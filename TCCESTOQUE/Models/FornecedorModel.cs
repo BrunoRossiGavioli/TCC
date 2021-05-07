@@ -37,7 +37,7 @@ namespace TCCESTOQUE.Models
         public FornecedorEnderecoModel Endereco { get; set; }
 
         [ScaffoldColumn(false)]
-        public ICollection<ProdutoModel> Produtos { get; set; }
+        public ICollection<EntradaModel> Entradas { get; set; }
 
         [ForeignKey("Vendedor")]
         public Guid VendedorId { get; set; }
