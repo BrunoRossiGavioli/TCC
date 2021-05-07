@@ -9,6 +9,6 @@ namespace TCCESTOQUE.POCO
     {
         public string Usuario;
         public string Email;
-        public int VendedorId;
+        public Guid VendedorId;
     }
 }

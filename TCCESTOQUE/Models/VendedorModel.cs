@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TCCESTOQUE.Models.Enum;
 
 namespace TCCESTOQUE.Models
 {
@@ -10,15 +11,15 @@ namespace TCCESTOQUE.Models
         [Key]
         [ScaffoldColumn(false)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int VendedorId { get; set; }
+        public Guid VendedorId { get; set; }
 
         [MaxLength(50)]
         [Required(ErrorMessage = "Informe o nome de usuario", AllowEmptyStrings = false)]
         public string Nome { get; set; }
 
-        [Required(ErrorMessage = "Informe a senha!", AllowEmptyStrings = false)]
         [MaxLength(70)]
-        [DataType(System.ComponentModel.DataAnnotations.DataType.Password)]
+        [DataType(DataType.Password)]
+        [Required(ErrorMessage = "Informe a senha!", AllowEmptyStrings = false)]
         public string Senha { get; set; }
 
         [Required(ErrorMessage = "Informe a data de nascimento", AllowEmptyStrings = false)]
@@ -30,16 +31,15 @@ namespace TCCESTOQUE.Models
 
         [MaxLength(80)]
         [Required(ErrorMessage = "Informe o Email!")]
-        [DataType(System.ComponentModel.DataAnnotations.DataType.EmailAddress)]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         [MaxLength(14)]
         public string Telefone { get; set; }
 
+        public SexoEnum Sexo { get; set; }
+
         [ScaffoldColumn(false)]
         public bool Ativo { get; set; }
-        
-        [ScaffoldColumn(false)]
-        public bool Logado { get; set; }
     }
 }

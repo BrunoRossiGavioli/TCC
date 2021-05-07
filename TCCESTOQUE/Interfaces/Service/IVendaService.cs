@@ -11,12 +11,9 @@ namespace TCCESTOQUE.Interfaces.Service
 {
     public interface IVendaService : IBaseService<VendaModel>
     {
-        public ValidationResult PostCricao(VendaViewModel venda);
+        public VendaModel GetEdicao(Guid? id);
 
-        public VendaModel GetEdicao(int? id);
-
-        public object PutEdicao(int id, VendaModel venda);
-
-        public bool PostExclusao(int id);
+        public object PutEdicao(Guid id, VendaModel venda);
+        public bool PostExclusao(Guid id);
     }
 }

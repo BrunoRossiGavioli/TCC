@@ -21,7 +21,7 @@ namespace TCCESTOQUE.Repository
             throw new NotImplementedException();
         }
 
-        public override VendaItensModel GetOne(int? id)
+        public override VendaItensModel GetOne(Guid? id)
         {
             var vendaItensModel = _context.VendaItensModel
                 .Include(v => v.Produto)

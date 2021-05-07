@@ -22,7 +22,7 @@ namespace TCCESTOQUE.Repository
             return _context.FornecedorModel.ToList();
         }
 
-        public override FornecedorModel GetOne(int? id)
+        public override FornecedorModel GetOne(Guid? id)
         {
             var fornecedorModel = _context.FornecedorModel
                 .Include(e => e.Endereco)

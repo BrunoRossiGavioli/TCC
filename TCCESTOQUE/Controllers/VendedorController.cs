@@ -32,7 +32,7 @@ namespace TCCESTOQUE.Controllers
 
         // GET: Vendedor/Details/5
         [Authorize]
-        public IActionResult Details(int? id)
+        public IActionResult Details(Guid? id)
         {
             Autenticar();
             return View(_vendedorService.GetOne(id));
@@ -62,7 +62,7 @@ namespace TCCESTOQUE.Controllers
 
         // GET: Vendedor/Edit/5
         [Authorize]
-        public IActionResult Edit(int? id)
+        public IActionResult Edit(Guid? id)
         {
             Autenticar();
             return View(_vendedorService.GetEdicao(id));
@@ -74,7 +74,7 @@ namespace TCCESTOQUE.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult Edit(int id,VendedorModel vendedorModel)
+        public IActionResult Edit(Guid id,VendedorModel vendedorModel)
         {
             Autenticar();
             var res = _vendedorService.PutEdicao(id, vendedorModel);
@@ -86,7 +86,7 @@ namespace TCCESTOQUE.Controllers
 
         // GET: Vendedor/Delete/5
         [Authorize]
-        public IActionResult Delete(int? id)
+        public IActionResult Delete(Guid? id)
         {
             Autenticar();
             return View(_vendedorService.GetOne(id));
@@ -96,7 +96,7 @@ namespace TCCESTOQUE.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(Guid id)
         {
             Autenticar();
             var res = _vendedorService.PostExclusao(id);

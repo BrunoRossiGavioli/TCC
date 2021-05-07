@@ -9,29 +9,24 @@
 <div>
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Valor)
+            Valor
         </dt>
         <dd class="col-sm-10">
             @{
+                decimal valor = 0m;
                 foreach (var item in Model.Itens)
                 {
                     if (Model.CarrinhoId == item.CarrinhoId)
-                        Model.Valor += item.Produto.ValorUnitario * item.Quantidade;
+                        valor += item.Produto.ValorUnitario * item.Quantidade;
                 }
             }
-            @Html.DisplayFor(model => model.Valor)
+            @valor
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Vendedor)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Vendedor.Nome)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Cliente)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Cliente.Nome)
         </dd>
     </dl>
 </div>
@@ -42,6 +37,7 @@
     <form asp-action="AdicionarVenda">
         <select asp-for="ClienteId" class="form-control" asp-items="ViewBag.ClienteId" ></select>
         <input type="hidden" asp-for="CarrinhoId" value="@ViewBag.CarrinhoId"/>
+        <input type="hidden" asp-for="VendedorId" value="@ViewBag.usuarioId" />
         <input type="submit" class="btn btn-primary" value="Finalizar" />
     </form>
     
@@ -69,11 +65,12 @@
         {
             @foreach (var item in Model.Itens)
             {
+                var numero = 1;
                 if (item.CarrinhoId == Model.CarrinhoId)
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.VendaItensId)
+                            @numero
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Produto.Nome)
@@ -90,6 +87,7 @@
                         </td>
                     </tr>
                 }
+                numero += 1;
             }
         }
     </tbody>

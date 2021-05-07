@@ -23,7 +23,7 @@ namespace TCCESTOQUE.Repository
             return _context.VendedorModel.ToList();
         }
 
-        public override VendedorModel GetOne(int? id)
+        public override VendedorModel GetOne(Guid? id)
         {
             var vendedorModel = _context.VendedorModel
                 .FirstOrDefault(m => m.VendedorId == id);

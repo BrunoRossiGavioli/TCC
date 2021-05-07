@@ -1,11 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace TCCESTOQUE.Models
 {
     public class EnderecoModel
     {
         [Key]
-        public int EnderecoId { get; set; }
+        public Guid EnderecoId { get; set; }
 
         [StringLength(9)]
         [Required(ErrorMessage = "Informe o Cep", AllowEmptyStrings = false)]
@@ -19,6 +20,7 @@ namespace TCCESTOQUE.Models
         public string Complemento { get; set; }
 
         [MaxLength(6)]
+        [Required]
         public int Numero { get; set; }
 
         [MaxLength(80)]

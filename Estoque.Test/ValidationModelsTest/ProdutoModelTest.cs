@@ -41,7 +41,7 @@ namespace Estoque.Test.ValidationModelsTest
             var instance = _builder.With(x => x.Nome = nome).Build();
             var validation = await _validator.ValidateAsync(instance);
             Assert.False(validation.IsValid);
-            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensErroProduto.NomeTamanhoMinimo));
+            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroPadrao.NomeTamanhoMinimo));
         }
 
         [Theory(DisplayName = "Nome Tamanho mínimo")]
@@ -52,7 +52,7 @@ namespace Estoque.Test.ValidationModelsTest
             var instance = _builder.With(x => x.Nome = nome).Build();
             var validation = await _validator.ValidateAsync(instance);
             Assert.False(validation.IsValid);
-            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensErroProduto.NomeTamanhoMaximo));
+            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroPadrao.NomeTamanhoMaximo));
         }
 
         [Fact(DisplayName = "Nome Tamanho mínimo")]
@@ -61,7 +61,7 @@ namespace Estoque.Test.ValidationModelsTest
             var instance = _builder.With(x => x.Nome = "").Build();
             var validation = await _validator.ValidateAsync(instance);
             Assert.False(validation.IsValid);
-            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensErroProduto.NomeVazio));
+            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroPadrao.NomeVazio));
         }
         #endregion
 

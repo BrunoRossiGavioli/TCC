@@ -12,21 +12,20 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
                 .MaximumLength(80).WithMessage(MensagensErroFornecedor.NomeFantasiaTamanhoMaximo)
                 .MinimumLength(3).WithMessage(MensagensErroFornecedor.NomeFantasiaTamanhoMinimo);
 
-                RuleFor(f => f.NomeFantasia).NotEmpty().WithMessage(MensagensErroFornecedor.NomeVazio)
-                .MaximumLength(80).WithMessage(MensagensErroFornecedor.NomeTamanhoMaximo)
-                .MinimumLength(3).WithMessage(MensagensErroFornecedor.NomeTamanhoMinimo);
+                RuleFor(f => f.NomeFantasia).NotEmpty().WithMessage(MensagensDeErroPadrao.NomeVazio)
+                .MaximumLength(80).WithMessage(MensagensDeErroPadrao.NomeTamanhoMaximo)
+                .MinimumLength(3).WithMessage(MensagensDeErroPadrao.NomeTamanhoMinimo);
 
-            RuleFor(f => f.Email).NotEmpty().WithMessage(MensagensErroFornecedor.EmailVazio)
-                .EmailAddress().WithMessage(MensagensErroFornecedor.EmailFormatoInvalido)
-                .MaximumLength(30).WithMessage(MensagensErroFornecedor.EmailTamanhoMaximo)
-                .MinimumLength(13).WithMessage(MensagensErroFornecedor.EmailTamanhoMinimo);
+            RuleFor(f => f.Email).NotEmpty().WithMessage(MensagensDeErroPadrao.EmailVazio)
+                .EmailAddress().WithMessage(MensagensDeErroPadrao.EmailFormatoInvalido)
+                .MaximumLength(80).WithMessage(MensagensDeErroPadrao.EmailTamanhoMaximo)
+                .MinimumLength(7).WithMessage(MensagensDeErroPadrao.EmailTamanhoMinimo);
                 
-            RuleFor(f => f.Telefone).NotEmpty().WithMessage(MensagensErroFornecedor.TelefoneVazio)
-                .Length(11).WithMessage(MensagensErroFornecedor.TelefoneTamanho);
+            RuleFor(f => f.Telefone).NotEmpty().WithMessage(MensagensDeErroPadrao.TelefoneVazio)
+                .Length(14).WithMessage(MensagensDeErroPadrao.TelefoneTamanho);
 
-                
             RuleFor(f => f.Cnpj).NotEmpty().WithMessage(MensagensErroFornecedor.CnpjVazio)
-                .Length(14).WithMessage(MensagensErroFornecedor.CnpjTamanho);            
+                .Length(18).WithMessage(MensagensErroFornecedor.CnpjTamanho);            
         
         }
         

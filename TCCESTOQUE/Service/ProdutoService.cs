@@ -1,4 +1,5 @@
 ﻿using FluentValidation.Results;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TCCESTOQUE.Interfaces.Repository;
@@ -22,7 +23,7 @@ namespace TCCESTOQUE.Service
             return _produtoRepository.GetAll();
         }
 
-        public ProdutoModel GetOne(int? id)
+        public ProdutoModel GetOne(Guid? id)
         {
             if (id == null)
                 return null;
@@ -30,7 +31,7 @@ namespace TCCESTOQUE.Service
             return _produtoRepository.GetOne(id);
         }
 
-        public ProdutoModel GetEdicao(int? id)
+        public ProdutoModel GetEdicao(Guid? id)
         {
             if (id == null)
                 return null;
@@ -48,7 +49,7 @@ namespace TCCESTOQUE.Service
             return validador;
         }
 
-        public bool PostExclusao(int id)
+        public bool PostExclusao(Guid id)
         {
             var produto = _produtoRepository.GetOne(id);
             if(produto != null)

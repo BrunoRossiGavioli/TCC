@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
@@ -28,7 +29,7 @@ namespace TCCESTOQUE.Controllers
 
         // GET: Produto/Details/5
         [Authorize]
-        public IActionResult Details(int? id)
+        public IActionResult Details(Guid? id)
         {
             Autenticar();
             return View(_produtoService.GetOne(id));
@@ -64,7 +65,7 @@ namespace TCCESTOQUE.Controllers
 
         // GET: Produto/Edit/5
         [Authorize]
-        public IActionResult Edit(int? id)
+        public IActionResult Edit(Guid? id)
         {
             Autenticar();
             var produtoModel = _produtoService.GetEdicao(id);
@@ -78,7 +79,7 @@ namespace TCCESTOQUE.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult Edit(int id,ProdutoModel produtoModel)
+        public IActionResult Edit(ProdutoModel produtoModel)
         {
             Autenticar();
             var res =_produtoService.PutEdicao(produtoModel);
@@ -92,10 +93,9 @@ namespace TCCESTOQUE.Controllers
 
         // GET: Produto/Delete/5
         [Authorize]
-        public IActionResult Delete(int? id)
+        public IActionResult Delete(Guid? id)
         {
             Autenticar();
-
             return View(_produtoService.GetOne(id));
         }
 
@@ -103,15 +103,15 @@ namespace TCCESTOQUE.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(ProdutoModel produto)
         {
             Autenticar();
-            var res = _produtoService.PostExclusao(id);
+            var res = _produtoService.PostExclusao(produto.ProdutoId);
             if(res)
                 return RedirectToAction("Index", "Produto");
 
-            ModelState.AddModelError("", "Não foi possivel excluir esse produto, tente novamente mais tarde!");
-            return View(_produtoService.GetOne(id));
+            ViewBag.ErroExcluir = "Não foi possivel excluir esse produto, ele está em uma venda";
+            return View(_produtoService.GetOne(produto.ProdutoId));
         }
     }
 }

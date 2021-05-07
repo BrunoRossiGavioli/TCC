@@ -117,7 +117,7 @@ namespace Estoque.Test.ValidationViewModelTests
             var validation = await _validator.ValidateAsync(instance);
 
             Assert.False(validation.IsValid);
-            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensErroFornecedor.EmailFormatoInvalido));
+            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroPadrao.EmailFormatoInvalido));
         }
 
         [Theory(DisplayName = "O email não pode exceder 80 caracteres")]
@@ -129,7 +129,7 @@ namespace Estoque.Test.ValidationViewModelTests
             var validation = await _validator.ValidateAsync(instance);
 
             Assert.False(validation.IsValid);
-            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensErroFornecedor.EmailTamanhoMaximo));
+            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroPadrao.EmailTamanhoMaximo));
         }
         #endregion
 

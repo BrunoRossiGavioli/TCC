@@ -116,15 +116,6 @@ namespace Estoque.Test.ValidationViewModelTests
             Assert.False(validation.IsValid);
             Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroEndereco.ComplementoTamanhoMaximo));
         }
-
-        [Fact(DisplayName = "Complemento não pode ser vazio")]
-        public async Task ComplementoValzio()
-        {
-            var instance = _builder.With(x => x.Complemento = "").Build();
-            var validation = await _validator.ValidateAsync(instance);
-            Assert.False(validation.IsValid);
-            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroEndereco.ComplementoVazio));
-        }
         #endregion
 
         #region Cpf
@@ -150,7 +141,7 @@ namespace Estoque.Test.ValidationViewModelTests
             var instance = _builder.With(x => x.Cpf = cpf).Build();
             var validation = await _validator.ValidateAsync(instance);
             Assert.False(validation.IsValid);
-            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensErroCliente.CpfTamanho));
+            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroPadrao.CpfTamanho));
         }
         #endregion
 
@@ -189,7 +180,7 @@ namespace Estoque.Test.ValidationViewModelTests
             var validation = await _validator.ValidateAsync(instance);
 
             Assert.False(validation.IsValid);
-            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensErroCliente.EmailFormatoInvalido));
+            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroPadrao.EmailFormatoInvalido));
         }
 
         [Theory(DisplayName = "O email não pode exceder 80 caracteres")]
@@ -201,7 +192,7 @@ namespace Estoque.Test.ValidationViewModelTests
             var validation = await _validator.ValidateAsync(instance);
 
             Assert.False(validation.IsValid);
-            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensErroCliente.EmailTamanhoMaximo));
+            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroPadrao.EmailTamanhoMaximo));
         }
         #endregion
 
@@ -300,7 +291,7 @@ namespace Estoque.Test.ValidationViewModelTests
             var instance = _builder.With(x => x.Nome = nome).Build();
             var validation = await _validator.ValidateAsync(instance);
             Assert.False(validation.IsValid);
-            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensErroCliente.NomeTamanhoMinimo));
+            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroPadrao.NomeTamanhoMinimo));
         }
 
         [Theory(DisplayName = "Teste nomes tamanho máximo")]
@@ -311,7 +302,7 @@ namespace Estoque.Test.ValidationViewModelTests
             var instance = _builder.With(x => x.Nome = nome).Build();
             var validation = await _validator.ValidateAsync(instance);
             Assert.False(validation.IsValid);
-            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensErroCliente.NomeTamanhoMaximo));
+            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroPadrao.NomeTamanhoMaximo));
         }
 
         [Fact(DisplayName = "Teste Nome não pode ser vazio")]
@@ -320,7 +311,7 @@ namespace Estoque.Test.ValidationViewModelTests
             var instance = _builder.With(x => x.Nome = "").Build();
             var validation = await _validator.ValidateAsync(instance);
             Assert.False(validation.IsValid);
-            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensErroCliente.NomeVazio));
+            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroPadrao.NomeVazio));
         }
         #endregion
 
@@ -376,7 +367,7 @@ namespace Estoque.Test.ValidationViewModelTests
             var instance = _builder.With(x => x.Telefone = telefone).Build();
             var validation = await _validator.ValidateAsync(instance);
             Assert.False(validation.IsValid);
-            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensErroCliente.TelefoneTamanho));
+            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroPadrao.TelefoneTamanho));
         }
         [Fact(DisplayName = "Telefone vazio")]
         public async Task TelefoneVazio()
@@ -384,7 +375,7 @@ namespace Estoque.Test.ValidationViewModelTests
             var instance = _builder.With(x => x.Telefone = "").Build();
             var validation = await _validator.ValidateAsync(instance);
             Assert.False(validation.IsValid);
-            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensErroCliente.TelefoneVazio));
+            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroPadrao.TelefoneVazio));
         }
         #endregion
 

@@ -12,12 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="Migrations\20210504185513_Nova.cs" />
-    <Compile Include="Migrations\20210504185513_Nova.Designer.cs" />
-    <Compile Include="Migrations\20210504190135_Nova2.cs" />
-    <Compile Include="Migrations\20210504190135_Nova2.Designer.cs" />
-    <Compile Include="Migrations\20210504192943_Nova3.cs" />
-    <Compile Include="Migrations\20210504192943_Nova3.Designer.cs" />
+    <Compile Include="Migrations\20210506200728_Nova.cs" />
+    <Compile Include="Migrations\20210506200728_Nova.Designer.cs" />
+    <Compile Include="Migrations\20210506212309_Nova2.cs" />
+    <Compile Include="Migrations\20210506212309_Nova2.Designer.cs" />
     <Compile Include="Migrations\TCCESTOQUEContextModelSnapshot.cs" />
   </ItemGroup>
 

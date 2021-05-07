@@ -11,29 +11,39 @@ namespace TCCESTOQUE.Models
     public class VendaItensModel
     {
         [Key]
-        public int VendaItensId { get; set; }
-
-        [ForeignKey("Venda")]
-        public int? VendaId { get; set; }
-        public VendaModel Venda { get; set; }
-
-        [ForeignKey("Carrinho")]
-        [ScaffoldColumn(false)]
-        public int? CarrinhoId { get; set; }
-        [ScaffoldColumn(false)] 
-        public CarrinhoModel Carrinho { get; set; }
-
-        [ForeignKey("Vendedor")]
-        [ScaffoldColumn(false)]
-        public int VendedorId { get; set; }
-        public VendedorModel Vendedor { get; set; }
-
-        [ForeignKey("Produto")]
-        public int ProdutoId { get; set; }
-        public ProdutoModel Produto { get; set; }
+        public Guid VendaItensId { get; set; }
 
         [Required(ErrorMessage = "Informe a quantidade!")]
         public int Quantidade { get; set; }
 
+        //[Required]
+        //public decimal PrecoProduto { get { return Produto.ValorUnitario; } }
+
+        //[Required]
+        //public decimal CustoProduto { get { return Produto.Custo; } }
+
+        [Required]
+        public decimal PrecoProduto { get; set; }
+
+        [Required]
+        public decimal CustoProduto { get; set; }
+
+        [ForeignKey("Venda")]
+        public Guid? VendaId { get; set; }
+        public VendaModel Venda { get; set; }
+
+        [ForeignKey("Carrinho")]
+        [ScaffoldColumn(false)]
+        public Guid? CarrinhoId { get; set; }
+        public CarrinhoModel Carrinho { get; set; }
+
+        [ForeignKey("Vendedor")]
+        [ScaffoldColumn(false)]
+        public Guid VendedorId { get; set; }
+        public VendedorModel Vendedor { get; set; }
+
+        [ForeignKey("Produto")]
+        public Guid ProdutoId { get; set; }
+        public ProdutoModel Produto { get; set; }
     }
 }

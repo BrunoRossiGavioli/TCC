@@ -35,7 +35,7 @@ namespace TCCESTOQUE.Controllers
 
         // GET: Venda/Details/5
         [Authorize]
-        public IActionResult Details(int? id)
+        public IActionResult Details(Guid? id)
         {
             Autenticar();
             if (id == null)
@@ -49,86 +49,9 @@ namespace TCCESTOQUE.Controllers
             return View(vendaModel);
         }
 
-        // GET: Venda/Create
-        [Authorize]
-        public IActionResult Create()
-        {
-            Autenticar();
-            ViewData["ClienteId"] = _selectListRepository.SelectListCliente("ClienteId", "Nome");
-            ViewData["VendedorId"] = _selectListRepository.SelectListVendedor("VendedorId", "Nome");
-            ViewData["ProdutoId"] = _selectListRepository.SelectListProduto("ProdutoId", "Nome");
-            return View();
-        }
-
-        // POST: Venda/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize]
-        public IActionResult Create(VendaViewModel vendaViewModel)
-        {
-            Autenticar();
-            if (ModelState.IsValid)
-            {
-                _vendaService.PostCricao(vendaViewModel);
-                return RedirectToAction("Index", "Venda");
-            }
-            ViewData["ClienteId"] = _selectListRepository.SelectListCliente("ClienteId", "Nome", vendaViewModel.ClienteId);
-            ViewData["VendedorId"] = _selectListRepository.SelectListVendedor("VendedorId", "Nome", vendaViewModel.VendedorId);
-            ViewData["ProdutoId"] = _selectListRepository.SelectListProduto("ProdutoId", "Nome", vendaViewModel.ProdutoId);
-            return View(vendaViewModel);
-        }
-
-        // GET: Venda/Edit/5
-        [Authorize]
-        public IActionResult Edit(int? id)
-        {
-            Autenticar();
-            if (id == null)
-                return NotFound();
-
-            var vendaModel = _vendaService.GetEdicao(id);
-            if (vendaModel == null)
-                return NotFound();
-
-            ViewData["ClienteId"] = _selectListRepository.SelectListCliente("ClienteId", "Nome", vendaModel.ClienteId);
-            ViewData["VendedorId"] = _selectListRepository.SelectListVendedor("VendedorId", "Nome", vendaModel.VendedorId);
-            return View(vendaModel);
-        }
-
-        // POST: Venda/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize]
-        public IActionResult Edit(int id,VendaModel vendaModel)
-        {
-            Autenticar();
-            if (id != vendaModel.VendaId)
-                return NotFound();
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _vendaService.PutEdicao(id, vendaModel);
-                }
-                catch (Exception)
-                {
-                    return View(vendaModel);
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["ClienteId"] = _selectListRepository.SelectListCliente("ClienteId", "Nome", vendaModel.ClienteId);
-            ViewData["VendedorId"] = _selectListRepository.SelectListVendedor("VendedorId", "Nome", vendaModel.VendedorId);
-            return View(vendaModel);
-        }
-
         // GET: Venda/Delete/5
         [Authorize]
-        public IActionResult Delete(int? id)
+        public IActionResult Delete(Guid? id)
         {
             Autenticar();
             if (id == null)
@@ -145,7 +68,7 @@ namespace TCCESTOQUE.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(Guid id)
         {
             Autenticar();
             var res = _vendaService.PostExclusao(id);

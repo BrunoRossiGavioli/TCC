@@ -21,7 +21,7 @@ namespace TCCESTOQUE.Controllers
 
         // GET: FornecedorEndereco/Edit/5
         [Authorize]
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(Guid? id)
         {
             Autenticar();
             if (id == null)
@@ -39,7 +39,7 @@ namespace TCCESTOQUE.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Edit(int id,FornecedorEnderecoModel fornecedorEnderecoModel)
+        public async Task<IActionResult> Edit(Guid id,FornecedorEnderecoModel fornecedorEnderecoModel)
         {
             Autenticar();
             if (id != fornecedorEnderecoModel.EnderecoId)
@@ -71,7 +71,7 @@ namespace TCCESTOQUE.Controllers
 
         // GET: FornecedorEndereco/Delete/5
         [Authorize]
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(Guid? id)
         {
             Autenticar();
             if (id == null)
@@ -94,7 +94,7 @@ namespace TCCESTOQUE.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             Autenticar();
             var fornecedorEnderecoModel = await _context.FornecedorEnderecoModel.FindAsync(id);
@@ -103,7 +103,7 @@ namespace TCCESTOQUE.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool FornecedorEnderecoModelExists(int id)
+        private bool FornecedorEnderecoModelExists(Guid id)
         {
             return _context.FornecedorEnderecoModel.Any(e => e.EnderecoId == id);
         }

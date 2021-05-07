@@ -22,7 +22,7 @@ namespace TCCESTOQUE.Service
             throw new NotImplementedException();
         }
 
-        public VendaItensModel GetOne(int? id)
+        public VendaItensModel GetOne(Guid? id)
         {
             return _vendaItensRepository.GetOne(id);
         }
@@ -39,7 +39,7 @@ namespace TCCESTOQUE.Service
             return true;
         }
 
-        public bool PostExclusao(int id)
+        public bool PostExclusao(Guid id)
         {
             var model = _vendaItensRepository.GetOne(id);
             if(model != null) { 

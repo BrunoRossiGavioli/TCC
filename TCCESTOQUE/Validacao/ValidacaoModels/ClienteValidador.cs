@@ -8,17 +8,17 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
     {
         public ClienteValidador()
         {
-            RuleFor(v => v.Nome).NotEmpty().WithMessage(MensagensErroCliente.NomeVazio)
-               .MaximumLength(80).WithMessage(MensagensErroCliente.NomeTamanhoMaximo)
-               .MinimumLength(3).WithMessage(MensagensErroCliente.NomeTamanhoMinimo);
+            RuleFor(v => v.Nome).NotEmpty().WithMessage(MensagensDeErroPadrao.NomeVazio)
+               .MaximumLength(80).WithMessage(MensagensDeErroPadrao.NomeTamanhoMaximo)
+               .MinimumLength(3).WithMessage(MensagensDeErroPadrao.NomeTamanhoMinimo);
 
-            RuleFor(v => v.Telefone).NotEmpty().WithMessage(MensagensErroCliente.TelefoneVazio)
-                .Length(14).WithMessage(MensagensErroCliente.TelefoneTamanho);
+            RuleFor(v => v.Telefone).NotEmpty().WithMessage(MensagensDeErroPadrao.TelefoneVazio)
+                .Length(14).WithMessage(MensagensDeErroPadrao.TelefoneTamanho);
 
-            RuleFor(v => v.Email).EmailAddress().WithMessage(MensagensErroCliente.EmailFormatoInvalido)
-               .MaximumLength(80).WithMessage(MensagensErroCliente.EmailTamanhoMaximo);
+            RuleFor(v => v.Email).EmailAddress().WithMessage(MensagensDeErroPadrao.EmailFormatoInvalido)
+               .MaximumLength(80).WithMessage(MensagensDeErroPadrao.EmailTamanhoMaximo);
 
-            RuleFor(v => v.Cpf).Length(14).WithMessage(MensagensErroCliente.CpfTamanho);
+            RuleFor(v => v.Cpf).Length(14).WithMessage(MensagensDeErroPadrao.CpfTamanho);
 
             #region endereco
             RuleFor(e => e.Cep).NotEmpty().WithMessage(MensagensDeErroEndereco.CepVazio)
@@ -28,9 +28,8 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
                 .MaximumLength(80).WithMessage(MensagensDeErroEndereco.LogradouroTamanhoMaximo)
                 .MinimumLength(3).WithMessage(MensagensDeErroEndereco.LogradouroTamanhoMinimo);
 
-            RuleFor(e => e.Complemento).NotEmpty().WithMessage(MensagensDeErroEndereco.ComplementoVazio)
-                .MaximumLength(80).WithMessage(MensagensDeErroEndereco.ComplementoTamanhoMaximo)
-                .MinimumLength(3).WithMessage(MensagensDeErroEndereco.ComplementoVazio);
+            RuleFor(e => e.Complemento).MaximumLength(80).WithMessage(MensagensDeErroEndereco.ComplementoTamanhoMaximo)
+                .MinimumLength(3).WithMessage(MensagensDeErroEndereco.ComplementoTamanhoMinimo);
 
             RuleFor(e => e.Numero).NotEmpty().WithMessage(MensagensDeErroEndereco.NumeroVazio)
                 .GreaterThan(0).WithMessage(MensagensDeErroEndereco.NumeroTamanhoMinimo);
@@ -43,8 +42,7 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
                 .MaximumLength(80).WithMessage(MensagensDeErroEndereco.LocalidadeTamanhoMaximo)
                 .MinimumLength(3).WithMessage(MensagensDeErroEndereco.LocalidadeTamanhoMinimo);
 
-            RuleFor(v => v.Uf).NotEmpty().WithMessage(MensagensDeErroEndereco.UfVazio)
-             .Length(2).WithMessage(MensagensDeErroEndereco.UfTamanho);
+            RuleFor(v => v.Uf).NotEmpty().WithMessage(MensagensDeErroEndereco.UfVazio);
             #endregion
         }
     }

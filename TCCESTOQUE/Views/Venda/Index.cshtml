@@ -13,7 +13,7 @@
                 Código
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Valor)
+                Valor
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DataVenda)
@@ -28,28 +28,33 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.VendaId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Valor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataVenda)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Vendedor.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cliente.Nome)
-            </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.VendaId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.VendaId">Delete</a>
-            </td>
-        </tr>
-}
+        @{
+            int numero = 1;
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @numero
+                    </td>
+                    <td>
+                        @item.Valor()
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataVenda)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Vendedor.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cliente.Nome)
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.VendaId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.VendaId">Delete</a>
+                    </td>
+                </tr>
+                numero += 1;
+            }
+        }
     </tbody>
 </table>

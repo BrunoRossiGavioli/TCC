@@ -24,12 +24,12 @@ namespace TCCESTOQUE.Service
             _cliEnderecoRepo = cliEnderecoRepo;
             _mapper = mapper;
         }
-        public ClienteModel GetOne(int? id)
+        public ClienteModel GetOne(Guid? id)
         {
             return _clienteRepository.GetOne(id);
         }
 
-        public ClienteViewModel GetEdicao(int? id)
+        public ClienteViewModel GetEdicao(Guid? id)
         {
             return ClienteParaClienteView(_clienteRepository.GetEdicao(id));
         }
@@ -55,12 +55,18 @@ namespace TCCESTOQUE.Service
             return validacao;
         }
 
-        public bool PostExclusao(int id)
+        public bool PostExclusao(Guid id)
         {
             var res = _clienteRepository.GetOne(id);
-            if(res != null) { 
-                _clienteRepository.PostExclusao(res);
-                return true;
+            
+            if(res != null)
+            {
+                if (!res.Venda.Any())
+                {
+                    _clienteRepository.PostExclusao(res);
+                    return true;
+                }
+                return false;
             }
             return false;
         }

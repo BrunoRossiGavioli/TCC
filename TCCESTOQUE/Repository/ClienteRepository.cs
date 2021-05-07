@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,9 +23,9 @@ namespace TCCESTOQUE.Repository
             return _context.ClienteModel.ToList();
         }
 
-        public override ClienteModel GetOne(int? id)
+        public override ClienteModel GetOne(Guid? id)
         {
-            return _context.ClienteModel.FirstOrDefault(m => m.ClienteId == id);
+            return _context.ClienteModel.Include(v => v.Venda).Include(v => v.Vendedor).FirstOrDefault(m => m.ClienteId == id);
         }
     }
 }

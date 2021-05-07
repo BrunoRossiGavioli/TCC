@@ -16,17 +16,24 @@ namespace TCCESTOQUE.Repository
 
         }
 
-        public override CarrinhoModel GetOne(int? id)
+        public override CarrinhoModel GetOne(Guid? id)
         {
             var carrinhoModel = _context.CarrinhoModel
                 .Include(c => c.Vendedor)
                 .Include(i => i.Itens)
-                .FirstOrDefault(m => m.CarrinhoId == id);
+                .ThenInclude(v => v.Produto)
+                .ThenInclude(v => v.Fornecedor)
+                .FirstOrDefault(m => m.VendedorId == id);
 
-            carrinhoModel.Itens = _context.VendaItensModel
-                .Include(v => v.Produto)
-                .Include(v => v.Produto.Fornecedor)
-                .Where(i => i.CarrinhoId == id).ToList();
+            return carrinhoModel;
+        }
+
+        public CarrinhoModel GetOneByVendedorId(Guid? id)
+        {
+            var carrinhoModel = _context.CarrinhoModel
+                .Include(c => c.Vendedor)
+                .Include(i => i.Itens)
+                .FirstOrDefault(m => m.VendedorId == id);
 
             return carrinhoModel;
         }

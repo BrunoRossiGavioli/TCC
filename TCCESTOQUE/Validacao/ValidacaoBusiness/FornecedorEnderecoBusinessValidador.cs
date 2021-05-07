@@ -28,13 +28,13 @@ namespace TCCESTOQUE.Validacao.ValidacaoBusiness
             When(fe => fornecedor.GetByNomeFantsia(fe.NomeFantasia)?.FornecedorId != fe.FornecedorId, () => 
             {
                 RuleFor(f => f.NomeFantasia).Must(nomeFantasia => fornecedor.GetByNomeFantsia(nomeFantasia) == null)
-               .WithMessage(MensagensErroFornecedor.NomeFantaziajaCadastrado);
+               .WithMessage(MensagensErroFornecedor.NomeFantasiajaCadastrado);
             });
 
             When(fe => fornecedor.GetByEmail(fe.Email)?.FornecedorId != fe.FornecedorId, () =>
             {
                 RuleFor(f => f.Email).Must(email => fornecedor.GetByEmail(email) == null)
-                .WithMessage(MensagensErroFornecedor.EmailJaCadastrado);
+                .WithMessage(MensagensDeErroPadrao.EmailJaCadastrado);
             });
         }
     }
