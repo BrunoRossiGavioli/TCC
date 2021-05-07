@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.ViewModel;
@@ -45,7 +46,7 @@ namespace TCCESTOQUE.Controllers
 
         // GET: Fornecedor/Details/5
         [Authorize]
-        public IActionResult Details(int? id)
+        public IActionResult Details(Guid? id)
         {
             Autenticar();
             return View(_fornecedorService.GetOne(id));
@@ -53,7 +54,7 @@ namespace TCCESTOQUE.Controllers
 
         // GET: Fornecedor/EditFull/5
         [Authorize]
-        public IActionResult EditFull(int? id)
+        public IActionResult EditFull(Guid? id)
         {
             Autenticar();
             var edit = _fornecedorService.GetEditFull(id);
@@ -72,7 +73,7 @@ namespace TCCESTOQUE.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult EditFull(int id, FornecedorEnderecoViewModel feviewmodel)
+        public IActionResult EditFull(Guid id, FornecedorEnderecoViewModel feviewmodel)
         {
             Autenticar();
             var res = _fornecedorService.PutEditFull(id, feviewmodel);
@@ -85,7 +86,7 @@ namespace TCCESTOQUE.Controllers
 
         // GET: Fornecedor/Delete/5
         [Authorize]
-        public IActionResult Delete(int? id)
+        public IActionResult Delete(Guid? id)
         {
             Autenticar();
             return View(_fornecedorService.GetOne(id));
@@ -95,7 +96,7 @@ namespace TCCESTOQUE.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(Guid id)
         {
             Autenticar();
             var res = _fornecedorService.PostExclusao(id);

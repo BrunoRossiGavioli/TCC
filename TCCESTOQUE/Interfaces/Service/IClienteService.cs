@@ -13,10 +13,10 @@ namespace TCCESTOQUE.Interfaces.Service
 
         public ValidationResult PostCriacao(ClienteViewModel cliente);
 
-        public ClienteViewModel GetEdicao(int? id);
+        public ClienteViewModel GetEdicao(Guid? id);
 
         public ValidationResult PutEdicao(ClienteViewModel cliente);
 
-        public bool PostExclusao(int id);
+        public bool PostExclusao(Guid id);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace TCCESTOQUE.Service
             return _vendedorRepository.GetAll();
         }
 
-        public VendedorModel GetOne(int? id)
+        public VendedorModel GetOne(Guid? id)
         {
             if (id == null)
                 return null;
@@ -37,7 +38,7 @@ namespace TCCESTOQUE.Service
             return _vendedorRepository.GetOne(id);
         }
 
-        public VendedorModel GetEdicao(int? id)
+        public VendedorModel GetEdicao(Guid? id)
         {
             return _vendedorRepository.GetEdicao(id);
         }
@@ -53,7 +54,7 @@ namespace TCCESTOQUE.Service
             return validacao;
         }
 
-        public ValidationResult PutEdicao(int id, VendedorModel vendedorModel)
+        public ValidationResult PutEdicao(Guid id, VendedorModel vendedorModel)
         {
             var validacao = ValidarVendedor(vendedorModel);
             if (validacao.IsValid)
@@ -65,7 +66,7 @@ namespace TCCESTOQUE.Service
             return validacao;
         }
 
-        public bool PostExclusao(int id)
+        public bool PostExclusao(Guid id)
         {
             var res = _vendedorRepository.GetOne(id);
             if (res != null)

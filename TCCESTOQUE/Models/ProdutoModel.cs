@@ -33,11 +33,11 @@ namespace TCCESTOQUE.Models
         public ICollection<VendaItensModel> Itens { get; set; }
 
         [ForeignKey("Fornecedor")]
-        public int FornecedorId { get; set; }
+        public Guid FornecedorId { get; set; }
         public FornecedorModel Fornecedor { get; set; }
 
         [ForeignKey("Vendedor")]
-        public int VendedorId { get; set; }
+        public Guid VendedorId { get; set; }
         public VendedorModel Vendedor { get; set; }
 
 

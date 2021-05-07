@@ -31,39 +31,24 @@ namespace TCCESTOQUE.Service
             return _vendaRepository.GetAll();
         }
 
-        public VendaModel GetOne(int? id)
+        public VendaModel GetOne(Guid? id)
         {
             return _vendaRepository.GetOne(id);
         }
 
-        public ValidationResult PostCricao(VendaViewModel vendaVM)
-        {
-            var validacao = new VendaViewModelValidador().Validate(vendaVM);
-            if (!validacao.IsValid)
-                return validacao;
-
-            var vendaModel = _mapper.Map<VendaModel>(vendaVM);
-            _vendaRepository.PostCriacao(vendaModel);
-            
-            var itens = _mapper.Map<VendaItensModel>(vendaVM);
-            itens.VendaId = vendaModel.VendaId;
-            _vendaItensRepository.PostCriacao(itens);
-            return validacao;
-        }
-
-        public VendaModel GetEdicao(int? id)
+        public VendaModel GetEdicao(Guid? id)
         {
             return _vendaRepository.GetEdicao(id);
         }
 
-        public object PutEdicao(int id, VendaModel venda)
+        public object PutEdicao(Guid id, VendaModel venda)
         {
             venda.VendaId = id;
             _vendaRepository.PutEdicao(venda);
             return true;
         }
 
-        public bool PostExclusao(int id)
+        public bool PostExclusao(Guid id)
         {
             var res = _vendaRepository.GetOne(id);
             if(res != null) { 

@@ -32,7 +32,7 @@ namespace TCCESTOQUE.Controllers
 
         // GET: Cliente/Details/5
         [Authorize]
-        public IActionResult Details(int? id)
+        public IActionResult Details(Guid? id)
         {
             Autenticar();
             if (id == null)
@@ -72,7 +72,7 @@ namespace TCCESTOQUE.Controllers
 
         // GET: Cliente/Edit/5/VendedorId
         [Authorize]
-        public IActionResult Edit(int? id)
+        public IActionResult Edit(Guid? id)
         {
             Autenticar();
             if (id == null)
@@ -91,10 +91,10 @@ namespace TCCESTOQUE.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult Edit(int id, ClienteViewModel cliVM)
+        public IActionResult Edit(Guid id, ClienteViewModel cliVM)
         {
             Autenticar();
-            if (id != cliVM.ClienteId)
+            if (cliVM.ClienteId == Guid.Empty)
                 return NotFound();
 
             var res = _cliService.PutEdicao(cliVM);
@@ -106,7 +106,7 @@ namespace TCCESTOQUE.Controllers
 
         // GET: Cliente/Delete/5
         [Authorize]
-        public IActionResult Delete(int? id)
+        public IActionResult Delete(Guid? id)
         {
             Autenticar();
             if (id == null)
@@ -124,7 +124,7 @@ namespace TCCESTOQUE.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(Guid id)
         {
             Autenticar();
             var res = _cliService.PostExclusao(id);

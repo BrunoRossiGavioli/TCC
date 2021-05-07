@@ -20,7 +20,7 @@ namespace TCCESTOQUE.Repository
 
         }
 
-        public override VendaModel GetOne(int? id)
+        public override VendaModel GetOne(Guid? id)
         {
             var vendaModel = _context.VendaModel
                 .Include(v => v.Itens)
@@ -38,7 +38,9 @@ namespace TCCESTOQUE.Repository
 
         public ICollection<VendaModel> GetAll()
         {
-            return _context.VendaModel.Include(v => v.Cliente).Include(v => v.Vendedor).ToList();
+            return _context.VendaModel.Include(v => v.Cliente)
+                .Include(v => v.Vendedor)
+                .Include(i => i.Itens).ThenInclude(e => e.Produto).ToList();
         }
     }
 }

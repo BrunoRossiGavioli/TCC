@@ -20,7 +20,7 @@ namespace TCCESTOQUE.Controllers
         }
 
         // GET: ClienteEndereco/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
             {
@@ -40,7 +40,7 @@ namespace TCCESTOQUE.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id,ClienteEnderecoModel clienteEnderecoModel)
+        public async Task<IActionResult> Edit(Guid id,ClienteEnderecoModel clienteEnderecoModel)
         {
             if (id != clienteEnderecoModel.EnderecoId)
             {
@@ -71,7 +71,7 @@ namespace TCCESTOQUE.Controllers
         }
 
         // GET: ClienteEndereco/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
             {
@@ -91,7 +91,7 @@ namespace TCCESTOQUE.Controllers
         // POST: ClienteEndereco/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             var clienteEnderecoModel = await _context.ClienteEnderecoModel.FindAsync(id);
             _context.ClienteEnderecoModel.Remove(clienteEnderecoModel);
@@ -99,7 +99,7 @@ namespace TCCESTOQUE.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ClienteEnderecoModelExists(int id)
+        private bool ClienteEnderecoModelExists(Guid id)
         {
             return _context.ClienteEnderecoModel.Any(e => e.EnderecoId == id);
         }

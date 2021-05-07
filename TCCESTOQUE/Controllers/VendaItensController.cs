@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
 
@@ -18,7 +19,7 @@ namespace TCCESTOQUE.Controllers
 
         // GET: VendaItens/Details/5
         [Authorize]
-        public IActionResult Details(int? id)
+        public IActionResult Details(Guid? id)
         {
             Autenticar();
             if (id == null)
@@ -35,7 +36,7 @@ namespace TCCESTOQUE.Controllers
         #region ItemCarrinho
         //GET
         [Authorize]
-        public IActionResult ItemCarrinho(int id)
+        public IActionResult ItemCarrinho(Guid id)
         {
             Autenticar();
             ViewData["ProdutoId"] = _selectListRepository.SelectListProduto("ProdutoId", "Nome");
@@ -48,7 +49,7 @@ namespace TCCESTOQUE.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult AdicionarItemCarrinho(VendaItensModel vendaItensModel, int carrinhoId)
+        public IActionResult AdicionarItemCarrinho(VendaItensModel vendaItensModel, Guid carrinhoId)
         {
             Autenticar();
             if (vendaItensModel.CarrinhoId != carrinhoId)
@@ -58,7 +59,7 @@ namespace TCCESTOQUE.Controllers
             {
                 var res = _VendaItensService.PostItem(vendaItensModel);
                 if (res)
-                    return RedirectToAction("Details","Carrinho",new { id = carrinhoId});
+                    return RedirectToAction("Details", "Carrinho", new { id = vendaItensModel.VendedorId });
             }
 
             ViewData["ProdutoId"] = _selectListRepository.SelectListProduto("ProdutoId", "Nome", vendaItensModel.ProdutoId);
@@ -68,7 +69,7 @@ namespace TCCESTOQUE.Controllers
 
         // GET: VendaItens/Edit/5
         [Authorize]
-        public IActionResult EditItemCarrinho(int? id)
+        public IActionResult EditItemCarrinho(Guid? id)
         {
             Autenticar();
             if (id == null)
@@ -89,7 +90,7 @@ namespace TCCESTOQUE.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult EditItemCarrinho(VendaItensModel vendaItensModel, int id)
+        public IActionResult EditItemCarrinho(VendaItensModel vendaItensModel, Guid id)
         {
             Autenticar();
             if (id != vendaItensModel.VendaItensId)
@@ -98,7 +99,7 @@ namespace TCCESTOQUE.Controllers
             if (ModelState.IsValid)
             {
                 _VendaItensService.PutEdicao(vendaItensModel);
-                return RedirectToAction("Details", "Carrinho", new { id = vendaItensModel.CarrinhoId });
+                return RedirectToAction("Details", "Carrinho", new { id = vendaItensModel.VendedorId });
             }
             ViewData["ProdutoId"] = _selectListRepository.SelectListProduto("ProdutoId", "Nome", vendaItensModel.ProdutoId);
             ViewData["CarrinhoId"] = vendaItensModel.CarrinhoId;
@@ -111,7 +112,7 @@ namespace TCCESTOQUE.Controllers
 
         // GET: VendaItens/Create
         [Authorize]
-        public IActionResult ItemVenda(int id)
+        public IActionResult ItemVenda(Guid id)
         {
             Autenticar();
             ViewData["ProdutoId"] = _selectListRepository.SelectListProduto("ProdutoId", "Nome");
@@ -123,7 +124,7 @@ namespace TCCESTOQUE.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult AdicionarItemVenda(VendaItensModel vendaItensModel, int vendaId)
+        public IActionResult AdicionarItemVenda(VendaItensModel vendaItensModel, Guid vendaId)
         {
             Autenticar();
             if (vendaItensModel.VendaId != vendaId)
@@ -143,7 +144,7 @@ namespace TCCESTOQUE.Controllers
 
         // GET: VendaItens/Edit/5
         [Authorize]
-        public IActionResult EditItemVenda(int? id)
+        public IActionResult EditItemVenda(Guid? id)
         {
             Autenticar();
             if (id == null)
@@ -164,7 +165,7 @@ namespace TCCESTOQUE.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult EditItemVenda(VendaItensModel vendaItensModel, int id)
+        public IActionResult EditItemVenda(VendaItensModel vendaItensModel, Guid id)
         {
             Autenticar();
             if (id != vendaItensModel.VendaItensId)
@@ -184,7 +185,7 @@ namespace TCCESTOQUE.Controllers
 
         // GET: VendaItens/Delete/5
         [Authorize]
-        public IActionResult Delete(int? id)
+        public IActionResult Delete(Guid? id)
         {
             Autenticar();
             if (id == null)
@@ -202,7 +203,7 @@ namespace TCCESTOQUE.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(Guid id)
         {
             Autenticar();
             var res = _VendaItensService.PostExclusao(id);

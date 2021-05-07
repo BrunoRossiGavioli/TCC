@@ -25,7 +25,7 @@ namespace TCCESTOQUE.Controllers
 
         // GET: Carrinho/Details/5
         [Authorize]
-        public IActionResult Details(int? id)
+        public IActionResult Details(Guid? id)
         {
             Autenticar();
             if (id == null || id != ViewBag.usuarioId)

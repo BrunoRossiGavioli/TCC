@@ -43,7 +43,7 @@ namespace TCCESTOQUE.Validacao.MensagensDeErro
         public static string RazaoSocialTamanhoMinimo = "O campo Razao Social tem que ter no mínimo {0} caracteres!";
         #endregion
 
-        public static string CnpjTamanho = "O campo Cnpj deve ter 14 caracteres!";
+        public static string CnpjTamanho = "O campo Cnpj deve ter 18 caracteres!";
 
     }
 }

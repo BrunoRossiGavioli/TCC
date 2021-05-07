@@ -31,7 +31,7 @@ namespace TCCESTOQUE.Service
             return _fornecedorRepository.GetAll();
         }
 
-        public FornecedorModel GetOne(int? id)
+        public FornecedorModel GetOne(Guid? id)
         {
             if (id == null)
                 return null;
@@ -39,7 +39,7 @@ namespace TCCESTOQUE.Service
             return _fornecedorRepository.GetOne(id);
         }
 
-        public object PostExclusao(int id)
+        public object PostExclusao(Guid id)
         {
             var res = _fornecedorRepository.GetOne(id);
             if (res.Produtos.Count > 0)
@@ -52,7 +52,7 @@ namespace TCCESTOQUE.Service
             return false;
         }
 
-        public FornecedorEnderecoViewModel GetEditFull(int? id)
+        public FornecedorEnderecoViewModel GetEditFull(Guid? id)
         {
             return FeviewConvert(_fornecedorRepository.GetEdicao(id));
         }
@@ -63,7 +63,7 @@ namespace TCCESTOQUE.Service
             if (validador.IsValid)
             {
                 feviewmodel = FormataValores.FormataValoresFornecedorView(feviewmodel);
-                var fornecedor = ConvertFornecedor(id, feviewmodel);
+                var fornecedor = ConvertFornecedor(feviewmodel);
                 _fornecedorRepository.PutEdicao(fornecedor);
 
                 var endereco = _mapper.Map<FornecedorEnderecoModel>(feviewmodel);
@@ -122,17 +122,16 @@ namespace TCCESTOQUE.Service
             return info;
         }
 
-        public FornecedorModel ConvertFornecedor(Guid id, FornecedorEnderecoViewModel feViewModel)
+        public FornecedorModel ConvertFornecedor(FornecedorEnderecoViewModel feViewModel)
         {
-            var fornecedor = _mapper.Map<FornecedorModel>(feViewModel);
-            var info = _fornecedorRepository.GetByEmail(feViewModel.Email);
-            info.Cnpj = fornecedor.Cnpj;
-            info.Email = fornecedor.Email;
-            info.FornecedorId = id;
-            info.NomeFantasia = fornecedor.NomeFantasia;
-            info.RazaoSocial = fornecedor.RazaoSocial;
-            info.Telefone = fornecedor.Telefone;
-            info.VendedorId = fornecedor.VendedorId;
+            var info = _fornecedorRepository.GetById(feViewModel.FornecedorId);
+            info.Cnpj = feViewModel.Cnpj;
+            info.Email = feViewModel.Email;
+            info.FornecedorId = feViewModel.FornecedorId;
+            info.NomeFantasia = feViewModel.NomeFantasia;
+            info.RazaoSocial = feViewModel.RazaoSocial;
+            info.Telefone = feViewModel.Telefone;
+            info.VendedorId = feViewModel.VendedorId;
             return info;
         }
     }

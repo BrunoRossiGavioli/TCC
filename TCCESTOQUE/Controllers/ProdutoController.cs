@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
@@ -28,7 +29,7 @@ namespace TCCESTOQUE.Controllers
 
         // GET: Produto/Details/5
         [Authorize]
-        public IActionResult Details(int? id)
+        public IActionResult Details(Guid? id)
         {
             Autenticar();
             return View(_produtoService.GetOne(id));
@@ -64,7 +65,7 @@ namespace TCCESTOQUE.Controllers
 
         // GET: Produto/Edit/5
         [Authorize]
-        public IActionResult Edit(int? id)
+        public IActionResult Edit(Guid? id)
         {
             Autenticar();
             var produtoModel = _produtoService.GetEdicao(id);
@@ -78,7 +79,7 @@ namespace TCCESTOQUE.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult Edit(int id,ProdutoModel produtoModel)
+        public IActionResult Edit(Guid id,ProdutoModel produtoModel)
         {
             Autenticar();
             var res =_produtoService.PutEdicao(produtoModel);
@@ -92,7 +93,7 @@ namespace TCCESTOQUE.Controllers
 
         // GET: Produto/Delete/5
         [Authorize]
-        public IActionResult Delete(int? id)
+        public IActionResult Delete(Guid? id)
         {
             Autenticar();
 
@@ -103,7 +104,7 @@ namespace TCCESTOQUE.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(Guid id)
         {
             Autenticar();
             var res = _produtoService.PostExclusao(id);

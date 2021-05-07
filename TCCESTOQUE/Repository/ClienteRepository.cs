@@ -22,7 +22,7 @@ namespace TCCESTOQUE.Repository
             return _context.ClienteModel.ToList();
         }
 
-        public override ClienteModel GetOne(int? id)
+        public override ClienteModel GetOne(Guid? id)
         {
             return _context.ClienteModel.FirstOrDefault(m => m.ClienteId == id);
         }

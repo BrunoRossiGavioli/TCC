@@ -22,7 +22,7 @@ namespace TCCESTOQUE.Repository
             return tCCESTOQUEContext.ToList();
         }
 
-        public override ProdutoModel GetOne(int? id)
+        public override ProdutoModel GetOne(Guid? id)
         {
             var produtoModel = _context.ProdutoModel
                 .FirstOrDefault(m => m.ProdutoId == id);
@@ -33,7 +33,7 @@ namespace TCCESTOQUE.Repository
             return produtoModel;
         }
 
-        public override ProdutoModel GetEdicao(int? id)
+        public override ProdutoModel GetEdicao(Guid? id)
         {
             var produtoModel = _context.ProdutoModel.Find(id);
             if (produtoModel == null)

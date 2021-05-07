@@ -20,6 +20,7 @@ namespace TCCESTOQUE.Models
         public string Complemento { get; set; }
 
         [MaxLength(6)]
+        [Required]
         public int Numero { get; set; }
 
         [MaxLength(80)]

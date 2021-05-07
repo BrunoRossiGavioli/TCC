@@ -13,7 +13,7 @@ namespace TCCESTOQUE.Service
         public static VendedorLogin Autenticado(HttpContext context)
         {
             string email = "";
-            string vendedorId = "";
+            var vendedorId = Guid.Empty;
             VendedorLogin res;
             if (context.User.Identity.IsAuthenticated)
             {
@@ -25,14 +25,14 @@ namespace TCCESTOQUE.Service
                         email = item.Value;
 
                     if (item.Type == ClaimTypes.SerialNumber)
-                        vendedorId = item.Value;
+                        vendedorId = Guid.Parse(item.Value);
                 }
 
                 res = new VendedorLogin()
                 {
                     Usuario = usuario,
                     Email = email,
-                    VendedorId = Convert.ToInt32(vendedorId)
+                    VendedorId = vendedorId
                 };
                 return res;
             }

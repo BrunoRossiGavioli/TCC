@@ -11,18 +11,14 @@ namespace TCCESTOQUE.Models
     public class CarrinhoModel
     {
         [Key]
-        public int CarrinhoId { get; set; }
-
-        [ScaffoldColumn(false)]
-        [Column(TypeName = "decimal(12,2)")]
-        public decimal Valor { get; set; }
+        public Guid CarrinhoId { get; set; }
 
         [ForeignKey("Vendedor")]
-        public int VendedorId { get; set; }
+        public Guid VendedorId { get; set; }
         public VendedorModel Vendedor { get; set; }
 
         [NotMapped]
-        public int ClienteId { get; set; }
+        public Guid ClienteId { get; set; }
         
         [NotMapped]
         public ClienteModel Cliente { get; set; }

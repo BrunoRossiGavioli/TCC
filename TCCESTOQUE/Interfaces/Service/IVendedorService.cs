@@ -10,11 +10,11 @@ namespace TCCESTOQUE.Interfaces.Service
     {
         public ValidationResult PostCriacao(VendedorModel vendedorModel);
 
-        public VendedorModel GetEdicao(int? id);
+        public VendedorModel GetEdicao(Guid? id);
 
         public ValidationResult PutEdicao(Guid id, VendedorModel vendedorModel);
 
-        public bool PostExclusao(int id);
+        public bool PostExclusao(Guid id);
 
         public object PostLogin(VendedorModel vendedorModel);
     }

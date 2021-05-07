@@ -22,7 +22,7 @@ namespace TCCESTOQUE.Models
         public string Cpf { get; set; }
 
         [MaxLength(80)]
-        [DataType(System.ComponentModel.DataAnnotations.DataType.EmailAddress)]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Informe o Telefone!")]
@@ -38,7 +38,7 @@ namespace TCCESTOQUE.Models
         public ICollection<VendaModel> Venda { get; set; }
 
         [ForeignKey("Vendedor")]
-        public int VendedorId { get; set; }
+        public Guid VendedorId { get; set; }
         public VendedorModel Vendedor { get; set; }
 
     }

@@ -18,7 +18,7 @@ namespace TCCESTOQUE.Models
         public string Nome { get; set; }
 
         [MaxLength(70)]
-        [DataType(System.ComponentModel.DataAnnotations.DataType.Password)]
+        [DataType(DataType.Password)]
         [Required(ErrorMessage = "Informe a senha!", AllowEmptyStrings = false)]
         public string Senha { get; set; }
 
@@ -31,7 +31,7 @@ namespace TCCESTOQUE.Models
 
         [MaxLength(80)]
         [Required(ErrorMessage = "Informe o Email!")]
-        [DataType(System.ComponentModel.DataAnnotations.DataType.EmailAddress)]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         [MaxLength(14)]

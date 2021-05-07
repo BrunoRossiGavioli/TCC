@@ -16,12 +16,17 @@ namespace TCCESTOQUE.Repository
             _context = context;
         }
 
+        public T GetById(Guid id)
+        {
+            return _context.Set<T>().Find(id);
+        }
+
         public DbSet<T> GetContext()
         {
             return _context.Set<T>();
         }
 
-        public virtual T GetOne(int? id)
+        public virtual T GetOne(Guid? id)
         {
             return _context.Set<T>().FirstOrDefault();
         }
@@ -32,7 +37,7 @@ namespace TCCESTOQUE.Repository
             SaveChanges();
         }
 
-        public virtual T GetEdicao(int? id)
+        public virtual T GetEdicao(Guid? id)
         {
             return _context.Set<T>().Find(id);
         }

@@ -9,6 +9,9 @@ namespace TCCESTOQUE.Interfaces.Repository
 {
     public interface IBaseRepository<T> where T : class
     {
+
+        public T GetById(Guid id);
+
         public DbSet<T> GetContext();
 
         public ICollection<T> GetAll();

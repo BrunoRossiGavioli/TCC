@@ -27,7 +27,7 @@ namespace TCCESTOQUE.Models
 
         [MaxLength(80)]
         [Required(ErrorMessage = "Informe o Email!")]
-        [DataType(System.ComponentModel.DataAnnotations.DataType.EmailAddress)]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         [MaxLength(14)]
@@ -40,7 +40,7 @@ namespace TCCESTOQUE.Models
         public ICollection<ProdutoModel> Produtos { get; set; }
 
         [ForeignKey("Vendedor")]
-        public int VendedorId { get; set; }
+        public Guid VendedorId { get; set; }
         public VendedorModel Vendedor { get; set; }
 
         [ScaffoldColumn(false)]

@@ -22,12 +22,9 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
                 
             RuleFor(p => p.ValorUnitario).NotEmpty().WithMessage(MensagensErroProduto.ValorUnitarioVazio)
                 .GreaterThan(0).WithMessage(MensagensErroProduto.ValorUnitarioMinimo);
-                
-            RuleFor(p => p.Quantidade).NotEmpty().WithMessage(MensagensErroProduto.QuantidadeVazia)
-                .GreaterThan(0).WithMessage(MensagensErroProduto.QuantidadeMinima);           
 
-             RuleFor(p => p.DataEntrada).NotEmpty().WithMessage(MensagensErroProduto.DataEntradaVazia)
-                .Must(DataMinima).WithMessage(MensagensErroProduto.DataDeEntradaFutura); 
+            RuleFor(p => p.Quantidade).NotEmpty().WithMessage(MensagensErroProduto.QuantidadeVazia)
+                .GreaterThan(0).WithMessage(MensagensErroProduto.QuantidadeMinima);
         }
         private static bool DataMinima(DateTime data)
         { 
