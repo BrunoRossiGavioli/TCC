@@ -19,11 +19,12 @@ namespace TCCESTOQUE.Migrations
 
             modelBuilder.Entity("TCCESTOQUE.Models.CarrinhoModel", b =>
                 {
-                    b.Property<Guid>("CarrinhoId")
+                    b.Property<string>("CarrinhoId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid>("VendedorId")
+                    b.Property<string>("VendedorId")
+                        .IsRequired()
                         .HasColumnType("char(36)");
 
                     b.HasKey("CarrinhoId");
@@ -35,7 +36,7 @@ namespace TCCESTOQUE.Migrations
 
             modelBuilder.Entity("TCCESTOQUE.Models.ClienteEnderecoModel", b =>
                 {
-                    b.Property<Guid>("EnderecoId")
+                    b.Property<string>("EnderecoId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
@@ -49,7 +50,8 @@ namespace TCCESTOQUE.Migrations
                         .HasColumnType("varchar(9) CHARACTER SET utf8mb4")
                         .HasMaxLength(9);
 
-                    b.Property<Guid>("ClienteId")
+                    b.Property<string>("ClienteId")
+                        .IsRequired()
                         .HasColumnType("char(36)");
 
                     b.Property<string>("Complemento")
@@ -85,7 +87,7 @@ namespace TCCESTOQUE.Migrations
 
             modelBuilder.Entity("TCCESTOQUE.Models.ClienteModel", b =>
                 {
-                    b.Property<Guid>("ClienteId")
+                    b.Property<string>("ClienteId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
@@ -109,7 +111,8 @@ namespace TCCESTOQUE.Migrations
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<Guid>("VendedorId")
+                    b.Property<string>("VendedorId")
+                        .IsRequired()
                         .HasColumnType("char(36)");
 
                     b.HasKey("ClienteId");
@@ -121,7 +124,7 @@ namespace TCCESTOQUE.Migrations
 
             modelBuilder.Entity("TCCESTOQUE.Models.FornecedorEnderecoModel", b =>
                 {
-                    b.Property<Guid>("EnderecoId")
+                    b.Property<string>("EnderecoId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
@@ -139,7 +142,8 @@ namespace TCCESTOQUE.Migrations
                         .HasColumnType("varchar(80) CHARACTER SET utf8mb4")
                         .HasMaxLength(80);
 
-                    b.Property<Guid>("FornecedorId")
+                    b.Property<string>("FornecedorId")
+                        .IsRequired()
                         .HasColumnType("char(36)");
 
                     b.Property<string>("Localidade")
@@ -171,7 +175,7 @@ namespace TCCESTOQUE.Migrations
 
             modelBuilder.Entity("TCCESTOQUE.Models.FornecedorModel", b =>
                 {
-                    b.Property<Guid>("FornecedorId")
+                    b.Property<string>("FornecedorId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
@@ -202,7 +206,8 @@ namespace TCCESTOQUE.Migrations
                         .HasColumnType("varchar(14) CHARACTER SET utf8mb4")
                         .HasMaxLength(14);
 
-                    b.Property<Guid>("VendedorId")
+                    b.Property<string>("VendedorId")
+                        .IsRequired()
                         .HasColumnType("char(36)");
 
                     b.HasKey("FornecedorId");
@@ -214,7 +219,7 @@ namespace TCCESTOQUE.Migrations
 
             modelBuilder.Entity("TCCESTOQUE.Models.ProdutoModel", b =>
                 {
-                    b.Property<Guid>("ProdutoId")
+                    b.Property<string>("ProdutoId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
@@ -225,7 +230,8 @@ namespace TCCESTOQUE.Migrations
                         .HasColumnType("varchar(100) CHARACTER SET utf8mb4")
                         .HasMaxLength(100);
 
-                    b.Property<Guid>("FornecedorId")
+                    b.Property<string>("FornecedorId")
+                        .IsRequired()
                         .HasColumnType("char(36)");
 
                     b.Property<string>("Nome")
@@ -239,7 +245,8 @@ namespace TCCESTOQUE.Migrations
                     b.Property<decimal>("ValorUnitario")
                         .HasColumnType("decimal(12,2)");
 
-                    b.Property<Guid>("VendedorId")
+                    b.Property<string>("VendedorId")
+                        .IsRequired()
                         .HasColumnType("char(36)");
 
                     b.HasKey("ProdutoId");
@@ -253,11 +260,11 @@ namespace TCCESTOQUE.Migrations
 
             modelBuilder.Entity("TCCESTOQUE.Models.VendaItensModel", b =>
                 {
-                    b.Property<Guid>("VendaItensId")
+                    b.Property<string>("VendaItensId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid?>("CarrinhoId")
+                    b.Property<string>("CarrinhoId")
                         .HasColumnType("char(36)");
 
                     b.Property<decimal>("CustoProduto")
@@ -266,16 +273,18 @@ namespace TCCESTOQUE.Migrations
                     b.Property<decimal>("PrecoProduto")
                         .HasColumnType("decimal(65,30)");
 
-                    b.Property<Guid>("ProdutoId")
+                    b.Property<string>("ProdutoId")
+                        .IsRequired()
                         .HasColumnType("char(36)");
 
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("VendaId")
+                    b.Property<string>("VendaId")
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid>("VendedorId")
+                    b.Property<string>("VendedorId")
+                        .IsRequired()
                         .HasColumnType("char(36)");
 
                     b.HasKey("VendaItensId");
@@ -293,20 +302,22 @@ namespace TCCESTOQUE.Migrations
 
             modelBuilder.Entity("TCCESTOQUE.Models.VendaModel", b =>
                 {
-                    b.Property<Guid>("VendaId")
+                    b.Property<string>("VendaId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
                     b.Property<bool>("Cancelada")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<Guid>("ClienteId")
+                    b.Property<string>("ClienteId")
+                        .IsRequired()
                         .HasColumnType("char(36)");
 
                     b.Property<DateTime>("DataVenda")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid>("VendedorId")
+                    b.Property<string>("VendedorId")
+                        .IsRequired()
                         .HasColumnType("char(36)");
 
                     b.HasKey("VendaId");
@@ -320,7 +331,7 @@ namespace TCCESTOQUE.Migrations
 
             modelBuilder.Entity("TCCESTOQUE.Models.VendedorModel", b =>
                 {
-                    b.Property<Guid>("VendedorId")
+                    b.Property<string>("VendedorId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 

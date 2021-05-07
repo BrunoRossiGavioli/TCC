@@ -23,15 +23,10 @@ namespace TCCESTOQUE.Repository
         public override VendaModel GetOne(Guid? id)
         {
             var vendaModel = _context.VendaModel
-                .Include(v => v.Itens)
                 .Include(v => v.Cliente)
                 .Include(v => v.Vendedor)
+                .Include(v => v.Itens).ThenInclude(p => p.Produto).ThenInclude(f => f.Fornecedor)
                 .FirstOrDefault(m => m.VendaId == id);
-
-            vendaModel.Itens = _context.VendaItensModel
-                .Include(v => v.Produto)
-                .Include(v => v.Produto.Fornecedor)
-                .ToList();
 
             return vendaModel;
         }

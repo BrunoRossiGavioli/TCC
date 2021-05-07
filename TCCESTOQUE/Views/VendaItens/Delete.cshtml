@@ -34,6 +34,12 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="VendaItensId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-controller="Venda" asp-action="Details" asp-route-id="@Model.VendaId">Back to List</a>
+        @if(Model.VendaId != null) { 
+            <a asp-controller="Venda" asp-action="Details" asp-route-id="@Model.VendaId">Back to List Venda</a>
+        }
+        else if(Model.CarrinhoId != null)
+        {
+            <a asp-controller="Carrinho" asp-action="Details" asp-route-id="@Model.VendedorId">Back to List Carrinho</a>
+        }
     </form>
 </div>

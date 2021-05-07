@@ -124,15 +124,15 @@ namespace TCCESTOQUE.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult DeleteConfirmed(Guid id)
+        public IActionResult DeleteConfirmed(ClienteModel cliente)
         {
             Autenticar();
-            var res = _cliService.PostExclusao(id);
+            var res = _cliService.PostExclusao(cliente.ClienteId);
             if(res)
                 return RedirectToAction(nameof(Index));
 
-            ModelState.AddModelError("", "Não foi possivel deletar o cliente, tente novamente mais tarde!");
-            return View(_cliService.GetOne(id));
+            ViewBag.ErroExcluir = "Não é possivel deletar o cliente, ele está em alguma venda!";
+            return View(_cliService.GetOne(cliente.ClienteId));
         }
     }
 }

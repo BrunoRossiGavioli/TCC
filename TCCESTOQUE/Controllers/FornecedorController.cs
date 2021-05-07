@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Service;
+using TCCESTOQUE.Models;
 using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Controllers
@@ -89,6 +90,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Delete(Guid? id)
         {
             Autenticar();
+            ViewBag.FornecedorId = id;
             return View(_fornecedorService.GetOne(id));
         }
 
@@ -96,17 +98,18 @@ namespace TCCESTOQUE.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult DeleteConfirmed(Guid id)
+        public IActionResult DeleteConfirmed(FornecedorModel fornecedor)
         {
             Autenticar();
-            var res = _fornecedorService.PostExclusao(id);
+            var res = _fornecedorService.PostExclusao(fornecedor.FornecedorId);
             if(res.GetType() == typeof(bool)) {
                 ViewBag.ErroExcluir = "";
                 return RedirectToAction("Index", "Fornecedor");
             }
 
+            ViewBag.FornecedorId = fornecedor.FornecedorId;
             ViewBag.FornecedorErroExcluir = (string)res;
-            return View(_fornecedorService.GetOne(id));
+            return View(_fornecedorService.GetOne(fornecedor.FornecedorId));
         }
     }
 }

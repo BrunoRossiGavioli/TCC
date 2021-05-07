@@ -79,7 +79,7 @@ namespace TCCESTOQUE.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult Edit(Guid id,ProdutoModel produtoModel)
+        public IActionResult Edit(ProdutoModel produtoModel)
         {
             Autenticar();
             var res =_produtoService.PutEdicao(produtoModel);
@@ -96,7 +96,6 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Delete(Guid? id)
         {
             Autenticar();
-
             return View(_produtoService.GetOne(id));
         }
 
@@ -104,15 +103,15 @@ namespace TCCESTOQUE.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult DeleteConfirmed(Guid id)
+        public IActionResult DeleteConfirmed(ProdutoModel produto)
         {
             Autenticar();
-            var res = _produtoService.PostExclusao(id);
+            var res = _produtoService.PostExclusao(produto.ProdutoId);
             if(res)
                 return RedirectToAction("Index", "Produto");
 
-            ModelState.AddModelError("", "Não foi possivel excluir esse produto, tente novamente mais tarde!");
-            return View(_produtoService.GetOne(id));
+            ViewBag.ErroExcluir = "Não foi possivel excluir esse produto, ele está em uma venda";
+            return View(_produtoService.GetOne(produto.ProdutoId));
         }
     }
 }
