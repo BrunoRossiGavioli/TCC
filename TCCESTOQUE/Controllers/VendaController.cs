@@ -71,7 +71,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult DeleteConfirmed(VendaModel vendaModel)
         {
             Autenticar();
-            var res = _vendaService.PostExclusao(vendaModel.VendaId);
+            var res = _vendaService.Cancelar(vendaModel.VendaId);
             if(res)
                 return RedirectToAction("Index","Venda");
 

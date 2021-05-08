@@ -17,15 +17,14 @@ namespace TCCESTOQUE.Repository
             _context = context;
         }
 
-        public T GetById(Guid id)
+        public virtual T GetById(Guid id)
         {
             return _context.Set<T>().Find(id);
         }
 
-        public DbSet<T> GetContext()
+        public virtual DbSet<T> GetContext()
         {
-            var res1 = _context.Set<T>();
-            return res1;
+            return _context.Set<T>();
         }
 
         public virtual T GetOne(Guid? id)

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using TCCESTOQUE.Models.Enum;
 
 namespace TCCESTOQUE.Models
 {
@@ -13,14 +14,25 @@ namespace TCCESTOQUE.Models
         [Key]
         public Guid EntradaId { get; set; }
 
-        [Required]
-        public decimal PrecoProduto { get { return Produto.ValorUnitario; } }
+        [ScaffoldColumn(false)]
+        [Column(TypeName = "decimal(12,2)")]
+        public decimal PrecoProduto { get; set; }  
 
-        [Required]
-        public decimal CustoProduto { get { return Produto.Custo; } }
+        [ScaffoldColumn(false)]
+        [Column(TypeName = "decimal(12,2)")]
+        public decimal CustoProduto { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Informe a quantidade!")]
         public double QuantidadeProduto { get; set; }
+
+        [Required]
+        public UnidadeDeMedidaEnum UnidadeMedida { get; set; }
+
+        [ScaffoldColumn(false)]
+        public DateTime DataEntrada { get; set; } = DateTime.Now;
+
+        [ScaffoldColumn(false)]
+        public bool Cancelada { get; set; }
 
         [ForeignKey("Produto")]
         public Guid ProdutoId { get; set; }

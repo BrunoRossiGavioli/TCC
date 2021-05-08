@@ -46,5 +46,7 @@ namespace TCCESTOQUE.Data
         public DbSet<TCCESTOQUE.Models.ClienteEnderecoModel> ClienteEnderecoModel { get; set; }
 
         public DbSet<TCCESTOQUE.Models.CarrinhoModel> CarrinhoModel { get; set; }
+
+        public DbSet<TCCESTOQUE.Models.EntradaModel> EntradaModel { get; set; }
     }
 }

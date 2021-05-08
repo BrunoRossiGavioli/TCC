@@ -17,12 +17,14 @@ namespace TCCESTOQUE.Service
     {
         private readonly IVendaRepository _vendaRepository;
         private readonly IVendaItensRepository _vendaItensRepository;
+        private readonly IMovimentacaoService _movimentacaoService;
         private readonly IMapper _mapper;
 
-        public VendaService(IVendaRepository vendaRepository, IVendaItensRepository vendaItensRepository, IMapper mapper)
+        public VendaService(IVendaRepository vendaRepository, IVendaItensRepository vendaItensRepository, IMovimentacaoService movimentacaoService, IMapper mapper)
         {
             _vendaRepository = vendaRepository;
             _vendaItensRepository = vendaItensRepository;
+            _movimentacaoService = movimentacaoService;
             _mapper = mapper;
         }
 
@@ -48,14 +50,23 @@ namespace TCCESTOQUE.Service
             return true;
         }
 
-        public bool PostExclusao(Guid id)
+        public bool Cancelar(Guid id)
         {
-            var res = _vendaRepository.GetOne(id);
-            if(res != null) { 
-                _vendaRepository.PostExclusao(res);
-                return true;
+            var venda = _vendaRepository.GetOne(id);
+            if (venda.Itens.Any())
+            {
+                var itens = venda.Itens.ToArray();
+                for (int i = 0; i < itens.Length; i++)
+                {
+                    if (itens[i].VendaId != null)
+                    {
+                        _movimentacaoService.SubirEstoque(itens[i].ProdutoId, itens[i].Quantidade);
+                    }
+                }
+                venda.Cancelada = true;
+                _vendaRepository.PutEdicao(venda);
             }
-            return false;
+            return true;
         }
     }
 }

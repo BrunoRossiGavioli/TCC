@@ -20,6 +20,18 @@
     <Compile Include="Migrations\20210507165612_Nova3.Designer.cs" />
     <Compile Include="Migrations\20210507193612_Nova4.cs" />
     <Compile Include="Migrations\20210507193612_Nova4.Designer.cs" />
+    <Compile Include="Migrations\20210508000925_Nova5.cs" />
+    <Compile Include="Migrations\20210508000925_Nova5.Designer.cs" />
+    <Compile Include="Migrations\20210508001247_Nova6.cs" />
+    <Compile Include="Migrations\20210508001247_Nova6.Designer.cs" />
+    <Compile Include="Migrations\20210508001439_Nova7.cs" />
+    <Compile Include="Migrations\20210508001439_Nova7.Designer.cs" />
+    <Compile Include="Migrations\20210508141921_Nova8.cs" />
+    <Compile Include="Migrations\20210508141921_Nova8.Designer.cs" />
+    <Compile Include="Migrations\20210508144504_Nova9.cs" />
+    <Compile Include="Migrations\20210508144504_Nova9.Designer.cs" />
+    <Compile Include="Migrations\20210508152534_Nova10.cs" />
+    <Compile Include="Migrations\20210508152534_Nova10.Designer.cs" />
     <Compile Include="Migrations\TCCESTOQUEContextModelSnapshot.cs" />
   </ItemGroup>
 

@@ -36,7 +36,11 @@ namespace TCCESTOQUE.Repository
         {
             return _context.VendaModel.Include(v => v.Cliente)
                 .Include(v => v.Vendedor)
-                .Include(i => i.Itens).ThenInclude(e => e.Produto).Where(v => v.VendedorId == vendedorId).ToList();
+                .Include(i => i.Itens)
+                .ThenInclude(e => e.Produto)
+                .Where(v => v.VendedorId == vendedorId)
+                .OrderByDescending(d => d.DataVenda)
+                .ToList();
         }
     }
 }
