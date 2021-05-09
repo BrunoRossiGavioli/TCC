@@ -1,0 +1,111 @@
+﻿@model TCCESTOQUE.Models.FornecedorModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Você tem certeza que deseja excluir esse fornecedor?</h3>
+<p class="text-danger">@ViewBag.FornecedorErroExcluir</p>
+    
+<div>
+    <h4>Fornecedor</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NomeFantasia)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NomeFantasia)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cnpj)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cnpj)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Telefone)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Telefone)
+        </dd>
+    </dl>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Endereco.Logradouro)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Endereco.Logradouro)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Endereco.Complemento)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Endereco.Complemento)
+        </dd>
+        @if (Model.Endereco.Numero > 0)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Endereco.Numero)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Endereco.Numero)
+            </dd>
+        }
+    </dl>
+    @if (ViewBag.FornecedorErroExcluir != null)
+    {
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Código da entrada
+                </th>
+                <th>
+                    Valor unitario
+                </th>
+                <th>
+                    Custo
+                </th>
+                <th>
+                    Quantidade
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var entrada in Model.Entradas)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelProduto => entrada.EntradaId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelProduto => entrada.PrecoProduto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelProduto => entrada.CustoProduto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelProduto => entrada.QuantidadeProduto)
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    }
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="FornecedorId" value="@ViewBag.FornecedorId"/>
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

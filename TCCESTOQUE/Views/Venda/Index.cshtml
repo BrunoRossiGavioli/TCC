@@ -1,0 +1,63 @@
+﻿@model IEnumerable<TCCESTOQUE.Models.VendaModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Código
+            </th>
+            <th>
+                Valor
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataVenda)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vendedor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cliente)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int numero = Model.Count();
+            foreach (var item in Model)
+            {
+                var estiloTr = "bg-light";
+                var estiloLink = "";
+                if (item.Cancelada) { estiloTr = "bg-danger text-white"; estiloLink = "text-white"; }
+                <tr class="@estiloTr">
+                    <td>
+                        @numero
+                    </td>
+                    <td>
+                        @item.Valor()
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataVenda)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Vendedor.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cliente.Nome)
+                    </td>
+                    <td>
+                        <a class="@estiloLink" asp-action="Details" asp-route-id="@item.VendaId">Details</a>
+                        @if (!item.Cancelada) { <span>|</span> <a class="@estiloLink" asp-action="Delete" asp-route-id="@item.VendaId">Delete</a> }
+                    </td>
+                </tr>
+                numero -= 1;
+            }
+        }
+    </tbody>
+</table>
