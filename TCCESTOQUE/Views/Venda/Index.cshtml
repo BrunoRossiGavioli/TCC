@@ -29,13 +29,10 @@
     </thead>
     <tbody>
         @{
-            int numero = Model.Count();
+            int numero = 1;
             foreach (var item in Model)
             {
-                var estiloTr = "bg-light";
-                var estiloLink = "";
-                if (item.Cancelada) { estiloTr = "bg-danger text-white"; estiloLink = "text-white"; }
-                <tr class="@estiloTr">
+                <tr>
                     <td>
                         @numero
                     </td>
@@ -52,11 +49,11 @@
                         @Html.DisplayFor(modelItem => item.Cliente.Nome)
                     </td>
                     <td>
-                        <a class="@estiloLink" asp-action="Details" asp-route-id="@item.VendaId">Details</a>
-                        @if (!item.Cancelada) { <span>|</span> <a class="@estiloLink" asp-action="Delete" asp-route-id="@item.VendaId">Delete</a> }
+                        <a asp-action="Details" asp-route-id="@item.VendaId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.VendaId">Delete</a>
                     </td>
                 </tr>
-                numero -= 1;
+                numero += 1;
             }
         }
     </tbody>

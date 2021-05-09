@@ -43,11 +43,6 @@ namespace TCCESTOQUE.StartUpOpcoes
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<IClienteEnderecoRepository, ClienteEnderecoRepository>();
 
-            services.AddScoped<IEntradaService, EntradaService>();
-            services.AddScoped<IEntradaRepository, EntradaRepository>();
-
-            services.AddScoped<IMovimentacaoService, MovimentacaoService>();
-
             services.AddScoped<ISelectListService, SelectListService>();
         }
     }

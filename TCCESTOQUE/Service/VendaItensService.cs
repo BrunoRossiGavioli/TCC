@@ -12,13 +12,9 @@ namespace TCCESTOQUE.Service
     public class VendaItensService : IVendaItensService
     {
         private readonly IVendaItensRepository _vendaItensRepository;
-        private readonly IProdutoRepository _produtoRepository;
-        private readonly IMovimentacaoService _movimentacaoService;
-        public VendaItensService(IVendaItensRepository vendaItensRepository, IMovimentacaoService movimentacaoService, IProdutoRepository produtoRepository)
+        public VendaItensService(IVendaItensRepository vendaItensRepository)
         {
             _vendaItensRepository = vendaItensRepository;
-            _movimentacaoService = movimentacaoService;
-            _produtoRepository = produtoRepository;
         }
 
         public ICollection<VendaItensModel> GetAll(Guid vendedorId)
@@ -31,33 +27,19 @@ namespace TCCESTOQUE.Service
             return _vendaItensRepository.GetOne(id);
         }
 
-        public string PostItem(VendaItensModel vendaItens)
+        public bool PostItem(VendaItensModel vendaItens)
         {
-            var res = _movimentacaoService.ChecarEstoque(vendaItens.ProdutoId, vendaItens.Quantidade);
-            var produto = _produtoRepository.GetOne(vendaItens.ProdutoId);
-            vendaItens.PrecoProduto = produto.ValorUnitario;
-            vendaItens.CustoProduto = produto.Custo;
-            if (res != "")
-                return res;
-            
             _vendaItensRepository.PostCriacao(vendaItens);
-            return res;
+            return true;
         }
 
-        public string PutItemEdicao(VendaItensModel vendaItens)
+        public bool PutEdicao(VendaItensModel vendaItens)
         {
-            var res = _movimentacaoService.ChecarEstoque(vendaItens.ProdutoId, vendaItens.Quantidade);
-            var produto = _produtoRepository.GetOne(vendaItens.ProdutoId);
-            vendaItens.PrecoProduto = produto.ValorUnitario;
-            vendaItens.CustoProduto = produto.Custo;
-            if (res != "")
-                return res;
-
             _vendaItensRepository.PutEdicao(vendaItens);
-            return res;
+            return true;
         }
 
-        public bool PostItemExclusao(Guid id)
+        public bool PostExclusao(Guid id)
         {
             var model = _vendaItensRepository.GetOne(id);
             if(model != null) { 

@@ -12,13 +12,13 @@ namespace TCCESTOQUE.Service
     {
         private readonly ICarrinhoRepository _carrinhoRepo;
         private readonly IVendaRepository _vendaRepo;
-        private readonly IMovimentacaoService _movimentacaoService;
+        private readonly IVendaItensRepository _vendaItensRepo;
 
-        public CarrinhoService(ICarrinhoRepository carrinhoRepo, IVendaRepository vendaRepo, IMovimentacaoService movimentacaoService)
+        public CarrinhoService(ICarrinhoRepository carrinhoRepo, IVendaRepository vendaRepo, IVendaItensRepository vendaItensRepo)
         {
             _carrinhoRepo = carrinhoRepo;
             _vendaRepo = vendaRepo;
-            _movimentacaoService = movimentacaoService;
+            _vendaItensRepo = vendaItensRepo;
         }
 
         public ICollection<CarrinhoModel> GetAll(Guid vendedorId)
@@ -26,47 +26,29 @@ namespace TCCESTOQUE.Service
             throw new NotImplementedException();
         }
 
-        public ICollection<string> Finalizar(CarrinhoModel carrinho)
+        public bool Finalizar(CarrinhoModel carrinho)
         {
             var car = _carrinhoRepo.GetOneByVendedorId(carrinho.VendedorId);
-            ICollection<string> erros = new List<string>();
-            if (car.Itens.Any()) {                
-                var venda = new VendaModel() 
-                { 
-                    ClienteId = carrinho.ClienteId, 
-                    DataVenda = DateTime.Now, 
-                    VendedorId = car.VendedorId
-                };
-
+            if(car.Itens.Count > 0) { 
+                var venda = new VendaModel() { ClienteId = carrinho.ClienteId, DataVenda = DateTime.Now, VendedorId = car.VendedorId};
                 _vendaRepo.PostCriacao(venda);
-                var itens = car.Itens.ToArray();
-                var somaItens = itens.GroupBy(x => x.ProdutoId).Select(e => new { Id = e.Key, quantidade = e.Sum(x => x.Quantidade) }).ToArray();                    
-                for (int i = 0; i < somaItens.Length; i++)
+                foreach (var item in car.Itens)
                 {
-                    var erro = _movimentacaoService.ChecarEstoque(somaItens[i].Id, somaItens[i].quantidade);
-                    if (erro != "")
-                        erros.Add(erro);
-                }
-                if (erros.Any())
-                {
-                    _vendaRepo.PostExclusao(venda);
-                    return erros;
-                }
-                for (int i = 0; i < itens.Length; i++)
-                {
-                    if(itens[i].CarrinhoId != null) 
+                    if(item.CarrinhoId != null)
                     { 
-                        itens[i].CarrinhoId = null;
-                        itens[i].VendaId = venda.VendaId;
-                        _movimentacaoService.BaixarEstoque(itens[i].ProdutoId, itens[i].Quantidade, false);
+                        item.CarrinhoId = null;
+                        item.VendaId = venda.VendaId;
                     }
                 }
-                venda.Itens = itens;
+                venda.Itens = car.Itens;
                 _vendaRepo.PutEdicao(venda);
+            
+                return true;
             }
-            else { erros.Add("Não existe nenhum item no carrinho"); }
-            return erros;
+            return false;
         }
+            
+            
 
         public CarrinhoModel GetOne(Guid? id)
         {

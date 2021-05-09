@@ -97,7 +97,7 @@ namespace TCCESTOQUE.Service
             if (!validacao.IsValid)
                 return validacao;
 
-            var validacaoBusiness = new FornecedorEnderecoVMBusinessValidador(_fornecedorRepository, feViewModel).Validate(feViewModel);
+            var validacaoBusiness = new FornecedorEnderecoVMBusinessValidador(_fornecedorRepository).Validate(feViewModel);
             if (!validacaoBusiness.IsValid)
                 return validacaoBusiness;
 

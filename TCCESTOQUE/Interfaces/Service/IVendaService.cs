@@ -14,6 +14,6 @@ namespace TCCESTOQUE.Interfaces.Service
         public VendaModel GetEdicao(Guid? id);
 
         public object PutEdicao(Guid id, VendaModel venda);
-        public bool Cancelar(Guid id);
+        public bool PostExclusao(Guid id);
     }
 }

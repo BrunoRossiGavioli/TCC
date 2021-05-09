@@ -16,6 +16,12 @@ namespace TCCESTOQUE.Models
         [Required(ErrorMessage = "Informe a quantidade!")]
         public int Quantidade { get; set; }
 
+        //[Required]
+        //public decimal PrecoProduto { get { return Produto.ValorUnitario; } }
+
+        //[Required]
+        //public decimal CustoProduto { get { return Produto.Custo; } }
+
         [Required]
         public decimal PrecoProduto { get; set; }
 

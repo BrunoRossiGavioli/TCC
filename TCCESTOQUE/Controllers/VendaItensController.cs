@@ -46,7 +46,7 @@ namespace TCCESTOQUE.Controllers
 
 
         // POST: VendaItens/Create
-        [HttpPost, ActionName("ItemCarrinho")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
         public IActionResult AdicionarItemCarrinho(VendaItensModel vendaItensModel, Guid carrinhoId)
@@ -58,15 +58,13 @@ namespace TCCESTOQUE.Controllers
             if (ModelState.IsValid)
             {
                 var res = _VendaItensService.PostItem(vendaItensModel);
-                if (res == "")
+                if (res)
                     return RedirectToAction("Details", "Carrinho", new { id = vendaItensModel.VendedorId });
-
-                ModelState.AddModelError("", res);
             }
 
             ViewData["ProdutoId"] = _selectListRepository.SelectListProduto("ProdutoId", "Nome", vendaItensModel.ProdutoId, ViewBag.usuarioId);
             ViewData["CarrinhoId"] = carrinhoId;
-            return View();
+            return View(vendaItensModel);
         }
 
         // GET: VendaItens/Edit/5
@@ -100,15 +98,87 @@ namespace TCCESTOQUE.Controllers
 
             if (ModelState.IsValid)
             {
-                var res = _VendaItensService.PutItemEdicao(vendaItensModel);
-                if(res == "")
-                    return RedirectToAction("Details", "Carrinho", new { id = vendaItensModel.VendedorId });
-
-                ModelState.AddModelError("", res);
+                _VendaItensService.PutEdicao(vendaItensModel);
+                return RedirectToAction("Details", "Carrinho", new { id = vendaItensModel.VendedorId });
             }
             ViewData["ProdutoId"] = _selectListRepository.SelectListProduto("ProdutoId", "Nome", vendaItensModel.ProdutoId, ViewBag.usuarioId);
             ViewData["CarrinhoId"] = vendaItensModel.CarrinhoId;
-            return View(_VendaItensService.GetOne(vendaItensId));
+            return View(vendaItensModel);
+        }
+
+        #endregion
+
+        #region ItemVenda
+
+        // GET: VendaItens/Create
+        [Authorize]
+        public IActionResult ItemVenda(Guid vendaitensId)
+        {
+            Autenticar();
+            ViewData["ProdutoId"] = _selectListRepository.SelectListProduto("ProdutoId", "Nome", ViewBag.usuarioId);
+            ViewData["VendaId"] = vendaitensId;
+            return View();
+        }
+
+        // POST: VendaItens/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public IActionResult AdicionarItemVenda(VendaItensModel vendaItensModel, Guid vendaId)
+        {
+            Autenticar();
+            if (vendaItensModel.VendaId != vendaId)
+                return NotFound();
+
+            if (ModelState.IsValid)
+            {
+                var res = _VendaItensService.PostItem(vendaItensModel);
+                if (res)
+                    return RedirectToAction("Index", "Venda", new { id = vendaItensModel.VendaId });
+            }
+
+            ViewData["ProdutoId"] = _selectListRepository.SelectListProduto("ProdutoId", "Nome", vendaItensModel.ProdutoId, ViewBag.usuarioId);
+            ViewData["VendaId"] = vendaId;
+            return View(vendaItensModel);
+        }
+
+        // GET: VendaItens/Edit/5
+        [Authorize]
+        public IActionResult EditItemVenda(Guid? vendaitensId)
+        {
+            Autenticar();
+            if (vendaitensId == null)
+                return NotFound();
+
+            var vendaItensModel = _VendaItensService.GetOne(vendaitensId);
+            if (vendaItensModel == null)
+                return NotFound();
+
+            ViewData["ProdutoId"] = _selectListRepository.SelectListProduto("ProdutoId", "Nome", vendaItensModel.ProdutoId, ViewBag.usuarioId);
+            ViewData["VendaId"] = vendaItensModel.VendaId;
+            return View(vendaItensModel);
+        }
+
+        // POST: VendaItens/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public IActionResult EditItemVenda(VendaItensModel vendaItensModel, Guid vendaitensId)
+        {
+            Autenticar();
+            if (vendaitensId != vendaItensModel.VendaItensId)
+                return NotFound();
+
+            if (ModelState.IsValid)
+            {
+                _VendaItensService.PutEdicao(vendaItensModel);
+                return RedirectToAction("Details", "Venda", new { id = vendaItensModel.VendaId });
+            }
+            ViewData["ProdutoId"] = _selectListRepository.SelectListProduto("ProdutoId", "Nome", vendaItensModel.ProdutoId, ViewBag.usuarioId);
+            ViewData["VendaId"] = vendaItensModel.VendaId;
+            return View(vendaItensModel);
         }
 
         #endregion
@@ -129,13 +199,28 @@ namespace TCCESTOQUE.Controllers
             return View(vendaItensModel);
         }
 
+        // POST: VendaItens/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public IActionResult DeleteConfirmed(VendaItensModel vendaItens)
+        {
+            Autenticar();
+            var res = _VendaItensService.PostExclusao(vendaItens.VendaItensId);
+            if(res)
+                return RedirectToAction("Details","Venda", new { id = vendaItens.VendaId });
+
+            ModelState.AddModelError("", "Não foi possivel excluir o item, tente novamente mais tarde!");
+            return View(_VendaItensService.GetOne(vendaItens.VendaItensId));
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
         public IActionResult DeleteItemCarrinho(VendaItensModel vendaItens)
         {
             Autenticar();
-            var res = _VendaItensService.PostItemExclusao(vendaItens.VendaItensId);
+            var res = _VendaItensService.PostExclusao(vendaItens.VendaItensId);
             if (res)
                 return RedirectToAction("Details", "Carrinho", new { id = ViewBag.usuarioId });
 
