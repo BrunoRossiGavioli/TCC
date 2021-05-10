@@ -33,8 +33,10 @@ namespace TCCESTOQUE.Controllers
             Autenticar();
             var res = _fornecedorService.PostCadastroFull(feviewmodel);
             if (!res.IsValid)
+            {
                 return View(MostrarErros(res, feviewmodel));
-                
+            }
+
             return RedirectToAction("Index", "Fornecedor");
         }
         // GET: Fornecedor
@@ -42,7 +44,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Index()
         {
             Autenticar();
-            return View(_fornecedorService.GetAll());
+            return View(_fornecedorService.GetAll(ViewBag.usuarioId));
         }
 
         // GET: Fornecedor/Details/5

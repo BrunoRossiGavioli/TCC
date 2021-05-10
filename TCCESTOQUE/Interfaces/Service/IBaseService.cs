@@ -10,6 +10,6 @@ namespace TCCESTOQUE.Interfaces.Service
     {
         public T GetOne(Guid? id);
 
-        public ICollection<T> GetAll();
+        public ICollection<T> GetAll(Guid id);
     }
 }

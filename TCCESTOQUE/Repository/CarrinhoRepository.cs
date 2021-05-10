@@ -22,7 +22,6 @@ namespace TCCESTOQUE.Repository
                 .Include(c => c.Vendedor)
                 .Include(i => i.Itens)
                 .ThenInclude(v => v.Produto)
-                .ThenInclude(v => v.Fornecedor)
                 .FirstOrDefault(m => m.VendedorId == id);
 
             return carrinhoModel;
@@ -38,7 +37,7 @@ namespace TCCESTOQUE.Repository
             return carrinhoModel;
         }
 
-        public ICollection<CarrinhoModel> GetAll()
+        public ICollection<CarrinhoModel> GetAll(Guid vendedorId)
         {
             throw new NotImplementedException();
         }

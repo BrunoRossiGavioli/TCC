@@ -7,7 +7,7 @@
 <h1>Delete</h1>
 
 <h3>Você tem certeza que deseja excluir esse fornecedor?</h3>
-@if (ViewBag.FornecedorErroExcluir != "") { <p class="text-danger">@ViewBag.FornecedorErroExcluir</p> }
+<p class="text-danger">@ViewBag.FornecedorErroExcluir</p>
     
 <div>
     <h4>Fornecedor</h4>
@@ -68,7 +68,7 @@
         <thead>
             <tr>
                 <th>
-                    Nome
+                    Código da entrada
                 </th>
                 <th>
                     Valor unitario
@@ -82,20 +82,20 @@
             </tr>
         </thead>
         <tbody>
-        @foreach (var produto in Model.Produtos)
+        @foreach (var entrada in Model.Entradas)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelProduto => produto.Nome)
+                    @Html.DisplayFor(modelProduto => entrada.EntradaId)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelProduto => produto.ValorUnitario)
+                    @Html.DisplayFor(modelProduto => entrada.PrecoProduto)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelProduto => produto.Custo)
+                    @Html.DisplayFor(modelProduto => entrada.CustoProduto)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelProduto => produto.Quantidade)
+                    @Html.DisplayFor(modelProduto => entrada.QuantidadeProduto)
                 </td>
             </tr>
         }

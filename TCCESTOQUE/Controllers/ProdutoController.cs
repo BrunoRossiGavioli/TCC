@@ -5,6 +5,7 @@ using System;
 using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.Models.Enum;
 
 namespace TCCESTOQUE.Controllers
 {
@@ -24,7 +25,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Index()
         {
             Autenticar();
-            return View(_produtoService.GetAll());
+            return View(_produtoService.GetAll(ViewBag.usuarioId));
         }
 
         // GET: Produto/Details/5
@@ -40,7 +41,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Create()
         {
             Autenticar();
-            ViewData["FornecedorId"] = _selectListRepository.SelectListFornecedor("FornecedorId", "NomeFantasia");
+            ViewData["UnidadeMedida"] = _produtoService.SelectUnidadeDeMedida;
             return View();
         }
 
@@ -54,13 +55,12 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             var res =_produtoService.PostCriacao(produtoModel);
-            if (!res.IsValid)
-            {
-                ViewData["FornecedorId"] = _selectListRepository.SelectListFornecedor("FornecedorId", "NomeFantasia", produtoModel.FornecedorId);
-                return View(MostrarErros(res, produtoModel));
-            }
-            
-            return RedirectToAction("Index", "Produto");
+            if (res.IsValid)
+                return RedirectToAction("Index", "Produto");
+
+            ViewData["UnidadeMedida"] = _produtoService.SelectUnidadeDeMedida;
+            return View(MostrarErros(res, produtoModel));
+                
         }
 
         // GET: Produto/Edit/5
@@ -68,9 +68,8 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Edit(Guid? id)
         {
             Autenticar();
-            var produtoModel = _produtoService.GetEdicao(id);
-            ViewData["FornecedorId"] = _selectListRepository.SelectListFornecedor("FornecedorId", "NomeFantasia", produtoModel.FornecedorId);
-            return View(produtoModel);
+            ViewData["UnidadeMedida"] = _produtoService.SelectUnidadeDeMedida;
+            return View(_produtoService.GetEdicao(id));
         }
 
         // POST: Produto/Edit/5
@@ -83,12 +82,11 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             var res =_produtoService.PutEdicao(produtoModel);
-            if (!res.IsValid)
-            {
-                ViewData["FornecedorId"] = _selectListRepository.SelectListFornecedor("FornecedorId", "NomeFantasia", produtoModel.FornecedorId);
-                return View(MostrarErros(res, produtoModel));
-            }
-            return RedirectToAction("Index", "Produto");
+            if (res.IsValid)
+                return RedirectToAction("Index", "Produto");
+
+            ViewData["UnidadeMedida"] = _produtoService.SelectUnidadeDeMedida;
+            return View(MostrarErros(res, produtoModel));
         }
 
         // GET: Produto/Delete/5

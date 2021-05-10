@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.Models.Enum;
 using TCCESTOQUE.Validacao.MensagensDeErro;
 
 namespace TCCESTOQUE.Validacao.ValidacaoModels
@@ -9,7 +10,7 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
         public EnderecoValidador()
         {
             RuleFor(e => e.Cep).NotEmpty().WithMessage(MensagensDeErroEndereco.CepVazio)
-                .Length(8).WithMessage(MensagensDeErroEndereco.CepTamanho);
+                .Length(9).WithMessage(MensagensDeErroEndereco.CepTamanho);
 
             RuleFor(e => e.Logradouro).NotEmpty().WithMessage(MensagensDeErroEndereco.LogradouroVazio)
                 .MaximumLength(80).WithMessage(MensagensDeErroEndereco.LogradouroTamanhoMaximo)
@@ -28,6 +29,9 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
             RuleFor(e => e.Localidade).NotEmpty().WithMessage(MensagensDeErroEndereco.LocalidadeVazio)
                 .MaximumLength(80).WithMessage(MensagensDeErroEndereco.LocalidadeTamanhoMaximo)
                 .MinimumLength(3).WithMessage(MensagensDeErroEndereco.LocalidadeTamanhoMinimo);
+
+            RuleFor(v => v.Uf).NotEmpty().WithMessage(MensagensDeErroEndereco.UfVazio)
+                .NotEqual(UnidadeFederalEnum.Null).WithMessage(MensagensDeErroEndereco.UfVazio);
         }
        
     }

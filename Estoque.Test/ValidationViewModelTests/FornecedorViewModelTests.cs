@@ -1,8 +1,9 @@
 ﻿using Estoque.Test.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
+using TCCESTOQUE.Models.Enum;
 using TCCESTOQUE.Validacao.MensagensDeErro;
-using TCCESTOQUE.Validacao.ValidacaoModels;
+using TCCESTOQUE.Validacao.ValidacaoModels.ViewModel;
 using Xunit;
 
 namespace Estoque.Test.ValidationViewModelTests
@@ -11,14 +12,14 @@ namespace Estoque.Test.ValidationViewModelTests
     public class FornecedorViewModelTests
     {
         private readonly FornecedorEnderecoViewModelBuilder _builder;
-        private readonly FornecedorEnderecoValidador _validator;
+        private readonly FornecedorEnderecoVMValidador _validator;
 
         public FornecedorViewModelTests()
         {
-            var provider = new ServiceCollection().AddScoped<FornecedorEnderecoValidador>().BuildServiceProvider();
+            var provider = new ServiceCollection().AddScoped<FornecedorEnderecoVMValidador>().BuildServiceProvider();
 
             _builder = new FornecedorEnderecoViewModelBuilder();
-            _validator = provider.GetService<FornecedorEnderecoValidador>();
+            _validator = provider.GetService<FornecedorEnderecoVMValidador>();
         }
 
         [Fact(DisplayName = "A classe deve ser válida")]
@@ -409,10 +410,10 @@ namespace Estoque.Test.ValidationViewModelTests
 
         #region Uf
         [Theory(DisplayName = "Teste UF válido")]
-        [InlineData("BH")]
-        [InlineData("SP")]
-        [InlineData("MT")]
-        public async Task UfValido(string uf)
+        [InlineData(UnidadeFederalEnum.BA)]
+        [InlineData(UnidadeFederalEnum.SP)]
+        [InlineData(UnidadeFederalEnum.MT)]
+        public async Task UfValido(UnidadeFederalEnum uf)
         {
             var instance = _builder.With(x => x.Uf = uf).Build();
             var validation = await _validator.ValidateAsync(instance);
@@ -423,7 +424,7 @@ namespace Estoque.Test.ValidationViewModelTests
         
         public async Task UfVazio()
         {
-            var instance = _builder.With(x => x.Uf = "").Build();
+            var instance = _builder.With(x => x.Uf = UnidadeFederalEnum.Null).Build();
             var validation = await _validator.ValidateAsync(instance);
             Assert.False(validation.IsValid);
             Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroEndereco.UfVazio));

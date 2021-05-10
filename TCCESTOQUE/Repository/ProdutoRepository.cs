@@ -16,10 +16,11 @@ namespace TCCESTOQUE.Repository
             
         }
 
-        public ICollection<ProdutoModel> GetAll()
+        public ICollection<ProdutoModel> GetAll(Guid vendedorId)
         {
-            var tCCESTOQUEContext = _context.ProdutoModel.Include(p => p.Fornecedor);
-            return tCCESTOQUEContext.ToList();
+            return _context.ProdutoModel
+                .Where(v => v.VendedorId == vendedorId && !v.Inativo)
+                .ToList();
         }
 
         public override ProdutoModel GetOne(Guid? id)

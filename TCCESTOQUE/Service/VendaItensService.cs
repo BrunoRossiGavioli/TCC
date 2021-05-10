@@ -12,12 +12,16 @@ namespace TCCESTOQUE.Service
     public class VendaItensService : IVendaItensService
     {
         private readonly IVendaItensRepository _vendaItensRepository;
-        public VendaItensService(IVendaItensRepository vendaItensRepository)
+        private readonly IProdutoRepository _produtoRepository;
+        private readonly IMovimentacaoService _movimentacaoService;
+        public VendaItensService(IVendaItensRepository vendaItensRepository, IMovimentacaoService movimentacaoService, IProdutoRepository produtoRepository)
         {
             _vendaItensRepository = vendaItensRepository;
+            _movimentacaoService = movimentacaoService;
+            _produtoRepository = produtoRepository;
         }
 
-        public ICollection<VendaItensModel> GetAll()
+        public ICollection<VendaItensModel> GetAll(Guid vendedorId)
         {
             throw new NotImplementedException();
         }
@@ -27,26 +31,37 @@ namespace TCCESTOQUE.Service
             return _vendaItensRepository.GetOne(id);
         }
 
-        public bool PostItem(VendaItensModel vendaItens)
+        public string PostItem(VendaItensModel vendaItens)
         {
+            var res = _movimentacaoService.ChecarEstoque(vendaItens.ProdutoId, vendaItens.Quantidade);
+            var produto = _produtoRepository.GetOne(vendaItens.ProdutoId);
+            vendaItens.PrecoProduto = produto.ValorUnitario;
+            vendaItens.CustoProduto = produto.Custo;
+            if (res != "")
+                return res;
+            
             _vendaItensRepository.PostCriacao(vendaItens);
-            return true;
+            return res;
         }
 
-        public bool PutEdicao(VendaItensModel vendaItens)
+        public string PutItemEdicao(VendaItensModel vendaItens)
         {
+            var res = _movimentacaoService.ChecarEstoque(vendaItens.ProdutoId, vendaItens.Quantidade);
+            var produto = _produtoRepository.GetOne(vendaItens.ProdutoId);
+            vendaItens.PrecoProduto = produto.ValorUnitario;
+            vendaItens.CustoProduto = produto.Custo;
+            if (res != "")
+                return res;
+
             _vendaItensRepository.PutEdicao(vendaItens);
-            return true;
+            return res;
         }
 
-        public bool PostExclusao(Guid id)
+        public bool PostItemExclusao(Guid id)
         {
             var model = _vendaItensRepository.GetOne(id);
-            if(model != null) { 
-                _vendaItensRepository.PostExclusao(model);
-                return true;
-            }
-            return false;
+            _vendaItensRepository.PostExclusao(model);
+            return true;
         }
     }
 }

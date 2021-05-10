@@ -34,9 +34,9 @@ namespace TCCESTOQUE.Service
             return ClienteParaClienteView(_clienteRepository.GetEdicao(id));
         }
 
-        public ICollection<ClienteModel> GetAll()
+        public ICollection<ClienteModel> GetAll(Guid vendedorId)
         {
-            return _clienteRepository.GetAll();
+            return _clienteRepository.GetAll(vendedorId);
         }
 
         public ValidationResult PostCriacao(ClienteViewModel clienteVM)
@@ -59,14 +59,11 @@ namespace TCCESTOQUE.Service
         {
             var res = _clienteRepository.GetOne(id);
             
-            if(res != null)
+            if(res != null && !res.Venda.Any())
             {
-                if (!res.Venda.Any())
-                {
-                    _clienteRepository.PostExclusao(res);
-                    return true;
-                }
-                return false;
+                res.Inativo = true;
+                _clienteRepository.PutEdicao(res);
+                return true;
             }
             return false;
         }

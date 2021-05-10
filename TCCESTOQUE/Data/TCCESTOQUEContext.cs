@@ -14,10 +14,10 @@ namespace TCCESTOQUE.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            //restringe a exclusão de um fornecedor se ele tiver produtos
-            modelBuilder.Entity<ProdutoModel>()
+            //restringe a exclusão de um fornecedor se ele tiver entradas
+            modelBuilder.Entity<EntradaModel>()
                 .HasOne(p => p.Fornecedor)
-                .WithMany(c => c.Produtos)
+                .WithMany(c => c.Entradas)
                 .HasForeignKey(p => p.FornecedorId)
                 .OnDelete(DeleteBehavior.Restrict);
 
@@ -46,5 +46,7 @@ namespace TCCESTOQUE.Data
         public DbSet<TCCESTOQUE.Models.ClienteEnderecoModel> ClienteEnderecoModel { get; set; }
 
         public DbSet<TCCESTOQUE.Models.CarrinhoModel> CarrinhoModel { get; set; }
+
+        public DbSet<TCCESTOQUE.Models.EntradaModel> EntradaModel { get; set; }
     }
 }

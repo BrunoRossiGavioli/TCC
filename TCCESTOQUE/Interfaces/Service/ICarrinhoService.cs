@@ -8,6 +8,6 @@ namespace TCCESTOQUE.Interfaces.Service
 {
     public interface ICarrinhoService : IBaseService<CarrinhoModel>
     {
-        public bool Finalizar(CarrinhoModel carrinho);
+        public ICollection<string> Finalizar(CarrinhoModel carrinho);
     }
 }

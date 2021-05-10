@@ -25,9 +25,9 @@ namespace TCCESTOQUE.Service
             _vendedorRepository = vendedorRepository;
             _carrinhoRepo = carrinhoRepo;
         }
-        public ICollection<VendedorModel> GetAll()
+        public ICollection<VendedorModel> GetAll(Guid vendedorId)
         {
-            return _vendedorRepository.GetAll();
+            return _vendedorRepository.GetAll(vendedorId);
         }
 
         public VendedorModel GetOne(Guid? id)
@@ -69,12 +69,12 @@ namespace TCCESTOQUE.Service
         public bool PostExclusao(Guid id)
         {
             var res = _vendedorRepository.GetOne(id);
-            if (res != null)
-            {
-                _vendedorRepository.PostExclusao(res);
-                return true;
-            }
-            return false;
+            if (res == null)
+                return false;
+
+            res.Inativo = true;
+            _vendedorRepository.PutEdicao(res);
+            return true;
         }
 
         public object PostLogin(VendedorModel vendedorModel)

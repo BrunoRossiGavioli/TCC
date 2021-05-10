@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TCCESTOQUE.Models.Enum;
 
 namespace TCCESTOQUE.Models
 {
@@ -27,14 +28,19 @@ namespace TCCESTOQUE.Models
         public decimal ValorUnitario { get; set; }
 
         [Required(ErrorMessage = "Informe a quantidade")]
-        public int Quantidade { get; set; }
+        public double Quantidade { get; set; }
+
+        [Required(ErrorMessage = "Informe a unidade de medida")]
+        public UnidadeDeMedidaEnum UnidadeMedida { get; set; }
+
+        [ScaffoldColumn(false)]
+        public bool Inativo { get; set; }
 
         [ScaffoldColumn(false)]
         public ICollection<VendaItensModel> Itens { get; set; }
 
-        [ForeignKey("Fornecedor")]
-        public Guid FornecedorId { get; set; }
-        public FornecedorModel Fornecedor { get; set; }
+        [ScaffoldColumn(false)]
+        public ICollection<EntradaModel> Entradas { get; set; }
 
         [ForeignKey("Vendedor")]
         public Guid VendedorId { get; set; }

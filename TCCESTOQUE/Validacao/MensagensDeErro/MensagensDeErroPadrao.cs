@@ -12,7 +12,6 @@ namespace TCCESTOQUE.Validacao.MensagensDeErro
         public static string EmailVazio = "Insira o email!";
         public static string TelefoneVazio = "Insira o telefone!";
         public static string CpfVazio = "Insira o cpf!";
-        
         #endregion
 
         #region Tamanho maximo de tamanho
@@ -47,7 +46,7 @@ namespace TCCESTOQUE.Validacao.MensagensDeErro
 
         #region Campo Invalido
         public static string EmailFormatoInvalido = "Email inválido!";
-
+        public static string SexoInvalido = "Informe uma das opções!";
         #endregion
     }
 }

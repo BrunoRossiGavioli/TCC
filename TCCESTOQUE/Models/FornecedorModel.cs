@@ -34,17 +34,17 @@ namespace TCCESTOQUE.Models
         public string Telefone { get; set; }
 
         [ScaffoldColumn(false)]
+        public bool Inativo { get; set; }
+
+        [ScaffoldColumn(false)]
         public FornecedorEnderecoModel Endereco { get; set; }
 
         [ScaffoldColumn(false)]
-        public ICollection<ProdutoModel> Produtos { get; set; }
+        public ICollection<EntradaModel> Entradas { get; set; }
 
         [ForeignKey("Vendedor")]
         public Guid VendedorId { get; set; }
         public VendedorModel Vendedor { get; set; }
-
-        [ScaffoldColumn(false)]
-        public bool Ativo { get; set; }
 
     }
 }

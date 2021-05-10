@@ -8,19 +8,16 @@ namespace TCCESTOQUE.Interfaces.Service
 {
     public interface ISelectListService
     {
-        public SelectList SelectListCliente(string dataValue, string textValue);
-        public SelectList SelectListCliente(string dataValue, string textValue, object selectedValue);
+        public SelectList SelectListCliente(string dataValue, string textValue, Guid vendedorId);
+        public SelectList SelectListCliente(string dataValue, string textValue, object selectedValue, Guid vendedorId);
 
-        public SelectList SelectListVendedor(string dataValue, string textValue);
-        public SelectList SelectListVendedor(string dataValue, string textValue, object selectedValue);
+        public SelectList SelectListProduto(string dataValue, string textValue, Guid vendedorId);
+        public SelectList SelectListProduto(string dataValue, string textValue, object selectedValue, Guid vendedorId);
 
-        public SelectList SelectListProduto(string dataValue, string textValue);
-        public SelectList SelectListProduto(string dataValue, string textValue, object selectedValue);
-
-        public SelectList SelectListFornecedor(string dataValue, string textValue);
-        public SelectList SelectListFornecedor(string dataValue, string textValue, object selectedValue);
+        public SelectList SelectListFornecedor(string dataValue, string textValue, Guid vendedorId);
+        public SelectList SelectListFornecedor(string dataValue, string textValue, object selectedValue, Guid vendedorId);
         
-        public SelectList SelectListVenda(string dataValue, string textValue);
-        public SelectList SelectListVenda(string dataValue, string textValue, object selectedValue);
+        public SelectList SelectListVenda(string dataValue, string textValue, Guid vendedorId);
+        public SelectList SelectListVenda(string dataValue, string textValue, object selectedValue, Guid vendedorId);
     }
 }

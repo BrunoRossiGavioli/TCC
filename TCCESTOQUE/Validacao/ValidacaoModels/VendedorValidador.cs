@@ -1,6 +1,7 @@
 using FluentValidation;
 using System;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.Models.Enum;
 using TCCESTOQUE.Validacao.MensagensDeErro;
 
 namespace TCCESTOQUE.ValidadorVendedor
@@ -27,6 +28,8 @@ namespace TCCESTOQUE.ValidadorVendedor
             RuleFor(v => v.Telefone).Length(14).WithMessage(MensagensDeErroPadrao.TelefoneTamanho);
 
             RuleFor(v => v.Cpf).Length(14).WithMessage(MensagensDeErroPadrao.CpfTamanho);
+
+            RuleFor(v => v.Sexo).NotEqual(SexoEnum.Selecione).WithMessage(MensagensDeErroPadrao.SexoInvalido);
         }
         private static bool IdadeMinima(DateTime data)
         {

@@ -33,7 +33,7 @@ namespace TCCESTOQUE.Controllers
 
             var carrinhoModel = _carrinhoService.GetOne(id);
 
-            ViewData["ClienteId"] = _selectListService.SelectListCliente("ClienteId", "Nome");
+            ViewData["ClienteId"] = _selectListService.SelectListCliente("ClienteId", "Nome", ViewBag.usuarioId);
             ViewData["CarrinhoId"] = carrinhoModel.CarrinhoId;
 
             if (carrinhoModel == null)
@@ -42,15 +42,23 @@ namespace TCCESTOQUE.Controllers
             return View(carrinhoModel);
         }
 
-        [HttpPost]
+        [HttpPost, ActionName("Details")]
         [Authorize]
         public IActionResult AdicionarVenda(CarrinhoModel carrinho)
         {
+            Autenticar();
             var car = _carrinhoService.Finalizar(carrinho);
-            if(car)
-                return RedirectToAction("Index","Venda");
-
-            return BadRequest();
+            if (car.Any())
+            {
+                foreach (var item in car)
+                {
+                    ModelState.AddModelError("", item);
+                }
+                ViewData["ClienteId"] = _selectListService.SelectListCliente("ClienteId", "Nome", ViewBag.usuarioId);
+                ViewData["CarrinhoId"] = carrinho.CarrinhoId;
+                return View(_carrinhoService.GetOne(carrinho.VendedorId));
+            }
+            return RedirectToAction("Index", "Venda");
         }
     }
 }

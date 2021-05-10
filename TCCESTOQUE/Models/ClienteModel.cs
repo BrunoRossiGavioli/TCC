@@ -32,6 +32,9 @@ namespace TCCESTOQUE.Models
         public SexoEnum Sexo { get; set; }
 
         [ScaffoldColumn(false)]
+        public bool Inativo { get; set; }
+
+        [ScaffoldColumn(false)]
         public ClienteEnderecoModel Endereco { get; set; }
 
         [ScaffoldColumn(false)]

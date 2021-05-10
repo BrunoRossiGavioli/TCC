@@ -4,10 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Estoque</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Adicionar produto</a>
 </p>
 <table class="table">
     <thead>
@@ -16,19 +16,13 @@
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Descricao)
+                Custo unitario
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Custo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ValorUnitario)
+                Valor unitario
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Quantidade)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Fornecedor)
             </th>
             <th></th>
         </tr>
@@ -40,9 +34,6 @@
                 @Html.DisplayFor(modelItem => item.Nome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Descricao)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Custo)
             </td>
             <td>
@@ -52,10 +43,8 @@
                 @Html.DisplayFor(modelItem => item.Quantidade)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Fornecedor.NomeFantasia)
-            </td>
-            <td>
                 <a asp-action="Edit" asp-route-id="@item.ProdutoId">Edit</a> |
+                <a asp-controller="Entrada" asp-action="Create" asp-route-produtoId="@item.ProdutoId">Adicionar</a> |
                 <a asp-action="Details" asp-route-id="@item.ProdutoId">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.ProdutoId">Delete</a>
             </td>

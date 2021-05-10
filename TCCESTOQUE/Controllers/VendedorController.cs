@@ -27,7 +27,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Index()
         {
             Autenticar();
-            return View(_vendedorService.GetAll());
+            return View(_vendedorService.GetAll(ViewBag.usuarioId));
         }
 
         // GET: Vendedor/Details/5
@@ -56,6 +56,8 @@ namespace TCCESTOQUE.Controllers
             var res = _vendedorService.PostCriacao(vendedorModel);
             if (!res.IsValid)
                 return View(MostrarErros(res, vendedorModel));
+            if (vendedorModel.Logar)
+                Login(vendedorModel);
 
             return RedirectToAction("Index", "Home");    
         }

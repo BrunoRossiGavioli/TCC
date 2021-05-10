@@ -25,17 +25,22 @@ namespace TCCESTOQUE.Repository
             var vendaModel = _context.VendaModel
                 .Include(v => v.Cliente)
                 .Include(v => v.Vendedor)
-                .Include(v => v.Itens).ThenInclude(p => p.Produto).ThenInclude(f => f.Fornecedor)
+                .Include(v => v.Itens)
+                .ThenInclude(p => p.Produto)
                 .FirstOrDefault(m => m.VendaId == id);
 
             return vendaModel;
         }
 
-        public ICollection<VendaModel> GetAll()
+        public ICollection<VendaModel> GetAll(Guid vendedorId)
         {
             return _context.VendaModel.Include(v => v.Cliente)
                 .Include(v => v.Vendedor)
-                .Include(i => i.Itens).ThenInclude(e => e.Produto).ToList();
+                .Include(i => i.Itens)
+                .ThenInclude(e => e.Produto)
+                .Where(v => v.VendedorId == vendedorId)
+                .OrderByDescending(d => d.DataVenda)
+                .ToList();
         }
     }
 }

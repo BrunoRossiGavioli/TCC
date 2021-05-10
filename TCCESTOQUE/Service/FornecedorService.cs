@@ -7,8 +7,8 @@ using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.Validacao.Formatacao;
-using TCCESTOQUE.Validacao.ValidacaoBusiness;
-using TCCESTOQUE.Validacao.ValidacaoModels;
+using TCCESTOQUE.Validacao.ValidacaoBusiness.ViewModel;
+using TCCESTOQUE.Validacao.ValidacaoModels.ViewModel;
 using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Service
@@ -26,9 +26,9 @@ namespace TCCESTOQUE.Service
             _mapper = mapper;
         }
 
-        public ICollection<FornecedorModel> GetAll()
+        public ICollection<FornecedorModel> GetAll(Guid id)
         {
-            return _fornecedorRepository.GetAll();
+            return _fornecedorRepository.GetAll(id);
         }
 
         public FornecedorModel GetOne(Guid? id)
@@ -42,11 +42,13 @@ namespace TCCESTOQUE.Service
         public object PostExclusao(Guid id)
         {
             var res = _fornecedorRepository.GetOne(id);
-            if (res.Produtos.Count > 0)
+            if (res.Entradas.Any())
                 return "Não é possivel deletar esse fornecedor, ele tem produtos";
+            
             if (res != null)
             {
-                _fornecedorRepository.PostExclusao(res);
+                res.Inativo = true;
+                _fornecedorRepository.PutEdicao(res);
                 return true;
             }
             return false;
@@ -92,11 +94,11 @@ namespace TCCESTOQUE.Service
 
         public ValidationResult ValidarFornecedorEnderecoViewModel(FornecedorEnderecoViewModel feViewModel)
         {
-            var validacao = new FornecedorEnderecoValidador().Validate(feViewModel);
+            var validacao = new FornecedorEnderecoVMValidador().Validate(feViewModel);
             if (!validacao.IsValid)
                 return validacao;
 
-            var validacaoBusiness = new FornecedorEnderecoBusinessValidador(_fornecedorRepository).Validate(feViewModel);
+            var validacaoBusiness = new FornecedorEnderecoVMBusinessValidador(_fornecedorRepository, feViewModel).Validate(feViewModel);
             if (!validacaoBusiness.IsValid)
                 return validacaoBusiness;
 

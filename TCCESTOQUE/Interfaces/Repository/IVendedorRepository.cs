@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.Service;
@@ -15,7 +16,7 @@ namespace TCCESTOQUE.Interfaces.Repository
         
         public VendedorModel GetByEmail(string email);
 
-        public VendedorModel GetBySenha(string senha);
+        public VendedorModel GetBySenha(string senha, VendedorModel vendedor);
 
     }
 }

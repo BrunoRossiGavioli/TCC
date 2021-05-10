@@ -7,7 +7,7 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
 {
     public class ProdutoValidador : AbstractValidator<ProdutoModel>
     {
-        public ProdutoValidador()
+        public ProdutoValidador(bool editando = false)
         { 
 
         RuleFor(p => p.Nome).NotEmpty().WithMessage(MensagensDeErroPadrao.NomeVazio)
@@ -23,12 +23,9 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
             RuleFor(p => p.ValorUnitario).NotEmpty().WithMessage(MensagensErroProduto.ValorUnitarioVazio)
                 .GreaterThan(0).WithMessage(MensagensErroProduto.ValorUnitarioMinimo);
 
-            RuleFor(p => p.Quantidade).NotEmpty().WithMessage(MensagensErroProduto.QuantidadeVazia)
-                .GreaterThan(0).WithMessage(MensagensErroProduto.QuantidadeMinima);
-        }
-        private static bool DataMinima(DateTime data)
-        { 
-           return data <= DateTime.Now.AddMinutes(1) ;
-        }        
+            if(!editando)
+                RuleFor(p => p.Quantidade).NotEmpty().WithMessage(MensagensErroProduto.QuantidadeVazia)
+                    .GreaterThan(0).WithMessage(MensagensErroProduto.QuantidadeMinima);
+        } 
     }
 }

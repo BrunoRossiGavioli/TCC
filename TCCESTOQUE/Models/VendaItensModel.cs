@@ -16,16 +16,12 @@ namespace TCCESTOQUE.Models
         [Required(ErrorMessage = "Informe a quantidade!")]
         public int Quantidade { get; set; }
 
-        //[Required]
-        //public decimal PrecoProduto { get { return Produto.ValorUnitario; } }
-
-        //[Required]
-        //public decimal CustoProduto { get { return Produto.Custo; } }
-
         [Required]
+        [Column(TypeName = "decimal(12,2)")]
         public decimal PrecoProduto { get; set; }
 
         [Required]
+        [Column(TypeName = "decimal(12,2)")]
         public decimal CustoProduto { get; set; }
 
         [ForeignKey("Venda")]

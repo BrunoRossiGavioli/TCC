@@ -1,4 +1,5 @@
 ﻿using FizzWare.NBuilder;
+using TCCESTOQUE.Models.Enum;
 using TCCESTOQUE.ViewModel;
 
 namespace Estoque.Test.Builder
@@ -18,7 +19,7 @@ namespace Estoque.Test.Builder
                  .With(x => x.Nome = "Ana Catarina da Silva")
                  .With(x => x.Numero = 59)
                  .With(x => x.Telefone = "(11)99443-1123")
-                 .With(x => x.Uf = "SP");
+                 .With(x => x.Uf = UnidadeFederalEnum.SP);
         }
     }
 }

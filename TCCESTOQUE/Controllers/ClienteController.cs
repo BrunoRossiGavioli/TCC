@@ -27,7 +27,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Index()
         {
             Autenticar();
-            return View(_cliService.GetAll());
+            return View(_cliService.GetAll(ViewBag.usuarioId));
         }
 
         // GET: Cliente/Details/5
@@ -99,7 +99,7 @@ namespace TCCESTOQUE.Controllers
 
             var res = _cliService.PutEdicao(cliVM);
             if (!res.IsValid)
-                return View(MostrarErros(res, cliVM));
+                return View(MostrarErros(res, cliVM));  
 
             return RedirectToAction(nameof(Index));
         }

@@ -39,13 +39,16 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Fornecedor" asp-action="Index">Fornecedor</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Produto" asp-action="Index">Produto</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Produto" asp-action="Index">Estoque</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Venda" asp-action="Index">Vendas</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Index" asp-route-id="@ViewBag.usuarioId">Cliente</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Index">Cliente</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="Entrada" asp-action="Index">Historico +</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-controller="Carrinho" asp-action="Details" asp-route-id="@ViewBag.usuarioId">Carrinho</a>

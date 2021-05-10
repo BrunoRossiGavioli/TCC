@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using TCCESTOQUE.Models.Enum;
 using TCCESTOQUE.Validacao.MensagensDeErro;
 using TCCESTOQUE.ViewModel;
 
@@ -19,6 +20,8 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
                .MaximumLength(80).WithMessage(MensagensDeErroPadrao.EmailTamanhoMaximo);
 
             RuleFor(v => v.Cpf).Length(14).WithMessage(MensagensDeErroPadrao.CpfTamanho);
+
+            RuleFor(v => v.Sexo).NotEqual(SexoEnum.Selecione).WithMessage(MensagensDeErroPadrao.SexoInvalido);
 
             #region endereco
             RuleFor(e => e.Cep).NotEmpty().WithMessage(MensagensDeErroEndereco.CepVazio)
@@ -42,7 +45,8 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
                 .MaximumLength(80).WithMessage(MensagensDeErroEndereco.LocalidadeTamanhoMaximo)
                 .MinimumLength(3).WithMessage(MensagensDeErroEndereco.LocalidadeTamanhoMinimo);
 
-            RuleFor(v => v.Uf).NotEmpty().WithMessage(MensagensDeErroEndereco.UfVazio);
+            RuleFor(v => v.Uf).NotEmpty().WithMessage(MensagensDeErroEndereco.UfVazio)
+                .NotEqual(UnidadeFederalEnum.Null).WithMessage(MensagensDeErroEndereco.UfVazio);
             #endregion
         }
     }

@@ -16,13 +16,35 @@
     <Compile Include="Migrations\20210506200728_Nova.Designer.cs" />
     <Compile Include="Migrations\20210506212309_Nova2.cs" />
     <Compile Include="Migrations\20210506212309_Nova2.Designer.cs" />
+    <Compile Include="Migrations\20210507165612_Nova3.cs" />
+    <Compile Include="Migrations\20210507165612_Nova3.Designer.cs" />
+    <Compile Include="Migrations\20210507193612_Nova4.cs" />
+    <Compile Include="Migrations\20210507193612_Nova4.Designer.cs" />
+    <Compile Include="Migrations\20210508000925_Nova5.cs" />
+    <Compile Include="Migrations\20210508000925_Nova5.Designer.cs" />
+    <Compile Include="Migrations\20210508001247_Nova6.cs" />
+    <Compile Include="Migrations\20210508001247_Nova6.Designer.cs" />
+    <Compile Include="Migrations\20210508001439_Nova7.cs" />
+    <Compile Include="Migrations\20210508001439_Nova7.Designer.cs" />
+    <Compile Include="Migrations\20210508141921_Nova8.cs" />
+    <Compile Include="Migrations\20210508141921_Nova8.Designer.cs" />
+    <Compile Include="Migrations\20210508144504_Nova9.cs" />
+    <Compile Include="Migrations\20210508144504_Nova9.Designer.cs" />
+    <Compile Include="Migrations\20210508152534_Nova10.cs" />
+    <Compile Include="Migrations\20210508152534_Nova10.Designer.cs" />
+    <Compile Include="Migrations\20210510180350_AdicionandoAtivoParaProduto.cs" />
+    <Compile Include="Migrations\20210510180350_AdicionandoAtivoParaProduto.Designer.cs" />
+    <Compile Include="Migrations\20210510195136_AdicionandoInativoParaTodasAsEntidades.cs" />
+    <Compile Include="Migrations\20210510195136_AdicionandoInativoParaTodasAsEntidades.Designer.cs" />
+    <Compile Include="Migrations\20210510195356_AdicionandoInativoParaTodasAsEntidades2.cs" />
+    <Compile Include="Migrations\20210510195356_AdicionandoInativoParaTodasAsEntidades2.Designer.cs" />
     <Compile Include="Migrations\TCCESTOQUEContextModelSnapshot.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
-    <PackageReference Include="FluentValidation.AspNetCore" Version="10.0.2" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="10.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.13">

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading.Tasks;
+using TCCESTOQUE.Models.Enum;
 using TCCESTOQUE.Validacao.MensagensDeErro;
 using TCCESTOQUE.ValidadorVendedor;
 using Xunit;
@@ -248,6 +249,27 @@ namespace Estoque.Test.ValidationModelTests
             var validation = await _validator.ValidateAsync(instancia);
             Assert.False(validation.IsValid);
             Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroPadrao.TelefoneTamanho));
+        }
+        #endregion
+
+        #region Sexo/Gênero
+        [Fact(DisplayName = "Sexo válido")]
+        public async Task SexoValido()
+        {
+            var instance = _builder.With(x => x.Sexo = SexoEnum.Masculino).Build();
+            var validation = await _validator.ValidateAsync(instance);
+            Assert.True(validation.IsValid);
+        }
+
+        [Theory(DisplayName = "Generos válidos")]
+        [InlineData(SexoEnum.Feminino)]
+        [InlineData(SexoEnum.Masculino)]
+        [InlineData(SexoEnum.Outros)]
+        public async Task GenerosValidos(SexoEnum sexo)
+        {
+            var instance = _builder.With(x => x.Sexo = sexo).Build();
+            var validation = await _validator.ValidateAsync(instance);
+            Assert.True(validation.IsValid);
         }
         #endregion
     }
