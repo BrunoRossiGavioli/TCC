@@ -69,12 +69,12 @@ namespace TCCESTOQUE.Service
         public bool PostExclusao(Guid id)
         {
             var res = _vendedorRepository.GetOne(id);
-            if (res != null)
-            {
-                _vendedorRepository.PostExclusao(res);
-                return true;
-            }
-            return false;
+            if (res == null)
+                return false;
+
+            res.Inativo = true;
+            _vendedorRepository.PutEdicao(res);
+            return true;
         }
 
         public object PostLogin(VendedorModel vendedorModel)

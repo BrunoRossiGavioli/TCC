@@ -47,7 +47,8 @@ namespace TCCESTOQUE.Service
             
             if (res != null)
             {
-                _fornecedorRepository.PostExclusao(res);
+                res.Inativo = true;
+                _fornecedorRepository.PutEdicao(res);
                 return true;
             }
             return false;

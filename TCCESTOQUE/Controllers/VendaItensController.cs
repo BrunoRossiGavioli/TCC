@@ -135,12 +135,8 @@ namespace TCCESTOQUE.Controllers
         public IActionResult DeleteItemCarrinho(VendaItensModel vendaItens)
         {
             Autenticar();
-            var res = _VendaItensService.PostItemExclusao(vendaItens.VendaItensId);
-            if (res)
-                return RedirectToAction("Details", "Carrinho", new { id = ViewBag.usuarioId });
-
-            ModelState.AddModelError("", "Não foi possivel excluir o item, tente novamente mais tarde!");
-            return View(_VendaItensService.GetOne(vendaItens.VendaItensId));
+            _VendaItensService.PostItemExclusao(vendaItens.VendaItensId);
+            return RedirectToAction("Details", "Carrinho", new { id = ViewBag.usuarioId });
         }
     }
 }

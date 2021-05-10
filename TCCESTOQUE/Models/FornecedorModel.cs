@@ -34,6 +34,9 @@ namespace TCCESTOQUE.Models
         public string Telefone { get; set; }
 
         [ScaffoldColumn(false)]
+        public bool Inativo { get; set; }
+
+        [ScaffoldColumn(false)]
         public FornecedorEnderecoModel Endereco { get; set; }
 
         [ScaffoldColumn(false)]
@@ -42,9 +45,6 @@ namespace TCCESTOQUE.Models
         [ForeignKey("Vendedor")]
         public Guid VendedorId { get; set; }
         public VendedorModel Vendedor { get; set; }
-
-        [ScaffoldColumn(false)]
-        public bool Desativado { get; set; }
 
     }
 }

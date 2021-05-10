@@ -19,7 +19,7 @@ namespace TCCESTOQUE.Repository
         public ICollection<ProdutoModel> GetAll(Guid vendedorId)
         {
             return _context.ProdutoModel
-                .Where(v => v.VendedorId == vendedorId)
+                .Where(v => v.VendedorId == vendedorId && !v.Inativo)
                 .ToList();
         }
 

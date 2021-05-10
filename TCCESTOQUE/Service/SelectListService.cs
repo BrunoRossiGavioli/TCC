@@ -27,36 +27,36 @@ namespace TCCESTOQUE.Service
         #region ListCliente
         public SelectList SelectListCliente(string dataValue, string textValue, Guid vendedorId)
         {
-            return new SelectList(_clienteRepo.GetContext().Where(v => v.VendedorId == vendedorId), dataValue, textValue);
+            return new SelectList(_clienteRepo.GetContext().Where(v => v.VendedorId == vendedorId && !v.Inativo), dataValue, textValue);
         }
 
         public SelectList SelectListCliente(string dataValue, string textValue, object selectedValueId, Guid vendedorId)
         {
-            return new SelectList(_clienteRepo.GetContext().Where(v => v.VendedorId == vendedorId), dataValue, textValue, selectedValueId);
+            return new SelectList(_clienteRepo.GetContext().Where(v => v.VendedorId == vendedorId && !v.Inativo), dataValue, textValue, selectedValueId);
         }
         #endregion
 
         #region ListProduto
         public SelectList SelectListProduto(string dataValue, string textValue, Guid vendedorId)
         {
-            return new SelectList(_produtoRepo.GetContext().Where(v => v.VendedorId == vendedorId), dataValue, textValue);
+            return new SelectList(_produtoRepo.GetContext().Where(v => v.VendedorId == vendedorId && !v.Inativo), dataValue, textValue);
         }
 
         public SelectList SelectListProduto(string dataValue, string textValue, object selectedValueId, Guid vendedorId)
         {
-            return new SelectList(_produtoRepo.GetContext().Where(v => v.VendedorId == vendedorId), dataValue, textValue, selectedValueId);
+            return new SelectList(_produtoRepo.GetContext().Where(v => v.VendedorId == vendedorId && !v.Inativo), dataValue, textValue, selectedValueId);
         }
         #endregion
 
         #region ListFornecedor
         public SelectList SelectListFornecedor(string dataValue, string textValue, Guid vendedorId)
         {
-            return new SelectList(_fornecedorRepo.GetContext().Where(v => v.VendedorId == vendedorId && !v.Desativado), dataValue, textValue);
+            return new SelectList(_fornecedorRepo.GetContext().Where(v => v.VendedorId == vendedorId && !v.Inativo), dataValue, textValue);
         }
 
         public SelectList SelectListFornecedor(string dataValue, string textValue, object selectedValueId, Guid vendedorId)
         {
-            return new SelectList(_fornecedorRepo.GetContext().Where(v => v.VendedorId == vendedorId && !v.Desativado), dataValue, textValue, selectedValueId); 
+            return new SelectList(_fornecedorRepo.GetContext().Where(v => v.VendedorId == vendedorId && !v.Inativo), dataValue, textValue, selectedValueId); 
         }
         #endregion
 

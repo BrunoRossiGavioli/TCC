@@ -41,7 +41,10 @@ namespace TCCESTOQUE.Models
        
         public SexoEnum Sexo { get; set; }
 
+        [NotMapped]
+        public bool Logar { get; set; }
+
         [ScaffoldColumn(false)]
-        public bool Ativo { get; set; }
+        public bool Inativo { get; set; }
     }
 }

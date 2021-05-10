@@ -18,7 +18,7 @@ namespace TCCESTOQUE.Repository
 
         public ICollection<FornecedorModel> GetAll(Guid vendedorId)
         {
-            return _context.FornecedorModel.Where(v => v.VendedorId == vendedorId && !v.Desativado).ToList();
+            return _context.FornecedorModel.Where(v => v.VendedorId == vendedorId && !v.Inativo).ToList();
         }
 
         public override FornecedorModel GetOne(Guid? id)
@@ -26,7 +26,7 @@ namespace TCCESTOQUE.Repository
             var fornecedorModel = _context.FornecedorModel
                 .Include(e => e.Endereco)
                 .Include(p => p.Entradas)
-                .FirstOrDefault(m => m.FornecedorId == id && !m.Desativado);
+                .FirstOrDefault(m => m.FornecedorId == id && !m.Inativo);
 
             if (fornecedorModel == null)
                 return null;
@@ -36,22 +36,22 @@ namespace TCCESTOQUE.Repository
 
         public FornecedorModel GetByCnpj(string cnpj, Guid vendedorId)
         {
-            return _context.FornecedorModel.Where(f => f.Cnpj == cnpj && f.VendedorId == vendedorId && !f.Desativado).FirstOrDefault();
+            return _context.FornecedorModel.Where(f => f.Cnpj == cnpj && f.VendedorId == vendedorId && !f.Inativo).FirstOrDefault();
         }
 
         public FornecedorModel GetByRazaoSocial(string razao, Guid vendedorId)
         {
-            return _context.FornecedorModel.Where(f => f.RazaoSocial == razao && f.VendedorId == vendedorId && !f.Desativado).FirstOrDefault();
+            return _context.FornecedorModel.Where(f => f.RazaoSocial == razao && f.VendedorId == vendedorId && !f.Inativo).FirstOrDefault();
         }
 
         public FornecedorModel GetByNomeFantsia(string nome, Guid vendedorId)
         {
-            return _context.FornecedorModel.Where(f => f.NomeFantasia == nome && f.VendedorId == vendedorId && !f.Desativado).FirstOrDefault();
+            return _context.FornecedorModel.Where(f => f.NomeFantasia == nome && f.VendedorId == vendedorId && !f.Inativo).FirstOrDefault();
         }
 
         public FornecedorModel GetByEmail(string email, Guid vendedorId)
         {
-            return _context.FornecedorModel.Where(f => f.Email == email && f.VendedorId == vendedorId && !f.Desativado).FirstOrDefault();
+            return _context.FornecedorModel.Where(f => f.Email == email && f.VendedorId == vendedorId && !f.Inativo).FirstOrDefault();
         }
     }
 }

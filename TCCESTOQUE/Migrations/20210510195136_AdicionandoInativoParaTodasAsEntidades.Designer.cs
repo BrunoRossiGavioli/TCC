@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TCCESTOQUE.Data;
 
 namespace TCCESTOQUE.Migrations
 {
     [DbContext(typeof(TCCESTOQUEContext))]
-    partial class TCCESTOQUEContextModelSnapshot : ModelSnapshot
+    [Migration("20210510195136_AdicionandoInativoParaTodasAsEntidades")]
+    partial class AdicionandoInativoParaTodasAsEntidades
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -222,6 +224,9 @@ namespace TCCESTOQUE.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(18) CHARACTER SET utf8mb4")
                         .HasMaxLength(18);
+
+                    b.Property<bool>("Desativado")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Email")
                         .IsRequired()

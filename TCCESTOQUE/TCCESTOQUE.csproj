@@ -32,6 +32,12 @@
     <Compile Include="Migrations\20210508144504_Nova9.Designer.cs" />
     <Compile Include="Migrations\20210508152534_Nova10.cs" />
     <Compile Include="Migrations\20210508152534_Nova10.Designer.cs" />
+    <Compile Include="Migrations\20210510180350_AdicionandoAtivoParaProduto.cs" />
+    <Compile Include="Migrations\20210510180350_AdicionandoAtivoParaProduto.Designer.cs" />
+    <Compile Include="Migrations\20210510195136_AdicionandoInativoParaTodasAsEntidades.cs" />
+    <Compile Include="Migrations\20210510195136_AdicionandoInativoParaTodasAsEntidades.Designer.cs" />
+    <Compile Include="Migrations\20210510195356_AdicionandoInativoParaTodasAsEntidades2.cs" />
+    <Compile Include="Migrations\20210510195356_AdicionandoInativoParaTodasAsEntidades2.Designer.cs" />
     <Compile Include="Migrations\TCCESTOQUEContextModelSnapshot.cs" />
   </ItemGroup>
 

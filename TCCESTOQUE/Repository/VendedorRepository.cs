@@ -63,10 +63,12 @@ namespace TCCESTOQUE.Repository
             return _context.VendedorModel.Where(a => a.Email == email).FirstOrDefault();
         }
 
-        public VendedorModel GetBySenha(string senha)
+        public VendedorModel GetBySenha(string senha, VendedorModel vendedor)
         {
-            senha = SecurityService.Criptografar(senha);
-            return _context.VendedorModel.Where(a => a.Senha == senha).FirstOrDefault();
+            if (vendedor.Logar)
+                return _context.VendedorModel.Where(a => a.Senha == senha && a.VendedorId == vendedor.VendedorId).FirstOrDefault();
+
+            return _context.VendedorModel.Where(a => a.Senha == SecurityService.Criptografar(senha) && a.Email == vendedor.Email).FirstOrDefault();
         }
     }
 }

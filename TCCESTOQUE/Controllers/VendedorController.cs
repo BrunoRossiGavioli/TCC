@@ -56,6 +56,8 @@ namespace TCCESTOQUE.Controllers
             var res = _vendedorService.PostCriacao(vendedorModel);
             if (!res.IsValid)
                 return View(MostrarErros(res, vendedorModel));
+            if (vendedorModel.Logar)
+                Login(vendedorModel);
 
             return RedirectToAction("Index", "Home");    
         }

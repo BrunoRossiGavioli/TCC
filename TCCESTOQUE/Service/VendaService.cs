@@ -63,9 +63,9 @@ namespace TCCESTOQUE.Service
                         _movimentacaoService.SubirEstoque(itens[i].ProdutoId, itens[i].Quantidade);
                     }
                 }
-                venda.Cancelada = true;
-                _vendaRepository.PutEdicao(venda);
             }
+            venda.Cancelada = true;
+            _vendaRepository.PutEdicao(venda);
             return true;
         }
     }

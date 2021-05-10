@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TCCESTOQUE.Data;
 
 namespace TCCESTOQUE.Migrations
 {
     [DbContext(typeof(TCCESTOQUEContext))]
-    partial class TCCESTOQUEContextModelSnapshot : ModelSnapshot
+    [Migration("20210510195356_AdicionandoInativoParaTodasAsEntidades2")]
+    partial class AdicionandoInativoParaTodasAsEntidades2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

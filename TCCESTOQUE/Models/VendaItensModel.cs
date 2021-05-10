@@ -17,9 +17,11 @@ namespace TCCESTOQUE.Models
         public int Quantidade { get; set; }
 
         [Required]
+        [Column(TypeName = "decimal(12,2)")]
         public decimal PrecoProduto { get; set; }
 
         [Required]
+        [Column(TypeName = "decimal(12,2)")]
         public decimal CustoProduto { get; set; }
 
         [ForeignKey("Venda")]

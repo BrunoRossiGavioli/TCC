@@ -34,6 +34,9 @@ namespace TCCESTOQUE.Models
         public UnidadeDeMedidaEnum UnidadeMedida { get; set; }
 
         [ScaffoldColumn(false)]
+        public bool Inativo { get; set; }
+
+        [ScaffoldColumn(false)]
         public ICollection<VendaItensModel> Itens { get; set; }
 
         [ScaffoldColumn(false)]

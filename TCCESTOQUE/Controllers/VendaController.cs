@@ -71,12 +71,8 @@ namespace TCCESTOQUE.Controllers
         public IActionResult DeleteConfirmed(VendaModel vendaModel)
         {
             Autenticar();
-            var res = _vendaService.Cancelar(vendaModel.VendaId);
-            if(res)
-                return RedirectToAction("Index","Venda");
-
-            ModelState.AddModelError("", "Não foi possivel deletar essa venda, tente novamente mais tarde!");
-            return View(_vendaService.GetOne(vendaModel.VendaId));
+            _vendaService.Cancelar(vendaModel.VendaId);
+            return RedirectToAction("Index","Venda");
         }
     }
 }

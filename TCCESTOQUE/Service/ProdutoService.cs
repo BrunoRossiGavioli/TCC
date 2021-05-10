@@ -54,22 +54,32 @@ namespace TCCESTOQUE.Service
         public bool PostExclusao(Guid id)
         {
             var produto = _produtoRepository.GetOne(id);
-            if(produto != null)
-            {
-                _produtoRepository.PostExclusao(produto);
-                return true;
-            }
-            return false;
+            if (produto == null)
+                return false;
+
+            produto.Inativo = true;
+            _produtoRepository.PutEdicao(produto);
+            return true;
         }
 
         public ValidationResult PutEdicao(ProdutoModel produtoModel)
         {
-            var validador = new ProdutoValidador().Validate(produtoModel);
+            var validador = new ProdutoValidador(true).Validate(produtoModel);
             if (!validador.IsValid)
                 return validador;
-
-            _produtoRepository.PutEdicao(produtoModel);
+            _produtoRepository.PutEdicao(ConvertProduto(produtoModel));
             return validador;
+        }
+
+        public ProdutoModel ConvertProduto(ProdutoModel produto)
+        {
+            var info = GetOne(produto.ProdutoId);
+            info.ValorUnitario = produto.ValorUnitario;
+            info.UnidadeMedida = produto.UnidadeMedida;
+            info.Nome = produto.Nome;
+            info.Descricao = produto.Descricao;
+            info.Custo = produto.Custo;
+            return info;
         }
     }
 }

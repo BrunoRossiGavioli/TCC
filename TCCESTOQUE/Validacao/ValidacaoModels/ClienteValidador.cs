@@ -21,6 +21,8 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
 
             RuleFor(v => v.Cpf).Length(14).WithMessage(MensagensDeErroPadrao.CpfTamanho);
 
+            RuleFor(v => v.Sexo).NotEqual(SexoEnum.Selecione).WithMessage(MensagensDeErroPadrao.SexoInvalido);
+
             #region endereco
             RuleFor(e => e.Cep).NotEmpty().WithMessage(MensagensDeErroEndereco.CepVazio)
                 .Length(9).WithMessage(MensagensDeErroEndereco.CepTamanho);

@@ -15,10 +15,12 @@ namespace TCCESTOQUE.Controllers
     {
         private readonly IEntradaService _entradaService;
         private readonly ISelectListService _selectListService;
-        public EntradaController(IEntradaService context, ISelectListService selectListService)
+        private readonly IProdutoService _produtoService;
+        public EntradaController(IEntradaService context, ISelectListService selectListService, IProdutoService produtoService)
         {
             _entradaService = context;
             _selectListService = selectListService;
+            _produtoService = produtoService;
         }
 
         // GET: Entrada
@@ -40,11 +42,14 @@ namespace TCCESTOQUE.Controllers
         }
 
         // GET: Entrada/Create
-        public IActionResult Create()
+        public IActionResult Create(Guid produtoId)
         {
             Autenticar();
+            if (produtoId == Guid.Empty || _produtoService.GetOne(produtoId) == null || _produtoService.GetOne(produtoId).Inativo)
+                return NotFound();
             ViewData["FornecedorId"] = _selectListService.SelectListFornecedor("FornecedorId","NomeFantasia", ViewBag.usuarioId);
-            ViewData["ProdutoId"] = _selectListService.SelectListProduto("ProdutoId", "Nome",ViewBag.usuarioId);
+            ViewData["ProdutoId"] = produtoId;
+            ViewData["Medida"] = _produtoService.GetOne(produtoId).UnidadeMedida;
             return View();
         }
 
@@ -56,13 +61,14 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Create(EntradaModel entradaModel)
         {
             Autenticar();
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && entradaModel.ProdutoId != Guid.Empty)
             {
                 _entradaService.PostEntrada(entradaModel);
                 return RedirectToAction(nameof(Index));
             }
             ViewData["FornecedorId"] = _selectListService.SelectListFornecedor("FornecedorId", "NomeFantasia", entradaModel.FornecedorId, ViewBag.usuarioId);
-            ViewData["ProdutoId"] = _selectListService.SelectListProduto("ProdutoId", "Nome", entradaModel.ProdutoId, ViewBag.usuarioId);
+            ViewData["ProdutoId"] = entradaModel.ProdutoId;
+            ViewData["Medida"] = _produtoService.GetOne(entradaModel.ProdutoId).UnidadeMedida;
             return View(entradaModel);
         }
 

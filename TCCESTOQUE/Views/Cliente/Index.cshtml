@@ -16,10 +16,7 @@
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cpf)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
+                Endereço
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Telefone)
@@ -34,10 +31,7 @@
                 @Html.DisplayFor(modelItem => item.Nome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Cpf)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
+                @Html.DisplayFor(modelItem => item.Endereco.Logradouro) @Html.DisplayFor(n => item.Endereco.Numero)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Telefone)

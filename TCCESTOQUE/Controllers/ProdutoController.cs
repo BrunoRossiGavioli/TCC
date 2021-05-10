@@ -55,14 +55,12 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             var res =_produtoService.PostCriacao(produtoModel);
-            if (!res.IsValid)
-            {
-                ViewData["UnidadeMedida"] = _produtoService.SelectUnidadeDeMedida;
-                return View(MostrarErros(res, produtoModel));
-            }
+            if (res.IsValid)
+                return RedirectToAction("Index", "Produto");
+
+            ViewData["UnidadeMedida"] = _produtoService.SelectUnidadeDeMedida;
+            return View(MostrarErros(res, produtoModel));
                 
-            
-            return RedirectToAction("Index", "Produto");
         }
 
         // GET: Produto/Edit/5
@@ -84,13 +82,11 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             var res =_produtoService.PutEdicao(produtoModel);
-            if (!res.IsValid)
-            {
-                ViewData["UnidadeMedida"] = _produtoService.SelectUnidadeDeMedida;
-                return View(MostrarErros(res, produtoModel));
-            }
+            if (res.IsValid)
+                return RedirectToAction("Index", "Produto");
 
-            return RedirectToAction("Index", "Produto");
+            ViewData["UnidadeMedida"] = _produtoService.SelectUnidadeDeMedida;
+            return View(MostrarErros(res, produtoModel));
         }
 
         // GET: Produto/Delete/5
