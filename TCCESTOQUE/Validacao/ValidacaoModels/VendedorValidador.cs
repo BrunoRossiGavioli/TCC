@@ -29,8 +29,7 @@ namespace TCCESTOQUE.ValidadorVendedor
 
             RuleFor(v => v.Cpf).Length(14).WithMessage(MensagensDeErroPadrao.CpfTamanho);
 
-            RuleFor(v => v.Sexo).NotEmpty().WithMessage("Escolha uma das opções")
-                .NotEqual(SexoEnum.Selecione).WithMessage("Escolha uma das opções");
+            RuleFor(v => v.Sexo).NotEqual(SexoEnum.Selecione).WithMessage("Escolha uma das opções");
         }
         private static bool IdadeMinima(DateTime data)
         {
