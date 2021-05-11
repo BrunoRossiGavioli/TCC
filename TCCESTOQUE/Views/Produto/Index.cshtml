@@ -10,7 +10,7 @@
     <a asp-action="Create">Adicionar produto</a>
 </p>
 <table class="table">
-    <thead>
+    <thead class="CabecalhoListagem">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Nome)
@@ -27,7 +27,7 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody class="Lista">
 @foreach (var item in Model) {
         <tr>
             <td>
@@ -43,10 +43,10 @@
                 @Html.DisplayFor(modelItem => item.Quantidade)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ProdutoId">Edit</a> |
-                <a asp-controller="Entrada" asp-action="Create" asp-route-produtoId="@item.ProdutoId">Adicionar</a> |
-                <a asp-action="Details" asp-route-id="@item.ProdutoId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ProdutoId">Delete</a>
+                <a asp-action="Edit" class="text-info LinksListagem" asp-route-id="@item.ProdutoId">Edit</a> |
+                <a asp-controller="Entrada" class="text-success LinksListagem" asp-action="Create" asp-route-produtoId="@item.ProdutoId">Adicionar</a> |
+                <a asp-action="Details" class="text-info LinksListagem" asp-route-id="@item.ProdutoId">Details</a> |
+                <a asp-action="Delete"  class="text-danger LinksListagem" asp-route-id="@item.ProdutoId">Delete</a>
             </td>
         </tr>
 }

@@ -10,7 +10,7 @@
     <a asp-action="CadastroFull">Create New</a>
 </p>
 <table class="table">
-    <thead>
+    <thead class="CabecalhoListagem">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.NomeFantasia)
@@ -24,29 +24,33 @@
             <th>
                 @Html.DisplayNameFor(model => model.Telefone)
             </th>
+            <th>
+            </th>
+                                  
         </tr>
     </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NomeFantasia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cnpj)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telefone)
-            </td>
-            <td>
-                <a asp-action="EditFull" asp-route-id="@item.FornecedorId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.FornecedorId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.FornecedorId">Delete</a>
-            </td>
-        </tr>
-}
+    <tbody class="Lista">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeFantasia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cnpj)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefone)
+                </td>
+                <td>
+                    <a asp-action="EditFull" class="text-info LinksListagem" asp-route-id="@item.FornecedorId">Edit</a> |
+                    <a asp-action="Details" class="text-success LinksListagem" asp-route-id="@item.FornecedorId">Details</a>|
+                    <a asp-action="Delete" class="text-danger LinksListagem" asp-route-id="@item.FornecedorId">Delete</a>
+                </td>                
+            </tr>
+        }
     </tbody>
 </table>

@@ -58,6 +58,30 @@ html {
   min-height: 100%;
 }
 
+.CabecalhoListagem{
+  border-width: 3px;
+  border-color: #656565;
+  border-style:solid;
+  background-color: #7F6A93;
+
+  box-shadow: 0 0 5px #656565, 0 0 5px #656565, 0 0 5px #656565, 0 0 5px #656565;
+}
+.Lista{
+  border-width: 3px;
+  border-color: #0E1C36;
+  border-style: solid;
+  background-color: #F9FBF2;
+  background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+  background-image: url("../img/fundoimg.png");
+
+  box-shadow: 0 0 5px #7F6A93, 0 0 5px #7F6A93, 0 0 5px #7F6A93, 0 0 5px #7F6A93;
+}
+.LinksListagem{
+  font-size: 20px; 
+  text-shadow: 0 0 1px #0f0b13, 0 0 1px #0f0b13, 0 0 1px #0f0b13, 0 0 1px #0f0b13;
+}
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;

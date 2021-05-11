@@ -10,7 +10,7 @@
     <a asp-action="Create" asp-route-id="@ViewBag.usuarioId">Create New</a>
 </p>
 <table class="table">
-    <thead>
+    <thead class="CabecalhoListagem">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Nome)
@@ -24,7 +24,7 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody class="Lista">
 @foreach (var item in Model) {
         <tr>
             <td>
@@ -37,9 +37,9 @@
                 @Html.DisplayFor(modelItem => item.Telefone)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ClienteId" asp-route-vendedorId="@ViewBag.usuarioId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ClienteId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ClienteId">Delete</a>
+                <a asp-action="Edit" class="text-info LinksListagem" asp-route-id="@item.ClienteId" asp-route-vendedorId="@ViewBag.usuarioId">Edit</a> |
+                <a asp-action="Details" class="text-success LinksListagem" asp-route-id="@item.ClienteId">Details</a> |
+                <a asp-action="Delete" class="text-danger LinksListagem" asp-route-id="@item.ClienteId">Delete</a>
             </td>
         </tr>
 }

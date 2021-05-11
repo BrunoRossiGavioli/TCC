@@ -7,7 +7,8 @@
 <h1>Index</h1>
 
 <table class="table">
-    <thead>
+    <thead class="CabecalhoListagem">
+
         <tr>
             <th>
                 Código
@@ -15,6 +16,7 @@
             <th>
                 Valor
             </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.DataVenda)
             </th>
@@ -27,12 +29,12 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody class="Lista">
         @{
             int numero = Model.Count();
             foreach (var item in Model)
             {
-                var estiloTr = "bg-light";
+                var estiloTr = "Lista";
                 var estiloLink = "";
                 if (item.Cancelada) { estiloTr = "bg-danger text-white"; estiloLink = "text-white"; }
                 <tr class="@estiloTr">
@@ -52,8 +54,12 @@
                         @Html.DisplayFor(modelItem => item.Cliente.Nome)
                     </td>
                     <td>
-                        <a class="@estiloLink" asp-action="Details" asp-route-id="@item.VendaId">Details</a>
-                        @if (!item.Cancelada) { <span>|</span> <a class="@estiloLink" asp-action="Delete" asp-route-id="@item.VendaId">Delete</a> }
+                        <a class="@estiloLink text-success LinksListagem" asp-action="Details" asp-route-id="@item.VendaId">Details</a>
+                        @if (!item.Cancelada)
+                        {
+                            <span>|</span>
+                            <a class="@estiloLink text-danger LinksListagem" asp-action="Delete" asp-route-id="@item.VendaId">Delete</a>
+                        }
                     </td>
                 </tr>
                 numero -= 1;
