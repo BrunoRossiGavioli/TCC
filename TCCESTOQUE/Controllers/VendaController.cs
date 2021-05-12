@@ -49,6 +49,22 @@ namespace TCCESTOQUE.Controllers
             return View(vendaModel);
         }
 
+        // GET: Venda/Print/5
+        [Authorize]
+        public IActionResult Print(Guid? id)
+        {
+            Autenticar();
+            if (id == null)
+                return NotFound();
+
+            var vendaModel = _vendaService.GetOne(id);
+
+            if (vendaModel == null)
+                return NotFound();
+
+            return View(vendaModel);
+        }
+
         // GET: Venda/Delete/5
         [Authorize]
         public IActionResult Delete(Guid? id)
