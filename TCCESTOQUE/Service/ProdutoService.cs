@@ -41,11 +41,11 @@ namespace TCCESTOQUE.Service
 
         public ValidationResult PostCriacao(ProdutoModel produtoModel)
         {
-            produtoModel = FormataValores.FormataProduto(produtoModel);
+          
             var validador = new ProdutoValidador().Validate(produtoModel);
             if (!validador.IsValid)
                 return validador;
-
+  produtoModel = FormataValores.FormataProduto(produtoModel);
             
             _produtoRepository.PostCriacao(produtoModel);
             return validador;
@@ -56,7 +56,6 @@ namespace TCCESTOQUE.Service
             var produto = _produtoRepository.GetOne(id);
             if (produto == null)
                 return false;
-
             produto.Inativo = true;
             _produtoRepository.PutEdicao(produto);
             return true;
@@ -64,11 +63,12 @@ namespace TCCESTOQUE.Service
 
         public ValidationResult PutEdicao(ProdutoModel produtoModel)
         {
-            produtoModel = FormataValores.FormataProduto(produtoModel);
+           
             produtoModel.Nome.ToUpper().Trim();
             var validador = new ProdutoValidador(true).Validate(produtoModel);
             if (!validador.IsValid)
                 return validador;
+                 produtoModel = FormataValores.FormataProduto(produtoModel);
             _produtoRepository.PutEdicao(ConvertProduto(produtoModel));
             return validador;
         }

@@ -41,11 +41,11 @@ namespace TCCESTOQUE.Service
 
         public ValidationResult PostCriacao(ClienteViewModel clienteVM)
         {
-            clienteVM = FormataValores.FormataCliente(clienteVM);
+            
             var validacao = new ClienteValidador().Validate(clienteVM);
             if (!validacao.IsValid)
                 return validacao;
-
+            clienteVM = FormataValores.FormataCliente(clienteVM);
             var cliente = _mapper.Map<ClienteModel>(clienteVM);
             _clienteRepository.PostCriacao(cliente);
 
