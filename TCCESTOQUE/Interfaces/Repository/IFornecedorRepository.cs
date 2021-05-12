@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using TCCESTOQUE.Models;
 
 
@@ -12,7 +11,7 @@ namespace TCCESTOQUE.Interfaces.Repository
         public FornecedorModel GetByRazaoSocial(string razao, Guid vendedorId);
 
         public FornecedorModel GetByNomeFantsia(string nome, Guid vendedorId);
-        
+
         public FornecedorModel GetByEmail(string email, Guid vendedorId);
     }
 }

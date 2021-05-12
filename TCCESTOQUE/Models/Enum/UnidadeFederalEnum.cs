@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace TCCESTOQUE.Models.Enum
 {
@@ -64,6 +59,6 @@ namespace TCCESTOQUE.Models.Enum
         [Display(Name = "Sergipe")]
         SE = 28,
         [Display(Name = "Tocantins")]
-        TO = 17      
+        TO = 17
     }
 }

@@ -1,8 +1,6 @@
 ﻿using FluentValidation.Results;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using TCCESTOQUE.Models;
-using TCCESTOQUE.Models.Enum;
 using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Interfaces.Service

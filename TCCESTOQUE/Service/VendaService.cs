@@ -1,15 +1,10 @@
 ﻿using AutoMapper;
-using FluentValidation.Results;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
-using TCCESTOQUE.Validacao.ValidacaoModels;
-using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Service
 {

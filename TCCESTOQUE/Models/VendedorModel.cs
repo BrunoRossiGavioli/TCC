@@ -5,7 +5,7 @@ using TCCESTOQUE.Models.Enum;
 
 namespace TCCESTOQUE.Models
 {
-    [Table("Vendedor")] 
+    [Table("Vendedor")]
     public class VendedorModel
     {
         [Key]
@@ -38,7 +38,7 @@ namespace TCCESTOQUE.Models
         public string Telefone { get; set; }
 
         [Required(ErrorMessage = "Escolha uma das opções")]
-       
+
         public SexoEnum Sexo { get; set; }
 
         [NotMapped]

@@ -292,7 +292,7 @@ namespace Estoque.Test.ValidationViewModelTests
         {
             var instance = _builder.With(x => x.Logradouro = logradouro).Build();
             var validation = await _validator.ValidateAsync(instance);
-            Assert.False(validation.IsValid);          
+            Assert.False(validation.IsValid);
         }
         [Theory(DisplayName = "Teste tamanho máximo localidade")]
         [InlineData("rua tal")]
@@ -421,7 +421,7 @@ namespace Estoque.Test.ValidationViewModelTests
         }
 
         [Fact(DisplayName = "Teste UF vazio")]
-        
+
         public async Task UfVazio()
         {
             var instance = _builder.With(x => x.Uf = UnidadeFederalEnum.Null).Build();

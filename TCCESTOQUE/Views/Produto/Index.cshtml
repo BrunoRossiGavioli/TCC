@@ -43,10 +43,10 @@
                 @Html.DisplayFor(modelItem => item.Quantidade)
             </td>
             <td>
-                <a asp-action="Edit" class="text-info LinksListagem" asp-route-id="@item.ProdutoId">Edit</a> |
-                <a asp-controller="Entrada" class="text-success LinksListagem" asp-action="Create" asp-route-produtoId="@item.ProdutoId">Adicionar</a> |
-                <a asp-action="Details" class="text-info LinksListagem" asp-route-id="@item.ProdutoId">Details</a> |
-                <a asp-action="Delete"  class="text-danger LinksListagem" asp-route-id="@item.ProdutoId">Delete</a>
+                <a asp-action="Edit" class="LinksListagem" asp-route-id="@item.ProdutoId">Edit</a> |
+                <a asp-controller="Entrada" class="LinksListagem" asp-action="Create" asp-route-produtoId="@item.ProdutoId">Adicionar</a> |
+                <a asp-action="Details" class="LinksListagem" asp-route-id="@item.ProdutoId">Details</a> |
+                <a asp-action="Delete"  class="LinksListagem" asp-route-id="@item.ProdutoId">Delete</a>
             </td>
         </tr>
 }

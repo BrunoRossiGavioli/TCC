@@ -54,11 +54,11 @@
                         @Html.DisplayFor(modelItem => item.Cliente.Nome)
                     </td>
                     <td>
-                        <a class="@estiloLink text-success LinksListagem" asp-action="Details" asp-route-id="@item.VendaId">Details</a>
+                        <a class="@estiloLink LinksListagem" asp-action="Details" asp-route-id="@item.VendaId">Details</a>
                         @if (!item.Cancelada)
                         {
                             <span>|</span>
-                            <a class="@estiloLink text-danger LinksListagem" asp-action="Delete" asp-route-id="@item.VendaId">Delete</a>
+                            <a class="@estiloLink LinksListagem" asp-action="Delete" asp-route-id="@item.VendaId">Delete</a>
                         }
                     </td>
                 </tr>

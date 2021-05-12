@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 using TCCESTOQUE.Models.Enum;
 
 namespace TCCESTOQUE.Models
@@ -16,7 +13,7 @@ namespace TCCESTOQUE.Models
 
         [ScaffoldColumn(false)]
         [Column(TypeName = "decimal(12,2)")]
-        public decimal PrecoProduto { get; set; }  
+        public decimal PrecoProduto { get; set; }
 
         [ScaffoldColumn(false)]
         [Column(TypeName = "decimal(12,2)")]

@@ -44,7 +44,7 @@
     
 </div>
 <table class="table">
-    <thead>
+    <thead class="CabecalhoListagem">
         <tr>
             <th>
                 Código
@@ -58,7 +58,7 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody class="Lista">
         @if (Model.Itens != null)
         {
             @foreach (var item in Model.Itens)
@@ -77,8 +77,8 @@
                             @Html.DisplayFor(modelItem => item.Quantidade)
                         </td>
                         <td>
-                            <a asp-controller="VendaItens" asp-action="EditItemCarrinho" asp-route-id="@item.VendaItensId">Edit</a> |
-                            <a asp-controller="VendaItens" asp-action="Delete" asp-route-id="@item.VendaItensId">Delete</a>
+                            <a asp-controller="VendaItens" asp-action="EditItemCarrinho" class="LinksListagem" asp-route-id="@item.VendaItensId">Edit</a> |
+                            <a asp-controller="VendaItens" asp-action="Delete" class="LinksListagem" asp-route-id="@item.VendaItensId">Delete</a>
                         </td>
                     </tr>
                 }

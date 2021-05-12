@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using TCCESTOQUE.Data;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
 
@@ -47,7 +41,7 @@ namespace TCCESTOQUE.Controllers
             Autenticar();
             if (produtoId == Guid.Empty || _produtoService.GetOne(produtoId) == null || _produtoService.GetOne(produtoId).Inativo)
                 return NotFound();
-            ViewData["FornecedorId"] = _selectListService.SelectListFornecedor("FornecedorId","NomeFantasia", ViewBag.usuarioId);
+            ViewData["FornecedorId"] = _selectListService.SelectListFornecedor("FornecedorId", "NomeFantasia", ViewBag.usuarioId);
             ViewData["ProdutoId"] = produtoId;
             ViewData["Medida"] = _produtoService.GetOne(produtoId).UnidadeMedida;
             return View();
@@ -90,7 +84,8 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             var saida = _entradaService.CancelarEntrada(entradaModel);
-            if(saida != "") { 
+            if (saida != "")
+            {
                 ModelState.AddModelError("", saida);
                 return View(entradaModel);
             }

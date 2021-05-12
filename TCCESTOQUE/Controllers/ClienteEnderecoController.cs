@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using TCCESTOQUE.Data;
 using TCCESTOQUE.Models;
 
@@ -40,7 +38,7 @@ namespace TCCESTOQUE.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id,ClienteEnderecoModel clienteEnderecoModel)
+        public async Task<IActionResult> Edit(Guid id, ClienteEnderecoModel clienteEnderecoModel)
         {
             if (id != clienteEnderecoModel.EnderecoId)
             {

@@ -1,8 +1,6 @@
 ﻿using Estoque.Test.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using TCCESTOQUE.Validacao.MensagensDeErro;
 using TCCESTOQUE.Validacao.ValidacaoModels;
@@ -22,7 +20,7 @@ namespace Estoque.Test.ValidationModelsTest
             _validator = provider.GetService<ProdutoValidador>();
         }
 
-        [Fact(DisplayName ="Classe válida")]
+        [Fact(DisplayName = "Classe válida")]
         public async Task ClasseValida()
         {
             var instance = _builder.Build();
@@ -31,7 +29,7 @@ namespace Estoque.Test.ValidationModelsTest
         }
 
         #region Nome
-        [Theory(DisplayName ="Nome Tamanho mínimo")]
+        [Theory(DisplayName = "Nome Tamanho mínimo")]
         [InlineData("GG")]
         [InlineData("jk")]
         [InlineData("ka")]
@@ -66,14 +64,14 @@ namespace Estoque.Test.ValidationModelsTest
         #endregion
 
         #region Custo
-        [Theory(DisplayName ="Teste do custo mínimo do produto")]
+        [Theory(DisplayName = "Teste do custo mínimo do produto")]
         [InlineData(0.00)]
         [InlineData(-1.00)]
         [InlineData(-2.00)]
         public async Task CustoValorMinimo(decimal custo)
         {
             var instance = _builder.With(x => x.Custo = custo).Build();
-            var validation =await _validator.ValidateAsync(instance);
+            var validation = await _validator.ValidateAsync(instance);
             Assert.False(validation.IsValid);
             Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensErroProduto.CustoMinimo));
         }
@@ -86,10 +84,10 @@ namespace Estoque.Test.ValidationModelsTest
         {
             var instance = _builder.With(x => x.Custo = custo).Build();
             var validation = await _validator.ValidateAsync(instance);
-            Assert.True(validation.IsValid);            
+            Assert.True(validation.IsValid);
         }
 
-        [Fact(DisplayName = "Teste do custo vazio")]      
+        [Fact(DisplayName = "Teste do custo vazio")]
         public async Task CustoVazio()
         {
             var instance = _builder.With(x => x.Custo = Convert.ToDecimal(null)).Build();
@@ -100,7 +98,7 @@ namespace Estoque.Test.ValidationModelsTest
         #endregion
 
         #region ValorUnitario
-        [Theory(DisplayName ="Valor unitário válido")]
+        [Theory(DisplayName = "Valor unitário válido")]
         [InlineData(1.00)]
         [InlineData(2.99)]
         [InlineData(3.66)]
@@ -109,7 +107,7 @@ namespace Estoque.Test.ValidationModelsTest
         {
             var instance = _builder.With(x => x.ValorUnitario = valor).Build();
             var validation = await _validator.ValidateAsync(instance);
-            Assert.True(validation.IsValid);         
+            Assert.True(validation.IsValid);
         }
 
         [Theory(DisplayName = "Valor unitário válido")]
@@ -125,7 +123,7 @@ namespace Estoque.Test.ValidationModelsTest
             Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensErroProduto.ValorUnitarioMinimo));
         }
 
-        [Fact(DisplayName ="Valor unitário vazio")]
+        [Fact(DisplayName = "Valor unitário vazio")]
         public async Task ValorUnitarioVazio()
         {
             var instance = _builder.With(x => x.ValorUnitario = Convert.ToDecimal(null)).Build();
@@ -136,7 +134,7 @@ namespace Estoque.Test.ValidationModelsTest
         #endregion
 
         #region Quantidade
-        [Theory(DisplayName ="Quantidade mínima de produto")]
+        [Theory(DisplayName = "Quantidade mínima de produto")]
         [InlineData(0)]
         [InlineData(-1)]
         [InlineData(-2)]
@@ -158,7 +156,7 @@ namespace Estoque.Test.ValidationModelsTest
         {
             var instance = _builder.With(x => x.Quantidade = quant).Build();
             var validation = await _validator.ValidateAsync(instance);
-            Assert.True(validation.IsValid);            
+            Assert.True(validation.IsValid);
         }
         #endregion
     }

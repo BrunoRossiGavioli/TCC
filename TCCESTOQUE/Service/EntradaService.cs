@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
@@ -43,7 +41,7 @@ namespace TCCESTOQUE.Service
 
         public void PostEntrada(EntradaModel entrada)
         {
-            var produto =_produtoRepo.GetOne(entrada.ProdutoId);
+            var produto = _produtoRepo.GetOne(entrada.ProdutoId);
             entrada.PrecoProduto = produto.ValorUnitario;
             entrada.CustoProduto = produto.Custo;
             _movimentacaoService.SubirEstoque(entrada.ProdutoId, entrada.QuantidadeProduto);

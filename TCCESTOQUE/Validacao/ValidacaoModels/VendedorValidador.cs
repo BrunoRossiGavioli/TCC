@@ -33,8 +33,8 @@ namespace TCCESTOQUE.ValidadorVendedor
         }
         private static bool IdadeMinima(DateTime data)
         {
-           return data <= DateTime.Today.AddYears(-18);
-        }   
+            return data <= DateTime.Today.AddYears(-18);
+        }
 
     }
 }

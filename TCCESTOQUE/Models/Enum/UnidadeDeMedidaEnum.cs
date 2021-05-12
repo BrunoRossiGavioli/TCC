@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace TCCESTOQUE.Models.Enum
+﻿namespace TCCESTOQUE.Models.Enum
 {
     public enum UnidadeDeMedidaEnum
     {
@@ -13,6 +8,7 @@ namespace TCCESTOQUE.Models.Enum
         Kg = 3,
         Duzia = 4,
         Saco = 5,
-        Gramas = 6
+        Gramas = 6,
+        Litros = 7
     }
 }
