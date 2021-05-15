@@ -10,7 +10,7 @@
     <a asp-action="Create">CADASTRAR</a>
 </p>
 <table class="table">
-    <thead>
+    <thead class="CabecalhoListagem">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Senha)
@@ -32,7 +32,7 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+        <tr class="Lista">
             <td>
                 @Html.DisplayFor(modelItem => item.Senha)
             </td>
@@ -49,9 +49,9 @@
                 @Html.DisplayFor(modelItem => item.DataNascimento)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.VendedorId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.VendedorId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.VendedorId">Delete</a>
+                <a asp-action="Edit" class="LinksListagem" asp-route-id="@item.VendedorId">Edit</a> |
+                <a asp-action="Details" class="LinksListagem" asp-route-id="@item.VendedorId">Details</a> |
+                <a asp-action="Delete" class="LinksListagem" asp-route-id="@item.VendedorId">Delete</a>
             </td>
         </tr>
 }

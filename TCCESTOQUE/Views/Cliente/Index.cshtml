@@ -24,16 +24,16 @@
             <th></th>
         </tr>
     </thead>
-    <tbody class="Lista">
+    <tbody>
 @foreach (var item in Model) {
-        <tr>
-            <td>
+        <tr class="Lista">
+            <td >
                 @Html.DisplayFor(modelItem => item.Nome)
             </td>
-            <td>
+            <td >
                 @Html.DisplayFor(modelItem => item.Endereco.Logradouro) @Html.DisplayFor(n => item.Endereco.Numero)
             </td>
-            <td>
+            <td >
                 @Html.DisplayFor(modelItem => item.Telefone)
             </td>
             <td>
