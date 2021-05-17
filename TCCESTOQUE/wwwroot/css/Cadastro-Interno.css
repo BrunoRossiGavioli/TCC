@@ -87,6 +87,16 @@ h1 {
     outline: none;
 }
 
+.link-add * {
+    transition: all .4s;
+    color: #212529 !important;
+}
+
+.link-add *:hover {
+    transition:all .4s;
+    color: #9370db !important;
+}
+
 .campo > input:focus{
     border: 1px solid lightblue;
 }

@@ -66,31 +66,36 @@ html {
 }
 
 .CabecalhoListagem {
-  border-width: 3px;
-  border-color: #656565;
-  border-style: solid;
-  background-color: #7f6a93;
-
-  box-shadow: 0 0 5px #656565, 0 0 5px #656565, 0 0 5px #656565, 0 0 5px #656565;
+    background-color: var(--light-purple);
+    color: ghostwhite;
 }
-.Lista {
-  border-width: 3px;
-  border-color: #0e1c36;
-  border-style:solid;
-  border-left: 0px; 
-  border-right: 0px;
-  border-top: 0px;
-  background-color: #e1e4d5;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
 
-  box-shadow: 0 0 5px #7f6a93, 0 0 5px #7f6a93, 0 0 5px #7f6a93, 0 0 5px #7f6a93;
+.CabecalhoListagem * {
+    border: none !important;
+}
+
+.Lista {
+    background-color: ghostwhite;
+    border: 1px solid #dcdcdc;
+    border-style: solid none !important;
 }
 .LinksListagem {
-  font-size: 20px;
   color:black;
 }
+
+.LinksListagem:hover{
+    color: rgba(0, 0, 0, 0.8);
+    text-decoration:none;
+}
+
+.bg-light-gray {
+    background-color: var(--lighter-gray);
+}
+
+.text-light-gray {
+    color: var(--gray) !important;
+}
+
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
