@@ -2,10 +2,8 @@
 
 @{
     ViewData["Title"] = "CadastroFull";
+    Layout = "~/Views/Shared/_Layout-Interno.cshtml";
 }
-<head>
-    <link href="~/css/Cadastro-Interno.css" rel="stylesheet" />
-</head>
 <body>
     <div id="moldura">
         <form class="cadastro" asp-action="CadastroFull">
@@ -106,6 +104,7 @@
                 <span asp-validation-for="Uf" class="text-danger"></span>
             </div>
             <div class="just-right">
+                <a asp-action="Index" class="btn-voltar">Voltar</a>
                 <input type="submit" value="Cadastrar" class="btn-cadastrar" />
             </div>
         </form>

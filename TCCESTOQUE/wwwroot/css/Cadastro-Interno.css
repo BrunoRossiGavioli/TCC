@@ -3,6 +3,10 @@
     margin: 0;
 }
 
+body{
+    height:100%;
+}
+
 select, option{
     cursor: pointer;
 }
@@ -21,7 +25,7 @@ h1 {
 
 .cadastro {
     display: flex;
-    background-color: #F9FBF2;
+    background-color: var(--white);
     max-width: 51rem;
     border-radius: 1rem;
     font-family: sans-serif;
@@ -34,7 +38,7 @@ h1 {
 .cadastro > h1 {
     display: block;
     text-align: center;
-    font-size: 2.2rem;
+    font-size: 2rem;
     margin-bottom: 2rem;
     text-transform: uppercase;
 }
@@ -93,20 +97,41 @@ h1 {
 
 .btn-cadastrar {
     margin-top: 1rem;
-    color: #F9FBF2;
+    color: var(--white);
     text-transform: uppercase;
     font-family: sans-serif !important;
-    font-weight:bold;
+    font-weight: bold;
     border: none;
-    border-radius: 1rem;
-    background-color: #02A9EA;
+    border-radius: .7rem;
+    background-color: var(--light-blue);
     padding: .5rem;
-    transition:all .4s;
+    margin-left: 1rem;
+    transition: all .4s;
 }
 
 .btn-cadastrar:hover {
     transition:all .4s;
-    background-color: #214382;
+    background-color: var(--dark-blue);
+}
+
+.btn-voltar {
+    margin-top: 1rem;
+    color: #F9FBF2;
+    text-transform: uppercase;
+    font-family: sans-serif !important;
+    font-weight: bold;
+    border: none;
+    border-radius: .7rem;
+    background-color: var(--lilac);
+    padding: .5rem;
+    margin-left: 1rem;
+    transition: all .4s;
+}
+
+.btn-voltar:hover {
+    text-decoration: none;
+    background-color: var(--strong-lilac);
+    color: #F9FBF2;
 }
 
 .just-right{

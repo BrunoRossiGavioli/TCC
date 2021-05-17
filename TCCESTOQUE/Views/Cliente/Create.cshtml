@@ -3,14 +3,12 @@
 
 @{
     ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout-Interno.cshtml";
 }
-
-<link href="~/css/Cadastro-Interno.css" rel="stylesheet" />
-
 <div id="moldura">
     <form class="cadastro" asp-action="Create">
         <h1>
-            Cadastrar cliente
+            Cadastrar Cliente
         </h1>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" hidden asp-for="VendedorId" value="@ViewBag.usuarioId" />
@@ -106,6 +104,7 @@
             <span asp-validation-for="Uf" class="text-danger"></span>
         </div>
         <div class="just-right">
+            <a asp-action="Index" class="btn-voltar">Voltar</a>
             <input type="submit" value="Cadastrar" class="btn-cadastrar" />
         </div>
     </form>

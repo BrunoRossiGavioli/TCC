@@ -43,6 +43,7 @@ namespace TCCESTOQUE.Controllers
                 return NotFound();
             ViewData["FornecedorId"] = _selectListService.SelectListFornecedor("FornecedorId", "NomeFantasia", ViewBag.usuarioId);
             ViewData["ProdutoId"] = produtoId;
+            ViewData["ProdutoNome"] = _produtoService.GetOne(produtoId).Nome;
             ViewData["Medida"] = _produtoService.GetOne(produtoId).UnidadeMedida;
             return View();
         }
@@ -62,6 +63,7 @@ namespace TCCESTOQUE.Controllers
             }
             ViewData["FornecedorId"] = _selectListService.SelectListFornecedor("FornecedorId", "NomeFantasia", entradaModel.FornecedorId, ViewBag.usuarioId);
             ViewData["ProdutoId"] = entradaModel.ProdutoId;
+            ViewData["ProdutoNome"] = _produtoService.GetOne(entradaModel.ProdutoId).Nome;
             ViewData["Medida"] = _produtoService.GetOne(entradaModel.ProdutoId).UnidadeMedida;
             return View(entradaModel);
         }

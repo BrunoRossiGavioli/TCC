@@ -2,10 +2,8 @@
 
 @{
     ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout-Interno.cshtml";
 }
-
-<link href="~/css/Cadastro-Interno.css" rel="stylesheet" />
-
     <div id="moldura">
         <form class="cadastro" asp-action="ItemCarrinho">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -24,7 +22,7 @@
                 <span asp-validation-for="Quantidade" class="text-danger"></span>
             </div>
             <div class="just-right">
-                <a asp-controller="Carrinho" asp-action="Details" asp-route-id="@ViewBag.usuarioId">Voltar a lista</a>
+                <a class="btn-voltar" asp-controller="Carrinho" asp-action="Details" asp-route-id="@ViewBag.usuarioId">Voltar</a>
                 <input type="submit" value="Adicionar" class="btn-cadastrar" />
             </div>
         </form>

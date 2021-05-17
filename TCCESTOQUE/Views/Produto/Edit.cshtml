@@ -2,8 +2,8 @@
 
 @{
     ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout-Interno.cshtml";
 }
-<link href="~/css/Cadastro-Interno.css" rel="stylesheet" />
 <div id="moldura">
     <form class="cadastro" asp-action="Edit">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -38,6 +38,7 @@
             <span asp-validation-for="UnidadeMedida" class="text-danger"></span>
         </div>
         <div class="just-right">
+            <a asp-action="Index" class="btn-voltar">Voltar</a>
             <input type="submit" value="Salvar" class="btn-cadastrar" />
         </div>
     </form>
