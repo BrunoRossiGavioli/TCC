@@ -18,7 +18,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav flex-grow-1 nav-divider">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
@@ -26,26 +26,26 @@
                             if (!ViewBag.autenticado)
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Vendedor" asp-action="Create">Cadastrar</a>
+                                    <a class="nav-link text-dark" asp-controller="Vendedor" asp-action="Create">Cadastrar</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Vendedor" asp-action="Login">Login</a>
+                                    <a class="nav-link text-dark" asp-controller="Vendedor" asp-action="Login">Login</a>
                                 </li>
                             }
 
                             if (ViewBag.autenticado != null && ViewBag.autenticado)
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Fornecedor" asp-action="Index">Fornecedor</a>
+                                    <a class="nav-link text-dark" asp-controller="Fornecedor" asp-action="Index">Fornecedor</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Produto" asp-action="Index">Estoque</a>
+                                    <a class="nav-link text-dark" asp-controller="Produto" asp-action="Index">Estoque</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Venda" asp-action="Index">Vendas</a>
+                                    <a class="nav-link text-dark" asp-controller="Venda" asp-action="Index">Vendas</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Index">Cliente</a>
+                                    <a class="nav-link text-dark" asp-controller="Cliente" asp-action="Index">Cliente</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-controller="Entrada" asp-action="Index">Historico +</a>
@@ -54,7 +54,7 @@
                                     <a class="nav-link text-dark" asp-controller="Carrinho" asp-action="Details" asp-route-id="@ViewBag.usuarioId">Carrinho</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Vendedor" asp-action="Logout" asp-route-id="@ViewBag.usuarioId">Desconectar</a>
+                                    <a class="nav-link text-dark" asp-controller="Vendedor" asp-action="Logout" asp-route-id="@ViewBag.usuarioId">Desconectar</a>
                                 </li>
                             }
                         }
@@ -68,11 +68,8 @@
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - TCCESTOQUE - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
+    <footer class="footer bg-white text-center">
+        &copy; 2021 - TCCESTOQUE - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
