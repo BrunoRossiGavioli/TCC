@@ -1,12 +1,10 @@
 ﻿using FluentValidation.Results;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
-using TCCESTOQUE.Models.Enum;
+using TCCESTOQUE.Validacao.Formatacao;
 using TCCESTOQUE.Validacao.ValidacaoModels;
 
 namespace TCCESTOQUE.Service
@@ -43,10 +41,12 @@ namespace TCCESTOQUE.Service
 
         public ValidationResult PostCriacao(ProdutoModel produtoModel)
         {
+          
             var validador = new ProdutoValidador().Validate(produtoModel);
             if (!validador.IsValid)
                 return validador;
-                    
+  produtoModel = FormataValores.FormataProduto(produtoModel);
+            
             _produtoRepository.PostCriacao(produtoModel);
             return validador;
         }
@@ -56,7 +56,6 @@ namespace TCCESTOQUE.Service
             var produto = _produtoRepository.GetOne(id);
             if (produto == null)
                 return false;
-
             produto.Inativo = true;
             _produtoRepository.PutEdicao(produto);
             return true;
@@ -64,9 +63,12 @@ namespace TCCESTOQUE.Service
 
         public ValidationResult PutEdicao(ProdutoModel produtoModel)
         {
+           
+            produtoModel.Nome.ToUpper().Trim();
             var validador = new ProdutoValidador(true).Validate(produtoModel);
             if (!validador.IsValid)
                 return validador;
+                 produtoModel = FormataValores.FormataProduto(produtoModel);
             _produtoRepository.PutEdicao(ConvertProduto(produtoModel));
             return validador;
         }

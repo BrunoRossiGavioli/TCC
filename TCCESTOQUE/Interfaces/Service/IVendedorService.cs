@@ -1,7 +1,5 @@
 ﻿using FluentValidation.Results;
 using System;
-using System.Collections.Generic;
-using System.Security.Claims;
 using TCCESTOQUE.Models;
 
 namespace TCCESTOQUE.Interfaces.Service

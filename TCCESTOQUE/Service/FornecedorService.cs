@@ -19,7 +19,7 @@ namespace TCCESTOQUE.Service
         private readonly IFornecedorEnderecoRepository _fornecedorEnderecoRepository;
         private readonly IMapper _mapper;
 
-        public FornecedorService(IFornecedorRepository fornecedorRepository,IFornecedorEnderecoRepository fornecedorEnderecoRepository ,IMapper mapper)
+        public FornecedorService(IFornecedorRepository fornecedorRepository, IFornecedorEnderecoRepository fornecedorEnderecoRepository, IMapper mapper)
         {
             _fornecedorRepository = fornecedorRepository;
             _fornecedorEnderecoRepository = fornecedorEnderecoRepository;
@@ -44,7 +44,7 @@ namespace TCCESTOQUE.Service
             var res = _fornecedorRepository.GetOne(id);
             if (res.Entradas.Any())
                 return "Não é possivel deletar esse fornecedor, ele tem produtos";
-            
+
             if (res != null)
             {
                 res.Inativo = true;
@@ -84,7 +84,7 @@ namespace TCCESTOQUE.Service
                 feviewmodel = FormataValores.FormataValoresFornecedorView(feviewmodel);
                 var fornecedor = _mapper.Map<FornecedorModel>(feviewmodel);
                 _fornecedorRepository.PostCriacao(fornecedor);
-                
+
                 var endereco = _mapper.Map<FornecedorEnderecoModel>(feviewmodel);
                 endereco.FornecedorId = fornecedor.FornecedorId;
                 _fornecedorEnderecoRepository.PostCadastro(endereco);

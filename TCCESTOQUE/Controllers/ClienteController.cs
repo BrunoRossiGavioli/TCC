@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using TCCESTOQUE.Data;
+using System;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.ViewModel;
@@ -63,7 +57,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Create(ClienteViewModel cliVM)
         {
             Autenticar();
-            var res =_cliService.PostCriacao(cliVM);
+            var res = _cliService.PostCriacao(cliVM);
             if (!res.IsValid)
                 return View(MostrarErros(res, cliVM));
 
@@ -99,7 +93,7 @@ namespace TCCESTOQUE.Controllers
 
             var res = _cliService.PutEdicao(cliVM);
             if (!res.IsValid)
-                return View(MostrarErros(res, cliVM));  
+                return View(MostrarErros(res, cliVM));
 
             return RedirectToAction(nameof(Index));
         }
@@ -128,7 +122,7 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             var res = _cliService.PostExclusao(cliente.ClienteId);
-            if(res)
+            if (res)
                 return RedirectToAction(nameof(Index));
 
             ViewBag.ErroExcluir = "Não é possivel deletar o cliente, ele está em alguma venda!";

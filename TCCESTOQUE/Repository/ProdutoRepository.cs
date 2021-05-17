@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using TCCESTOQUE.Data;
@@ -9,11 +7,11 @@ using TCCESTOQUE.Models;
 
 namespace TCCESTOQUE.Repository
 {
-    public class ProdutoRepository : BaseRepository<ProdutoModel>,IProdutoRepository
+    public class ProdutoRepository : BaseRepository<ProdutoModel>, IProdutoRepository
     {
-        public ProdutoRepository(TCCESTOQUEContext context) :base(context)
+        public ProdutoRepository(TCCESTOQUEContext context) : base(context)
         {
-            
+
         }
 
         public ICollection<ProdutoModel> GetAll(Guid vendedorId)

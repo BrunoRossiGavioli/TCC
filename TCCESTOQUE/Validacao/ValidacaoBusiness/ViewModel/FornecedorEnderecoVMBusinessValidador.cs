@@ -1,8 +1,4 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Validacao.MensagensDeErro;
 using TCCESTOQUE.ViewModel;
@@ -13,19 +9,19 @@ namespace TCCESTOQUE.Validacao.ValidacaoBusiness.ViewModel
     {
         public FornecedorEnderecoVMBusinessValidador(IFornecedorRepository fornecedorRepo, FornecedorEnderecoViewModel fornecedor)
         {
-            When(fe => fornecedorRepo.GetByCnpj(fe.Cnpj, fe.VendedorId)?.FornecedorId != fe.FornecedorId, () => 
+            When(fe => fornecedorRepo.GetByCnpj(fe.Cnpj, fe.VendedorId)?.FornecedorId != fe.FornecedorId, () =>
             {
                 RuleFor(f => f.Cnpj).Must(cnpj => fornecedorRepo.GetByCnpj(cnpj, fornecedor.VendedorId) == null)
                 .WithMessage(MensagensErroFornecedor.CnpjJaCadastrado);
             });
-            
-            When(fe => fornecedorRepo.GetByRazaoSocial(fe.RazaoSocial, fe.VendedorId)?.FornecedorId != fe.FornecedorId, () => 
+
+            When(fe => fornecedorRepo.GetByRazaoSocial(fe.RazaoSocial, fe.VendedorId)?.FornecedorId != fe.FornecedorId, () =>
             {
                 RuleFor(f => f.RazaoSocial).Must(razaoSocial => fornecedorRepo.GetByRazaoSocial(razaoSocial, fornecedor.VendedorId) == null)
                 .WithMessage(MensagensErroFornecedor.RazaoSocialJaCadastrada);
             });
-            
-            When(fe => fornecedorRepo.GetByNomeFantsia(fe.NomeFantasia, fe.VendedorId)?.FornecedorId != fe.FornecedorId, () => 
+
+            When(fe => fornecedorRepo.GetByNomeFantsia(fe.NomeFantasia, fe.VendedorId)?.FornecedorId != fe.FornecedorId, () =>
             {
                 RuleFor(f => f.NomeFantasia).Must(nomeFantasia => fornecedorRepo.GetByNomeFantsia(nomeFantasia, fornecedor.VendedorId) == null)
                .WithMessage(MensagensErroFornecedor.NomeFantasiajaCadastrado);

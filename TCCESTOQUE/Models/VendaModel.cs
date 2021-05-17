@@ -21,7 +21,7 @@ namespace TCCESTOQUE.Models
         public Guid VendedorId { get; set; }
         [ScaffoldColumn(false)]
         public VendedorModel Vendedor { get; set; }
-        
+
         [ForeignKey("Cliente")]
         public Guid ClienteId { get; set; }
         [ScaffoldColumn(false)]

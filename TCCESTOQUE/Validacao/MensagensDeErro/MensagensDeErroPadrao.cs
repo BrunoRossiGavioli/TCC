@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace TCCESTOQUE.Validacao.MensagensDeErro
+﻿namespace TCCESTOQUE.Validacao.MensagensDeErro
 {
     public class MensagensDeErroPadrao
     {
@@ -36,7 +31,7 @@ namespace TCCESTOQUE.Validacao.MensagensDeErro
         public static string TelefoneJaCadastrado = "O telefone já encontra-se cadastrado!";
         public static string EmailJaCadastrado = "O email já encontra-se cadastrado!";
         public static string CpfJaCadastrado = "O cpf já encontra-se cadastrado!";
-        
+
         #endregion
 
         #region Campo não encontrado

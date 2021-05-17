@@ -33,6 +33,6 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
             RuleFor(v => v.Uf).NotEmpty().WithMessage(MensagensDeErroEndereco.UfVazio)
                 .NotEqual(UnidadeFederalEnum.Null).WithMessage(MensagensDeErroEndereco.UfVazio);
         }
-       
+
     }
 }

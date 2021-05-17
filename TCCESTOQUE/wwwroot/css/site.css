@@ -1,6 +1,12 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
-
+body{
+  background-color: #DCDCDC;
+  background-image: url('../img/fundoimg.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
 a.navbar-brand {
   white-space: normal;
   text-align: center;
@@ -18,7 +24,8 @@ a {
   border-color: #1861ac;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
@@ -43,7 +50,7 @@ html {
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
 }
 
 button.accept-policy {
@@ -58,30 +65,37 @@ html {
   min-height: 100%;
 }
 
-.CabecalhoListagem{
-  border-width: 3px;
-  border-color: #656565;
-  border-style:solid;
-  background-color: #7F6A93;
+.CabecalhoListagem {
+    background-color: var(--light-purple);
+    color: ghostwhite;
+}
 
-  box-shadow: 0 0 5px #656565, 0 0 5px #656565, 0 0 5px #656565, 0 0 5px #656565;
+.CabecalhoListagem * {
+    border: none !important;
 }
-.Lista{
-  border-width: 3px;
-  border-color: #0E1C36;
-  border-style: solid;
-  background-color: #F9FBF2;
-  background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-  background-image: url("../img/fundoimg.png");
 
-  box-shadow: 0 0 5px #7F6A93, 0 0 5px #7F6A93, 0 0 5px #7F6A93, 0 0 5px #7F6A93;
+.Lista {
+    background-color: ghostwhite;
+    border: 1px solid #dcdcdc;
+    border-style: solid none !important;
 }
-.LinksListagem{
-  font-size: 20px; 
-  text-shadow: 0 0 1px #0f0b13, 0 0 1px #0f0b13, 0 0 1px #0f0b13, 0 0 1px #0f0b13;
+.LinksListagem {
+  color:black;
 }
+
+.LinksListagem:hover{
+    color: rgba(0, 0, 0, 0.8);
+    text-decoration:none;
+}
+
+.bg-light-gray {
+    background-color: var(--lighter-gray);
+}
+
+.text-light-gray {
+    color: var(--gray) !important;
+}
+
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;

@@ -101,7 +101,7 @@ namespace TCCESTOQUE.Controllers
             if (ModelState.IsValid)
             {
                 var res = _VendaItensService.PutItemEdicao(vendaItensModel);
-                if(res == "")
+                if (res == "")
                     return RedirectToAction("Details", "Carrinho", new { id = vendaItensModel.VendedorId });
 
                 ModelState.AddModelError("", res);

@@ -1,8 +1,5 @@
-﻿using FluentValidation.Results;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
@@ -39,7 +36,7 @@ namespace TCCESTOQUE.Service
             vendaItens.CustoProduto = produto.Custo;
             if (res != "")
                 return res;
-            
+
             _vendaItensRepository.PostCriacao(vendaItens);
             return res;
         }

@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +12,7 @@ namespace TCCESTOQUE.Repository
     {
         public FornecedorRepository(TCCESTOQUEContext context) : base(context)
         {
-            
+
         }
 
         public ICollection<FornecedorModel> GetAll(Guid vendedorId)

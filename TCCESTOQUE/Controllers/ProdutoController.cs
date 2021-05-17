@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
-using TCCESTOQUE.Data;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
-using TCCESTOQUE.Models.Enum;
 
 namespace TCCESTOQUE.Controllers
 {
@@ -54,13 +51,13 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Create(ProdutoModel produtoModel)
         {
             Autenticar();
-            var res =_produtoService.PostCriacao(produtoModel);
+            var res = _produtoService.PostCriacao(produtoModel);
             if (res.IsValid)
                 return RedirectToAction("Index", "Produto");
 
             ViewData["UnidadeMedida"] = _produtoService.SelectUnidadeDeMedida;
             return View(MostrarErros(res, produtoModel));
-                
+
         }
 
         // GET: Produto/Edit/5
@@ -81,7 +78,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Edit(ProdutoModel produtoModel)
         {
             Autenticar();
-            var res =_produtoService.PutEdicao(produtoModel);
+            var res = _produtoService.PutEdicao(produtoModel);
             if (res.IsValid)
                 return RedirectToAction("Index", "Produto");
 
@@ -105,7 +102,7 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             var res = _produtoService.PostExclusao(produto.ProdutoId);
-            if(res)
+            if (res)
                 return RedirectToAction("Index", "Produto");
 
             ViewBag.ErroExcluir = "Não foi possivel excluir esse produto, ele está em uma venda";

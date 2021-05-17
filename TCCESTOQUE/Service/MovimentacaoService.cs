@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
-using TCCESTOQUE.Models;
 
 namespace TCCESTOQUE.Service
 {
@@ -18,7 +14,7 @@ namespace TCCESTOQUE.Service
 
         public string BaixarEstoque(Guid produtoId, double quantidade, bool checar = true)
         {
-            if(checar)
+            if (checar)
                 ChecarEstoque(produtoId, quantidade);
 
             var produto = _produtoRepo.GetOne(produtoId);

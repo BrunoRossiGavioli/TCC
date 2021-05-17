@@ -39,7 +39,7 @@ namespace TCCESTOQUE.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Edit(Guid id,FornecedorEnderecoModel fornecedorEnderecoModel)
+        public async Task<IActionResult> Edit(Guid id, FornecedorEnderecoModel fornecedorEnderecoModel)
         {
             Autenticar();
             if (id != fornecedorEnderecoModel.EnderecoId)

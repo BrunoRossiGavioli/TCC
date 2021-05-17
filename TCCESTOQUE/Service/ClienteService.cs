@@ -3,10 +3,10 @@ using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.Validacao.Formatacao;
 using TCCESTOQUE.Validacao.ValidacaoModels;
 using TCCESTOQUE.ViewModel;
 
@@ -41,10 +41,11 @@ namespace TCCESTOQUE.Service
 
         public ValidationResult PostCriacao(ClienteViewModel clienteVM)
         {
+            
             var validacao = new ClienteValidador().Validate(clienteVM);
             if (!validacao.IsValid)
                 return validacao;
-
+            clienteVM = FormataValores.FormataCliente(clienteVM);
             var cliente = _mapper.Map<ClienteModel>(clienteVM);
             _clienteRepository.PostCriacao(cliente);
 
@@ -58,8 +59,8 @@ namespace TCCESTOQUE.Service
         public bool PostExclusao(Guid id)
         {
             var res = _clienteRepository.GetOne(id);
-            
-            if(res != null && !res.Venda.Any())
+
+            if (res != null && !res.Venda.Any())
             {
                 res.Inativo = true;
                 _clienteRepository.PutEdicao(res);
@@ -70,6 +71,7 @@ namespace TCCESTOQUE.Service
 
         public ValidationResult PutEdicao(ClienteViewModel clienteVM)
         {
+            clienteVM = FormataValores.FormataCliente(clienteVM);
             var validacao = new ClienteValidador().Validate(clienteVM);
             if (!validacao.IsValid)
                 return validacao;
