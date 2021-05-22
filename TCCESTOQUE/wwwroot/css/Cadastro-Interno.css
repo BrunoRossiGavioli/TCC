@@ -87,7 +87,7 @@ h1 {
     outline: none;
 }
 
-.link-add * {
+.link-add * { 
     transition: all .4s;
     color: #212529 !important;
 }

@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Details";
-}
+} 
 
 <h1>Carrinho</h1> 
 
@@ -12,7 +12,7 @@
         <dt class="col-sm-2">
             Valor
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-10 ">
             @{
                 decimal valor = 0m;
                 foreach (var item in Model.Itens)
@@ -44,7 +44,7 @@
     
 </div>
 <table class="table">
-    <thead>
+    <thead class="CabecalhoListagem">
         <tr>
             <th>
                 Código
@@ -66,7 +66,7 @@
                 var numero = 1;
                 if (item.CarrinhoId == Model.CarrinhoId)
                 {
-                    <tr>
+                    <tr class="Lista">
                         <td>
                             @numero
                         </td>
