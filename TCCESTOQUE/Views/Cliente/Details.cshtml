@@ -10,32 +10,32 @@
 <div>
     <h4>ClienteModel</h4>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
+    <dl class="row Detalhes">
+        <dt class="col-sm-2 DetalhesHeader">
             @Html.DisplayNameFor(model => model.Nome)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Nome)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-2 DetalhesHeader">
             @Html.DisplayNameFor(model => model.Cpf)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Cpf)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-2 DetalhesHeader">
             @Html.DisplayNameFor(model => model.Email)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Email)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-2 DetalhesHeader">
             @Html.DisplayNameFor(model => model.Telefone)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Telefone)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-2 DetalhesHeader">
             @Html.DisplayNameFor(model => model.Sexo)
         </dt>
         <dd class="col-sm-10">
@@ -44,7 +44,7 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.ClienteId">Edit</a> |
+    <a asp-action="Edit" title="Editar" asp-route-id="@Model.ClienteId">Edit</a> |
     <a asp-action="Index">
         Voltar
     </a>

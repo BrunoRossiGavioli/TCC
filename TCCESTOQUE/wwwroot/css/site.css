@@ -6,7 +6,7 @@ body {
     background-image: url('../img/fundoimg.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: cover;
+    background-size: cover; 
 }
 
 a.navbar-brand {
@@ -75,17 +75,27 @@ html {
 .CabecalhoListagem * {
     border: none !important;
 }
+.DetalhesHeader { 
+  background-color: var(--lilac); 
+  border-bottom:black solid 2px;
+  padding-right: 283px;
+}
 
+.Detalhes {
+  border: var(--lilac) 2px solid; 
+  background-color: var(--white);
+  width:300px;
+}
 .Lista {
     background-color: var(--white);
     border: 1px solid #dcdcdc;
     border-style: solid none !important;
 }
-.LinksListagem {
+.Links {
   color:black;
 }
 
-.LinksListagem:hover{
+.Links:hover{
     color: rgba(0, 0, 0, 0.8);
     text-decoration:none;
 }
