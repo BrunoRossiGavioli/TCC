@@ -345,23 +345,23 @@ namespace Estoque.Test.ValidationViewModelTests
 
         #region Numero
         [Theory(DisplayName = "teste de números válidos")]
-        [InlineData(1)]
-        [InlineData(2)]
-        [InlineData(3)]
-        [InlineData(500)]
-        [InlineData(37)]
-        public async Task NumerosValidos(int numero)
+        [InlineData("1")]
+        [InlineData("2")]
+        [InlineData("3")]
+        [InlineData("500")]
+        [InlineData("37")]
+        public async Task NumerosValidos(string numero)
         {
             var instance = _builder.With(x => x.Numero = numero).Build();
             var validation = await _validator.ValidateAsync(instance);
             Assert.True(validation.IsValid);
         }
         [Theory(DisplayName = "teste de números inválidos")]
-        [InlineData(-1)]
-        [InlineData(0)]
-        [InlineData(-30)]
-        [InlineData(-48)]
-        public async Task NumerosInvalidos(int numero)
+        [InlineData("-1")]
+        [InlineData("0")]
+        [InlineData("-30")]
+        [InlineData("-48")]
+        public async Task NumerosInvalidos(string numero)
         {
             var instance = _builder.With(x => x.Numero = numero).Build();
             var validation = await _validator.ValidateAsync(instance);

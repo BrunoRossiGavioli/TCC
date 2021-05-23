@@ -22,7 +22,7 @@ namespace TCCESTOQUE.Models
 
         [MaxLength(6)]
         [Required(ErrorMessage = "Informe o numero")]
-        public int Numero { get; set; }
+        public string Numero { get; set; }
 
         [MaxLength(80)]
         [Required(ErrorMessage = "Informe o Bairro", AllowEmptyStrings = false)]

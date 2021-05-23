@@ -38,6 +38,8 @@
     <Compile Include="Migrations\20210510195136_AdicionandoInativoParaTodasAsEntidades.Designer.cs" />
     <Compile Include="Migrations\20210510195356_AdicionandoInativoParaTodasAsEntidades2.cs" />
     <Compile Include="Migrations\20210510195356_AdicionandoInativoParaTodasAsEntidades2.Designer.cs" />
+    <Compile Include="Migrations\20210523201129_AlterandoNumeroResidenciaParaString.cs" />
+    <Compile Include="Migrations\20210523201129_AlterandoNumeroResidenciaParaString.Designer.cs" />
     <Compile Include="Migrations\TCCESTOQUEContextModelSnapshot.cs" />
   </ItemGroup>
 
