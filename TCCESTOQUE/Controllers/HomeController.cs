@@ -22,6 +22,7 @@ namespace TCCESTOQUE.Controllers
 
         public IActionResult Privacy()
         {
+            Autenticar();
             return View();
         }
 

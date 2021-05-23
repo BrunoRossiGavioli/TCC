@@ -3,18 +3,21 @@
     margin: 0;
 }
 
-body{
-    height:100%;
+body {
+    height: 100%;
+    background-image: unset !important;
 }
 
 select, option{
     cursor: pointer;
 }
 
-h1 {
+h1, tr {
     cursor: default;
 }
   
+
+
 #moldura {
     display: flex;
     height: 100%;
@@ -113,15 +116,15 @@ h1 {
     font-weight: bold;
     border: none;
     border-radius: .7rem;
-    background-color: var(--light-blue);
+    background-color: var(--light-purple);
     padding: .5rem;
     margin-left: 1rem;
     transition: all .4s;
 }
 
 .btn-cadastrar:hover {
-    transition:all .4s;
-    background-color: var(--dark-blue);
+    transition: all .4s;
+    background-color: var(--lilac);
 }
 
 .btn-voltar {
@@ -132,7 +135,7 @@ h1 {
     font-weight: bold;
     border: none;
     border-radius: .7rem;
-    background-color: var(--lilac);
+    background-color: var(--gray);
     padding: .5rem;
     margin-left: 1rem;
     transition: all .4s;
@@ -140,7 +143,7 @@ h1 {
 
 .btn-voltar:hover {
     text-decoration: none;
-    background-color: var(--strong-lilac);
+    background-color: var(--gray-hover);
     color: #F9FBF2;
 }
 
