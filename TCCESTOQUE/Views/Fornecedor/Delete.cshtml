@@ -65,19 +65,16 @@
     </dl>
     @if (ViewBag.FornecedorErroExcluir != null)
     {
-    <table class="table">
+    <table class="tabela">
         <thead>
             <tr>
-                <th>
-                    Código da entrada
-                </th>
-                <th>
+                <th class="mb-visivel">
                     Valor unitario
                 </th>
-                <th>
+                <th class="mb-visivel">
                     Custo
                 </th>
-                <th>
+                <th class="mb-visivel">
                     Quantidade
                 </th>
             </tr>
@@ -86,16 +83,13 @@
         @foreach (var entrada in Model.Entradas)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelProduto => entrada.EntradaId)
-                </td>
-                <td>
+                <td class="mb-visivel">
                     @Html.DisplayFor(modelProduto => entrada.PrecoProduto)
                 </td>
-                <td>
+                <td class="mb-visivel">
                     @Html.DisplayFor(modelProduto => entrada.CustoProduto)
                 </td>
-                <td>
+                <td class="mb-visivel">
                     @Html.DisplayFor(modelProduto => entrada.QuantidadeProduto)
                 </td>
             </tr>

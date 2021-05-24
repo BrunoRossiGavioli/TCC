@@ -86,27 +86,6 @@ html {
   background-color: var(--white);
   width:300px;
 }
-.Lista {
-    background-color: var(--white);
-    border: 1px solid #dcdcdc;
-    border-style: solid none !important;
-}
-.Links {
-  color:black;
-}
-
-.Links:hover{
-    color: rgba(0, 0, 0, 0.8);
-    text-decoration:none;
-}
-
-.bg-light-gray {
-    background-color: var(--lighter-gray);
-}
-
-.text-light-gray {
-    color: var(--gray) !important;
-}
 
 body {
   /* Margin bottom by footer height */

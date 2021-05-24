@@ -38,5 +38,10 @@ namespace TCCESTOQUE.Models
             }
             return valor;
         }
+
+        public string PegarData(DateTime data)
+        {
+            return data.ToShortDateString();
+        }
     }
 }
