@@ -22,5 +22,16 @@ namespace TCCESTOQUE.Models
         public ClienteModel Cliente { get; set; }
 
         public ICollection<VendaItensModel> Itens { get; set; }
+
+        public decimal Valor()
+        {
+            decimal valor = 0m;
+            foreach (var item in Itens)
+            {
+                if (CarrinhoId == item.CarrinhoId)
+                    valor += item.Produto.ValorUnitario * item.Quantidade;
+            }
+            return valor;
+        }
     }
 }

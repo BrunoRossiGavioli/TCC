@@ -78,7 +78,6 @@ html {
 .DetalhesHeader { 
   background-color: var(--lilac); 
   border-bottom:black solid 2px;
-  padding-right: 283px;
 }
 
 .Detalhes {
