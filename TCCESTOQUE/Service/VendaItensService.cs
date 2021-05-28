@@ -32,7 +32,7 @@ namespace TCCESTOQUE.Service
         {
             var res = _movimentacaoService.ChecarEstoque(vendaItens.ProdutoId, vendaItens.Quantidade);
             var produto = _produtoRepository.GetOne(vendaItens.ProdutoId);
-            vendaItens.PrecoProduto = produto.ValorUnitario;
+            vendaItens.PrecoProduto = produto.Valor;
             vendaItens.CustoProduto = produto.Custo;
             if (res != "")
                 return res;
@@ -45,7 +45,7 @@ namespace TCCESTOQUE.Service
         {
             var res = _movimentacaoService.ChecarEstoque(vendaItens.ProdutoId, vendaItens.Quantidade);
             var produto = _produtoRepository.GetOne(vendaItens.ProdutoId);
-            vendaItens.PrecoProduto = produto.ValorUnitario;
+            vendaItens.PrecoProduto = produto.Valor;
             vendaItens.CustoProduto = produto.Custo;
             if (res != "")
                 return res;

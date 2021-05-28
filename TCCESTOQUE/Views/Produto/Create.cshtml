@@ -1,5 +1,4 @@
-﻿@model TCCESTOQUE.Models.ProdutoModel
-@using TCCESTOQUE.Models.Enum
+﻿@model TCCESTOQUE.ViewModel.ProdutoViewModel
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout-Interno.cshtml";
@@ -22,24 +21,31 @@
             <span asp-validation-for="Descricao" class="text-danger"></span>
         </div>
         <div class="campo">
+            <label asp-for="UnidadeMedida">Unidade de medida*</label>
+            <select asp-for="UnidadeMedida" asp-items="@ViewBag.UnidadeMedida"></select>
+            <span asp-validation-for="UnidadeMedida" class="text-danger"></span>
+        </div>
+        <div class="campo">
             <label asp-for="Custo">Custo*</label>
             <input asp-for="Custo" />
             <span asp-validation-for="Custo" class="text-danger"></span>
         </div>
         <div class="campo">
-            <label asp-for="ValorUnitario">Valor unitario*</label>
-            <input asp-for="ValorUnitario" />
-            <span asp-validation-for="ValorUnitario" class="text-danger"></span>
+            <label asp-for="Valor">Valor*</label>
+            <input asp-for="Valor" />
+            <span asp-validation-for="Valor" class="text-danger"></span>
+        </div>
+        <div class="campo">
+            <label asp-for="FornecedorId">Fornecedor*</label>
+            <select asp-for="FornecedorId" asp-items="@ViewBag.Fornecedores">
+                <option value="00000000-0000-0000-0000-000000000000">Selecione</option>
+            </select>
+            <span asp-validation-for="FornecedorId" class="text-danger"></span>
         </div>
         <div class="campo">
             <label asp-for="Quantidade">Quantidade*</label>
             <input asp-for="Quantidade" />
             <span asp-validation-for="Quantidade" class="text-danger"></span>
-        </div>
-        <div class="campo">
-            <label asp-for="UnidadeMedida">Unidade de medida*</label>
-            <select asp-for="UnidadeMedida" asp-items="@ViewBag.UnidadeMedida"></select>
-            <span asp-validation-for="UnidadeMedida" class="text-danger"></span>
         </div>
         <div class="just-right">
             <a asp-action="Index" alt="Voltar" class="btn-voltar">
@@ -50,7 +56,9 @@
     </form>
 </div>
 @section Scripts {
-@{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+ }
 
 <script>
     $.validator.methods.number = function (value, element) {

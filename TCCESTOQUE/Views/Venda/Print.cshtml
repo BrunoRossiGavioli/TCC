@@ -92,15 +92,7 @@
                 <tr>
                     <td colspan="3">Total</td>
                     <td>
-                        @{
-                            decimal valor = 0m;
-                            foreach (var item in Model.Itens)
-                            {
-                                if (Model.VendaId == item.VendaId)
-                                    valor += item.Produto.ValorUnitario * item.Quantidade;
-                            }
-                        }
-                        @valor;
+                        @Model.Valor();
                     </td>
 
                 </tr>

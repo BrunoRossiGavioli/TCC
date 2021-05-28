@@ -30,7 +30,7 @@
     @if (item.Cancelada) {estiloTr = "cancelada";}
         <tr class="@estiloTr">
             <td class="mb-visivel">
-                @Html.DisplayFor(modelItem => item.QuantidadeProduto)
+                @Html.DisplayFor(modelItem => item.Quantidade)
             </td>
             <td class="mb-visivel">
                 @Html.DisplayFor(modelItem => item.Produto.Nome)

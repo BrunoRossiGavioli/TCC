@@ -22,7 +22,7 @@ namespace TCCESTOQUE.Service
         {
             entrada = GetOne(entrada.EntradaId);
             entrada.Cancelada = true;
-            var erro = _movimentacaoService.BaixarEstoque(entrada.ProdutoId, entrada.QuantidadeProduto);
+            var erro = _movimentacaoService.BaixarEstoque(entrada.ProdutoId, entrada.Quantidade);
             if (erro != "")
                 return erro;
             _entradaRepo.PutEdicao(entrada);
@@ -42,9 +42,9 @@ namespace TCCESTOQUE.Service
         public void PostEntrada(EntradaModel entrada)
         {
             var produto = _produtoRepo.GetOne(entrada.ProdutoId);
-            entrada.PrecoProduto = produto.ValorUnitario;
-            entrada.CustoProduto = produto.Custo;
-            _movimentacaoService.SubirEstoque(entrada.ProdutoId, entrada.QuantidadeProduto);
+            entrada.Valor = produto.Valor;
+            entrada.Custo = produto.Custo;
+            _movimentacaoService.SubirEstoque(entrada.ProdutoId, entrada.Quantidade);
             _entradaRepo.PostCriacao(entrada);
         }
     }

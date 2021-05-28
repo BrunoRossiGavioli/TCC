@@ -105,7 +105,7 @@ namespace Estoque.Test.ValidationModelsTest
         [InlineData(4.57)]
         public async Task ValorUnitarioValido(decimal valor)
         {
-            var instance = _builder.With(x => x.ValorUnitario = valor).Build();
+            var instance = _builder.With(x => x.Valor = valor).Build();
             var validation = await _validator.ValidateAsync(instance);
             Assert.True(validation.IsValid);
         }
@@ -117,7 +117,7 @@ namespace Estoque.Test.ValidationModelsTest
         [InlineData(-4.57)]
         public async Task ValorUnitarioMinimo(decimal valor)
         {
-            var instance = _builder.With(x => x.ValorUnitario = valor).Build();
+            var instance = _builder.With(x => x.Valor = valor).Build();
             var validation = await _validator.ValidateAsync(instance);
             Assert.False(validation.IsValid);
             Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensErroProduto.ValorUnitarioMinimo));
@@ -126,7 +126,7 @@ namespace Estoque.Test.ValidationModelsTest
         [Fact(DisplayName = "Valor unitário vazio")]
         public async Task ValorUnitarioVazio()
         {
-            var instance = _builder.With(x => x.ValorUnitario = Convert.ToDecimal(null)).Build();
+            var instance = _builder.With(x => x.Valor = Convert.ToDecimal(null)).Build();
             var validation = await _validator.ValidateAsync(instance);
             Assert.False(validation.IsValid);
             Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensErroProduto.ValorUnitarioVazio));

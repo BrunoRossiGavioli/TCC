@@ -25,7 +25,7 @@ namespace TCCESTOQUE.Models
 
         [Column(TypeName = "decimal(12,2)")]
         [Required(ErrorMessage = "Informe o valor unitario")]
-        public decimal ValorUnitario { get; set; }
+        public decimal Valor { get; set; }
 
         [Required(ErrorMessage = "Informe a quantidade")]
         public double Quantidade { get; set; }

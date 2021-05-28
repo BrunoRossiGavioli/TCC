@@ -1,4 +1,5 @@
-﻿using FluentValidation.Results;
+﻿using AutoMapper;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using TCCESTOQUE.Interfaces.Repository;
@@ -6,16 +7,21 @@ using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.Validacao.Formatacao;
 using TCCESTOQUE.Validacao.ValidacaoModels;
+using TCCESTOQUE.Validacao.ValidacaoModels.ViewModel;
+using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Service
 {
     public class ProdutoService : IProdutoService
     {
         private readonly IProdutoRepository _produtoRepository;
-
-        public ProdutoService(IProdutoRepository produtoRepository)
+        private readonly IEntradaRepository _entradaRepository;
+        private readonly IMapper _mapper;
+        public ProdutoService(IProdutoRepository produtoRepository, IEntradaRepository entradaRepository, IMapper mapper)
         {
             _produtoRepository = produtoRepository;
+            _entradaRepository = entradaRepository;
+            _mapper = mapper;
         }
 
         public ICollection<ProdutoModel> GetAll(Guid vendedorId)
@@ -39,15 +45,22 @@ namespace TCCESTOQUE.Service
             return _produtoRepository.GetEdicao(id);
         }
 
-        public ValidationResult PostCriacao(ProdutoModel produtoModel)
+        public ValidationResult PostCriacao(ProdutoViewModel produtoModel)
         {
-          
-            var validador = new ProdutoValidador().Validate(produtoModel);
+            var validador = new ProdutoVMValidador().Validate(produtoModel);
+
+            var produto = _mapper.Map<ProdutoViewModel, ProdutoModel>(produtoModel);
+            var entrada = _mapper.Map<ProdutoViewModel, EntradaModel>(produtoModel);
+
             if (!validador.IsValid)
                 return validador;
-  produtoModel = FormataValores.FormataProduto(produtoModel);
             
-            _produtoRepository.PostCriacao(produtoModel);
+            produto = FormataValores.FormataProduto(produto);
+            _produtoRepository.PostCriacao(produto);
+
+            entrada.ProdutoId = produto.ProdutoId;
+            _entradaRepository.PostCriacao(entrada);
+
             return validador;
         }
 
@@ -76,7 +89,7 @@ namespace TCCESTOQUE.Service
         public ProdutoModel ConvertProduto(ProdutoModel produto)
         {
             var info = GetOne(produto.ProdutoId);
-            info.ValorUnitario = produto.ValorUnitario;
+            info.Valor = produto.Valor;
             info.UnidadeMedida = produto.UnidadeMedida;
             info.Nome = produto.Nome;
             info.Descricao = produto.Descricao;

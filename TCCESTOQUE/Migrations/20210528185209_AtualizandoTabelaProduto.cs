@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TCCESTOQUE.Migrations
 {
-    public partial class Nova : Migration
+    public partial class AtualizandoTabelaProduto : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,7 +19,7 @@ namespace TCCESTOQUE.Migrations
                     Email = table.Column<string>(maxLength: 80, nullable: false),
                     Telefone = table.Column<string>(maxLength: 14, nullable: true),
                     Sexo = table.Column<int>(nullable: false),
-                    Ativo = table.Column<bool>(nullable: false)
+                    Inativo = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,6 +54,7 @@ namespace TCCESTOQUE.Migrations
                     Email = table.Column<string>(maxLength: 80, nullable: true),
                     Telefone = table.Column<string>(nullable: false),
                     Sexo = table.Column<int>(nullable: false),
+                    Inativo = table.Column<bool>(nullable: false),
                     VendedorId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
@@ -77,14 +78,39 @@ namespace TCCESTOQUE.Migrations
                     Cnpj = table.Column<string>(maxLength: 18, nullable: false),
                     Email = table.Column<string>(maxLength: 80, nullable: false),
                     Telefone = table.Column<string>(maxLength: 14, nullable: true),
-                    VendedorId = table.Column<Guid>(nullable: false),
-                    Ativo = table.Column<bool>(nullable: false)
+                    Inativo = table.Column<bool>(nullable: false),
+                    VendedorId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Fornecedor", x => x.FornecedorId);
                     table.ForeignKey(
                         name: "FK_Fornecedor_Vendedor_VendedorId",
+                        column: x => x.VendedorId,
+                        principalTable: "Vendedor",
+                        principalColumn: "VendedorId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Produto",
+                columns: table => new
+                {
+                    ProdutoId = table.Column<Guid>(nullable: false),
+                    Nome = table.Column<string>(maxLength: 50, nullable: false),
+                    Descricao = table.Column<string>(maxLength: 100, nullable: true),
+                    Custo = table.Column<decimal>(type: "decimal(12,2)", nullable: false),
+                    Valor = table.Column<decimal>(type: "decimal(12,2)", nullable: false),
+                    Quantidade = table.Column<double>(nullable: false),
+                    UnidadeMedida = table.Column<int>(nullable: false),
+                    Inativo = table.Column<bool>(nullable: false),
+                    VendedorId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Produto", x => x.ProdutoId);
+                    table.ForeignKey(
+                        name: "FK_Produto_Vendedor_VendedorId",
                         column: x => x.VendedorId,
                         principalTable: "Vendedor",
                         principalColumn: "VendedorId",
@@ -99,10 +125,10 @@ namespace TCCESTOQUE.Migrations
                     Cep = table.Column<string>(maxLength: 9, nullable: false),
                     Logradouro = table.Column<string>(maxLength: 80, nullable: false),
                     Complemento = table.Column<string>(maxLength: 80, nullable: true),
-                    Numero = table.Column<int>(maxLength: 6, nullable: false),
+                    Numero = table.Column<string>(maxLength: 6, nullable: false),
                     Bairro = table.Column<string>(maxLength: 80, nullable: false),
                     Localidade = table.Column<string>(maxLength: 80, nullable: false),
-                    Uf = table.Column<string>(maxLength: 2, nullable: false),
+                    Uf = table.Column<int>(nullable: false),
                     ClienteId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
@@ -151,10 +177,10 @@ namespace TCCESTOQUE.Migrations
                     Cep = table.Column<string>(maxLength: 9, nullable: false),
                     Logradouro = table.Column<string>(maxLength: 80, nullable: false),
                     Complemento = table.Column<string>(maxLength: 80, nullable: true),
-                    Numero = table.Column<int>(maxLength: 6, nullable: false),
+                    Numero = table.Column<string>(maxLength: 6, nullable: false),
                     Bairro = table.Column<string>(maxLength: 80, nullable: false),
                     Localidade = table.Column<string>(maxLength: 80, nullable: false),
-                    Uf = table.Column<string>(maxLength: 2, nullable: false),
+                    Uf = table.Column<int>(nullable: false),
                     FornecedorId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
@@ -169,29 +195,37 @@ namespace TCCESTOQUE.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Produto",
+                name: "Entrada",
                 columns: table => new
                 {
-                    ProdutoId = table.Column<Guid>(nullable: false),
-                    Nome = table.Column<string>(maxLength: 50, nullable: false),
-                    Descricao = table.Column<string>(maxLength: 100, nullable: true),
+                    EntradaId = table.Column<Guid>(nullable: false),
+                    Valor = table.Column<decimal>(type: "decimal(12,2)", nullable: false),
                     Custo = table.Column<decimal>(type: "decimal(12,2)", nullable: false),
-                    ValorUnitario = table.Column<decimal>(type: "decimal(12,2)", nullable: false),
-                    Quantidade = table.Column<int>(nullable: false),
+                    Quantidade = table.Column<double>(nullable: false),
+                    UnidadeMedida = table.Column<int>(nullable: false),
+                    DataEntrada = table.Column<DateTime>(nullable: false),
+                    Cancelada = table.Column<bool>(nullable: false),
+                    ProdutoId = table.Column<Guid>(nullable: false),
                     FornecedorId = table.Column<Guid>(nullable: false),
                     VendedorId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Produto", x => x.ProdutoId);
+                    table.PrimaryKey("PK_Entrada", x => x.EntradaId);
                     table.ForeignKey(
-                        name: "FK_Produto_Fornecedor_FornecedorId",
+                        name: "FK_Entrada_Fornecedor_FornecedorId",
                         column: x => x.FornecedorId,
                         principalTable: "Fornecedor",
                         principalColumn: "FornecedorId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Produto_Vendedor_VendedorId",
+                        name: "FK_Entrada_Produto_ProdutoId",
+                        column: x => x.ProdutoId,
+                        principalTable: "Produto",
+                        principalColumn: "ProdutoId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Entrada_Vendedor_VendedorId",
                         column: x => x.VendedorId,
                         principalTable: "Vendedor",
                         principalColumn: "VendedorId",
@@ -204,6 +238,8 @@ namespace TCCESTOQUE.Migrations
                 {
                     VendaItensId = table.Column<Guid>(nullable: false),
                     Quantidade = table.Column<int>(nullable: false),
+                    PrecoProduto = table.Column<decimal>(type: "decimal(12,2)", nullable: false),
+                    CustoProduto = table.Column<decimal>(type: "decimal(12,2)", nullable: false),
                     VendaId = table.Column<Guid>(nullable: true),
                     CarrinhoId = table.Column<Guid>(nullable: true),
                     VendedorId = table.Column<Guid>(nullable: false),
@@ -255,6 +291,21 @@ namespace TCCESTOQUE.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Entrada_FornecedorId",
+                table: "Entrada",
+                column: "FornecedorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Entrada_ProdutoId",
+                table: "Entrada",
+                column: "ProdutoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Entrada_VendedorId",
+                table: "Entrada",
+                column: "VendedorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Fornecedor_VendedorId",
                 table: "Fornecedor",
                 column: "VendedorId");
@@ -264,11 +315,6 @@ namespace TCCESTOQUE.Migrations
                 table: "FornecedorEndereco",
                 column: "FornecedorId",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Produto_FornecedorId",
-                table: "Produto",
-                column: "FornecedorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Produto_VendedorId",
@@ -312,10 +358,16 @@ namespace TCCESTOQUE.Migrations
                 name: "ClienteEndereco");
 
             migrationBuilder.DropTable(
+                name: "Entrada");
+
+            migrationBuilder.DropTable(
                 name: "FornecedorEndereco");
 
             migrationBuilder.DropTable(
                 name: "VendaItens");
+
+            migrationBuilder.DropTable(
+                name: "Fornecedor");
 
             migrationBuilder.DropTable(
                 name: "Carrinho");
@@ -325,9 +377,6 @@ namespace TCCESTOQUE.Migrations
 
             migrationBuilder.DropTable(
                 name: "Venda");
-
-            migrationBuilder.DropTable(
-                name: "Fornecedor");
 
             migrationBuilder.DropTable(
                 name: "Cliente");

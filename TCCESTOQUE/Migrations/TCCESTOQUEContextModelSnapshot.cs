@@ -130,7 +130,7 @@ namespace TCCESTOQUE.Migrations
                     b.Property<bool>("Cancelada")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<decimal>("CustoProduto")
+                    b.Property<decimal>("Custo")
                         .HasColumnType("decimal(12,2)");
 
                     b.Property<DateTime>("DataEntrada")
@@ -139,17 +139,17 @@ namespace TCCESTOQUE.Migrations
                     b.Property<Guid>("FornecedorId")
                         .HasColumnType("char(36)");
 
-                    b.Property<decimal>("PrecoProduto")
-                        .HasColumnType("decimal(12,2)");
-
                     b.Property<Guid>("ProdutoId")
                         .HasColumnType("char(36)");
 
-                    b.Property<double>("QuantidadeProduto")
+                    b.Property<double>("Quantidade")
                         .HasColumnType("double");
 
                     b.Property<int>("UnidadeMedida")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("Valor")
+                        .HasColumnType("decimal(12,2)");
 
                     b.Property<Guid>("VendedorId")
                         .HasColumnType("char(36)");
@@ -284,7 +284,7 @@ namespace TCCESTOQUE.Migrations
                     b.Property<int>("UnidadeMedida")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("ValorUnitario")
+                    b.Property<decimal>("Valor")
                         .HasColumnType("decimal(12,2)");
 
                     b.Property<Guid>("VendedorId")

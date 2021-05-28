@@ -29,7 +29,7 @@ namespace TCCESTOQUE.Models
             foreach (var item in Itens)
             {
                 if (CarrinhoId == item.CarrinhoId)
-                    valor += item.Produto.ValorUnitario * item.Quantidade;
+                    valor += item.Produto.Valor * item.Quantidade;
             }
             return valor;
         }

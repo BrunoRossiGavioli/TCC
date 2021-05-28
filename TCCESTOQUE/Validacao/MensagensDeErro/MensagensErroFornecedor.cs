@@ -28,5 +28,9 @@ namespace TCCESTOQUE.Validacao.MensagensDeErro
         #region Tamanho obrigatorio
         public static string CnpjTamanho = "O campo Cnpj deve ter 18 caracteres";
         #endregion
+
+        #region Informar
+        public static string InformeFornecedor = "Informe o fornecedor";
+        #endregion
     }
 }

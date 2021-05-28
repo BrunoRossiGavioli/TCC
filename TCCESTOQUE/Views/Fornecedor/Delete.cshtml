@@ -111,13 +111,13 @@
                     @Html.DisplayFor(modelProduto => entrada.Produto.Nome)
                 </td>
                 <td class="mb-visivel just-cont-center">
-                    @Html.DisplayFor(modelProduto => entrada.PrecoProduto)
+                    @Html.DisplayFor(modelProduto => entrada.Valor)
                 </td>
                 <td class="mb-visivel just-cont-center">
-                    @Html.DisplayFor(modelProduto => entrada.CustoProduto)
+                    @Html.DisplayFor(modelProduto => entrada.Custo)
                 </td>
                 <td class="mb-visivel just-cont-end">
-                    @Html.DisplayFor(modelProduto => entrada.QuantidadeProduto) @Html.DisplayFor(modelProduto => entrada.UnidadeMedida)
+                    @Html.DisplayFor(modelProduto => entrada.Quantidade) @Html.DisplayFor(modelProduto => entrada.UnidadeMedida)
                 </td>
             </tr>
         }

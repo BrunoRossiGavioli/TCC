@@ -19,6 +19,9 @@ namespace TCCESTOQUE.AutoMapper
 
             CreateMap<ClienteModel, ClienteViewModel>();
             CreateMap<ClienteEnderecoModel, ClienteViewModel>();
+
+            CreateMap<ProdutoViewModel, ProdutoModel>();
+            CreateMap<ProdutoViewModel, EntradaModel>();
         }
     }
 }

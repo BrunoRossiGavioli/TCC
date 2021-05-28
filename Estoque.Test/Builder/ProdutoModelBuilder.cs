@@ -11,7 +11,7 @@ namespace Estoque.Test.Builder
             _builderInstance = Builder<ProdutoModel>.CreateNew()
                 .With(x => x.Custo = Convert.ToDecimal(12.00))
                 .With(x => x.Nome = "Cleberson")
-                .With(x => x.ValorUnitario = Convert.ToDecimal(12.00))
+                .With(x => x.Valor = Convert.ToDecimal(12.00))
                 .With(x => x.Quantidade = 40);
         }
     }

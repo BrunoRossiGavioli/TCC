@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Controllers
 {
@@ -39,6 +40,7 @@ namespace TCCESTOQUE.Controllers
         {
             Autenticar();
             ViewData["UnidadeMedida"] = _produtoService.SelectUnidadeDeMedida;
+            ViewData["Fornecedores"] = _selectListRepository.SelectListFornecedor("FornecedorId", "NomeFantasia", ViewBag.usuarioId);
             return View();
         }
 
@@ -48,7 +50,7 @@ namespace TCCESTOQUE.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult Create(ProdutoModel produtoModel)
+        public IActionResult Create(ProdutoViewModel produtoModel)
         {
             Autenticar();
             var res = _produtoService.PostCriacao(produtoModel);
@@ -56,6 +58,8 @@ namespace TCCESTOQUE.Controllers
                 return RedirectToAction("Index", "Produto");
 
             ViewData["UnidadeMedida"] = _produtoService.SelectUnidadeDeMedida;
+            ViewData["Fornecedores"] = _selectListRepository.SelectListFornecedor("FornecedorId", "NomeFantasia", ViewBag.usuarioId);
+
             return View(MostrarErros(res, produtoModel));
 
         }
