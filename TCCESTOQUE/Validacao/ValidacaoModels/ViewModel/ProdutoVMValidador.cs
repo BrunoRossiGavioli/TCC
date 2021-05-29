@@ -1,8 +1,5 @@
 ﻿using FluentValidation;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TCCESTOQUE.Models.Enum;
 using TCCESTOQUE.Validacao.MensagensDeErro;
 using TCCESTOQUE.ViewModel;
@@ -21,15 +18,17 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels.ViewModel
                     .MinimumLength(3).WithMessage(MensagensErroProduto.DescricaoTamanhoMinimo);
 
             RuleFor(p => p.Custo).NotEmpty().WithMessage(MensagensErroProduto.CustoVazio)
+                .NotNull().WithMessage(MensagensErroProduto.CustoVazio)
                     .GreaterThan(0).WithMessage(MensagensErroProduto.CustoMinimo);
 
+
             RuleFor(p => p.Valor).NotEmpty().WithMessage(MensagensErroProduto.ValorUnitarioVazio)
-                    .GreaterThan(0).WithMessage(MensagensErroProduto.ValorUnitarioMinimo);
+                .GreaterThan(0).WithMessage(MensagensErroProduto.ValorUnitarioMinimo);
 
             RuleFor(p => p.Quantidade).NotEmpty().WithMessage(MensagensErroProduto.QuantidadeVazia)
                 .GreaterThan(0).WithMessage(MensagensErroProduto.QuantidadeMinima);
 
-            RuleFor(p => p.UnidadeMedida).NotEqual(UnidadeDeMedidaEnum.Selecione).WithMessage("Informe a unidade de medida");
+            RuleFor(p => p.UnidadeMedida).NotEqual(UnidadeDeMedidaEnum.Selecione).WithMessage(MensagensErroProduto.UnidadeDeMedidaInválida);
 
             RuleFor(p => p.FornecedorId).NotEqual(Guid.Empty).WithMessage(MensagensErroFornecedor.InformeFornecedor);
         }

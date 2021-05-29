@@ -20,5 +20,9 @@ namespace TCCESTOQUE.Validacao.MensagensDeErro
         public static string ValorUnitarioMinimo = "O campo Valor Unitário tem que ter no mínimo 1";
         public static string QuantidadeMinima = "O campo Quantidade tem que ter no mínimo 1";
         #endregion
+
+        #region Valores Não numéricos
+        public static string UnidadeDeMedidaInválida = "Informe a unidade de medida";
+        #endregion
     }
 }

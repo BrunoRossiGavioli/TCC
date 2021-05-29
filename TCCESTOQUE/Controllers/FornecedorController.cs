@@ -36,7 +36,7 @@ namespace TCCESTOQUE.Controllers
             }
 
             return RedirectToAction("Index", "Fornecedor");
-            }
+        }
         // GET: Fornecedor
         [Authorize]
         public IActionResult Index()

@@ -26,9 +26,8 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
                 .GreaterThan(0).WithMessage(MensagensErroProduto.ValorUnitarioMinimo);
 
             RuleFor(p => p.UnidadeMedida).NotNull()
-                .NotEqual(UnidadeDeMedidaEnum.Selecione).WithMessage("Informe a unidade de medida");
+                .NotEqual(UnidadeDeMedidaEnum.Selecione).WithMessage(MensagensErroProduto.UnidadeDeMedidaInválida);
 
-                
             if (!editando)
                 RuleFor(p => p.Quantidade).NotNull().WithMessage(MensagensErroProduto.QuantidadeVazia)
                     .NotEmpty().WithMessage(MensagensErroProduto.QuantidadeVazia)

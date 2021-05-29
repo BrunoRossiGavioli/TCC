@@ -3,7 +3,7 @@ using TCCESTOQUE.Service;
 using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Validacao.Formatacao
-{ 
+{
     public class FormataValores
     {
         public static VendedorModel FormataValoresVendedor(VendedorModel vendedor)
