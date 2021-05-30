@@ -14,53 +14,75 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TCCESTOQUE</a>
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">TCCESTOQUE</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        @{
-                            if (!ViewBag.autenticado)
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Vendedor" asp-action="Create">Cadastrar</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Vendedor" asp-action="Login">Login</a>
-                                </li>
-                            }
 
-                            if (ViewBag.autenticado != null && ViewBag.autenticado)
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Fornecedor" asp-action="Index">Fornecedor</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Produto" asp-action="Index">Estoque</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Venda" asp-action="Index">Vendas</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Index">Cliente</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-controller="Entrada" asp-action="Index">Historico +</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-controller="Carrinho" asp-action="Details" asp-route-id="@ViewBag.usuarioId">Carrinho</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Vendedor" asp-action="Logout" asp-route-id="@ViewBag.usuarioId">Desconectar</a>
-                                </li>
-                            }
-                        }
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Dashboard</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownFornecedor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Fornecedor
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" asp-controller="Fornecedor" asp-action="CadastroFull">Cadastrar Fornecedor</a>
+                                <a class="dropdown-item" asp-controller="Fornecedor" asp-action="Index">Meus Fornecedores</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownProduto" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Produto
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" asp-controller="Produto" asp-action="Create">Cadastrar Produto</a>
+                                <a class="dropdown-item" asp-controller="Produto" asp-action="Index">Meu Estoque</a>
+                                <a class="dropdown-item" asp-controller="Entrada" asp-action="Index">Histórico de entradas</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownFornecedor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Vendas
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" asp-controller="Venda" asp-action="Delete">Cancelar uma Venda</a>
+                                <a class="dropdown-item" asp-controller="Venda" asp-action="Index">Minhas vendas</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownFornecedor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Cliente
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" asp-controller="Cliente" asp-action="Create">Cadastrar Cliente</a>
+                                <a class="dropdown-item" asp-controller="Cliente" asp-action="Index">Meus Cliente</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown mr-2">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Olá @ViewBag.usuario
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <form method="post">
+                                    <input type="submit" value="Desconectar" class="dropdown-item" asp-controller="Vendedor" asp-action="Logout" />
+                                </form>
+                            </div>
+                        </li>
+
+                        <li class="nav-item btn btn-outline-success my-2 my-sm-0 py-0">
+                            <a class="nav-link text-dark" asp-controller="Carrinho" asp-action="Details" asp-route-id="@ViewBag.usuarioId">Vender</a>
+                        </li>
+
                     </ul>
                 </div>
             </div>
@@ -72,14 +94,12 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted bg-white">
-        <div class="container">
-            &copy; 2021 - TCCESTOQUE - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
+    <footer class="footer bg-white text-center">
+        &copy; 2021 - TCCESTOQUE - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/lib/jquery-mask-plugin/jquery.mask.js" type="text/javascript"  asp-append-version="true"></script>
+    <script src="~/lib/jquery-mask-plugin/jquery.mask.js" type="text/javascript" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
