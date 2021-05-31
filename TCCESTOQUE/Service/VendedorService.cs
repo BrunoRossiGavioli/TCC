@@ -156,7 +156,7 @@ namespace TCCESTOQUE.Service
             if (vendedorModel.Codigo == alt?.Codigo)
             {
                 var vend = _vendedorRepository.GetById(vendedorModel.VendedorId);
-                vend.Senha = vendedorModel.NovaSenha;
+                vend.Senha = SecurityService.Criptografar(vendedorModel.NovaSenha);
                 _vendedorRepository.PutEdicao(vend);
                 alt.Invalida = true;
                 _alterarSenhaRepo.PutEdicao(alt);
