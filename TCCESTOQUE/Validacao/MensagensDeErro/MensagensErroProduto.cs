@@ -22,7 +22,7 @@ namespace TCCESTOQUE.Validacao.MensagensDeErro
         #endregion
 
         #region Valores Não numéricos
-        public static string UnidadeDeMedidaInválida = "Informe a unidade de medida";
+        public static string UnidadeDeMedidaInvalida = "Informe a unidade de medida";
         #endregion
     }
 }

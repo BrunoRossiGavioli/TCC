@@ -1,0 +1,20 @@
+﻿@model TCCESTOQUE.Models.EmailClienteModel
+@{
+    ViewData["Title"] = "EsqueciSenha";
+    Layout = "~/Views/Shared/_Layout-Externo.cshtml";
+}
+
+<h1>Esqueci a senha</h1>
+<form class="col-6" asp-action="EsqueciSenha">
+    <div class="my-4">
+        <label class="control-label"> Informe o e-mail </label>
+        <input class="form-control" asp-for="Email" />
+        <span class="text-success">@ViewBag.sucesso</span>
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <input class="btn btn-success" type="submit" value="Enviar e-mail" />
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

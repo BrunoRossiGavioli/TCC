@@ -10,6 +10,8 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
     {
         public LoginValidador(IVendedorRepository vend, VendedorModel vendedor)
         {
+            RuleFor(v => v).Must(ven => ven.Inativo == false).WithMessage(MensagensErroVendedor.ContaInativa);
+            
             RuleFor(v => v.Email).Must(email => vend.GetByEmail(email) != null).WithMessage(MensagensDeErroPadrao.EmailNaoEncontrado);
 
             if (vendedor.Logar)
@@ -19,6 +21,7 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
                 {
                     RuleFor(v => v.Senha).Must(senha => vend.GetBySenha(senha, vendedor)?.Senha == SecurityService.Criptografar(vendedor.Senha)).WithMessage(MensagensErroVendedor.SenhaIncorreta);
                 });
+            
         }
     }
 }

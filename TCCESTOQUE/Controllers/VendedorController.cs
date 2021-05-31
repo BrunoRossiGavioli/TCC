@@ -7,6 +7,8 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.POCO;
+using TCCESTOQUE.Service;
 
 namespace TCCESTOQUE.Controllers
 {
@@ -55,7 +57,7 @@ namespace TCCESTOQUE.Controllers
             if (vendedorModel.Logar)
                 Login(vendedorModel);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Vendedor");
         }
 
         // GET: Vendedor/Edit/5
@@ -114,6 +116,7 @@ namespace TCCESTOQUE.Controllers
 
         //POST
         [HttpPost, ActionName("Login")]
+        [ValidateAntiForgeryToken]
         public IActionResult Login(VendedorModel vendedor)
         {
             Autenticar();
@@ -137,11 +140,67 @@ namespace TCCESTOQUE.Controllers
         //POST
         [Authorize]
         [HttpPost, ActionName("Logout")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> LogoutConfirmado()
         {
             Autenticar();
             await HttpContext.SignOutAsync();
             return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult EsqueciSenha()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EsqueciSenha(EmailClienteModel cliente)
+        {
+            _vendedorService.EsqueciSenha(cliente);
+            ViewData["sucesso"] = "Verifique seu e-mail!";
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult AlterarSenha(Guid id, Guid trocaId)
+        {
+            if (id == null || id == Guid.Empty)
+                return NotFound();
+
+            if (trocaId == null || trocaId == Guid.Empty)
+                return NotFound();
+
+            ViewData["VendedorId"] = id;
+            ViewData["TrocaId"] = trocaId;
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AlterarSenha(AlterarSenha vendedor)
+        {
+            _vendedorService.AlterarSenha(vendedor);
+
+            ViewData["VendedorId"] = vendedor.VendedorId;
+            return RedirectToAction("Login", "Vendedor");
+        }
+
+        public IActionResult AutenticarConta(Guid Id)
+        {
+            if (Id == null || Id == Guid.Empty)
+                return NotFound();
+
+            ViewData["ContaId"] = Id;
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AutenticarConta(EmailClienteModel clienteModel)
+        {
+            _vendedorService.AutenticarConta(clienteModel.Id);
+            return RedirectToAction("Login", "Vendedor");
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.POCO;
 using TCCESTOQUE.Validacao.Formatacao;
 using TCCESTOQUE.Validacao.ValidacaoBusiness;
 using TCCESTOQUE.Validacao.ValidacaoModels;
@@ -15,10 +16,12 @@ namespace TCCESTOQUE.Service
     {
         private readonly IVendedorRepository _vendedorRepository;
         private readonly ICarrinhoRepository _carrinhoRepo;
-        public VendedorService(IVendedorRepository vendedorRepository, ICarrinhoRepository carrinhoRepo)
+        private readonly ISenhaRepository _alterarSenhaRepo;
+        public VendedorService(IVendedorRepository vendedorRepository, ICarrinhoRepository carrinhoRepo, ISenhaRepository alterarSenhaRepo)
         {
             _vendedorRepository = vendedorRepository;
             _carrinhoRepo = carrinhoRepo;
+            _alterarSenhaRepo = alterarSenhaRepo;
         }
         public ICollection<VendedorModel> GetAll(Guid vendedorId)
         {
@@ -44,7 +47,9 @@ namespace TCCESTOQUE.Service
             if (validacao.IsValid)
             {
                 vendedorModel = FormataValores.FormataValoresVendedor(vendedorModel);
+                vendedorModel.Inativo = true;
                 _vendedorRepository.PostCriacao(vendedorModel);
+                EmailService.EnviarMensagem(new string[] { vendedorModel.Email }, null, "https://localhost:44338/Vendedor/AutenticarConta?id=" + vendedorModel.VendedorId, "Autenticar conta", null);
                 _carrinhoRepo.PostCriacao(new CarrinhoModel() { VendedorId = vendedorModel.VendedorId });
             }
             return validacao;
@@ -75,6 +80,7 @@ namespace TCCESTOQUE.Service
 
         public object PostLogin(VendedorModel vendedorModel)
         {
+            vendedorModel.Inativo = Convert.ToBoolean(_vendedorRepository.GetByEmail(vendedorModel.Email)?.Inativo);
             var validacao = new LoginValidador(_vendedorRepository, vendedorModel).Validate(vendedorModel);
             if (!validacao.IsValid)
                 return validacao;
@@ -106,6 +112,55 @@ namespace TCCESTOQUE.Service
             vendedor.Senha = vendedorModel.Senha;
             vendedor.Telefone = vendedorModel.Telefone;
             return vendedor;
+        }
+
+        public void EsqueciSenha(EmailClienteModel cliente)
+        {
+            if(cliente.Email != null || cliente.Email != "") { 
+                int codigo = new Random().Next(100000, 999999);
+                var altSenha = new AlterarSenhaModel() 
+                {
+                    Codigo = codigo,
+                    DataEmissão = DateTime.Now,
+                    VendedorId = _vendedorRepository.GetByEmail(cliente.Email).VendedorId
+                };
+
+                try
+                {
+                    _alterarSenhaRepo.PostCriacao(altSenha);
+                    EmailService.EnviarMensagem(new string[] { cliente.Email }, null,
+                        "https://localhost:44338/Vendedor/AlterarSenha?Id=" + altSenha.VendedorId  +
+                        "&trocaId="+ altSenha.Id +"\nCódigo: "+codigo,
+                        "Troca de senha", null);
+                }
+                catch (Exception erro)
+                {
+
+                }
+
+                
+            }
+
+        }
+
+        public void AutenticarConta(Guid vendedorId)
+        {
+            var vendedor = _vendedorRepository.GetById(vendedorId);
+            vendedor.Inativo = false;
+            _vendedorRepository.PutEdicao(vendedor);
+        }
+
+        public void AlterarSenha(AlterarSenha vendedorModel)
+        {
+            var alt = _alterarSenhaRepo.GetOneByCodigo(vendedorModel);
+            if (vendedorModel.Codigo == alt?.Codigo)
+            {
+                var vend = _vendedorRepository.GetById(vendedorModel.VendedorId);
+                vend.Senha = vendedorModel.NovaSenha;
+                _vendedorRepository.PutEdicao(vend);
+                alt.Invalida = true;
+                _alterarSenhaRepo.PutEdicao(alt);
+            }
         }
     }
 }

@@ -20,5 +20,9 @@ namespace TCCESTOQUE.Validacao.MensagensDeErro
         public static string SenhaTamanhoMinimo = "A Seha tem que ter no mínimo 8 caracteres";
         public static string DataTamanhoMinimo = "A idade minima é 18 anos";
         #endregion
+
+        #region Conta Inativa
+        public static string ContaInativa = "Conta inativa, verifique seu e-mail para ativar a conta";
+        #endregion
     }
 }

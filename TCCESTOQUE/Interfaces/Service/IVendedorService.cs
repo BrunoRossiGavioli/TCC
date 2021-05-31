@@ -1,6 +1,7 @@
 ﻿using FluentValidation.Results;
 using System;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.POCO;
 
 namespace TCCESTOQUE.Interfaces.Service
 {
@@ -15,5 +16,11 @@ namespace TCCESTOQUE.Interfaces.Service
         public bool PostExclusao(Guid id);
 
         public object PostLogin(VendedorModel vendedorModel);
+
+        public void AutenticarConta(Guid vendedorId);
+
+        public void EsqueciSenha(EmailClienteModel cliente);
+
+        public void AlterarSenha(AlterarSenha vendedorModel);
     }
 }

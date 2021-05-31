@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using TCCESTOQUE.Models.Enum;
@@ -18,7 +19,7 @@ namespace TCCESTOQUE.Models
 
         [MaxLength(70)]
         [DataType(DataType.Password)]
-        [Required(ErrorMessage = "Informe a senha!", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Informe a senha", AllowEmptyStrings = false)]
         public string Senha { get; set; }
 
         [Required(ErrorMessage = "Informe a data de nascimento", AllowEmptyStrings = false)]
@@ -30,7 +31,7 @@ namespace TCCESTOQUE.Models
         public string Cpf { get; set; }
 
         [MaxLength(80)]
-        [Required(ErrorMessage = "Informe o Email!")]
+        [Required(ErrorMessage = "Informe o Email")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
