@@ -43,7 +43,7 @@ namespace TCCESTOQUE.Service
         {
             var res = _fornecedorRepository.GetOne(id);
             if (res.Entradas.Any())
-                return "Não é possivel deletar esse fornecedor, ele tem produtos";
+                return "Não é possivel excluir esse fornecedor, ele tem produtos";
 
             if (res != null)
             {

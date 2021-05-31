@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿body{
   background-color: #DCDCDC;
   background-image: url('../img/fundoimg.png');
@@ -5,29 +6,47 @@
   background-attachment: fixed;
   background-size: cover;
 }
+=======
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+body {
+    background-color: var(--bg-white);
+    background-image: url('../img/fundoimg.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover; 
+}
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+>>>>>>> fbf4f8d32dd28cfd6a503eef7e5febe29f276708
 
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+    color: #0366d6;
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+      color: #fff;
+      background-color: #1b6ec2;
+      border-color: #1861ac;
 }
 
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+      color: #fff;
+      background-color: #1b6ec2;
+      border-color: #1861ac;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 @media (min-width: 768px) {
   html {
@@ -66,27 +85,15 @@ html {
 .CabecalhoListagem * {
     border: none !important;
 }
-
-.Lista {
-    background-color: ghostwhite;
-    border: 1px solid #dcdcdc;
-    border-style: solid none !important;
-}
-.LinksListagem {
-  color:black;
+.DetalhesHeader { 
+  background-color: var(--lilac); 
+  border-bottom:black solid 2px;
 }
 
-.LinksListagem:hover{
-    color: rgba(0, 0, 0, 0.8);
-    text-decoration:none;
-}
-
-.bg-light-gray {
-    background-color: var(--lighter-gray);
-}
-
-.text-light-gray {
-    color: var(--gray) !important;
+.Detalhes {
+  border: var(--lilac) 2px solid; 
+  background-color: var(--white);
+  width:300px;
 }
 
 body {

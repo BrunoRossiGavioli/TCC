@@ -13,14 +13,13 @@ namespace TCCESTOQUE.Models
 
         [ScaffoldColumn(false)]
         [Column(TypeName = "decimal(12,2)")]
-        public decimal PrecoProduto { get; set; }
+        public decimal Valor { get; set; }
 
         [ScaffoldColumn(false)]
         [Column(TypeName = "decimal(12,2)")]
-        public decimal CustoProduto { get; set; }
+        public decimal Custo { get; set; }
 
-        [Required(ErrorMessage = "Informe a quantidade!")]
-        public double QuantidadeProduto { get; set; }
+        public double Quantidade { get; set; }
 
         [Required]
         public UnidadeDeMedidaEnum UnidadeMedida { get; set; }

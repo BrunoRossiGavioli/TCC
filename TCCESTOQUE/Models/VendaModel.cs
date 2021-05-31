@@ -34,9 +34,14 @@ namespace TCCESTOQUE.Models
             var valor = 0m;
             foreach (var item in Itens)
             {
-                valor += item.Produto.ValorUnitario * item.Quantidade;
+                valor += item.Produto.Valor * item.Quantidade;
             }
             return valor;
+        }
+
+        public string PegarData(DateTime data)
+        {
+            return data.ToShortDateString();
         }
     }
 }

@@ -3,12 +3,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.Models.Enum;
+using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Interfaces.Service
 {
     public interface IProdutoService : IBaseService<ProdutoModel>
     {
-        public ValidationResult PostCriacao(ProdutoModel produtoModel);
+        public ValidationResult PostCriacao(ProdutoViewModel produtoModel);
 
         public ValidationResult PutEdicao(ProdutoModel produtoModel);
 

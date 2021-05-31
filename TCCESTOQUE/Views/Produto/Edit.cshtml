@@ -18,7 +18,7 @@
             <span asp-validation-for="Nome" class="text-danger"></span>
         </div>
         <div class="campo">
-            <label asp-for="Descricao" >Descriçaõ</label>
+            <label asp-for="Descricao" >Descrição</label>
             <input asp-for="Descricao"/>
             <span asp-validation-for="Descricao" class="text-danger"></span>
         </div>
@@ -28,9 +28,9 @@
             <span asp-validation-for="Custo" class="text-danger"></span>
         </div>
         <div class="campo">
-            <label asp-for="ValorUnitario">Valor unitario*</label>
-            <input asp-for="ValorUnitario"/>
-            <span asp-validation-for="ValorUnitario" class="text-danger"></span>
+            <label asp-for="Valor">Valor unitario*</label>
+            <input asp-for="Valor"/>
+            <span asp-validation-for="Valor" class="text-danger"></span>
         </div>
         <div class="campo">
             <label asp-for="UnidadeMedida" >Unidade de medida*</label>
@@ -38,7 +38,9 @@
             <span asp-validation-for="UnidadeMedida" class="text-danger"></span>
         </div>
         <div class="just-right">
-            <a asp-action="Index" class="btn-voltar">Voltar</a>
+            <a asp-action="Index" class="btn-voltar">
+                Cancelar
+            </a>
             <input type="submit" value="Salvar" class="btn-cadastrar" />
         </div>
     </form>

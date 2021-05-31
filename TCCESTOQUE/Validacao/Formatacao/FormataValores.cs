@@ -3,7 +3,7 @@ using TCCESTOQUE.Service;
 using TCCESTOQUE.ViewModel;
 
 namespace TCCESTOQUE.Validacao.Formatacao
-{ 
+{
     public class FormataValores
     {
         public static VendedorModel FormataValoresVendedor(VendedorModel vendedor)
@@ -34,7 +34,7 @@ namespace TCCESTOQUE.Validacao.Formatacao
             fornecedor.RazaoSocial = fornecedor.RazaoSocial.ToUpper().Trim();
             fornecedor.Logradouro = fornecedor.Logradouro.ToUpper().Trim();
             fornecedor.Localidade = fornecedor.Localidade.ToUpper().Trim();
-            fornecedor.Complemento = fornecedor.Complemento.ToUpper().Trim();
+            fornecedor.Complemento = fornecedor.Complemento?.ToUpper().Trim();
             fornecedor.Bairro = fornecedor.Bairro.ToUpper().Trim();
             return fornecedor;
         }

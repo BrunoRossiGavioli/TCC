@@ -22,7 +22,9 @@
             <span asp-validation-for="Quantidade" class="text-danger"></span>
         </div>
         <div class="just-right">
-            <a class="btn-voltar" asp-controller="Carrinho" asp-action="Details" asp-route-id="@ViewBag.usuarioId">Voltar</a>
+            <a class="btn-voltar" asp-controller="Carrinho" asp-action="Details" asp-route-id="@ViewBag.usuarioId">
+                Voltar ao carrinho
+            </a>
             <input type="submit" value="Adicionar" class="btn-cadastrar" />
         </div>
     </form>

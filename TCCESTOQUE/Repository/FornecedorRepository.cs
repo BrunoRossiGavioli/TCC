@@ -25,6 +25,7 @@ namespace TCCESTOQUE.Repository
             var fornecedorModel = _context.FornecedorModel
                 .Include(e => e.Endereco)
                 .Include(p => p.Entradas)
+                .ThenInclude(p => p.Produto)
                 .FirstOrDefault(m => m.FornecedorId == id && !m.Inativo);
 
             if (fornecedorModel == null)

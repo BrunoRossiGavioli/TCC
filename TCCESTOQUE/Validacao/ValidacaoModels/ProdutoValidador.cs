@@ -1,5 +1,6 @@
 using FluentValidation;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.Models.Enum;
 using TCCESTOQUE.Validacao.MensagensDeErro;
 
 namespace TCCESTOQUE.Validacao.ValidacaoModels
@@ -16,14 +17,20 @@ namespace TCCESTOQUE.Validacao.ValidacaoModels
             RuleFor(p => p.Descricao).MaximumLength(30).WithMessage(MensagensErroProduto.DescricaoTamanhoMaximo)
                 .MinimumLength(3).WithMessage(MensagensErroProduto.DescricaoTamanhoMinimo);
 
-            RuleFor(p => p.Custo).NotEmpty().WithMessage(MensagensErroProduto.CustoVazio)
+            RuleFor(p => p.Custo).NotNull().WithMessage(MensagensErroProduto.CustoVazio)
+                .NotEmpty().WithMessage(MensagensErroProduto.CustoVazio)
                 .GreaterThan(0).WithMessage(MensagensErroProduto.CustoMinimo);
 
-            RuleFor(p => p.ValorUnitario).NotEmpty().WithMessage(MensagensErroProduto.ValorUnitarioVazio)
+            RuleFor(p => p.Valor).NotNull().WithMessage(MensagensErroProduto.ValorUnitarioVazio)
+                .NotEmpty().WithMessage(MensagensErroProduto.ValorUnitarioVazio)
                 .GreaterThan(0).WithMessage(MensagensErroProduto.ValorUnitarioMinimo);
 
+            RuleFor(p => p.UnidadeMedida).NotNull()
+                .NotEqual(UnidadeDeMedidaEnum.Selecione).WithMessage(MensagensErroProduto.UnidadeDeMedidaInválida);
+
             if (!editando)
-                RuleFor(p => p.Quantidade).NotEmpty().WithMessage(MensagensErroProduto.QuantidadeVazia)
+                RuleFor(p => p.Quantidade).NotNull().WithMessage(MensagensErroProduto.QuantidadeVazia)
+                    .NotEmpty().WithMessage(MensagensErroProduto.QuantidadeVazia)
                     .GreaterThan(0).WithMessage(MensagensErroProduto.QuantidadeMinima);
         }
     }

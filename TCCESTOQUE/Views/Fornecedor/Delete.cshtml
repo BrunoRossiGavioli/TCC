@@ -2,81 +2,103 @@
 
 @{
     ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout-Interno.cshtml";
 }
 
-<h1>Delete</h1>
+<h1>EXCLUIR - @Model.NomeFantasia</h1>
 
 <h3>Você tem certeza que deseja excluir esse fornecedor?</h3>
 <p class="text-danger">@ViewBag.FornecedorErroExcluir</p>
     
 <div>
-    <h4>Fornecedor</h4>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.NomeFantasia)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.NomeFantasia)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Cnpj)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Cnpj)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Telefone)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Telefone)
-        </dd>
-    </dl>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Endereco.Logradouro)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Endereco.Logradouro)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Endereco.Complemento)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Endereco.Complemento)
-        </dd>
-        @if (Model.Endereco.Numero > 0)
-        {
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Endereco.Numero)
+    <dl class="descricao dt-dark my-4">
+        <div>
+            <dt>
+                @Html.DisplayNameFor(model => model.NomeFantasia)
             </dt>
-            <dd class="col-sm-10">
+            <dd>
+                @Html.DisplayFor(model => model.NomeFantasia)
+            </dd>
+        </div>
+        <div>
+            <dt>
+                @Html.DisplayNameFor(model => model.Cnpj)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Cnpj)
+            </dd>
+        </div>
+        <div>
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+        </div>
+        @if (Model.Telefone != null)
+        {
+            <div>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Telefone)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Telefone)
+                </dd>
+            </div>
+        }
+        <div>
+            <dt>
+                Cep
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Endereco.Cep)
+            </dd>
+        </div>
+        <div>
+            <dt>
+                Cidade
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Endereco.Localidade) - @Html.DisplayFor(model => model.Endereco.Uf)
+            </dd>
+        </div>
+        <div>
+            <dt>
+                Bairro
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Endereco.Bairro)
+            </dd>
+        </div>
+        <div>
+            <dt>
+                Endereço
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Endereco.Logradouro)
+                @Html.DisplayFor(model => model.Endereco.Complemento)
                 @Html.DisplayFor(model => model.Endereco.Numero)
             </dd>
-        }
+        </div>
     </dl>
     @if (ViewBag.FornecedorErroExcluir != null)
     {
-    <table class="table">
+    <hr class="my-4"/>
+    <table class="tabela dark-thead my-4">
         <thead>
             <tr>
-                <th>
-                    Código da entrada
+                <th class="mb-visivel">
+                    Produto
                 </th>
-                <th>
-                    Valor unitario
+                <th class="mb-visivel just-cont-center">
+                    Preço
                 </th>
-                <th>
+                <th class="mb-visivel just-cont-center">
                     Custo
                 </th>
-                <th>
+                <th class="mb-visivel just-cont-end">
                     Quantidade
                 </th>
             </tr>
@@ -85,17 +107,17 @@
         @foreach (var entrada in Model.Entradas)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelProduto => entrada.EntradaId)
+                <td class="mb-visivel">
+                    @Html.DisplayFor(modelProduto => entrada.Produto.Nome)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelProduto => entrada.PrecoProduto)
+                <td class="mb-visivel just-cont-center">
+                    @Html.DisplayFor(modelProduto => entrada.Valor)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelProduto => entrada.CustoProduto)
+                <td class="mb-visivel just-cont-center">
+                    @Html.DisplayFor(modelProduto => entrada.Custo)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelProduto => entrada.QuantidadeProduto)
+                <td class="mb-visivel just-cont-end">
+                    @Html.DisplayFor(modelProduto => entrada.Quantidade) @Html.DisplayFor(modelProduto => entrada.UnidadeMedida)
                 </td>
             </tr>
         }
@@ -106,6 +128,8 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="FornecedorId" value="@ViewBag.FornecedorId"/>
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="Index">
+            Cancelar
+        </a>
     </form>
 </div>

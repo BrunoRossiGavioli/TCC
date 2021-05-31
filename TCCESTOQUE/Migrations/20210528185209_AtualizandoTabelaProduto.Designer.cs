@@ -9,8 +9,8 @@ using TCCESTOQUE.Data;
 namespace TCCESTOQUE.Migrations
 {
     [DbContext(typeof(TCCESTOQUEContext))]
-    [Migration("20210507165612_Nova3")]
-    partial class Nova3
+    [Migration("20210528185209_AtualizandoTabelaProduto")]
+    partial class AtualizandoTabelaProduto
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -68,14 +68,13 @@ namespace TCCESTOQUE.Migrations
                         .HasColumnType("varchar(80) CHARACTER SET utf8mb4")
                         .HasMaxLength(80);
 
-                    b.Property<int>("Numero")
-                        .HasColumnType("int")
+                    b.Property<string>("Numero")
+                        .IsRequired()
+                        .HasColumnType("varchar(6) CHARACTER SET utf8mb4")
                         .HasMaxLength(6);
 
-                    b.Property<string>("Uf")
-                        .IsRequired()
-                        .HasColumnType("varchar(2) CHARACTER SET utf8mb4")
-                        .HasMaxLength(2);
+                    b.Property<int>("Uf")
+                        .HasColumnType("int");
 
                     b.HasKey("EnderecoId");
 
@@ -98,6 +97,9 @@ namespace TCCESTOQUE.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("varchar(80) CHARACTER SET utf8mb4")
                         .HasMaxLength(80);
+
+                    b.Property<bool>("Inativo")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -127,14 +129,29 @@ namespace TCCESTOQUE.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
+                    b.Property<bool>("Cancelada")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<decimal>("Custo")
+                        .HasColumnType("decimal(12,2)");
+
+                    b.Property<DateTime>("DataEntrada")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<Guid>("FornecedorId")
                         .HasColumnType("char(36)");
 
                     b.Property<Guid>("ProdutoId")
                         .HasColumnType("char(36)");
 
-                    b.Property<double>("QuantidadeProduto")
+                    b.Property<double>("Quantidade")
                         .HasColumnType("double");
+
+                    b.Property<int>("UnidadeMedida")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Valor")
+                        .HasColumnType("decimal(12,2)");
 
                     b.Property<Guid>("VendedorId")
                         .HasColumnType("char(36)");
@@ -183,14 +200,13 @@ namespace TCCESTOQUE.Migrations
                         .HasColumnType("varchar(80) CHARACTER SET utf8mb4")
                         .HasMaxLength(80);
 
-                    b.Property<int>("Numero")
-                        .HasColumnType("int")
+                    b.Property<string>("Numero")
+                        .IsRequired()
+                        .HasColumnType("varchar(6) CHARACTER SET utf8mb4")
                         .HasMaxLength(6);
 
-                    b.Property<string>("Uf")
-                        .IsRequired()
-                        .HasColumnType("varchar(2) CHARACTER SET utf8mb4")
-                        .HasMaxLength(2);
+                    b.Property<int>("Uf")
+                        .HasColumnType("int");
 
                     b.HasKey("EnderecoId");
 
@@ -206,9 +222,6 @@ namespace TCCESTOQUE.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<bool>("Ativo")
-                        .HasColumnType("tinyint(1)");
-
                     b.Property<string>("Cnpj")
                         .IsRequired()
                         .HasColumnType("varchar(18) CHARACTER SET utf8mb4")
@@ -218,6 +231,9 @@ namespace TCCESTOQUE.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(80) CHARACTER SET utf8mb4")
                         .HasMaxLength(80);
+
+                    b.Property<bool>("Inativo")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("NomeFantasia")
                         .IsRequired()
@@ -256,6 +272,9 @@ namespace TCCESTOQUE.Migrations
                         .HasColumnType("varchar(100) CHARACTER SET utf8mb4")
                         .HasMaxLength(100);
 
+                    b.Property<bool>("Inativo")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
@@ -267,7 +286,7 @@ namespace TCCESTOQUE.Migrations
                     b.Property<int>("UnidadeMedida")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("ValorUnitario")
+                    b.Property<decimal>("Valor")
                         .HasColumnType("decimal(12,2)");
 
                     b.Property<Guid>("VendedorId")
@@ -290,10 +309,10 @@ namespace TCCESTOQUE.Migrations
                         .HasColumnType("char(36)");
 
                     b.Property<decimal>("CustoProduto")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(12,2)");
 
                     b.Property<decimal>("PrecoProduto")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(12,2)");
 
                     b.Property<Guid>("ProdutoId")
                         .HasColumnType("char(36)");
@@ -353,9 +372,6 @@ namespace TCCESTOQUE.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<bool>("Ativo")
-                        .HasColumnType("tinyint(1)");
-
                     b.Property<string>("Cpf")
                         .IsRequired()
                         .HasColumnType("varchar(14) CHARACTER SET utf8mb4")
@@ -368,6 +384,9 @@ namespace TCCESTOQUE.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(80) CHARACTER SET utf8mb4")
                         .HasMaxLength(80);
+
+                    b.Property<bool>("Inativo")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Nome")
                         .IsRequired()

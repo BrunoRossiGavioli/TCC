@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout-Interno.cshtml";
 }
 
 <h1>Cancelar</h1>
@@ -10,54 +11,62 @@
 <div>
     <h4>Estoque</h4>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            Unidade de medida
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.UnidadeMedida)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.QuantidadeProduto)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.QuantidadeProduto)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Produto)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Produto.Nome)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PrecoProduto)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PrecoProduto)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CustoProduto)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CustoProduto)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Fornecedor)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Fornecedor.NomeFantasia)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Vendedor)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Vendedor.Nome)
-        </dd>
+    <dl class="descricao dt-dark">
+        <div>
+            <dt>
+                Data de entrada
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DataEntrada)
+            </dd>
+        </div>
+        <div>
+            <dt>
+                @Html.DisplayNameFor(model => model.Fornecedor)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Fornecedor.NomeFantasia)
+            </dd>
+        </div>
+        <div>
+            <dt>
+                @Html.DisplayNameFor(model => model.Produto)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Produto.Nome)
+            </dd>
+        </div>
+        <div>
+            <dt>
+                Quantidade em @Model.UnidadeMedida
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Quantidade)
+            </dd>
+        </div>
+        <div>
+            <dt>
+                Preço por @Model.UnidadeMedida
+            </dt>
+            <dd>
+                R$ @Html.DisplayFor(model => model.Valor)
+            </dd>
+        </div>
+        <div>
+            <dt>
+                Custo por @Model.UnidadeMedida
+            </dt>
+            <dd>
+                R$ @Html.DisplayFor(model => model.Valor)
+            </dd>
+        </div>
     </dl>
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="EntradaId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="Index">
+            Cancelar
+        </a>
     </form>
 </div>

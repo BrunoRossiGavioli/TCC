@@ -25,7 +25,11 @@ namespace TCCESTOQUE.Repository
 
         public override ClienteModel GetOne(Guid? id)
         {
-            return _context.ClienteModel.Include(v => v.Venda).Include(v => v.Vendedor).FirstOrDefault(m => m.ClienteId == id);
+            return _context.ClienteModel
+                .Include(v => v.Venda)
+                .Include(v => v.Vendedor)
+                .Include(v => v.Endereco)
+                .FirstOrDefault(m => m.ClienteId == id);
         }
     }
 }

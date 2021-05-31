@@ -2,45 +2,97 @@
 
 @{
     ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout-Interno.cshtml";
 }
 
-<h1>Delete</h1>
+<h1>EXCLUIR</h1>
 
-<h3>Você tem certeza que deseja excluir esse produto?</h3>
+<h3>Você tem certeza que deseja excluir esse cliente?</h3>
 <p class="text-danger">@ViewBag.ErroExcluir</p>
 <div>
-    <h4>ClienteModel</h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cpf)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cpf)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Telefone)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Telefone)
-        </dd>
+    <dl class="descricao dt-dark">
+        <div>
+            <dt>
+                @Html.DisplayNameFor(model => model.Nome)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Nome)
+            </dd>
+        </div>
+        <div>
+            <dt>
+                @Html.DisplayNameFor(model => model.Cpf)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Cpf)
+            </dd>
+        </div>
+        <div>
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+        </div>
+        <div>
+            <dt>
+                @Html.DisplayNameFor(model => model.Telefone)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Telefone)
+            </dd>
+        </div>
+        <div>
+            <dt>
+                Gênero
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Sexo)
+            </dd>
+        </div>
+        <div>
+            <dt>
+                Cep
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Endereco.Cep)
+            </dd>
+        </div>
+        <div>
+            <dt>
+                Cidade
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Endereco.Localidade) - @Html.DisplayFor(model => model.Endereco.Uf)
+            </dd>
+        </div>
+        <div>
+            <dt>
+                Bairro
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Endereco.Bairro)
+            </dd>
+        </div>
+        <div>
+            <dt>
+                Endereço
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Endereco.Logradouro)
+                @Html.DisplayFor(model => model.Endereco.Complemento)
+                @Html.DisplayFor(model => model.Endereco.Numero)
+            </dd>
+        </div>
     </dl>
-    
+
     <form asp-action="Delete">
         <input type="hidden" asp-for="ClienteId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="Index">
+            Cancelar
+        </a>
     </form>
 </div>

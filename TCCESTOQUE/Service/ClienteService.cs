@@ -41,7 +41,7 @@ namespace TCCESTOQUE.Service
 
         public ValidationResult PostCriacao(ClienteViewModel clienteVM)
         {
-            
+
             var validacao = new ClienteValidador().Validate(clienteVM);
             if (!validacao.IsValid)
                 return validacao;
