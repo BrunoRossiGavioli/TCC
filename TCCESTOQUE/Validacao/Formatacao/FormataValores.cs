@@ -23,7 +23,7 @@ namespace TCCESTOQUE.Validacao.Formatacao
         public static ClienteViewModel FormataCliente(ClienteViewModel cli)
         {
             cli.Nome = cli.Nome.ToUpper().Trim();
-            cli.Logradouro = cli.Logradouro.ToUpper().Trim();
+            cli.Logradouro = cli.Logradouro?.ToUpper().Trim();
             cli.Bairro = cli.Bairro.ToUpper().Trim();
             cli.Localidade = cli.Localidade.ToUpper().Trim();
             return cli;

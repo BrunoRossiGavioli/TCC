@@ -19,8 +19,10 @@ namespace TCCESTOQUE.Interfaces.Service
 
         public void AutenticarConta(Guid vendedorId);
 
-        public void EsqueciSenha(EmailClienteModel cliente);
+        public bool EsqueciSenha(EmailClienteModel cliente);
 
-        public void AlterarSenha(AlterarSenha vendedorModel);
+        public AlterarSenhaModel GetOneAlterarSenha(Guid? trocaId);
+
+        public ValidationResult AlterarSenha(AlterarSenha vendedorModel);
     }
 }

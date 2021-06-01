@@ -24,5 +24,10 @@ namespace TCCESTOQUE.Validacao.MensagensDeErro
         #region Conta Inativa
         public static string ContaInativa = "Conta inativa, verifique seu e-mail para ativar a conta";
         #endregion
+
+        #region Erro codigo
+        public static string CodigoInvalido = "Código inválido";
+        public static string CodigoVazio = "Insira o código";
+        #endregion
     }
 }

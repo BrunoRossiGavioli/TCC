@@ -16,6 +16,11 @@ namespace TCCESTOQUE.Repository
 
         }
 
+        public override AlterarSenhaModel GetOne(Guid? id)
+        {
+            return _context.AlterarSenhaModel.Where(m => m.Id == id && !m.Invalida).FirstOrDefault();
+        }
+
         public AlterarSenhaModel GetOneByCodigo(AlterarSenha model)
         {
             return _context.AlterarSenhaModel.Where(m => m.Id == model.TrocaId && m.Codigo == model.Codigo && m.Invalida == false).FirstOrDefault();

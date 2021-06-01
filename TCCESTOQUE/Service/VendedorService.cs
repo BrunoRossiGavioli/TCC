@@ -8,6 +8,7 @@ using TCCESTOQUE.POCO;
 using TCCESTOQUE.Validacao.Formatacao;
 using TCCESTOQUE.Validacao.ValidacaoBusiness;
 using TCCESTOQUE.Validacao.ValidacaoModels;
+using TCCESTOQUE.Validacao.ValidacaoPOCO;
 using TCCESTOQUE.ValidadorVendedor;
 
 namespace TCCESTOQUE.Service
@@ -34,6 +35,11 @@ namespace TCCESTOQUE.Service
                 return null;
 
             return _vendedorRepository.GetOne(id);
+        }
+
+        public AlterarSenhaModel GetOneAlterarSenha(Guid? trocaId)
+        {
+            return _alterarSenhaRepo.GetOne(trocaId);
         }
 
         public VendedorModel GetEdicao(Guid? id)
@@ -114,33 +120,27 @@ namespace TCCESTOQUE.Service
             return vendedor;
         }
 
-        public void EsqueciSenha(EmailClienteModel cliente)
+        public bool EsqueciSenha(EmailClienteModel cliente)
         {
-            if(cliente.Email != null || cliente.Email != "") { 
-                int codigo = new Random().Next(100000, 999999);
-                var altSenha = new AlterarSenhaModel() 
+            if(cliente.Email != null || cliente.Email != "") {
+                var cliId = _vendedorRepository.GetByEmail(cliente.Email)?.VendedorId;
+                if (cliId != Guid.Empty)
                 {
-                    Codigo = codigo,
-                    DataEmissão = DateTime.Now,
-                    VendedorId = _vendedorRepository.GetByEmail(cliente.Email).VendedorId
-                };
-
-                try
-                {
+                    var altSenha = new AlterarSenhaModel() 
+                    {
+                        Codigo = new Random().Next(100000, 999999),
+                        DataEmissão = DateTime.Now,
+                        VendedorId = cliId
+                    };
                     _alterarSenhaRepo.PostCriacao(altSenha);
                     EmailService.EnviarMensagem(new string[] { cliente.Email }, null,
                         "https://localhost:44338/Vendedor/AlterarSenha?Id=" + altSenha.VendedorId  +
-                        "&trocaId="+ altSenha.Id +"\nCódigo: "+codigo,
+                        "&trocaId="+ altSenha.Id +"\nCódigo: "+altSenha.Codigo,
                         "Troca de senha", null);
+                        return true;
                 }
-                catch (Exception erro)
-                {
-
-                }
-
-                
             }
-
+            return false;
         }
 
         public void AutenticarConta(Guid vendedorId)
@@ -150,17 +150,21 @@ namespace TCCESTOQUE.Service
             _vendedorRepository.PutEdicao(vendedor);
         }
 
-        public void AlterarSenha(AlterarSenha vendedorModel)
+        public ValidationResult AlterarSenha(AlterarSenha senhaModel)
         {
-            var alt = _alterarSenhaRepo.GetOneByCodigo(vendedorModel);
-            if (vendedorModel.Codigo == alt?.Codigo)
+            var alt = _alterarSenhaRepo.GetOneByCodigo(senhaModel);
+            var validador = new AlterarSenhaValidador(alt).Validate(senhaModel);
+            if (validador.IsValid)
             {
-                var vend = _vendedorRepository.GetById(vendedorModel.VendedorId);
-                vend.Senha = SecurityService.Criptografar(vendedorModel.NovaSenha);
+                var vend = _vendedorRepository.GetById(senhaModel.VendedorId);
+                vend.Senha = SecurityService.Criptografar(senhaModel.NovaSenha);
                 _vendedorRepository.PutEdicao(vend);
                 alt.Invalida = true;
                 _alterarSenhaRepo.PutEdicao(alt);
+                return validador;
             }
+
+            return validador;
         }
     }
 }

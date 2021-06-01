@@ -1,4 +1,4 @@
-﻿using FluentValidation;
+﻿    using FluentValidation;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Validacao.MensagensDeErro;
 using TCCESTOQUE.ViewModel;

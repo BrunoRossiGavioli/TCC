@@ -16,8 +16,6 @@ h1, tr {
     cursor: default;
 }
 
-
-
 #moldura {
     display: flex;
     height: 100%;
@@ -122,7 +120,6 @@ h1, tr {
     border-radius: .7rem;
     background-color: var(--light-purple);
     padding: .5rem;
-    margin-left: 1rem;
     transition: all .4s;
 }
 
@@ -142,7 +139,6 @@ h1, tr {
     border-radius: .7rem;
     background-color: var(--gray);
     padding: .5rem;
-    margin-left: 1rem;
     transition: all .4s;
 }
 
@@ -153,9 +149,17 @@ h1, tr {
 }
 
 .just-right{
+    grid-gap:1rem;
     display:flex;
     width:80%;
     justify-content: flex-end;
+}
+
+.just-cont-center {
+    grid-gap: 1rem;
+    display: flex;
+    width: 80%;
+    justify-content: center;
 }
 
 .grow1 {

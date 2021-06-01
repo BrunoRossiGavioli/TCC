@@ -20,7 +20,7 @@ namespace TCCESTOQUE.Models
         public bool Invalida { get; set; }
 
         [ForeignKey("Vendedor")]
-        public Guid VendedorId { get; set; }
+        public Guid? VendedorId { get; set; }
 
         public VendedorModel Vendedor { get; set; }
     }

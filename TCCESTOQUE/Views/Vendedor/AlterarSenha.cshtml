@@ -5,29 +5,30 @@
     Layout = "~/Views/Shared/_Layout-Externo.cshtml";
 }
 
-<h1>Alterar senha</h1>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="AlterarSenha">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" value="@ViewBag.VendedorId" asp-for="VendedorId" />
-            <input type="hidden" value="@ViewBag.TrocaId" asp-for="TrocaId" />
-            <div class="form-group">
-                <label asp-for="NovaSenha" class="control-label">Nova senha</label>
-                <input asp-for="NovaSenha" class="form-control" />
-                <span asp-validation-for="NovaSenha" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Codigo" class="control-label"></label>
-                <input type="text" asp-for="Codigo" data-mask="000000" class="form-control" />
-                <span asp-validation-for="Codigo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Enviar" class="btn btn-primary" />
-                <a asp-action="Index">Voltar ao menu</a>
-            </div>
-        </form>
-    </div>
+<div id="moldura">
+    <form class="cadastro" asp-action="AlterarSenha">
+        <h1>Alterar senha</h1>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" value="@ViewBag.VendedorId" asp-for="VendedorId" />
+        <input type="hidden" value="@ViewBag.TrocaId" asp-for="TrocaId" />
+        <div class="campo">
+            <label asp-for="NovaSenha">Nova senha</label>
+            <input asp-for="NovaSenha" />
+            <span asp-validation-for="NovaSenha" class="text-danger"></span>
+        </div>
+        <div class="campo">
+            <label asp-for="Codigo"></label>
+            <input type="text" asp-for="Codigo" data-mask="000000" />
+            <span asp-validation-for="Codigo" class="text-danger"></span>
+        </div>
+        <div class="just-cont-center">
+            <input type="submit" value="Enviar" class="btn-cadastrar" />
+            <a class="btn-voltar" asp-action="Login">Voltar</a>
+        </div>
+    </form>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 

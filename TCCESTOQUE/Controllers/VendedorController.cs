@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
 using TCCESTOQUE.POCO;
-using TCCESTOQUE.Service;
 
 namespace TCCESTOQUE.Controllers
 {
@@ -157,19 +156,21 @@ namespace TCCESTOQUE.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult EsqueciSenha(EmailClienteModel cliente)
         {
-            _vendedorService.EsqueciSenha(cliente);
-            ViewData["sucesso"] = "Verifique seu e-mail!";
+            var res = _vendedorService.EsqueciSenha(cliente);
+            if(res)
+                ViewData["sucesso"] = "Verifique seu e-mail";
+            else
+                ViewData["erro"] = "Email não encontrado";
+
             return View();
         }
 
         [HttpGet]
         public IActionResult AlterarSenha(Guid id, Guid trocaId)
         {
-            if (id == null || id == Guid.Empty)
-                return NotFound();
-
-            if (trocaId == null || trocaId == Guid.Empty)
-                return NotFound();
+            var troca = _vendedorService.GetOneAlterarSenha(trocaId);
+            if (id == Guid.Empty || trocaId == Guid.Empty || troca == null || DateTime.Today > troca.DataEmissão)
+                return NotFound();//Mostrar uma view falando que a url é invalida ou o código já foi utilizado!
 
             ViewData["VendedorId"] = id;
             ViewData["TrocaId"] = trocaId;
@@ -177,12 +178,16 @@ namespace TCCESTOQUE.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult AlterarSenha(AlterarSenha vendedor)
         {
-            _vendedorService.AlterarSenha(vendedor);
+            var res = _vendedorService.AlterarSenha(vendedor);
+            if (!res.IsValid)
+            {
+                ViewData["TrocaId"] = vendedor.TrocaId;
+                ViewData["VendedorId"] = vendedor.VendedorId;
+                return View(MostrarErros(res, vendedor));
+            }
 
-            ViewData["VendedorId"] = vendedor.VendedorId;
             return RedirectToAction("Login", "Vendedor");
         }
 
