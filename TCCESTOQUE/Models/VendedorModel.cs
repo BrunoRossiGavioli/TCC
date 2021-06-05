@@ -32,7 +32,6 @@ namespace TCCESTOQUE.Models
 
         [MaxLength(80)]
         [Required(ErrorMessage = "Informe o Email")]
-        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         [MaxLength(14)]

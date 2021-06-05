@@ -20,7 +20,6 @@ namespace TCCESTOQUE.Models
         public string Cpf { get; set; }
 
         [MaxLength(80)]
-        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Informe o Telefone!")]
