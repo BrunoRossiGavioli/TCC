@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-﻿body{
-  background-color: #DCDCDC;
-  background-image: url('../img/fundoimg.png');
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-}
-=======
 /* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
@@ -23,8 +14,6 @@ a.navbar-brand {
     text-align: center;
     word-break: break-all;
 }
->>>>>>> fbf4f8d32dd28cfd6a503eef7e5febe29f276708
-
 /* Provide sufficient contrast against white background */
 a {
     color: #0366d6;
