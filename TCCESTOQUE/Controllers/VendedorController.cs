@@ -157,7 +157,7 @@ namespace TCCESTOQUE.Controllers
         public IActionResult EsqueciSenha(EmailClienteModel cliente)
         {
             var res = _vendedorService.EsqueciSenha(cliente);
-            if(res)
+            if (res)
                 ViewData["sucesso"] = "Verifique seu e-mail";
             else
                 ViewData["erro"] = "Email não encontrado";

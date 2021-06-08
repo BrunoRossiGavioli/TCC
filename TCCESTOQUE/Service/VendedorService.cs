@@ -122,11 +122,12 @@ namespace TCCESTOQUE.Service
 
         public bool EsqueciSenha(EmailClienteModel cliente)
         {
-            if(cliente.Email != null || cliente.Email != "") {
+            if (cliente.Email != null || cliente.Email != "")
+            {
                 var cliId = _vendedorRepository.GetByEmail(cliente.Email)?.VendedorId;
                 if (cliId != Guid.Empty)
                 {
-                    var altSenha = new AlterarSenhaModel() 
+                    var altSenha = new AlterarSenhaModel()
                     {
                         Codigo = new Random().Next(100000, 999999),
                         DataEmissão = DateTime.Now,
@@ -134,10 +135,10 @@ namespace TCCESTOQUE.Service
                     };
                     _alterarSenhaRepo.PostCriacao(altSenha);
                     EmailService.EnviarMensagem(new string[] { cliente.Email }, null,
-                        "https://localhost:44338/Vendedor/AlterarSenha?Id=" + altSenha.VendedorId  +
-                        "&trocaId="+ altSenha.Id +"\nCódigo: "+altSenha.Codigo,
+                        "https://localhost:44338/Vendedor/AlterarSenha?Id=" + altSenha.VendedorId +
+                        "&trocaId=" + altSenha.Id + "\nCódigo: " + altSenha.Codigo,
                         "Troca de senha", null);
-                        return true;
+                    return true;
                 }
             }
             return false;
