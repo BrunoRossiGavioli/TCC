@@ -27,6 +27,12 @@ a {
 .titulosSobre{
   color:var(--purple);
   background-color: var(--gray-hover);    
+} 
+.imgSobre{
+  border-width:3px ;
+  border-style: solid;
+  border-color: var(--lilac);
+  border-radius: 20px;
 }
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
