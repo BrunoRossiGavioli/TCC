@@ -1,0 +1,44 @@
+﻿@model TCCESTOQUE.Models.EntradaModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout-Interno.cshtml";
+}
+<div id="moldura">
+    <form class="cadastro" asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input hidden type="hidden" asp-for="VendedorId"  value="@ViewBag.usuarioId" />
+        <input hidden type="hidden" asp-for="ProdutoId"  value="@ViewBag.ProdutoId">
+        <h1>
+            Adicionar
+            <br />
+            @ViewBag.ProdutoNome
+        </h1>
+        <div class="campo">
+            <label asp-for="UnidadeMedida" >Unidade de medida: @ViewBag.Medida</label>
+            <input hidden type="hidden" asp-for="UnidadeMedida" value="@ViewBag.Medida" />
+        </div>
+        <div class="campo">
+            <label asp-for="Quantidade" ></label>
+            <input asp-for="Quantidade"  />
+            <span asp-validation-for="Quantidade" class="text-danger"></span>
+        </div>
+        <div class="campo">
+            <label asp-for="FornecedorId" >Fornecedor</label>
+            <select asp-for="FornecedorId"  asp-items="ViewBag.FornecedorId"></select>
+        </div>
+        <div class="just-right">
+            <a asp-controller="Produto" asp-action="Index" class="btn-voltar">
+                Cancelar
+            </a>
+            <input type="submit" value="Adicionar" class="btn-cadastrar" />
+        </div>
+    </form>
+</div>
+<div>
+    
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

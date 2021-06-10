@@ -1,0 +1,57 @@
+﻿@model TCCESTOQUE.Models.ProdutoModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout-Interno.cshtml";
+}
+<div id="moldura">
+    <form class="cadastro" asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="VendedorId" value="@ViewBag.usuarioId" />
+        <input type="hidden" asp-for="ProdutoId" />
+        <h1>
+            Editar produto
+        </h1>
+        <div class="campo">
+            <label asp-for="Nome" >Nome*</label>
+            <input asp-for="Nome"/>
+            <span asp-validation-for="Nome" class="text-danger"></span>
+        </div>
+        <div class="campo">
+            <label asp-for="Descricao" >Descrição</label>
+            <input asp-for="Descricao"/>
+            <span asp-validation-for="Descricao" class="text-danger"></span>
+        </div>
+        <div class="campo">
+            <label asp-for="Custo" >Custo*</label>
+            <input asp-for="Custo"/>
+            <span asp-validation-for="Custo" class="text-danger"></span>
+        </div>
+        <div class="campo">
+            <label asp-for="Valor">Valor unitario*</label>
+            <input asp-for="Valor"/>
+            <span asp-validation-for="Valor" class="text-danger"></span>
+        </div>
+        <div class="campo">
+            <label asp-for="UnidadeMedida" >Unidade de medida*</label>
+            <select asp-for="UnidadeMedida"  asp-items="@ViewBag.UnidadeMedida"></select>
+            <span asp-validation-for="UnidadeMedida" class="text-danger"></span>
+        </div>
+        <div class="just-right">
+            <a asp-action="Index" class="btn-voltar">
+                Cancelar
+            </a>
+            <input type="submit" value="Salvar" class="btn-cadastrar" />
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $.validator.methods.number = function (value, element) {
+            return this.optional(element) || /^-?(?:\d+|\d{1,3}(?:\.\d{3})+)?(?:,\d+)?$/.test(value);
+        }
+    </script>
+}

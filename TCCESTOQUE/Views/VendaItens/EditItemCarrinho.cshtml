@@ -1,0 +1,38 @@
+﻿@model TCCESTOQUE.Models.VendaItensModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout-Interno.cshtml";
+}
+<div id="moldura">
+    <form class="cadastro" asp-action="EditItemCarrinho">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="VendaItensId" />
+        <input type="hidden" asp-for="VendedorId" value="@ViewBag.usuarioId" />
+        <input type="hidden" asp-for="CarrinhoId"  value="@ViewBag.CarrinhoId" />
+        <div class="campo">
+            <label asp-for="ProdutoId" ></label>
+            <select asp-for="ProdutoId"  asp-items="ViewBag.ProdutoId"></select>
+            <span asp-validation-for="ProdutoId" class="text-danger"></span>
+        </div>
+        <div class="campo">
+            <label asp-for="Quantidade" ></label>
+            <input asp-for="Quantidade"  />
+            <span asp-validation-for="Quantidade" class="text-danger"></span>
+        </div>
+        <div class="just-right">
+            <a class="btn-voltar" asp-controller="Carrinho" asp-action="Details" asp-route-id="@ViewBag.usuarioId">
+                Voltar ao carrinho
+            </a>
+            <input type="submit" value="Salvar" class="btn-cadastrar" />
+        </div>
+    </form>
+</div>
+
+<div>
+    
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

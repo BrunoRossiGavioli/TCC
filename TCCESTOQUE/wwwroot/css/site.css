@@ -1,0 +1,141 @@
+<<<<<<< HEAD
+﻿body{
+  background-color: #DCDCDC;
+  background-image: url('../img/fundoimg.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+=======
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+body {
+    background-color: var(--bg-white);
+    background-image: url('../img/fundoimg.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover; 
+}
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+>>>>>>> fbf4f8d32dd28cfd6a503eef7e5febe29f276708
+
+/* Provide sufficient contrast against white background */
+a {
+    color: #0366d6;
+}
+
+.btn-primary {
+      color: #fff;
+      background-color: #1b6ec2;
+      border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+      color: #fff;
+      background-color: #1b6ec2;
+      border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.CabecalhoListagem {
+    background-color: var(--light-purple);
+    color: ghostwhite;
+}
+
+.CabecalhoListagem * {
+    border: none !important;
+}
+.DetalhesHeader { 
+  background-color: var(--lilac); 
+  border-bottom:black solid 2px;
+}
+
+.Detalhes {
+  border: var(--lilac) 2px solid; 
+  background-color: var(--white);
+  width:300px;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 40px;
+}
+
+/*#region Navbar */
+
+li.dropdown:nth-last-of-type(n+2) {
+    margin-left:auto;
+}
+
+li.nav-item:nth-child(-n + 5){
+    margin:0rem 0.5rem 0rem 0.5rem;
+}
+
+#dropdownMenuButton #dropdownFornecedor{
+    text-decoration: none;
+    border: none;
+}
+
+.nav-link {
+    color: black !important;
+}
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;    
+}
+
+@media (max-width: 600px){
+    li.dropdown:nth-last-of-type(n+2) {
+        margin-left: 0px;
+    }
+}
+
+/*#endregion */

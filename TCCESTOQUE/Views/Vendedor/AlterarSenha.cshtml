@@ -1,0 +1,34 @@
+﻿@model TCCESTOQUE.POCO.AlterarSenha
+
+@{
+    ViewData["Title"] = "AlterarSenha";
+    Layout = "~/Views/Shared/_Layout-Externo.cshtml";
+}
+
+<div id="moldura">
+    <form class="cadastro" asp-action="AlterarSenha">
+        <h1>Alterar senha</h1>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" value="@ViewBag.VendedorId" asp-for="VendedorId" />
+        <input type="hidden" value="@ViewBag.TrocaId" asp-for="TrocaId" />
+        <div class="campo">
+            <label asp-for="NovaSenha">Nova senha</label>
+            <input asp-for="NovaSenha" />
+            <span asp-validation-for="NovaSenha" class="text-danger"></span>
+        </div>
+        <div class="campo">
+            <label asp-for="Codigo"></label>
+            <input type="text" asp-for="Codigo" data-mask="000000" />
+            <span asp-validation-for="Codigo" class="text-danger"></span>
+        </div>
+        <div class="just-cont-center">
+            <input type="submit" value="Enviar" class="btn-cadastrar" />
+            <a class="btn-voltar" asp-action="Login">Voltar</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
