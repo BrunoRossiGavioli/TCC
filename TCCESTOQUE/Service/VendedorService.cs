@@ -1,6 +1,7 @@
 ﻿using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
+using TCCESTOQUE.EmailPages;
 using TCCESTOQUE.Interfaces.Repository;
 using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
@@ -55,7 +56,7 @@ namespace TCCESTOQUE.Service
                 vendedorModel = FormataValores.FormataValoresVendedor(vendedorModel);
                 vendedorModel.Inativo = true;
                 _vendedorRepository.PostCriacao(vendedorModel);
-                EmailService.EnviarMensagem(new string[] { vendedorModel.Email }, null, "https://localhost:44338/Vendedor/AutenticarConta?id=" + vendedorModel.VendedorId, "Autenticar conta", null);
+                EmailService.EnviarMensagem(new string[] { vendedorModel.Email }, null, SendEmail.EmailDeVerificacao(vendedorModel.VendedorId), "Autenticar conta", null);
                 _carrinhoRepo.PostCriacao(new CarrinhoModel() { VendedorId = vendedorModel.VendedorId });
             }
             return validacao;
@@ -125,7 +126,8 @@ namespace TCCESTOQUE.Service
             if (cliente.Email != null || cliente.Email != "")
             {
                 var cliId = _vendedorRepository.GetByEmail(cliente.Email)?.VendedorId;
-                if (cliId != Guid.Empty)
+                var disponivel = _alterarSenhaRepo.ChegarUltimaTroca(cliId);
+                if (cliId != Guid.Empty && disponivel)
                 {
                     var altSenha = new AlterarSenhaModel()
                     {
@@ -135,8 +137,7 @@ namespace TCCESTOQUE.Service
                     };
                     _alterarSenhaRepo.PostCriacao(altSenha);
                     EmailService.EnviarMensagem(new string[] { cliente.Email }, null,
-                        "https://localhost:44338/Vendedor/AlterarSenha?Id=" + altSenha.VendedorId +
-                        "&trocaId=" + altSenha.Id + "\nCódigo: " + altSenha.Codigo,
+                        SendEmail.EmailTrocaSenha(altSenha.VendedorId, altSenha.Id, altSenha.Codigo),
                         "Troca de senha", null);
                     return true;
                 }

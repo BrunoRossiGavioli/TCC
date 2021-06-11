@@ -2,6 +2,7 @@
 using System;
 using System.Net;
 using System.Net.Mail;
+using System.Text;
 using TCCESTOQUE.Models;
 
 namespace TCCESTOQUE.Service
@@ -82,13 +83,15 @@ namespace TCCESTOQUE.Service
             message.Priority = MailPriority.Normal;
 
             //utilize true pra ativar html no conteúdo do email, ou false, para somente texto
-            message.IsBodyHtml = false;
+            message.IsBodyHtml = true;
 
             //Assunto do email
             message.Subject = titulo;
+            message.SubjectEncoding = Encoding.GetEncoding("UTF-8");
 
             //corpo do email a ser enviado
             message.Body = mensagem;
+            message.BodyEncoding = Encoding.GetEncoding("UTF-8");
 
             // Envia a mensagem
             SmtpClient client = new SmtpClient(conta.Server, conta.Port);

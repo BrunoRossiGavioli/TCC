@@ -20,6 +20,15 @@ namespace TCCESTOQUE.Repository
             return _context.AlterarSenhaModel.Where(m => m.Id == id && !m.Invalida).FirstOrDefault();
         }
 
+        public bool ChegarUltimaTroca(Guid? vendedorId)
+        {
+            var dis = _context.AlterarSenhaModel.Where(m => m.VendedorId == vendedorId && !m.Invalida && m.DataEmissão.Date == DateTime.Today).FirstOrDefault();
+            if (dis == null)
+                return true;
+
+            return false;
+        }
+
         public AlterarSenhaModel GetOneByCodigo(AlterarSenha model)
         {
             return _context.AlterarSenhaModel.Where(m => m.Id == model.TrocaId && m.Codigo == model.Codigo && m.Invalida == false).FirstOrDefault();
