@@ -83,6 +83,9 @@
 }
 
 @media (max-width:600px) {
+    .tabela.mt-5{
+        margin: 1rem 0 0 0 !important;
+    }
 
     .container {
         margin: 0 !important;

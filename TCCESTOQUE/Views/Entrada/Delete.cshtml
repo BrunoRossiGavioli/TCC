@@ -5,12 +5,11 @@
     Layout = "~/Views/Shared/_Layout-Interno.cshtml";
 }
 
-<h1>Cancelar</h1>
+<h1>Excluir</h1>
 
-<h3>Tem certeza que deseja cancelar essa entrada de estoque?</h3>
+<h3>Tem certeza que deseja excluir essa entrada de estoque?</h3>
+<hr />
 <div>
-    <h4>Estoque</h4>
-    <hr />
     <dl class="descricao dt-dark">
         <div>
             <dt>
@@ -64,9 +63,9 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="EntradaId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">
-            Cancelar
+        <input type="submit" value="Excluir" class="btn btn-danger" /> |
+        <a class="btn btn-cinza" asp-action="Index">
+            Voltar
         </a>
     </form>
 </div>

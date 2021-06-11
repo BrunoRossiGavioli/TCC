@@ -13,4 +13,49 @@
     --strong-lilac-hover: #cc5eb7;
 }
 
+img{
+    width: 100%;
+}
 
+.obrigatorio::after {
+    content: " *";
+    color: red;
+}
+
+.border-radius-1rem{
+    border-radius:1rem;
+}
+
+.btn-mold {
+    text-transform: uppercase;
+    text-decoration:none !important;
+    font-family: sans-serif !important;
+    font-weight: bold;
+    border: none;
+    border-radius: .7rem;
+    margin: 0 .75rem;
+    padding: .5rem;
+    transition: all .4s;
+}
+
+.btn-roxo {
+    color: var(--white) !important;
+    background-color: var(--light-purple);
+}
+
+.btn-roxo:hover {
+    transition: all .4s;
+    color: var(--white) !important;
+    background-color: var(--lilac);
+}
+
+.btn-cinza {
+    color: #F9FBF2;
+    background-color: var(--gray);
+}
+
+.btn-cinza:hover {
+    text-decoration: none;
+    background-color: var(--gray-hover);
+    color: #F9FBF2;
+}

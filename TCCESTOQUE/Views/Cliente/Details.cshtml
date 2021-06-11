@@ -18,22 +18,28 @@
                 @Html.DisplayFor(model => model.Nome)
             </dd>
         </div>
-        <div>
-            <dt>
-                @Html.DisplayNameFor(model => model.Cpf)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Cpf)
-            </dd>
-        </div>
-        <div>
-            <dt>
-                @Html.DisplayNameFor(model => model.Email)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Email)
-            </dd>
-        </div>
+        @if (Model.Cpf != "" && Model.Cpf!= null)
+        {
+            <div>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Cpf)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Cpf)
+                </dd>
+            </div>
+        }
+        @if(Model.Email != "" && Model.Email != null)
+        { 
+            <div>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+            </div>
+        }
         <div>
             <dt>
                 @Html.DisplayNameFor(model => model.Telefone)
@@ -87,8 +93,8 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" title="Editar" asp-route-id="@Model.ClienteId">Edit</a> |
-    <a asp-action="Index">
+    <a class="btn btn-roxo" asp-action="Edit" title="Editar" asp-route-id="@Model.ClienteId">Editar</a> |
+    <a class="btn btn-cinza" asp-action="Index">
         Voltar
     </a>
 </div>

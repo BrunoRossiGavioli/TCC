@@ -11,47 +11,47 @@
             Adicionar produto
         </h1>
         <div class="campo">
-            <label asp-for="Nome">Nome*</label>
+            <label asp-for="Nome" class="obrigatorio">Nome</label>
             <input asp-for="Nome" />
             <span asp-validation-for="Nome" class="text-danger"></span>
         </div>
         <div class="campo">
-            <label asp-for="Descricao">Descrição</label>
+            <label asp-for="Descricao" class="obrigatorio">Descrição</label>
             <input asp-for="Descricao" />
             <span asp-validation-for="Descricao" class="text-danger"></span>
         </div>
         <div class="campo">
-            <label asp-for="UnidadeMedida">Unidade de medida*</label>
+            <label asp-for="UnidadeMedida" class="obrigatorio">Unidade de medida</label>
             <select asp-for="UnidadeMedida" asp-items="@ViewBag.UnidadeMedida"></select>
             <span asp-validation-for="UnidadeMedida" class="text-danger"></span>
         </div>
         <div class="campo">
-            <label asp-for="Custo">Custo*</label>
+            <label asp-for="Custo" class="obrigatorio">Custo</label>
             <input asp-for="Custo" type="number"/>
             <span asp-validation-for="Custo" class="text-danger"></span>
         </div>
         <div class="campo">
-            <label asp-for="Valor">Valor*</label>
+            <label asp-for="Valor" class="obrigatorio">Valor</label>
             <input asp-for="Valor" type="number"/>
             <span asp-validation-for="Valor" class="text-danger"></span>
         </div>
         <div class="campo">
-            <label asp-for="FornecedorId">Fornecedor*</label>
+            <label asp-for="FornecedorId" class="obrigatorio">Fornecedor</label>
             <select asp-for="FornecedorId" asp-items="@ViewBag.Fornecedores">
                 <option value="00000000-0000-0000-0000-000000000000">Selecione</option>
             </select>
             <span asp-validation-for="FornecedorId" class="text-danger"></span>
         </div>
         <div class="campo">
-            <label asp-for="Quantidade">Quantidade*</label>
+            <label asp-for="Quantidade">Quantidade</label>
             <input asp-for="Quantidade"type="number"/>
             <span asp-validation-for="Quantidade" class="text-danger"></span>
         </div>
-        <div class="just-right">
-            <a asp-action="Index" alt="Voltar" class="btn-voltar">
-                Cancelar
+        <div class="just-right mt-2">
+            <a asp-action="Index" alt="Voltar" class="btn-mold btn-cinza m-0">
+                Voltar
             </a>
-            <input type="submit" value="Adicionar" class="btn-cadastrar" />
+            <input type="submit" value="Adicionar" class="btn-mold btn-roxo m-0"/>
         </div>
     </form>
 </div>

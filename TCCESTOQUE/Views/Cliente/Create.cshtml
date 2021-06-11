@@ -13,43 +13,43 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" hidden asp-for="VendedorId" value="@ViewBag.usuarioId" />
         <div class="campo">
-            <label asp-for="Nome" ></label>
-            <input asp-for="Nome"  />
+            <label asp-for="Nome" class="obrigatorio"></label>
+            <input asp-for="Nome"/>
             <span asp-validation-for="Nome" class="text-danger"></span>
         </div>
         <div class="campo">
-            <label asp-for="Sexo" >Gênero</label>
+            <label asp-for="Sexo" class="obrigatorio">Gênero</label>
             <select asp-for="Sexo"  asp-items="Html.GetEnumSelectList<SexoEnum>()"></select>
             <span asp-validation-for="Sexo" class="text-danger"></span>
         </div>
         <div class="campo">
-            <label asp-for="Cpf" ></label>
+            <label asp-for="Cpf">CPF</label>
             <input asp-for="Cpf" data-mask="000.000.000-00"  />
             <span asp-validation-for="Cpf" class="text-danger"></span>
         </div>
         <div class="campo">
-            <label asp-for="Email" ></label>
+            <label asp-for="Email" >E-mail</label>
             <input asp-for="Email"  />
             <span asp-validation-for="Email" class="text-danger"></span>
         </div>
         <div class="campo">
-            <label asp-for="Cep" ></label>
+            <label asp-for="Cep" class="obrigatorio">CEP</label>
             <input asp-for="Cep" data-mask="00000-000" id="cep"  />
             <span asp-validation-for="Cep" class="text-danger"></span>
         </div>
         <div class="campo">
-            <label asp-for="Telefone" ></label>
+            <label asp-for="Telefone" class="obrigatorio"></label>
             <input asp-for="Telefone" data-mask="(00)00000-0000"  />
             <span asp-validation-for="Telefone" class="text-danger"></span>
         </div>
         <div class="campo">
-            <label asp-for="Localidade" ></label>
+            <label asp-for="Localidade" class="obrigatorio">Cidade</label>
             <input asp-for="Localidade" id="localidade"  />
             <span asp-validation-for="Localidade" class="text-danger"></span>
         </div>
         <div class="campo2">
             <div>
-                <label asp-for="Logradouro">Rua</label>
+                <label asp-for="Logradouro" class="obrigatorio">Rua</label>
                 <input asp-for="Logradouro" id="logradouro" />
                 <span asp-validation-for="Logradouro" class="text-danger"></span>
             </div>
@@ -59,18 +59,18 @@
                 <span asp-validation-for="Complemento" class="text-danger"></span>
             </div>
             <div>
-                <label asp-for="Numero"></label>
+                <label asp-for="Numero" class="obrigatorio"></label>
                 <input type="text" asp-for="Numero" data-mask="000000" id="numero" />
                 <span asp-validation-for="Numero" class="text-danger"></span>
             </div>
         </div>
         <div class="campo">
-            <label asp-for="Bairro" ></label>
+            <label asp-for="Bairro" class="obrigatorio"></label>
             <input asp-for="Bairro" id="bairro"  />
             <span asp-validation-for="Bairro" class="text-danger"></span>
         </div>
         <div class="campo">
-            <label asp-for="Uf" >Estado</label>
+            <label asp-for="Uf" class="obrigatorio">Estado</label>
             <select asp-for="Uf" id="uf" >
                 <option selected value="0">Selecionar</option>
                 <option value="AC">Acre</option>
@@ -103,11 +103,11 @@
             </select>
             <span asp-validation-for="Uf" class="text-danger"></span>
         </div>
-        <div class="just-right">
-            <a class="btn-voltar" asp-action="Index">
-                Cancelar
+        <div class="just-right mt-2">
+            <a class="btn-mold btn-cinza m-0" asp-action="Index">
+                Voltar
             </a>
-            <input type="submit" value="Cadastrar" class="btn-cadastrar" />
+            <input type="submit" value="Cadastrar" class="btn-mold btn-roxo m-0" />
         </div>
     </form>
 </div>
