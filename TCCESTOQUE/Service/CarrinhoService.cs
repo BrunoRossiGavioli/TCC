@@ -27,8 +27,12 @@ namespace TCCESTOQUE.Service
 
         public ICollection<string> Finalizar(CarrinhoModel carrinho)
         {
-            var car = _carrinhoRepo.GetOneByVendedorId(carrinho.VendedorId);
             ICollection<string> erros = new List<string>();
+            if (carrinho.ClienteId == Guid.Empty) { 
+                erros.Add("Selecione o usuario");
+                return erros;
+            }
+            var car = _carrinhoRepo.GetOneByVendedorId(carrinho.VendedorId);
             if (car.Itens.Any())
             {
                 var venda = new VendaModel()

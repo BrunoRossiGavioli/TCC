@@ -1,7 +1,7 @@
 ﻿@model TCCESTOQUE.Models.VendedorModel
 
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "- Login";
 }
 
 
@@ -27,8 +27,11 @@
                     <span asp-validation-for="Senha" class="text-danger"></span>
                 </div>
             </div>
-            <div class="text-right">
+            <div class="text-left">
                 <a asp-action="EsqueciSenha">Esqueceu a senha</a>
+            </div>
+            <div class="text-left">
+                <a asp-action="Create">Cadastrar</a>
             </div>
             <div class="d-flex justify-content-center mt-4 mb-3">
                 <input class="btn-mold btn-roxo" type="submit" value="Entrar" />

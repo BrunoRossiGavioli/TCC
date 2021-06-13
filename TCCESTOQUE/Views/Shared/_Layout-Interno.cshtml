@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - TCCESTOQUE</title>
+    <title>E-STOCK @ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link href="~/css/formularios.css" rel="stylesheet" />
     <link href="~/css/tabela.css" rel="stylesheet" />
@@ -16,7 +16,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-controller="Home" asp-action="Index">TCCESTOQUE</a>
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img class="nav-logo" src="~/img/NavImgs/logo.png" /></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -71,7 +71,7 @@
                         </li>
 
                         <li class="my-sm-2 py-0">
-                            <a class="btn-mold btn-roxo" asp-controller="Carrinho" asp-action="Details" asp-route-id="@ViewBag.usuarioId">Vender</a>
+                            <a class="btn-mold btn-roxo m-0" asp-controller="Carrinho" asp-action="Details" asp-route-id="@ViewBag.usuarioId">Vender</a>
                         </li>
 
                     </ul>

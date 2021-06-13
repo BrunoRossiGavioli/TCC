@@ -13,7 +13,18 @@
     --strong-lilac-hover: #cc5eb7;
 }
 
-img{
+.nav-logo{
+    height:50px !important;
+    width:260px !important;
+}
+
+@media (max-width:320px){
+    .nav-logo{
+        width:228px !important;
+    }
+}
+
+img {
     width: 100%;
 }
 
