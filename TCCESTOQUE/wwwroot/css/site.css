@@ -132,3 +132,14 @@ a.navbar-brand {
 }
 
 /*#endregion */
+
+/*#region Home*/
+.segunda-linha {
+    background-color: rgb(68, 81, 138);
+    border-radius: .2rem;
+}
+
+.radius-2rem {
+    border-radius: 2.5rem;
+}
+/*#endregion */

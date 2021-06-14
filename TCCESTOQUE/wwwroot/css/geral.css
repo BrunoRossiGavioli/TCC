@@ -13,6 +13,10 @@
     --strong-lilac-hover: #cc5eb7;
 }
 
+h1,h2,h3,h4,h5{
+    cursor:default;
+}
+
 .nav-logo{
     height:50px !important;
     width:260px !important;

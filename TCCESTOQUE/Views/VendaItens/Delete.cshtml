@@ -45,8 +45,8 @@
     <form asp-action="DeleteItemCarrinho">
         <input type="hidden" asp-for="VendaItensId" />
         <input type="submit" value="Remover" class="btn btn-danger" /> |
-        <a asp-controller="Carrinho" asp-action="Details" asp-route-id="@Model.VendedorId">
-            Voltar ao carrinho
+        <a class="btn btn-cinza" asp-controller="Carrinho" asp-action="Details" asp-route-id="@Model.VendedorId">
+            Voltar
         </a>
     </form>
 </div>

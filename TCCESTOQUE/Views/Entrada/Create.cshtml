@@ -24,8 +24,10 @@
             <span asp-validation-for="Quantidade" class="text-danger"></span>
         </div>
         <div class="campo">
-            <label asp-for="FornecedorId" >Fornecedor</label>
-            <select asp-for="FornecedorId"  asp-items="ViewBag.FornecedorId"></select>
+            <label asp-for="FornecedorId">Fornecedor</label>
+            <select asp-for="FornecedorId" asp-items="ViewBag.FornecedorId">
+                <option>SELECIONAR</option>
+            </select>
         </div>
         <div class="just-right mt-2">
             <a asp-controller="Produto" asp-action="Index" class="btn-mold btn-cinza m-0">

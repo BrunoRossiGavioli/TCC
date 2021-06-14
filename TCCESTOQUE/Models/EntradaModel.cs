@@ -19,6 +19,7 @@ namespace TCCESTOQUE.Models
         [Column(TypeName = "decimal(12,2)")]
         public decimal Custo { get; set; }
 
+        [Required(ErrorMessage = "Informe a quantidade")]
         public double Quantidade { get; set; }
 
         [Required]

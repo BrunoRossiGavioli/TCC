@@ -13,7 +13,7 @@
             Adicionar produto ao carrinho
         </h1>
         <div class="campo">
-            <label asp-for="ProdutoId" ></label>
+            <label asp-for="ProdutoId" >Produto</label>
             <select asp-for="ProdutoId"  asp-items="ViewBag.ProdutoId"></select>
         </div>
         <div class="campo">
@@ -21,11 +21,11 @@
             <input asp-for="Quantidade"  />
             <span asp-validation-for="Quantidade" class="text-danger"></span>
         </div>
-        <div class="just-right">
-            <a class="btn-voltar" asp-controller="Carrinho" asp-action="Details" asp-route-id="@ViewBag.usuarioId">
-                Voltar ao carrinho
+        <div class="just-right mt-2">
+            <a class="btn-mold btn-cinza m-0 " asp-controller="Carrinho" asp-action="Details" asp-route-id="@ViewBag.usuarioId">
+                Voltar
             </a>
-            <input type="submit" value="Adicionar" class="btn-cadastrar" />
+            <input type="submit" value="Adicionar" class="btn-mold btn-roxo m-0" />
         </div>
     </form>
 </div>
