@@ -29,7 +29,7 @@ namespace TCCESTOQUE.Service
         {
             ICollection<string> erros = new List<string>();
             if (carrinho.ClienteId == Guid.Empty) { 
-                erros.Add("Selecione o usuario");
+                erros.Add("Selecione o cliente");
                 return erros;
             }
             var car = _carrinhoRepo.GetOneByVendedorId(carrinho.VendedorId);

@@ -56,6 +56,9 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Create(EntradaModel entradaModel)
         {
             Autenticar();
+            if (entradaModel.FornecedorId == Guid.Empty)
+                ModelState.AddModelError("FornecedorId", "Selecione um fornecedor");
+
             if (ModelState.IsValid && entradaModel.ProdutoId != Guid.Empty)
             {
                 _entradaService.PostEntrada(entradaModel);

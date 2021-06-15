@@ -36,6 +36,7 @@ namespace TCCESTOQUE.Models
         public ProdutoModel Produto { get; set; }
 
         [ForeignKey("Fornecedor")]
+        [Required(ErrorMessage = "Selecione um fornecedor")]
         public Guid FornecedorId { get; set; }
         public FornecedorModel Fornecedor { get; set; }
 

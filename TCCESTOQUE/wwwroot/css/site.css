@@ -107,7 +107,7 @@ li.dropdown:nth-last-of-type(n+2) {
     margin-left:auto;
 }
 
-li.nav-item:nth-child(-n + 4){
+li.nav-item:nth-child(-n + 5){
     margin:0rem 0.5rem 0rem 0.5rem;
 }
 
