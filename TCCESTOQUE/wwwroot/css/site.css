@@ -1,8 +1,9 @@
 /* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+
 body {
-    background-color: var(--bg-white);
+   background-color: var(--bg-white);
     background-image: url('../img/fundoimg.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -134,9 +135,38 @@ a.navbar-brand {
 /*#endregion */
 
 /*#region Home*/
-.segunda-linha {
-    background-color: rgb(68, 81, 138);
-    border-radius: .2rem;
+#segunda-linha {
+    margin: 0px;
+    padding: 3rem 1.5rem;
+    align-items: center;
+    padding: 2rem 1.5rem 0rem 1.5rem;
+}
+
+#segunda-linha> div:first-child{
+    padding: 5rem;
+}
+
+#primeira-linha {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #9272c1;
+    border-radius: 0px 0px 100px 100px;
+    margin: 0px;
+    flex-direction: column;
+    color: white;
+    padding-top: 2rem;
+    padding-bottom:2rem;
+}
+
+#logo-container {
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+
+#logo-home {
+    width: 20vh;
 }
 
 .radius-2rem {

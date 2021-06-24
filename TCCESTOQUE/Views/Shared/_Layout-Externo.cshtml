@@ -10,40 +10,39 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
-<body>
+<body class="bg-white">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img class="nav-logo" src="~/img/NavImgs/logo.png"/></a>
+        <nav class="navbar navbar-expand-sm p-0 navbar-toggleable-sm navbar-dark bg-roxo">
+            <div class="container-fluid py-2">                
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1 nav-divider"> 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    <ul id="nav-externo" class="navbar-nav flex-grow-1 nav-divider"> 
+                        <li class="">
+                            <a class="btn btn-outline-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Sobre</a>
+                            <a class="btn btn-outline-light" asp-area="" asp-controller="Home" asp-action="Manual">Manual</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Vendedor" asp-action="Create">Cadastrar</a>
+                            <a class="btn btn-outline-light" asp-controller="Vendedor" asp-action="Create">Cadastrar</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Vendedor" asp-action="Login">Login</a>
+                            <a class="btn btn-outline-light" asp-controller="Vendedor" asp-action="Login">Login</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container-fluid p-0">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-    <footer class="footer bg-white text-center">
+    <footer class="footer border-top box-shadow bg-white text-center">
         &copy; 2021 - E-STOCK
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

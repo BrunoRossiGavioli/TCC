@@ -20,7 +20,7 @@ namespace TCCESTOQUE.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Manual()
         {
             Autenticar();
             return View();

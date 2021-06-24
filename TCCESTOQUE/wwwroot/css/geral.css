@@ -13,18 +13,33 @@
     --strong-lilac-hover: #cc5eb7;
 }
 
+.bg-roxo {
+    background-color: #9272c1;
+}
+
 h1,h2,h3,h4,h5{
     cursor:default;
 }
 
-.nav-logo{
-    height:50px !important;
-    width:260px !important;
+.nav-logo{    
+    width:50px !important;
 }
 
 @media (max-width:320px){
     .nav-logo{
-        width:228px !important;
+        width:40px !important;
+    }
+}
+
+.linha{
+    display: flex;
+    align-content: center;
+    flex-direction: row;
+}
+
+@media (max-width:600px){
+    .linha{
+        flex-direction: column;
     }
 }
 
@@ -74,3 +89,25 @@ img {
     background-color: var(--gray-hover);
     color: #F9FBF2;
 }
+
+.btn-outline-personalizado {
+    color: #f8f9fa;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+}
+
+    .btn-outline-personalizado :hover {
+        color: white;
+        border-color: #f8f9fa;
+    }

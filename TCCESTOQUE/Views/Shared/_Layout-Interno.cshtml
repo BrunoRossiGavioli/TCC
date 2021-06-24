@@ -14,9 +14,9 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow p-0 mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img class="nav-logo" src="~/img/NavImgs/logo.png" /></a>
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img class="nav-logo" src="~/img/logo-box.png"/></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -76,7 +76,6 @@
                             </div>
                         </li>
 
-
                         <li class="my-sm-2 py-0">
                             <a class="btn-mold btn-roxo m-0" asp-controller="Carrinho" asp-action="Details" asp-route-id="@ViewBag.usuarioId">Vender</a>
                         </li>
@@ -86,13 +85,13 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container-fluid">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="footer bg-white text-center">
+    <footer class="footer border-top box-shadow bg-white text-center">
         &copy; 2021 - E-STOCK
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
