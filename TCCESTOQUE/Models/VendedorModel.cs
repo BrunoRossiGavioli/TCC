@@ -25,10 +25,6 @@ namespace TCCESTOQUE.Models
         [DataType(DataType.Date)]
         public DateTime DataNascimento { get; set; }
 
-        [MaxLength(14)]
-        [Required(ErrorMessage = "Informe o cpf", AllowEmptyStrings = false)]
-        public string Cpf { get; set; }
-
         [MaxLength(80)]
         [Required(ErrorMessage = "Informe o Email")]
         public string Email { get; set; }

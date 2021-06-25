@@ -30,18 +30,6 @@ namespace Estoque.Test.ValidationModelTests
 
             Assert.True(validation.IsValid);
         }
-        #region Cpf
-        [Theory(DisplayName = "Cpf deve ser válido")]
-        [InlineData("123.353.762-71")]
-        [InlineData("423.233.892-32")]
-        [InlineData("623.378.242-02")]
-        public async Task CpfValido(string cpf)
-        {
-            var instance = _builder.With(x => x.Cpf = cpf).Build();
-            var validation = await _validator.ValidateAsync(instance);
-            Assert.True(validation.IsValid);
-        }
-        #endregion
 
         #region Data de nascimento
         [Theory(DisplayName = "Teste de datas de nascimento válidas")]

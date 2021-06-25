@@ -7,8 +7,6 @@ namespace TCCESTOQUE.Interfaces.Repository
     {
         public ClaimsPrincipal PostLogin(VendedorModel vendedorModel);
 
-        public VendedorModel GetByCpf(string cpf);
-
         public VendedorModel GetByTelefone(string telefone);
 
         public VendedorModel GetByEmail(string email);

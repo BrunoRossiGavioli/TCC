@@ -111,8 +111,7 @@ namespace TCCESTOQUE.Service
 
         private VendedorModel ConvertVendedor(VendedorModel vendedorModel)
         {
-            var vendedor = _vendedorRepository.GetByCpf(vendedorModel.Cpf);
-            vendedor.Cpf = vendedorModel.Cpf;
+            var vendedor = _vendedorRepository.GetByEmail(vendedorModel.Email);
             vendedor.Email = vendedorModel.Email;
             vendedor.DataNascimento = vendedor.DataNascimento;
             vendedor.Nome = vendedorModel.Nome;

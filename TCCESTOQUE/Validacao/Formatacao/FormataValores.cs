@@ -9,7 +9,6 @@ namespace TCCESTOQUE.Validacao.Formatacao
         public static VendedorModel FormataValoresVendedor(VendedorModel vendedor)
         {
             vendedor.Nome = vendedor.Nome.ToUpper().Trim();
-            vendedor.Cpf = vendedor.Cpf.Trim();
             vendedor.Telefone = vendedor.Telefone?.Trim();
             vendedor.Email = vendedor.Email.Trim();
             vendedor.Senha = SecurityService.Criptografar(vendedor.Senha);

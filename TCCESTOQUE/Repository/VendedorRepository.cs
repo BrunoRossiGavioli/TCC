@@ -46,11 +46,6 @@ namespace TCCESTOQUE.Repository
             return new ClaimsPrincipal(new[] { minhaIdentity });
         }
 
-        public VendedorModel GetByCpf(string cpf)
-        {
-            return _context.VendedorModel.Where(a => a.Cpf == cpf).FirstOrDefault();
-        }
-
         public VendedorModel GetByTelefone(string telefone)
         {
             return _context.VendedorModel.Where(a => a.Telefone == telefone).FirstOrDefault();

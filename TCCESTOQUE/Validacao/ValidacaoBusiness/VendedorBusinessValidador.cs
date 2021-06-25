@@ -9,14 +9,6 @@ namespace TCCESTOQUE.Validacao.ValidacaoBusiness
     {
         public VendedorBusinessValidador(IVendedorRepository vendRepo)
         {
-            When(v => !string.IsNullOrEmpty(v.Cpf), () =>
-            {
-                When(v => vendRepo.GetByCpf(v.Cpf)?.VendedorId != v.VendedorId, () =>
-                {
-                    RuleFor(a => a.Cpf).Must(cpf => vendRepo.GetByCpf(cpf) == null).WithMessage(MensagensDeErroPadrao.CpfJaCadastrado);
-                });
-            });
-
             When(v => vendRepo.GetByEmail(v.Email)?.VendedorId != v.VendedorId, () =>
             {
                 RuleFor(a => a.Email).Must(email => vendRepo.GetByEmail(email) == null).WithMessage(MensagensDeErroPadrao.EmailJaCadastrado);

@@ -10,7 +10,6 @@ namespace Estoque.Test.Builder
         protected override void LoadDefault()
         {
             _builderInstance = Builder<VendedorModel>.CreateNew()
-                .With(x => x.Cpf = "123.456.789-10")
                 .With(x => x.DataNascimento = DateTime.Today.AddYears(-18))
                 .With(x => x.Email = "teste@gmail.com")
                 .With(x => x.Nome = "João carlos")
