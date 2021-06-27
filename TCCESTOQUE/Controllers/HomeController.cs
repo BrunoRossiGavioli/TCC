@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using TCCESTOQUE.Models;
 
@@ -30,6 +32,13 @@ namespace TCCESTOQUE.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+
+        [HttpPost]
+        public ContentResult NovoGrafico()
+        {
+                
         }
     }
 }

@@ -16,7 +16,7 @@ namespace TCCESTOQUE.ValidadorVendedor
 
             RuleFor(v => v.Email).NotEmpty().WithMessage(MensagensDeErroPadrao.EmailVazio)
                 .EmailAddress().WithMessage(MensagensDeErroPadrao.EmailFormatoInvalido)
-                .MaximumLength(30).WithMessage(MensagensDeErroPadrao.EmailTamanhoMaximo);
+                .MaximumLength(100).WithMessage(MensagensDeErroPadrao.EmailTamanhoMaximo);
 
             RuleFor(v => v.Senha).NotEmpty().WithMessage(MensagensErroVendedor.SenhaVazia)
                 .MaximumLength(50).WithMessage(MensagensErroVendedor.SenhaTamanhoMaximo)
