@@ -1,5 +1,5 @@
 ﻿@{ 
-    
+
 }
 
 <h2>Teste</h2>
@@ -10,15 +10,15 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
 <script>
-    
     $(document).ready(function () {
+        var label = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.labels));
         var ctx = document.getElementById('myChart').getContext('2d');
         new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: [1,2,3,4,5,6,7],
+                labels: label,
                 datasets: [{
-                    data: [12, 19, 3, 5, 2, 3],
+                    data: [12, 19, 3, 5, 0, 3, 12, 19, 3, 5, 2, 3],
                     backgroundColor: '#9272c1',
                     borderColor: '#9272c1',
                     borderWidth: 1
