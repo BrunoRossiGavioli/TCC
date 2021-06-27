@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
@@ -38,7 +39,7 @@ namespace TCCESTOQUE.Controllers
         [HttpPost]
         public ContentResult NovoGrafico()
         {
-                
+            throw new NotImplementedException();
         }
     }
 }
