@@ -357,10 +357,8 @@ namespace Estoque.Test.ValidationViewModelTests
             Assert.True(validation.IsValid);
         }
         [Theory(DisplayName = "teste de números inválidos")]
-        [InlineData("-1")]
-        [InlineData("0")]
-        [InlineData("-30")]
-        [InlineData("-48")]
+        [InlineData("")]
+        [InlineData(null)]
         public async Task NumerosInvalidos(string numero)
         {
             var instance = _builder.With(x => x.Numero = numero).Build();

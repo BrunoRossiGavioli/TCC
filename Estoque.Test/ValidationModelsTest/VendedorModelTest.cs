@@ -81,18 +81,6 @@ namespace Estoque.Test.ValidationModelTests
             Assert.True(validation.IsValid);
         }
 
-        [Theory(DisplayName = "Email deve ser válido!")]
-        [InlineData("testegmailltamanhmaxidode30caracteresnocampo@gmail.com")]
-        [InlineData("jsdhfjdsfsfsfdfsfdfsfsfsdfsdfsdfsfgmail@gmail.com")]
-        [InlineData("mhkfhfkjhkjdshkjfdshfsdkskfjdsfsfsd@gmail.com")]
-        [InlineData("oijrgotriojgrjtogrtjogjrtogjirogjjghrbbjjb@gmail.com")]
-        public async Task EmailsTamanhoMaximo(string email)
-        {
-            var instance = _builder.With(x => x.Email = email).Build();
-            var validation = await _validator.ValidateAsync(instance);
-            Assert.False(validation.IsValid);
-            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroPadrao.EmailTamanhoMaximo));
-        }
         [Fact(DisplayName = "Email nulo!")]
         public async Task EmailsNulo()
         {

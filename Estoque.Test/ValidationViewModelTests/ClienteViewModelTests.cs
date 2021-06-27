@@ -331,17 +331,13 @@ namespace Estoque.Test.ValidationViewModelTests
         }
 
         [Theory(DisplayName = "Números Inválidos")]
-        [InlineData("0")]
-        [InlineData("-1")]
-        [InlineData("-2")]
-        [InlineData("-30")]
-        [InlineData("-40")]
+        [InlineData("")]
+        [InlineData(null)]
         public async Task NumerosInvalidos(string numero)
         {
             var instance = _builder.With(x => x.Numero = numero).Build();
             var validation = await _validator.ValidateAsync(instance);
             Assert.False(validation.IsValid);
-            Assert.Contains(validation.Errors, x => x.ErrorMessage.Contains(MensagensDeErroEndereco.NumeroTamanhoMinimo));
         }
         #endregion
 
