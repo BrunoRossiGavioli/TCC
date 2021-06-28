@@ -47,6 +47,9 @@ namespace TCCESTOQUE.StartUpOpcoes
             services.AddScoped<ISelectListService, SelectListService>();
 
             services.AddScoped<ISenhaRepository, SenhaRepository>();
+
+            services.AddScoped<IChartRepository, ChartRepository>();
+            services.AddScoped<IChartService, ChartService>();
         }
     }
 }

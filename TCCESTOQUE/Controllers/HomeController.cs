@@ -4,29 +4,31 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using TCCESTOQUE.Interfaces.Service;
 using TCCESTOQUE.Models;
+using TCCESTOQUE.Service;
 
 namespace TCCESTOQUE.Controllers
 {
     public class HomeController : ControllerPai
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IChartService _chartService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IChartService chartService)
         {
             _logger = logger;
+            _chartService = chartService;
         }
 
         public IActionResult Index()
         {
             Autenticar();
-            var label = new List<string>
-            {
-                "janaina","fevereiro","marcio","abril","mauro","junho",
-                "julhu","agosto","steve","outubro","natalina","dezembro"
-
-            };
-            ViewData["labels"] = label;
+            var custo = _chartService.GetValorTotalCusto(ViewBag.usuarioId);
+            var valor = _chartService.GetValorTotalValor(ViewBag.usuarioId);
+            
+            ViewData["custoTotal"] = custo;
+            ViewData["valorTotal"] = valor-custo;
             return View();
         }
 
