@@ -12,61 +12,67 @@
             <h1>
                 Cadastrar fornecedor
             </h1>
-            <div class="form-group">
-                <label asp-for="RazaoSocial" class="obrigatorio">Razão Social</label>
-                <input class="form-control" asp-for="RazaoSocial" />
-                <span asp-validation-for="RazaoSocial" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <label asp-for="NomeFantasia" class="obrigatorio">Nome fantasia</label>
                 <input class="form-control" asp-for="NomeFantasia" />
                 <span asp-validation-for="NomeFantasia" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Cnpj" class="obrigatorio">CNPJ</label>
-                <input class="form-control" asp-for="Cnpj" data-mask="00.000.000/0000-00" />
-                <span asp-validation-for="Cnpj" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="obrigatorio">E-mail</label>
-                <input class="form-control" asp-for="Email" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Telefone"></label>
-                <input class="form-control" asp-for="Telefone" data-mask="(00)00000-0000" />
-                <span asp-validation-for="Telefone" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Cep" class="obrigatorio">CEP</label>
-                <input class="form-control" asp-for="Cep" data-mask="00000-000" id="cep" />
-                <span asp-validation-for="Cep" class="text-danger"></span>
-            </div>
             <div class="form-row">
                 <div class="form-group col-md-8">
+                    <label asp-for="RazaoSocial" class="obrigatorio">Razão Social</label>
+                    <input class="form-control" asp-for="RazaoSocial" />
+                    <span asp-validation-for="RazaoSocial" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="Cnpj" class="obrigatorio">CNPJ</label>
+                    <input class="form-control" asp-for="Cnpj" data-mask="00.000.000/0000-00" />
+                    <span asp-validation-for="Cnpj" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Email" class="obrigatorio">E-mail</label>
+                    <input class="form-control" asp-for="Email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Telefone"></label>
+                    <input class="form-control" asp-for="Telefone" data-mask="(00)00000-0000" />
+                    <span asp-validation-for="Telefone" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label asp-for="Cep" class="obrigatorio">CEP</label>
+                    <input class="form-control" asp-for="Cep" data-mask="00000-000" id="cep" />
+                    <span asp-validation-for="Cep" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-md-6">
                     <label asp-for="Logradouro" class="obrigatorio">Rua</label>
                     <input class="form-control" asp-for="Logradouro" id="logradouro" />
                     <span asp-validation-for="Logradouro" class="text-danger"></span>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-2">
                     <label asp-for="Numero" class="obrigatorio"></label>
                     <input class="form-control" type="text" asp-for="Numero" data-mask="000000" id="numero" />
                     <span asp-validation-for="Numero" class="text-danger"></span>
                 </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Bairro" class="obrigatorio"></label>
-                <input class="form-control" asp-for="Bairro" id="bairro" />
-                <span asp-validation-for="Bairro" class="text-danger"></span>
-            </div>
             <div class="form-row">
-                <div class="form-group col-md-7">
+                <div class="form-group col-md-4">
+                    <label asp-for="Bairro" class="obrigatorio"></label>
+                    <input class="form-control" asp-for="Bairro" id="bairro" />
+                    <span asp-validation-for="Bairro" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
                     <label asp-for="Localidade" class="obrigatorio">Cidade</label>
                     <input class="form-control" asp-for="Localidade" id="localidade" />
                     <span asp-validation-for="Localidade" class="text-danger"></span>
                 </div>
-                <div class="form-group col-md-5">
+                <div class="form-group col-md-4">
                     <label asp-for="Uf" class="obrigatorio">Unidade Federal</label>
                     <select asp-for="Uf" id="uf" class="col-md-12">
                         <option selected value="0">Selecionar</option>
@@ -103,15 +109,15 @@
             </div>
             <div class="form-group">
                 <label asp-for="Complemento"></label>
-                <textarea class="form-control" rows="3" asp-for="Complemento" id="complemento" ></textarea>
+                <textarea class="form-control" rows="1" asp-for="Complemento" id="complemento"></textarea>
                 <span asp-validation-for="Complemento" class="text-danger"></span>
             </div>
 
-            <div class="just-right mt-2">
-                <a asp-action="Index" class="btn-mold btn-cinza m-0">
+            <div class="row p-3">
+                <a asp-action="Index" class="btn-mold btn-cinza m-0 mr-3">
                     Voltar
                 </a>
-                <input class="form-control" type="submit" value="Cadastrar" class="btn-mold btn-roxo m-0" />
+                <input class="btn-mold btn-roxo m-0" type="submit" value="Cadastrar"/>
             </div>
         </form>
     </div>

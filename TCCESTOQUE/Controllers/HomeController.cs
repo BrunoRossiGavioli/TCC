@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Diagnostics;
 using TCCESTOQUE.Models;
 
@@ -19,14 +17,7 @@ namespace TCCESTOQUE.Controllers
 
         public IActionResult Index()
         {
-            Autenticar();
-            var label = new List<string>
-            {
-                "janaina","fevereiro","marcio","abril","mauro","junho",
-                "julhu","agosto","steve","outubro","natalina","dezembro"
-
-            };
-            ViewData["labels"] = label;
+            Autenticar();            
             return View();
         }
 

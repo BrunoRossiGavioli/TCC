@@ -13,6 +13,10 @@
     --strong-lilac-hover: #cc5eb7;
 }
 
+.alinhar-direita{
+    float: left;
+}
+
 .bg-roxo {
     background-color: #9272c1;
 }
