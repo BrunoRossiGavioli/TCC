@@ -62,8 +62,8 @@
                                 Venda
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" asp-controller="Carrinho" asp-action="Details" asp-route-id="@ViewBag.usuarioId">Vender</a>
                                 <a class="dropdown-item" asp-controller="Venda" asp-action="Index">Minhas vendas</a>
-                                <a class="dropdown-item" asp-controller="Carrinho" asp-action="Details" asp-route-id="@ViewBag.usuarioId">Fazer uma venda</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown mr-2">
